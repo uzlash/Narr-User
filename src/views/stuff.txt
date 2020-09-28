@@ -1,0 +1,35 @@
+ <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" md="8" sm="8">
+            <v-card color="white" tile class="pa-16">
+              <v-row align="center" justify="center">
+                <v-col cols="12" md="8">
+                  <v-card-text class="my-12">
+                    <h1 class="text-center display-4">
+                      <span class="green--text">N</span>
+                      <span class="amber--text">A</span>
+                      <span class="green--text text--lighten-2">RR</span>
+                    </h1>
+                    <v-form class="mt-10">
+                      <v-text-field
+                        color="green"
+                        name="Search"
+                        prepend-inner-icon="search"
+                        outlined
+                        clearable
+                        rounded
+                        label="Search Journals"
+                      ></v-text-field>
+                    </v-form>
+                    <div class="text-center">
+                      <v-btn tile depressed color="green lighten-1" class="mr-6">Search NARR</v-btn>
+                      <v-btn tile outlined depressed color="amber darken-1">Browse NARR</v-btn>
+                    </div>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="12" md="8"></v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
