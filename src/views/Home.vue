@@ -15,7 +15,7 @@
               label="Search NARR"
               append-icon="search"
             ></v-text-field>
-            <v-btn class="mt-n4 text-capitalize" color="green" small text
+            <v-btn class="mt-n4 text-capitalize" color="#00a368" small text
               >Search Filter</v-btn
             >
           </v-col>
@@ -24,11 +24,13 @@
           <v-col cols="3" lg="3" md="6" sm="12">
             <v-card tile>
               <div class="d-flex pa-3 align-center">
-                <v-btn class="mx-2" fab dark color="green">
+                <v-btn class="mx-2" fab dark color="#00a368">
                   <v-icon dark> mdi-file </v-icon>
                 </v-btn>
                 <div class="">
-                  <h2 class="font-weight-light green--text">3 documents</h2>
+                  <h2 class="font-weight-light green--text text--darken-2">
+                    3 documents
+                  </h2>
                   <h5 class="font-weight-light">Documents uploaded</h5>
                 </div>
               </div>
@@ -79,7 +81,7 @@
             <h1 class="headline mb-2 font-weight-light">Reading history</h1>
           </v-col>
           <v-col cols="12" lg="8" md="6" sm="12">
-            <h1 class="headline mb-2 font-weight-light">Analytics</h1>
+            <h1 class="headline mb-2 font-weight-light">Usage History</h1>
           </v-col>
           <v-col cols="6" lg="4" md="6" sm="12">
             <v-card height="320" class="cutom__card--overflow">
@@ -120,7 +122,25 @@
                   />
                 </div>
               </template>
-              <v-card-text> <span class="text-center"> Usage in the last 24hrs </span></v-card-text>
+              <v-card-text>
+                <span class="text-center">
+                  Usage in the last 24hrs
+                </span></v-card-text
+              >
+            </v-card>
+            <v-card class="mt-4 pa-4 d-flex align-center">
+              <v-icon color="orange darken-2">mdi-clock</v-icon>
+              <span class="font-weight-light mx-2">Last Login:</span>
+              <span class="font-weight-light orange--text">26 minutes ago</span>
+            </v-card>
+          </v-col>
+          <v-col cols="12" lg="12" md="8" sm="12">
+            <v-card>
+              <GChart
+                type="ColumnChart"
+                :data="columnChartData"
+                :options="chartOptions"
+              />
             </v-card>
           </v-col>
         </v-row>
@@ -257,6 +277,16 @@ export default {
       ["9pm", 50],
       ["10pm", 55],
       ["11pm", 0],
+    ],
+    columnChartData: [
+      ["Days", "Times"],
+      ["Monday", 45],
+      ["Tuesday", 60],
+      ["Wednesday", 30],
+      ["Thursday", 0],
+      ["Friday", 0],
+      ["Saturday", 0],
+      ["Sunday", 0],
     ],
     pieChartData: [
       ["Year", "Usage"],

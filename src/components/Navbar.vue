@@ -36,7 +36,7 @@
       </div>
     </v-app-bar>
     <!-- <v-divider></v-divider> -->
-    <v-navigation-drawer v-model="drawer" dark app class="green darken-1">
+    <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-10 mb-8">
           <span class="text-h4 white--text font-weight-thin">NARR</span>
@@ -62,9 +62,10 @@
       </v-list>
       <v-divider></v-divider>
        <template v-slot:append>
-        <div class="pa-2">
-          <v-btn block  color="#00a368">
-            Logout
+        <div class="pa-2 d-flex justify-center">
+          <v-btn dark outlined color="white">
+            <span>Logout</span>
+            <v-icon>mdi-exit-to-app</v-icon>
           </v-btn>
         </div>
       </template>
