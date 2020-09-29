@@ -22,11 +22,17 @@
           <span class="text-capitalize">Logout</span>
           <v-icon right>mdi-exit-to-app</v-icon>
         </v-btn> -->
-        <v-btn rounded icon>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+        <v-btn to="/profile" v-bind="attrs"
+          v-on="on" rounded icon>
           <v-list-item-avatar class="ml-4">
             <v-img src="../assets/avatar-1.png"></v-img>
           </v-list-item-avatar>
         </v-btn>
+         </template>
+      <span>Umar</span>
+    </v-tooltip>
       </div>
     </v-app-bar>
     <!-- <v-divider></v-divider> -->
@@ -55,6 +61,13 @@
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
+       <template v-slot:append>
+        <div class="pa-2">
+          <v-btn block  color="#00a368">
+            Logout
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
   </nav>
 </template>

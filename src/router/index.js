@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -18,6 +19,15 @@ const routes = [
     name: "Analytics",
     component: () =>
       import(/* webpackChunkName: "Analytics" */ "../views/Analytics.vue"),
+    meta: {
+      showHeader: true,
+    },
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () =>
+      import(/* webpackChunkName: "Analytics" */ "../components/profile.vue"),
     meta: {
       showHeader: true,
     },
