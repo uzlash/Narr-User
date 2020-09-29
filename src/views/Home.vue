@@ -2,11 +2,126 @@
   <div class="home">
     <v-app class="grey lighten-4">
       <v-container>
-        <v-row>
+        <v-row class="my-n6">
           <v-col cols="12">
             <span class="text-h4 font-weight-thin">Home</span>
           </v-col>
-          <v-col cols="12">
+        </v-row>
+        <v-row align="center" justify="center">
+          <v-col cols="12" md="8" sm="8">
+            <v-text-field
+              solo
+              rounded
+              label="Search NARR"
+              append-icon="search"
+            ></v-text-field>
+            <v-btn class="mt-n4 text-capitalize" color="green" small text
+              >Search Filter</v-btn
+            >
+          </v-col>
+        </v-row>
+        <v-row align="center" justify="center">
+          <v-col cols="3" lg="3" md="6" sm="12">
+            <v-card tile>
+              <div class="d-flex pa-3 align-center">
+                <v-btn class="mx-2" fab dark color="green">
+                  <v-icon dark> mdi-file </v-icon>
+                </v-btn>
+                <div class="">
+                  <h2 class="font-weight-light green--text">3 documents</h2>
+                  <h5 class="font-weight-light">Documents uploaded</h5>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col cols="3" lg="3" md="6" sm="12">
+            <v-card tile>
+              <div class="d-flex pa-3 align-center">
+                <v-btn class="mx-2" fab dark color="blue">
+                  <v-icon dark> mdi-book-open-page-variant </v-icon>
+                </v-btn>
+                <div class="">
+                  <h2 class="font-weight-light blue--text">33 read</h2>
+                  <h5 class="font-weight-light">Reading History</h5>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col cols="3" lg="3" md="6" sm="12">
+            <v-card tile>
+              <div class="d-flex pa-3 align-center">
+                <v-btn class="mx-2" fab dark color="orange">
+                  <v-icon dark> mdi-account </v-icon>
+                </v-btn>
+                <div class="">
+                  <h2 class="font-weight-light orange--text">21 mentions</h2>
+                  <h5 class="font-weight-light">Mentions</h5>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col cols="3" lg="3" md="6" sm="12" xs="12">
+            <v-card tile>
+              <div class="d-flex pa-3 align-center">
+                <v-btn class="mx-2" fab dark color="pink">
+                  <v-icon dark> mdi-book-open-variant </v-icon>
+                </v-btn>
+                <div class="">
+                  <h2 class="font-weight-light pink--text">1 active</h2>
+                  <h5 class="font-weight-light">Research Grants</h5>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" lg="4" md="6" sm="12">
+            <h1 class="headline mb-2 font-weight-light">Reading history</h1>
+          </v-col>
+          <v-col cols="12" lg="8" md="6" sm="12">
+            <h1 class="headline mb-2 font-weight-light">Analytics</h1>
+          </v-col>
+          <v-col cols="6" lg="4" md="6" sm="12">
+            <v-card height="320" class="cutom__card--overflow">
+              <v-list v-for="item in History" :key="item.id">
+                <v-list-item>
+                  <v-list-item-avatar :color="item.color">
+                    <v-icon dark>{{ item.icon }}</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title class="font-weight-light">{{
+                      item.title1
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.subtitle1
+                    }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-list-item-content align="right">
+                    <v-list-item-title class="green--text font-weight-light">{{
+                      item.title2
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.subtitle2
+                    }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-divider inset></v-divider>
+              </v-list>
+            </v-card>
+          </v-col>
+          <v-col cols="6" lg="8" md="6" sm="12">
+            <v-card height="">
+              <template>
+                <div class="chart">
+                  <GChart
+                    type="LineChart"
+                    :data="chartData"
+                    :options="chartOptions"
+                  />
+                </div>
+              </template>
+              <v-card-text> <span class="text-center"> Usage in the last 24hrs </span></v-card-text>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -18,10 +133,10 @@
 export default {
   components: {},
   data: () => ({
-    Budget: [
+    History: [
       {
         id: 1,
-        color: "red",
+        color: "blue",
         icon: "mdi-file-document",
         title1: "A research on neural networks with backwards propagation",
         subtitle1: "35 pages left",
@@ -30,7 +145,7 @@ export default {
       },
       {
         id: 2,
-        color: "red",
+        color: "blue",
         icon: "mdi-file-document",
         title1: "linear regression and SVM",
         subtitle1: "10 pages left",
@@ -39,7 +154,7 @@ export default {
       },
       {
         id: 3,
-        color: "orange",
+        color: "blue",
         icon: "mdi-file-document",
         title1: "An intensive research on KNN & Random forest",
         subtitle1: "20 pages left",
@@ -48,6 +163,42 @@ export default {
       },
       {
         id: 4,
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "Election violence, a case of 2011 presidential election",
+        subtitle1: "all pages read",
+        title2: "FREE",
+        subtitle2: "Free",
+      },
+      {
+        id: 5,
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "A research on neural networks with backwards propagation",
+        subtitle1: "35 pages left",
+        title2: "N1200",
+        subtitle2: "Paid",
+      },
+      {
+        id: 6,
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "linear regression and SVM",
+        subtitle1: "10 pages left",
+        title2: "N700",
+        subtitle2: "Paid",
+      },
+      {
+        id: 7,
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "An intensive research on KNN & Random forest",
+        subtitle1: "20 pages left",
+        title2: "N500/month",
+        subtitle2: "Subscription",
+      },
+      {
+        id: 8,
         color: "blue",
         icon: "mdi-file-document",
         title1: "Election violence, a case of 2011 presidential election",
@@ -81,11 +232,31 @@ export default {
       },
     ],
     chartData: [
-      ["Year", "Free", "Paid", "Subscription"],
-      ["2017", 10, 4, 2],
-      ["2018", 11, 5, 2],
-      ["2019", 6, 11, 3],
-      ["2020", 10, 5, 4],
+      ["Time", "Mins"],
+      ["12am", 0],
+      ["1am", 0],
+      ["2am", 0],
+      ["3am", 0],
+      ["4am", 0],
+      ["5am", 0],
+      ["6am", 0],
+      ["7am", 0],
+      ["8am", 40],
+      ["9am", 30],
+      ["10am", 10],
+      ["11am", 0],
+      ["12pm", 0],
+      ["1pm", 50],
+      ["2pm", 30],
+      ["3pm", 5],
+      ["4pm", 10],
+      ["5pm", 15],
+      ["6pm", 20],
+      ["7pm", 40],
+      ["8pm", 45],
+      ["9pm", 50],
+      ["10pm", 55],
+      ["11pm", 0],
     ],
     pieChartData: [
       ["Year", "Usage"],
@@ -123,16 +294,11 @@ export default {
       },
     ],
   }),
-  computed: {
-    theme() {
-      return this.$vuetify.theme.dark ? "dark" : "light";
-    },
-  },
   methods: {
     logout() {
-      this.$router.push('/signin')
-    }
-  }
+      this.$router.push("/signin");
+    },
+  },
 };
 </script>
 
@@ -142,5 +308,9 @@ export default {
 }
 .line {
   border-right: solid 1px #95a5a6;
+}
+.cutom__card--overflow {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 </style>

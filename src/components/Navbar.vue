@@ -10,12 +10,12 @@
       <div>
         <v-btn icon>
           <v-badge content="5" color="red" overlap>
-            <v-icon color="grey darken-1">mdi-email</v-icon>
+            <v-icon color="grey">mdi-email</v-icon>
           </v-badge>
         </v-btn>
         <v-btn icon class="mr-2">
           <v-badge content="3" color="red" overlap>
-            <v-icon color="grey darken-1">mdi-bell</v-icon>
+            <v-icon color="grey">mdi-bell</v-icon>
           </v-badge>
         </v-btn>
         <!-- <v-btn @click="logout()" outlined small color="pink">
@@ -29,6 +29,7 @@
         </v-btn>
       </div>
     </v-app-bar>
+    <!-- <v-divider></v-divider> -->
     <v-navigation-drawer v-model="drawer" dark app class="green darken-1">
       <v-layout column align-center>
         <v-flex class="mt-10 mb-8">
@@ -53,6 +54,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-divider></v-divider>
     </v-navigation-drawer>
   </nav>
 </template>
