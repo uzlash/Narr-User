@@ -18,28 +18,22 @@
             <v-icon color="grey">mdi-bell</v-icon>
           </v-badge>
         </v-btn>
-        <!-- <v-btn @click="logout()" outlined small color="pink">
-          <span class="text-capitalize">Logout</span>
-          <v-icon right>mdi-exit-to-app</v-icon>
-        </v-btn> -->
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-        <v-btn to="/profile" v-bind="attrs"
-          v-on="on" rounded icon>
-          <v-list-item-avatar class="ml-4">
-            <v-img src="../assets/avatar-1.png"></v-img>
-          </v-list-item-avatar>
-        </v-btn>
-         </template>
-      <span>Umar</span>
-    </v-tooltip>
+            <v-btn to="/profile" v-bind="attrs" v-on="on" rounded icon>
+              <v-list-item-avatar class="ml-4">
+                <v-img src="../assets/avatar-1.png"></v-img>
+              </v-list-item-avatar>
+            </v-btn>
+          </template>
+          <span>Umar</span>
+        </v-tooltip>
       </div>
     </v-app-bar>
-    <!-- <v-divider></v-divider> -->
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-10 mb-8">
-          <span class="text-h4 white--text font-weight-thin">NARR</span>
+          <span class="text-h4 white--text font-weight-light">NARR</span>
         </v-flex>
       </v-layout>
       <v-divider></v-divider>
@@ -54,14 +48,14 @@
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-thin">{{
+            <v-list-item-title class="font-weight-light">{{
               link.text
             }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
-       <template v-slot:append>
+      <template v-slot:append>
         <div class="pa-2 d-flex justify-center">
           <v-btn dark outlined color="white">
             <span>Logout</span>
@@ -79,7 +73,7 @@ export default {
     drawer: true,
     links: [
       { icon: "mdi-home", text: "Home", route: "/" },
-      { icon: "mdi-cloud-upload", text: "Upload Document", route: "/upload" },
+      { icon: "mdi-cloud-upload", text: "Upload Research", route: "/upload" },
       { icon: "mdi-read", text: "Reading History", route: "/history" },
       {
         icon: "mdi-book-open-variant",
