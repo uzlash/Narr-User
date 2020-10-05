@@ -7786,6 +7786,11 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
+simple-uploader.js@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/simple-uploader.js/-/simple-uploader.js-0.5.5.tgz#d365190dde50ce267ca2a08f76c8f917a33eb700"
+  integrity sha512-W7eI/Emj2hstc4BOa4awIw8VByNXR3gSivNlKb8UjLZKZRnNtJ8trh5e9/4xF2kToupiAV11gRvlmPI9AMRW5A==
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -8887,6 +8892,13 @@ vue-router@^3.2.0:
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.4.5.tgz#d396ec037b35931bdd1e9b7edd86f9788dc15175"
   integrity sha512-ioRY5QyDpXM9TDjOX6hX79gtaMXSVDDzSlbIlyAmbHNteIL81WIVB2e+jbzV23vzxtoV0krdS2XHm+GxFg+Nxg==
+
+vue-simple-uploader@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/vue-simple-uploader/-/vue-simple-uploader-0.7.5.tgz#b0ec9565e9eacd0df3b6bbbb64f804300bbc51e7"
+  integrity sha512-Q7+4ufprtfMJtEUDz9vGluejI4qwIRWXP/ALMOPVUosR5dYUQ+bc8dqX1Zck8RIjHFt6oKBq50e6hR9JomAilA==
+  dependencies:
+    simple-uploader.js "^0.5.5"
 
 vue-socket.io@^3.0.10:
   version "3.0.10"

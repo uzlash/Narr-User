@@ -12,7 +12,9 @@
                       <img src="../assets/avatar-1.png" alt srcset />
                     </v-avatar>
                     <h2 class="display-2">Usman Murtala</h2>
-                    <h3 class="text-h5 font-weight-light">Federal University Dutsinma</h3>
+                    <h3 class="text-h5 font-weight-light">
+                      Federal University Dutsinma
+                    </h3>
                     <h3 class="text-h5 font-weight-light mb-4">Level 300</h3>
                     <v-btn depressed outlined color="green">Edit</v-btn>
                   </v-card-text>
@@ -28,6 +30,6 @@
 </template>
 <script>
 export default {
-  name: 'profile'
-}
+  name: "profile",
+};
 </script>

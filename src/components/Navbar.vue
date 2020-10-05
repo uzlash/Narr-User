@@ -8,6 +8,7 @@
       ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <div>
+<<<<<<< HEAD
         <v-menu bottom offset-overflow>
           <template v-slot:activator="{ on, attrs }">
             <v-btn icon class="mr-2" v-bind="attrs" v-on="on">
@@ -82,6 +83,18 @@
           <span class="text-capitalize">Logout</span>
           <v-icon right>mdi-exit-to-app</v-icon>
         </v-btn> -->
+=======
+        <v-btn icon>
+          <v-badge content="5" color="red" overlap>
+            <v-icon color="grey">mdi-email</v-icon>
+          </v-badge>
+        </v-btn>
+        <v-btn icon class="mr-2">
+          <v-badge content="3" color="red" overlap>
+            <v-icon color="grey">mdi-bell</v-icon>
+          </v-badge>
+        </v-btn>
+>>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn to="/profile" v-bind="attrs" v-on="on" rounded icon>
@@ -94,11 +107,10 @@
         </v-tooltip>
       </div>
     </v-app-bar>
-    <!-- <v-divider></v-divider> -->
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-10 mb-8">
-          <span class="text-h4 white--text font-weight-thin">NARR</span>
+          <span class="text-h4 white--text font-weight-light">NARR</span>
         </v-flex>
       </v-layout>
       <v-divider></v-divider>
@@ -113,7 +125,7 @@
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-thin">{{
+            <v-list-item-title class="font-weight-light">{{
               link.text
             }}</v-list-item-title>
           </v-list-item-content>
@@ -138,7 +150,7 @@ export default {
     drawer: true,
     links: [
       { icon: "mdi-home", text: "Home", route: "/" },
-      { icon: "mdi-cloud-upload", text: "Upload Document", route: "/upload" },
+      { icon: "mdi-cloud-upload", text: "Upload Research", route: "/upload" },
       { icon: "mdi-read", text: "Reading History", route: "/history" },
       {
         icon: "mdi-book-open-variant",

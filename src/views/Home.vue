@@ -43,8 +43,8 @@
                   <v-icon dark> mdi-book-open-page-variant </v-icon>
                 </v-btn>
                 <div class="">
-                  <h2 class="font-weight-light blue--text">33 read</h2>
-                  <h5 class="font-weight-light">Reading History</h5>
+                  <h2 class="font-weight-light blue--text">33 documents</h2>
+                  <h5 class="font-weight-light">Suggestions</h5>
                 </div>
               </div>
             </v-card>
@@ -283,8 +283,8 @@ export default {
       ["Monday", 45],
       ["Tuesday", 60],
       ["Wednesday", 30],
-      ["Thursday", 0],
-      ["Friday", 0],
+      ["Thursday", 30],
+      ["Friday", 55],
       ["Saturday", 0],
       ["Sunday", 0],
     ],

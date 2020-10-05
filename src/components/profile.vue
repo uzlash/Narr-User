@@ -4,9 +4,10 @@
       <v-col cols="12" md12>
         <v-card class="ma-5 text-center my-12" elevation-10>
           <v-card-title> </v-card-title>
-          <v-avatar class="mb-4" size="300" circle elevation-12>
+          <v-avatar class="mb-4" size="100" circle elevation-12>
             <img src="../assets/avatar-1.png" alt="" />
           </v-avatar>
+<<<<<<< HEAD
 
           <h1>Umar Abubakar</h1>
 
@@ -36,6 +37,10 @@
               </v-list-item>
             </div>
           </v-row>
+=======
+          <h2 class="display-2">Umar Abubakar</h2>
+          <h3 class="text-h5 font-weight-light">Kaduna State University</h3>
+>>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
           <v-dialog v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn tile color="success" v-bind="attrs" v-on="on" small>
@@ -71,14 +76,6 @@
                         prepend-icon="edit"
                       ></v-text-field>
                     </v-col>
-
-                    <!-- <v-col cols="12" sm="6">
-                      <v-select
-                        :items="['100', '200', '300', '400']"
-                        label="level"
-                        required
-                      ></v-select>
-                    </v-col> -->
                   </v-row>
                 </v-container>
               </v-card-text>
@@ -106,6 +103,7 @@
           </v-tabs>
           <v-tabs-items :value="tab">
             <v-tab-item value="one">
+<<<<<<< HEAD
               <v-card flat>
                 <v-col cols="12" md6>
                   <v-card-subtitle>8 Researches</v-card-subtitle>
@@ -139,6 +137,56 @@
                   </v-list>
                 </v-col>
               </v-card>
+=======
+              <v-card-text>
+                <v-tabs vertical color="#00a368">
+                  <v-tab> Overview </v-tab>
+
+                  <v-tab> contact and basic info </v-tab>
+                  <v-tab> Details about you </v-tab>
+
+                  <v-tab-item>
+                    <v-card flat>
+                      <v-card-text icons-and-text>
+                        <p class="mb-0">
+                          Phasellus dolor. Fusce neque. Fusce fermentum odio nec
+                          arcu. Pellentesque libero tortor, tincidunt et,
+                          tincidunt eget, semper nec, quam. Phasellus blandit
+                          leo ut odio.
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+
+                  <v-tab-item>
+                    <v-card flat>
+                      <v-card-text>
+                        <p class="mb-0">
+                          Donec venenatis vulputate lorem. Aenean viverra
+                          rhoncus pede. In dui magna, posuere eget, vestibulum
+                          et, tempor auctor, justo. Fusce commodo aliquam arcu.
+                          Suspendisse enim turpis, dictum sed, iaculis a,
+                          condimentum nec, nisi.
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+                  <v-tab-item>
+                    <v-card flat>
+                      <v-card-text>
+                        <p class="mb-0">
+                          Cras sagittis. Phasellus nec sem in justo pellentesque
+                          facilisis. Proin sapien ipsum, porta a, auctor quis,
+                          euismod ut, mi. Donec quam felis, ultricies nec,
+                          pellentesque eu, pretium quis, sem. Nam at tortor in
+                          tellus interdum sagittis.
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+                </v-tabs>
+              </v-card-text>
+>>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
             </v-tab-item>
             <v-tab-item value="two">
               <v-card-text>
@@ -153,6 +201,7 @@
                   <!-- <v-tab> Basic Info </v-tab>
                   <v-tab> Contact info </v-tab> -->
                   <v-tab-item>
+<<<<<<< HEAD
                   <v-col cols="12"> 
                     <v-row justify="center">
                       
@@ -202,6 +251,45 @@
                       
                     </v-row>
                   </v-col>
+=======
+                    <v-card flat>
+                      <v-card-text icons-and-text>
+                        <p class="mb-0">
+                          Phasellus dolor. Fusce neque. Fusce fermentum odio nec
+                          arcu. Pellentesque libero tortor, tincidunt et,
+                          tincidunt eget, semper nec, quam. Phasellus blandit
+                          leo ut odio.
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+
+                  <v-tab-item>
+                    <v-card flat>
+                      <v-card-text>
+                        <p class="mb-0">
+                          Donec venenatis vulputate lorem. Aenean viverra
+                          rhoncus pede. In dui magna, posuere eget, vestibulum
+                          et, tempor auctor, justo. Fusce commodo aliquam arcu.
+                          Suspendisse enim turpis, dictum sed, iaculis a,
+                          condimentum nec, nisi.
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+                  <v-tab-item>
+                    <v-card flat>
+                      <v-card-text>
+                        <p class="mb-0">
+                          Cras sagittis. Phasellus nec sem in justo pellentesque
+                          facilisis. Proin sapien ipsum, porta a, auctor quis,
+                          euismod ut, mi. Donec quam felis, ultricies nec,
+                          pellentesque eu, pretium quis, sem. Nam at tortor in
+                          tellus interdum sagittis.
+                        </p>
+                      </v-card-text>
+                    </v-card>
+>>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
                   </v-tab-item>
                        <v-tab-item class="ml-3">
                         <v-container grid-list-xs >
