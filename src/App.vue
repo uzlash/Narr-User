@@ -30,6 +30,6 @@ export default {
   background: #bdbdbd;
 }
 ::-webkit-scrollbar-thumb {
-  background: grey;
+  background: rgb(170, 170, 170);
 }
 </style>

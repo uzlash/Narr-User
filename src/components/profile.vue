@@ -4,7 +4,7 @@
       <v-col cols="12" md12>
         <v-card class="ma-5 text-center my-12" elevation-10>
           <v-card-title> </v-card-title>
-          <v-avatar class="mb-4" size="300" circle elevation-12>
+          <v-avatar class="mb-4" size="100" circle elevation-12>
             <img src="../assets/avatar-1.png" alt="" />
           </v-avatar>
           <h2 class="display-2">Umar Abubakar</h2>
