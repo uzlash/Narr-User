@@ -27,7 +27,7 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: () =>
-      import(/* webpackChunkName: "Analytics" */ "../components/profile.vue"),
+      import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
     meta: {
       showHeader: true,
     },
