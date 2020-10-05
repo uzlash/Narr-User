@@ -8,31 +8,90 @@
       ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <div>
-        <v-btn icon>
-          <v-badge content="5" color="red" overlap>
-            <v-icon color="grey">mdi-email</v-icon>
-          </v-badge>
-        </v-btn>
-        <v-btn icon class="mr-2">
-          <v-badge content="3" color="red" overlap>
-            <v-icon color="grey">mdi-bell</v-icon>
-          </v-badge>
-        </v-btn>
+        <v-menu bottom offset-overflow>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="mr-2" v-bind="attrs" v-on="on">
+              <v-badge content="6" color="red" overlap>
+                <v-icon color="grey">mdi-email</v-icon>
+              </v-badge>
+            </v-btn>
+          </template>
+          <v-card outlined>
+            <v-card-title>
+              <v-text-field
+                solo
+                rounded
+                label="Search messages"
+                append-icon="search"
+              ></v-text-field>
+            </v-card-title>
+            <v-card-subtitle>Today 8pm</v-card-subtitle>
+            <v-list>
+              <v-list-item
+                v-for="message in messages"
+                :key="message.title"
+                to="/chat"
+              >
+                <v-list-item-avatar>
+                  <v-avatar>
+                    <img src="../assets/avatar-1.png" alt="" />
+                  </v-avatar>
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>{{ message.title }}</v-list-item-title>
+                  <v-list-item-subtitle>{{
+                    message.subtitle
+                  }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-menu>
+
+        <v-menu bottom offset-overflow>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="mr-2" v-bind="attrs" v-on="on">
+              <v-badge content="6" color="red" overlap>
+                <v-icon color="grey">mdi-bell</v-icon>
+              </v-badge>
+            </v-btn>
+          </template>
+          <v-card outlined>
+            <v-card-title> notifications </v-card-title>
+            <v-card-subtitle>Today 8pm</v-card-subtitle>
+            <v-list>
+              <v-list-item
+                v-for="message in messages"
+                :key="message.title"
+                to=""
+              >
+                <v-list-item-avatar>
+                  <v-avatar>
+                    <img src="../assets/avatar-1.png" alt="" />
+                  </v-avatar>
+                </v-list-item-avatar>
+
+                <v-list-item-title>{{ message.title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ message.tile }}</v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-menu>
+
         <!-- <v-btn @click="logout()" outlined small color="pink">
           <span class="text-capitalize">Logout</span>
           <v-icon right>mdi-exit-to-app</v-icon>
         </v-btn> -->
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-        <v-btn to="/profile" v-bind="attrs"
-          v-on="on" rounded icon>
-          <v-list-item-avatar class="ml-4">
-            <v-img src="../assets/avatar-1.png"></v-img>
-          </v-list-item-avatar>
-        </v-btn>
-         </template>
-      <span>Umar</span>
-    </v-tooltip>
+            <v-btn to="/profile" v-bind="attrs" v-on="on" rounded icon>
+              <v-list-item-avatar class="ml-4">
+                <v-img src="../assets/avatar-1.png"></v-img>
+              </v-list-item-avatar>
+            </v-btn>
+          </template>
+          <span>Umar</span>
+        </v-tooltip>
       </div>
     </v-app-bar>
     <!-- <v-divider></v-divider> -->
@@ -61,7 +120,7 @@
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
-       <template v-slot:append>
+      <template v-slot:append>
         <div class="pa-2 d-flex justify-center">
           <v-btn dark outlined color="white">
             <span>Logout</span>
@@ -117,6 +176,52 @@ export default {
       "OCR & Document conversion features now live",
       "Research grants can now be paid directly on the platform for research works",
     ],
+    items: [
+      { header: "Today" },
+      {
+        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+        title: "Brunch this weekend?",
+        subtitle:
+          "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+      },
+      { divider: true, inset: true },
+      {
+        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+        title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+        subtitle:
+          "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
+      },
+      { divider: true, inset: true },
+      {
+        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+        title: "Oui oui",
+        subtitle:
+          "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
+      },
+      { divider: true, inset: true },
+      {
+        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+        title: "Birthday gift",
+        subtitle:
+          "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
+      },
+      { divider: true, inset: true },
+      {
+        avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
+        title: "Recipe to try",
+        subtitle:
+          "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
+      },
+    ],
+    messages: [
+      { title: "umar abubakar", subtitle: "hello", tile: "mention you" },
+      { title: "mubarak saeed", subtitle: "hello", tile: "mention you" },
+      { title: "musa abubakar", subtitle: "hello", tile: "mention you" },
+      { title: "usman murtala", subtitle: "hello", tile: "mention you" },
+      { title: "abba kabir", subtitle: "hello", tile: "mention you" },
+      { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
+    ],
+    offset: true,
   }),
 };
 </script>

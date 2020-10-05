@@ -7,14 +7,41 @@
           <v-avatar class="mb-4" size="300" circle elevation-12>
             <img src="../assets/avatar-1.png" alt="" />
           </v-avatar>
-          <h2 class="display-2">Umar Abubakar</h2>
-          <h3 class="text-h5 font-weight-light">Kaduna State University</h3>
-          <!-- <h3 class="text-h5 font-weight-light mb-4">Level 400</h3> -->
+
+          <h1>Umar Abubakar</h1>
+
+          <v-row justify="center">
+            <div>
+              <v-list>
+                <v-list-item>
+                   <v-list-item-content> 
+                    <v-list-item-title icon-and-text>
+                      <h3 class="text-h6 font-weight-light" display-4>
+                        <v-icon>mdi-email</v-icon>
+                        umarabubakarrg@gmail.com
+                      </h3></v-list-item-title
+                    >
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+              <v-list-item>
+                 <v-list-item-content>
+                  <v-list-item-title icon-and-text>
+                    <h3 class="text-h6 font-weight-light">
+                      <v-icon class="pa-2">fas fa-graduation-cap</v-icon>
+                      Kaduna state university
+                    </h3></v-list-item-title
+                  >
+                </v-list-item-content>
+              </v-list-item>
+            </div>
+          </v-row>
           <v-dialog v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on, attrs }">
-              <v-icon color="#00a368" dark v-bind="attrs" v-on="on" mt-5>
-                fas fa-user-edit
-              </v-icon>
+              <v-btn tile color="success" v-bind="attrs" v-on="on" small>
+                <v-icon left> mdi-pencil </v-icon>
+                Edit
+              </v-btn>
             </template>
             <v-card>
               <v-card-title>
@@ -24,12 +51,24 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field label="Edit name" required></v-text-field>
+                      <v-text-field
+                        label="Edit name"
+                        required
+                        prepend-icon="edit"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        label="Edit email"
+                        required
+                        prepend-icon="email"
+                      ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
                         label="Edit institution"
                         required
+                        prepend-icon="edit"
                       ></v-text-field>
                     </v-col>
 
@@ -62,293 +101,150 @@
           <br />
           <v-divider class=""></v-divider>
           <v-tabs v-model="tab" centered icons-and-text color="#00a368">
-            <v-tab href="#one"> About </v-tab>
-            <v-tab href="#two"> institution </v-tab>
+            <v-tab href="#one"> Researches </v-tab>
+            <v-tab href="#two"> About</v-tab>
           </v-tabs>
           <v-tabs-items :value="tab">
             <v-tab-item value="one">
-              <v-card-text>
-                <v-tabs vertical color="#00a368">
-                  <v-tab> Overview </v-tab>
-
-                  <v-tab> contact and basic info </v-tab>
-                  <v-tab> Details about you </v-tab>
-
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text icons-and-text>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-
-                        <p>
-                          Nam ipsum risus, rutrum vitae, vestibulum eu, molestie
-                          vel, lacus. Aenean tellus metus, bibendum sed, posuere
-                          ac, mattis non, nunc. Aliquam lobortis. Aliquam
-                          lobortis. Suspendisse non nisl sit amet velit
-                          hendrerit rutrum.
-                        </p>
-
-                        <p class="mb-0">
-                          Phasellus dolor. Fusce neque. Fusce fermentum odio nec
-                          arcu. Pellentesque libero tortor, tincidunt et,
-                          tincidunt eget, semper nec, quam. Phasellus blandit
-                          leo ut odio.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p>
-                          Morbi nec metus. Suspendisse faucibus, nunc et
-                          pellentesque egestas, lacus ante convallis tellus,
-                          vitae iaculis lacus elit id tortor. Sed mollis, eros
-                          et ultrices tempus, mauris ipsum aliquam libero, non
-                          adipiscing dolor urna a orci. Curabitur ligula sapien,
-                          tincidunt non, euismod vitae, posuere imperdiet, leo.
-                          Nunc sed turpis.
-                        </p>
-
-                        <p>
-                          Suspendisse feugiat. Suspendisse faucibus, nunc et
-                          pellentesque egestas, lacus ante convallis tellus,
-                          vitae iaculis lacus elit id tortor. Proin viverra,
-                          ligula sit amet ultrices semper, ligula arcu tristique
-                          sapien, a accumsan nisi mauris ac eros. In hac
-                          habitasse platea dictumst. Fusce ac felis sit amet
-                          ligula pharetra condimentum.
-                        </p>
-
-                        <p>
-                          Sed consequat, leo eget bibendum sodales, augue velit
-                          cursus nunc, quis gravida magna mi a libero. Nam
-                          commodo suscipit quam. In consectetuer turpis ut
-                          velit. Sed cursus turpis vitae tortor. Aliquam eu
-                          nunc.
-                        </p>
-
-                        <p>
-                          Etiam ut purus mattis mauris sodales aliquam. Ut
-                          varius tincidunt libero. Aenean viverra rhoncus pede.
-                          Duis leo. Fusce fermentum odio nec arcu.
-                        </p>
-
-                        <p class="mb-0">
-                          Donec venenatis vulputate lorem. Aenean viverra
-                          rhoncus pede. In dui magna, posuere eget, vestibulum
-                          et, tempor auctor, justo. Fusce commodo aliquam arcu.
-                          Suspendisse enim turpis, dictum sed, iaculis a,
-                          condimentum nec, nisi.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p>
-                          Fusce a quam. Phasellus nec sem in justo pellentesque
-                          facilisis. Nam eget dui. Proin viverra, ligula sit
-                          amet ultrices semper, ligula arcu tristique sapien, a
-                          accumsan nisi mauris ac eros. In dui magna, posuere
-                          eget, vestibulum et, tempor auctor, justo.
-                        </p>
-
-                        <p class="mb-0">
-                          Cras sagittis. Phasellus nec sem in justo pellentesque
-                          facilisis. Proin sapien ipsum, porta a, auctor quis,
-                          euismod ut, mi. Donec quam felis, ultricies nec,
-                          pellentesque eu, pretium quis, sem. Nam at tortor in
-                          tellus interdum sagittis.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                </v-tabs>
-              </v-card-text>
+              <v-card flat>
+                <v-col cols="12" md6>
+                  <v-card-subtitle>8 Researches</v-card-subtitle>
+                  <v-list>
+                    <v-list v-for="item in History" :key="item.id">
+                      <v-list-item>
+                        <v-list-item-avatar :color="item.color" size="200" tile>
+                          <v-avatar>{{item.avatar}}</v-avatar>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                          <v-list-item-title class="font-weight-light">{{
+                            item.title1
+                          }}</v-list-item-title>
+                          <v-list-item-subtitle class="font-weight-light">{{
+                            item.subtitle1
+                          }}</v-list-item-subtitle>
+                          <v-list-item-subtitle class="font-weight-light">{{
+                            item.subtitle2
+                          }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                        <v-list-item-content align="right">
+                          <v-list-item-title
+                            
+                            >{{ item.title2 }}</v-list-item-title
+                          >
+                         
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider ></v-divider>
+                    </v-list>
+                  </v-list>
+                </v-col>
+              </v-card>
             </v-tab-item>
             <v-tab-item value="two">
               <v-card-text>
-                <v-tabs vertical color="#00a368">
-                  <v-tab color="#00a368"> Overview </v-tab>
-
-                  <v-tab> contact and basic info </v-tab>
-                  <v-tab> Details about you </v-tab>
-
+                <v-tabs vertical color="#00a368" xs12>
+                  <v-container grid-list-xs>
+                    <v-flex xs5>
+                      <v-tab> Basic Info </v-tab>
+                       <v-tab> Contact info </v-tab>
+                    </v-flex>
+                    
+                  </v-container>
+                  <!-- <v-tab> Basic Info </v-tab>
+                  <v-tab> Contact info </v-tab> -->
                   <v-tab-item>
-                    <v-card flat>
-                      <v-card-text icons-and-text>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Exercitationem facilis modi natus blanditiis,
-                          corrupti tempora dolores inventore laboriosam nam,
-                          consequatur in aperiam omnis fuga quod officiis
-                          voluptatem dolorum vitae non?
-                        </p>
-
-                        <p>
-                          Nam ipsum risus, rutrum vitae, vestibulum eu, molestie
-                          vel, lacus. Aenean tellus metus, bibendum sed, posuere
-                          ac, mattis non, nunc. Aliquam lobortis. Aliquam
-                          lobortis. Suspendisse non nisl sit amet velit
-                          hendrerit rutrum.
-                        </p>
-
-                        <p class="mb-0">
-                          Phasellus dolor. Fusce neque. Fusce fermentum odio nec
-                          arcu. Pellentesque libero tortor, tincidunt et,
-                          tincidunt eget, semper nec, quam. Phasellus blandit
-                          leo ut odio.
-                        </p>
-                      </v-card-text>
-                    </v-card>
+                  <v-col cols="12"> 
+                    <v-row justify="center">
+                      
+                        <v-list>
+                          <v-list-item>
+                             <v-list-item-content>
+                              <v-list-item-title>
+                                <h3 class="text-h5 font-weight-light">
+                                  <v-icon class="pa-2">fas fa-user</v-icon>
+                                  Male
+                                 </h3></v-list-item-title
+                              >
+                              <v-list-tile-sub-title class="grey--text" 
+                                >gender</v-list-tile-sub-title
+                              >
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                        <v-list-item>
+                            <v-list-item-content>
+                            <v-list-item-title>
+                              <h3 class="text-h5 font-weight-light">
+                                <v-icon class="pa-2">fas fa-birthday-cake</v-icon>
+                                August 2
+                              </h3></v-list-item-title
+                            >
+                            <v-list-tile-sub-title class="grey--text"
+                              >birth date</v-list-tile-sub-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                          <v-list-item-action>
+                            <v-icon></v-icon>
+                          </v-list-item-action>
+                          <v-list-item-content>
+                            <v-list-item-title>
+                              <h3 class="text-h5 font-weight-light">
+                                2002
+                              </h3></v-list-item-title
+                            >
+                            <v-list-tile-sub-title class="grey--text"
+                              >birth year</v-list-tile-sub-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      
+                    </v-row>
+                  </v-col>
                   </v-tab-item>
-
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p>
-                          Morbi nec metus. Suspendisse faucibus, nunc et
-                          pellentesque egestas, lacus ante convallis tellus,
-                          vitae iaculis lacus elit id tortor. Sed mollis, eros
-                          et ultrices tempus, mauris ipsum aliquam libero, non
-                          adipiscing dolor urna a orci. Curabitur ligula sapien,
-                          tincidunt non, euismod vitae, posuere imperdiet, leo.
-                          Nunc sed turpis.
-                        </p>
-
-                        <p>
-                          Suspendisse feugiat. Suspendisse faucibus, nunc et
-                          pellentesque egestas, lacus ante convallis tellus,
-                          vitae iaculis lacus elit id tortor. Proin viverra,
-                          ligula sit amet ultrices semper, ligula arcu tristique
-                          sapien, a accumsan nisi mauris ac eros. In hac
-                          habitasse platea dictumst. Fusce ac felis sit amet
-                          ligula pharetra condimentum.
-                        </p>
-
-                        <p>
-                          Sed consequat, leo eget bibendum sodales, augue velit
-                          cursus nunc, quis gravida magna mi a libero. Nam
-                          commodo suscipit quam. In consectetuer turpis ut
-                          velit. Sed cursus turpis vitae tortor. Aliquam eu
-                          nunc.
-                        </p>
-
-                        <p>
-                          Etiam ut purus mattis mauris sodales aliquam. Ut
-                          varius tincidunt libero. Aenean viverra rhoncus pede.
-                          Duis leo. Fusce fermentum odio nec arcu.
-                        </p>
-
-                        <p class="mb-0">
-                          Donec venenatis vulputate lorem. Aenean viverra
-                          rhoncus pede. In dui magna, posuere eget, vestibulum
-                          et, tempor auctor, justo. Fusce commodo aliquam arcu.
-                          Suspendisse enim turpis, dictum sed, iaculis a,
-                          condimentum nec, nisi.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p>
-                          Fusce a quam. Phasellus nec sem in justo pellentesque
-                          facilisis. Nam eget dui. Proin viverra, ligula sit
-                          amet ultrices semper, ligula arcu tristique sapien, a
-                          accumsan nisi mauris ac eros. In dui magna, posuere
-                          eget, vestibulum et, tempor auctor, justo.
-                        </p>
-
-                        <p class="mb-0">
-                          Cras sagittis. Phasellus nec sem in justo pellentesque
-                          facilisis. Proin sapien ipsum, porta a, auctor quis,
-                          euismod ut, mi. Donec quam felis, ultricies nec,
-                          pellentesque eu, pretium quis, sem. Nam at tortor in
-                          tellus interdum sagittis.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
+                       <v-tab-item class="ml-3">
+                        <v-container grid-list-xs >
+                          <v-flex align-content-start>
+                          <v-card flat >
+                         <v-list >
+                          <v-list-item>
+                             <v-list-item-content>
+                              <v-list-item-title icon-and-text>
+                                <h3 class="text-h5 font-weight-light">
+                                  <v-icon>mdi-email</v-icon>
+                                  umarabubakarrg@gmail.com
+                                </h3></v-list-item-title
+                              >
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                        <v-list-item>
+                           <v-list-item-content>
+                            <v-list-item-title icon-and-text>
+                               <h3 class="text-h5 font-weight-light">
+                                <v-icon>fas fa-phone-square-alt</v-icon>
+                                07016505825
+                              </h3></v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                           <v-list-item-content>
+                            <v-list-item-title>
+                              <h3 class="text-h5 font-weight-light">
+                                <v-icon>fab fa-linkedin</v-icon>
+                                Umar Abubakar
+                              </h3></v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-card>
+                        
+                     
+                          </v-flex>
+                           </v-container> 
+                       </v-tab-item>                                                     
                 </v-tabs>
               </v-card-text>
             </v-tab-item>
@@ -367,6 +263,66 @@ export default {
       tab: null,
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      History: [
+        {
+          id: 1,
+          color: "blue",
+          title1: "A research on neural networks with backwards propagation",
+          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "2nd august",
+          avatar: ""
+        },
+        {
+          id: 2,
+          color: "blue",
+          title1: "linear regression and SVM",
+          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "18 sep",
+        },
+        {
+          id: 3,
+          color: "blue",
+          title1: "An intensive research on KNN & Random forest",
+          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "14 april",
+        },
+        {
+          id: 4,
+          color: "blue",
+          title1: "Election violence, a case of 2011 presidential election",
+          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "12 jan",
+        },
+        {
+          id: 5,
+          color: "blue",
+          title1: "A research on neural networks with backwards propagation",
+          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "12 jan",
+        },
+        {
+          id: 6,
+          color: "blue",
+          title1: "linear regression and SVM",
+          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "11 jan",
+        },
+        {
+          id: 7,
+          color: "blue",
+          title1: "An intensive research on KNN & Random forest",
+           subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "21 jan",
+        },
+        {
+          id: 8,
+          color: "blue",
+          title1: "Lorem ipsum dolor sit, amet cons",
+          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle2: "16 feb",
+          
+        },
+      ],
     };
   },
 };
