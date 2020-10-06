@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -27,7 +26,7 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: () =>
-      import(/* webpackChunkName: "Analytics" */ "../components/profile.vue"),
+      import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
     meta: {
       showHeader: true,
     },
@@ -82,8 +81,7 @@ const routes = [
   {
     path: "/chat",
     name: "Chat",
-    component: () =>
-      import(/* webpackChunkName: "Chat" */ "../views/Chat.vue"),
+    component: () => import(/* webpackChunkName: "Chat" */ "../views/Chat.vue"),
     meta: {
       showHeader: true,
     },
@@ -120,6 +118,15 @@ const routes = [
     name: "signin",
     component: () =>
       import(/* webpackChunkName: "Signin" */ "../views/Signin.vue"),
+    meta: {
+      showHeader: false,
+    },
+  },
+  {
+    path: "/users",
+    name: "users",
+    component: () =>
+      import(/* webpackChunkName: "Signin" */ "../views/Users.vue"),
     meta: {
       showHeader: false,
     },

@@ -336,8 +336,7 @@ export default {
     ForgotPasswordPopup
   },
   data: () => ({
-    email: '',
-    password: '',
+   
     step: 1,
     userTypes: ["Student", "Staff", "Independent Researcher"],
     institutionTypes: [
@@ -364,25 +363,9 @@ export default {
     menu: false,
     modal: false,
   }),
-   methods: {
-    submit() {
-      let data = { username: this.email, password: this.password }; 
-      // console.log(data)
+  
      
-      axios.post("http://192.168.1.4:3000/api/v1/auth/login", data)
-        .then(function (response) {
-          localStorage.setItem("user", JSON.stringify(response.data.payload.user));
-          localStorage.setItem("token", response.data.payload.token);
-          localStorage.setItem("token", response.data.payload.refreshToken);
-          // this.$router.push('/Home');
-          console.log("server returns ", response);
-          
-        })
-        .catch(function (error) {
-          console.log("server error ", error);
-        });
-    },
-  },
+    
   computed: {
     filteredInstitutions () {
       return this.institutions.filter( (institution) => {
