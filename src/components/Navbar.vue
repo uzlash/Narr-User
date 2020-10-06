@@ -8,36 +8,41 @@
       ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <div>
-<<<<<<< HEAD
-        <v-menu bottom offset-overflow>
+        <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon class="mr-2" v-bind="attrs" v-on="on">
-              <v-badge content="6" color="red" overlap>
+            <v-btn icon class="mr-2" v-on="on" v-bind="attrs">
+              <v-badge content="11" color="red" overlap>
                 <v-icon color="grey">mdi-email</v-icon>
               </v-badge>
             </v-btn>
           </template>
-          <v-card outlined>
-            <v-card-title>
-              <v-text-field
-                solo
-                rounded
-                label="Search messages"
-                append-icon="search"
-              ></v-text-field>
-            </v-card-title>
-            <v-card-subtitle>Today 8pm</v-card-subtitle>
+          <v-card
+            max-width="400"
+            class="mx-auto cutom__card--overflow"
+            height="400"
+            width="350"
+          >
+            <v-card-title primary-title> Messages </v-card-title>
+
+            <v-text-field
+              filled
+              rounded
+              dense
+              label="Search Messages"
+              append-icon="search"
+            ></v-text-field>
+
             <v-list>
+              <span class="mx-4">Earlier</span>
               <v-list-item
                 v-for="message in messages"
                 :key="message.title"
                 to="/chat"
               >
-                <v-list-item-avatar>
-                  <v-avatar>
-                    <img src="../assets/avatar-1.png" alt="" />
-                  </v-avatar>
-                </v-list-item-avatar>
+                <v-avatar>
+                  <img src="../assets/avatar-1.png" alt="alt" class="mr-2" />
+                </v-avatar>
+
                 <v-list-item-content>
                   <v-list-item-title>{{ message.title }}</v-list-item-title>
                   <v-list-item-subtitle>{{
@@ -48,53 +53,46 @@
             </v-list>
           </v-card>
         </v-menu>
-
-        <v-menu bottom offset-overflow>
+        <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon class="mr-2" v-bind="attrs" v-on="on">
-              <v-badge content="6" color="red" overlap>
+            <v-btn icon class="mr-2" v-on="on" v-bind="attrs">
+              <v-badge content="7" color="red" overlap>
                 <v-icon color="grey">mdi-bell</v-icon>
               </v-badge>
             </v-btn>
           </template>
-          <v-card outlined>
-            <v-card-title> notifications </v-card-title>
-            <v-card-subtitle>Today 8pm</v-card-subtitle>
+          <v-card
+            max-width="400"
+            class="mx-auto cutom__card--overflow"
+            height="400"
+            width="350"
+          >
+            <v-card-title primary-title> Notifications </v-card-title>
+
             <v-list>
+              <v-list-tile-sub-title class="ml-3"
+                >Earlier</v-list-tile-sub-title
+              >
               <v-list-item
                 v-for="message in messages"
                 :key="message.title"
                 to=""
               >
-                <v-list-item-avatar>
-                  <v-avatar>
-                    <img src="../assets/avatar-1.png" alt="" />
-                  </v-avatar>
-                </v-list-item-avatar>
+                <v-avatar>
+                  <img src="../assets/avatar-1.png" alt="alt" class="mr-2" />
+                </v-avatar>
 
-                <v-list-item-title>{{ message.title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ message.tile }}</v-list-item-subtitle>
+                <v-list-item-content>
+                  <v-list-item-title>{{ message.title }}</v-list-item-title>
+                  <v-list-item-subtitle>{{
+                    message.tile
+                  }}</v-list-item-subtitle>
+                </v-list-item-content>
               </v-list-item>
             </v-list>
           </v-card>
         </v-menu>
 
-        <!-- <v-btn @click="logout()" outlined small color="pink">
-          <span class="text-capitalize">Logout</span>
-          <v-icon right>mdi-exit-to-app</v-icon>
-        </v-btn> -->
-=======
-        <v-btn icon>
-          <v-badge content="5" color="red" overlap>
-            <v-icon color="grey">mdi-email</v-icon>
-          </v-badge>
-        </v-btn>
-        <v-btn icon class="mr-2">
-          <v-badge content="3" color="red" overlap>
-            <v-icon color="grey">mdi-bell</v-icon>
-          </v-badge>
-        </v-btn>
->>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn to="/profile" v-bind="attrs" v-on="on" rounded icon>
@@ -103,7 +101,7 @@
               </v-list-item-avatar>
             </v-btn>
           </template>
-          <span>Umar</span>
+          <span>profile</span>
         </v-tooltip>
       </div>
     </v-app-bar>
@@ -226,10 +224,25 @@ export default {
       },
     ],
     messages: [
-      { title: "umar abubakar", subtitle: "hello", tile: "mention you" },
-      { title: "mubarak saeed", subtitle: "hello", tile: "mention you" },
-      { title: "musa abubakar", subtitle: "hello", tile: "mention you" },
-      { title: "usman murtala", subtitle: "hello", tile: "mention you" },
+      {
+        title: "umar abubakar",
+        subtitle: "hi",
+        tile: "mention you",
+        avatar: "mdi-user",
+      },
+      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
+      { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
+      { title: "usman murtala", subtitle: "hi", tile: "mention you" },
+      { title: "abba kabir", subtitle: "hello", tile: "mention you" },
+      { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
+      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
+      { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
+      { title: "usman murtala", subtitle: "hi", tile: "mention you" },
+      { title: "abba kabir", subtitle: "hello", tile: "mention you" },
+      { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
+      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
+      { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
+      { title: "usman murtala", subtitle: "hi", tile: "mention you" },
       { title: "abba kabir", subtitle: "hello", tile: "mention you" },
       { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
     ],
@@ -241,5 +254,14 @@ export default {
 <style scoped>
 .border {
   border-left: 4px solid green;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #bdbdbd;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(170, 170, 170);
 }
 </style>

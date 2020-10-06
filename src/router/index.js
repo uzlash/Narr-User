@@ -32,6 +32,16 @@ const routes = [
       showHeader: true,
     },
   },
+
+  {
+    path: "/user",
+    name: "user",
+    component: () =>
+      import(/* webpackChunkName: "Analytics" */ "../views/user.vue"),
+    meta: {
+      showHeader: true,
+    },
+  },
   
   {
     path: "/grants",
@@ -107,7 +117,7 @@ const routes = [
   },
   {
     path: "/signin",
-    name: "Signin",
+    name: "signin",
     component: () =>
       import(/* webpackChunkName: "Signin" */ "../views/Signin.vue"),
     meta: {

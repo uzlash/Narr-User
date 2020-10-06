@@ -32,7 +32,7 @@
                             <v-icon>fab fa-linkedin-in</v-icon>
                           </v-btn>
                         </div>
-                        <v-form>
+                        <v-form method="post" action="form @submit.prevent">
                           <v-row justify="center">
                             <v-col cols="8">
                               <v-text-field
@@ -43,6 +43,7 @@
                                 prepend-icon="email"
                                 type="text"
                                 color="#00A368"
+                                v-model="email"
                               />
                             </v-col>
                             <v-col cols="8">
@@ -53,6 +54,7 @@
                                 prepend-icon="lock"
                                 type="password"
                                 color="#00A368"
+                                v-model="password"
                               />
                             </v-col>
                           </v-row>
@@ -61,7 +63,7 @@
                       </v-card-text>
                       <div class="text-center mt-3">
                         <v-btn
-                          @click="goHome()"
+                          @click="submit"
                           rounded
                           class="text-capitalize px-8"
                           color="#00A368"
@@ -145,7 +147,7 @@
                               <v-icon>fab fa-linkedin-in</v-icon>
                             </v-btn>
                           </div>
-                          <v-form>
+                          <v-form >
                             <v-row justify="center">
                               <v-col cols="12" md="6">
                                 <v-text-field
@@ -327,11 +329,15 @@
 
 <script>
 import ForgotPasswordPopup from '../components/ForgotPasswordPopup'
+import axios from 'axios'
 export default {
+  name: 'signin',
   components: {
     ForgotPasswordPopup
   },
   data: () => ({
+    email: '',
+    password: '',
     step: 1,
     userTypes: ["Student", "Staff", "Independent Researcher"],
     institutionTypes: [
@@ -358,9 +364,23 @@ export default {
     menu: false,
     modal: false,
   }),
-  methods: {
-    goHome() {
-      return this.$router.push("/");
+   methods: {
+    submit() {
+      let data = { username: this.email, password: this.password }; 
+      // console.log(data)
+     
+      axios.post("http://192.168.1.4:3000/api/v1/auth/login", data)
+        .then(function (response) {
+          localStorage.setItem("user", JSON.stringify(response.data.payload.user));
+          localStorage.setItem("token", response.data.payload.token);
+          localStorage.setItem("token", response.data.payload.refreshToken);
+          // this.$router.push('/Home');
+          console.log("server returns ", response);
+          
+        })
+        .catch(function (error) {
+          console.log("server error ", error);
+        });
     },
   },
   computed: {

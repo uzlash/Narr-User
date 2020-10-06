@@ -7,43 +7,16 @@
           <v-avatar class="mb-4" size="100" circle elevation-12>
             <img src="../assets/avatar-1.png" alt="" />
           </v-avatar>
-<<<<<<< HEAD
-
-          <h1>Umar Abubakar</h1>
-
-          <v-row justify="center">
-            <div>
-              <v-list>
-                <v-list-item>
-                   <v-list-item-content> 
-                    <v-list-item-title icon-and-text>
-                      <h3 class="text-h6 font-weight-light" display-4>
-                        <v-icon>mdi-email</v-icon>
-                        umarabubakarrg@gmail.com
-                      </h3></v-list-item-title
-                    >
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-              <v-list-item>
-                 <v-list-item-content>
-                  <v-list-item-title icon-and-text>
-                    <h3 class="text-h6 font-weight-light">
-                      <v-icon class="pa-2">fas fa-graduation-cap</v-icon>
-                      Kaduna state university
-                    </h3></v-list-item-title
-                  >
-                </v-list-item-content>
-              </v-list-item>
-            </div>
-          </v-row>
-=======
           <h2 class="display-2">Umar Abubakar</h2>
-          <h3 class="text-h5 font-weight-light">Kaduna State University</h3>
->>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
+          <h3 class="text-h5 font-weight-light" icon-and-text>
+            <v-icon>mdi-email</v-icon> Umarabubakar@gmail.com
+          </h3>
+          <h3 class="text-h6 font-weight-light" icon-and-text>
+            <v-icon>mdi-school</v-icon> Kaduna State University
+          </h3>
           <v-dialog v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn tile color="success" v-bind="attrs" v-on="on" small>
+              <v-btn outlined color="success" v-bind="attrs" v-on="on" small>
                 <v-icon left> mdi-pencil </v-icon>
                 Edit
               </v-btn>
@@ -103,15 +76,14 @@
           </v-tabs>
           <v-tabs-items :value="tab">
             <v-tab-item value="one">
-<<<<<<< HEAD
               <v-card flat>
                 <v-col cols="12" md6>
                   <v-card-subtitle>8 Researches</v-card-subtitle>
                   <v-list>
                     <v-list v-for="item in History" :key="item.id">
                       <v-list-item>
-                        <v-list-item-avatar :color="item.color" size="200" tile>
-                          <v-avatar>{{item.avatar}}</v-avatar>
+                        <v-list-item-avatar :color="item.color" size="100">
+                          <v-icon size="100">{{ item.icon }}</v-icon>
                         </v-list-item-avatar>
                         <v-list-item-content>
                           <v-list-item-title class="font-weight-light">{{
@@ -125,68 +97,16 @@
                           }}</v-list-item-subtitle>
                         </v-list-item-content>
                         <v-list-item-content align="right">
-                          <v-list-item-title
-                            
-                            >{{ item.title2 }}</v-list-item-title
-                          >
-                         
+                          <v-list-item-title>{{
+                            item.title2
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
-                      <v-divider ></v-divider>
+                      <v-divider></v-divider>
                     </v-list>
                   </v-list>
                 </v-col>
               </v-card>
-=======
-              <v-card-text>
-                <v-tabs vertical color="#00a368">
-                  <v-tab> Overview </v-tab>
-
-                  <v-tab> contact and basic info </v-tab>
-                  <v-tab> Details about you </v-tab>
-
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text icons-and-text>
-                        <p class="mb-0">
-                          Phasellus dolor. Fusce neque. Fusce fermentum odio nec
-                          arcu. Pellentesque libero tortor, tincidunt et,
-                          tincidunt eget, semper nec, quam. Phasellus blandit
-                          leo ut odio.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="mb-0">
-                          Donec venenatis vulputate lorem. Aenean viverra
-                          rhoncus pede. In dui magna, posuere eget, vestibulum
-                          et, tempor auctor, justo. Fusce commodo aliquam arcu.
-                          Suspendisse enim turpis, dictum sed, iaculis a,
-                          condimentum nec, nisi.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="mb-0">
-                          Cras sagittis. Phasellus nec sem in justo pellentesque
-                          facilisis. Proin sapien ipsum, porta a, auctor quis,
-                          euismod ut, mi. Donec quam felis, ultricies nec,
-                          pellentesque eu, pretium quis, sem. Nam at tortor in
-                          tellus interdum sagittis.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                </v-tabs>
-              </v-card-text>
->>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
             </v-tab-item>
             <v-tab-item value="two">
               <v-card-text>
@@ -194,145 +114,88 @@
                   <v-container grid-list-xs>
                     <v-flex xs5>
                       <v-tab> Basic Info </v-tab>
-                       <v-tab> Contact info </v-tab>
+                      <v-tab> Contact info </v-tab>
                     </v-flex>
-                    
                   </v-container>
-                  <!-- <v-tab> Basic Info </v-tab>
-                  <v-tab> Contact info </v-tab> -->
+
                   <v-tab-item>
-<<<<<<< HEAD
-                  <v-col cols="12"> 
-                    <v-row justify="center">
-                      
+                    
+                    
+                     
                         <v-list>
                           <v-list-item>
-                             <v-list-item-content>
-                              <v-list-item-title>
-                                <h3 class="text-h5 font-weight-light">
-                                  <v-icon class="pa-2">fas fa-user</v-icon>
-                                  Male
-                                 </h3></v-list-item-title
+                            <v-list-tile-content>
+                              <v-list-item-title icon-and-text display-2
+                                ><v-icon>mdi-account</v-icon>
+                                Male</v-list-item-title
                               >
-                              <v-list-tile-sub-title class="grey--text" 
-                                >gender</v-list-tile-sub-title
+                              <v-list-item-subtitle class="ml-4"
+                                >gender</v-list-item-subtitle
                               >
-                            </v-list-item-content>
+                            </v-list-tile-content>
+                          </v-list-item>
+                          <br />
+                          <v-list-item>
+                            <v-list-tile-content>
+                              <v-list-item-title icon-and-text display-2
+                                ><v-icon>mdi-cake</v-icon> August 2
+                              </v-list-item-title>
+                              <v-list-item-subtitle class="ml-4"
+                                >birth date</v-list-item-subtitle
+                              >
+                            </v-list-tile-content>
+                          </v-list-item>
+                          <br />
+                          <v-list-item>
+                            <v-list-tile-content>
+                              <v-list-item-title class="ml-4">
+                                2002</v-list-item-title
+                              >
+                              <v-list-item-subtitle class="ml-4"
+                                >birth year</v-list-item-subtitle
+                              >
+                            </v-list-tile-content>
                           </v-list-item>
                         </v-list>
-                        <v-list-item>
-                            <v-list-item-content>
-                            <v-list-item-title>
-                              <h3 class="text-h5 font-weight-light">
-                                <v-icon class="pa-2">fas fa-birthday-cake</v-icon>
-                                August 2
-                              </h3></v-list-item-title
-                            >
-                            <v-list-tile-sub-title class="grey--text"
-                              >birth date</v-list-tile-sub-title
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item>
-                          <v-list-item-action>
-                            <v-icon></v-icon>
-                          </v-list-item-action>
-                          <v-list-item-content>
-                            <v-list-item-title>
-                              <h3 class="text-h5 font-weight-light">
-                                2002
-                              </h3></v-list-item-title
-                            >
-                            <v-list-tile-sub-title class="grey--text"
-                              >birth year</v-list-tile-sub-title
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
                       
-                    </v-row>
-                  </v-col>
-=======
-                    <v-card flat>
-                      <v-card-text icons-and-text>
-                        <p class="mb-0">
-                          Phasellus dolor. Fusce neque. Fusce fermentum odio nec
-                          arcu. Pellentesque libero tortor, tincidunt et,
-                          tincidunt eget, semper nec, quam. Phasellus blandit
-                          leo ut odio.
-                        </p>
-                      </v-card-text>
-                    </v-card>
+                   
                   </v-tab-item>
 
                   <v-tab-item>
+                    <v-col cols="12" md6 xs12 sm12>
                     <v-card flat>
                       <v-card-text>
-                        <p class="mb-0">
-                          Donec venenatis vulputate lorem. Aenean viverra
-                          rhoncus pede. In dui magna, posuere eget, vestibulum
-                          et, tempor auctor, justo. Fusce commodo aliquam arcu.
-                          Suspendisse enim turpis, dictum sed, iaculis a,
-                          condimentum nec, nisi.
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="mb-0">
-                          Cras sagittis. Phasellus nec sem in justo pellentesque
-                          facilisis. Proin sapien ipsum, porta a, auctor quis,
-                          euismod ut, mi. Donec quam felis, ultricies nec,
-                          pellentesque eu, pretium quis, sem. Nam at tortor in
-                          tellus interdum sagittis.
-                        </p>
-                      </v-card-text>
-                    </v-card>
->>>>>>> 9516f7884580b7db7bb2ec58713da479e97ac678
-                  </v-tab-item>
-                       <v-tab-item class="ml-3">
-                        <v-container grid-list-xs >
-                          <v-flex align-content-start>
-                          <v-card flat >
-                         <v-list >
+                        <v-list>
                           <v-list-item>
-                             <v-list-item-content>
-                              <v-list-item-title icon-and-text>
-                                <h3 class="text-h5 font-weight-light">
-                                  <v-icon>mdi-email</v-icon>
-                                  umarabubakarrg@gmail.com
-                                </h3></v-list-item-title
+                            <v-list-tile-content>
+                              <v-list-item-title icon-and-text
+                                ><v-icon left>mdi-email</v-icon
+                                >umar@gmail.com</v-list-item-title
                               >
-                            </v-list-item-content>
+                            </v-list-tile-content> </v-list-item
+                          ><br />
+                          <v-list-item>
+                            <v-list-tile-content>
+                              <v-list-item-title icon-and-text
+                                ><v-icon left>mdi-phone</v-icon
+                                >07016595825</v-list-item-title
+                              >
+                            </v-list-tile-content> </v-list-item
+                          ><br />
+                          <v-list-item>
+                            <v-list-tile-content>
+                              <v-list-item-title icon-and-text
+                                ><v-icon left>fab fa-invision</v-icon>umar
+                                abubakar</v-list-item-title
+                              >
+                            </v-list-tile-content>
                           </v-list-item>
                         </v-list>
-                        <v-list-item>
-                           <v-list-item-content>
-                            <v-list-item-title icon-and-text>
-                               <h3 class="text-h5 font-weight-light">
-                                <v-icon>fas fa-phone-square-alt</v-icon>
-                                07016505825
-                              </h3></v-list-item-title
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item>
-                           <v-list-item-content>
-                            <v-list-item-title>
-                              <h3 class="text-h5 font-weight-light">
-                                <v-icon>fab fa-linkedin</v-icon>
-                                Umar Abubakar
-                              </h3></v-list-item-title
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-card>
-                        
-                     
-                          </v-flex>
-                           </v-container> 
-                       </v-tab-item>                                                     
+                      </v-card-text>
+                    </v-card>
+                    </v-col>
+                  </v-tab-item>
+                  <v-tab-item> </v-tab-item>
                 </v-tabs>
               </v-card-text>
             </v-tab-item>
@@ -354,61 +217,75 @@ export default {
       History: [
         {
           id: 1,
-          color: "blue",
+          color: "teal",
           title1: "A research on neural networks with backwards propagation",
-          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "2nd august",
-          avatar: ""
+          icon: "mdi-file-document",
         },
         {
           id: 2,
-          color: "blue",
+          color: "pink",
           title1: "linear regression and SVM",
-          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "18 sep",
+          icon: "mdi-file",
         },
         {
           id: 3,
-          color: "blue",
+          color: "white",
           title1: "An intensive research on KNN & Random forest",
-          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "14 april",
+          icon: "mdi-file-document",
         },
         {
           id: 4,
           color: "blue",
           title1: "Election violence, a case of 2011 presidential election",
-          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "12 jan",
+          icon: "mdi-file-document",
         },
         {
           id: 5,
-          color: "blue",
+          color: "yellow",
           title1: "A research on neural networks with backwards propagation",
-          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "12 jan",
+          icon: "mdi-file-document",
         },
         {
           id: 6,
-          color: "blue",
+          color: "teal darken-2",
           title1: "linear regression and SVM",
-          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "11 jan",
+          icon: "mdi-file-document",
         },
         {
           id: 7,
-          color: "blue",
+          color: "ash",
           title1: "An intensive research on KNN & Random forest",
-           subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "21 jan",
+          icon: "mdi-file-document",
         },
         {
           id: 8,
           color: "blue",
           title1: "Lorem ipsum dolor sit, amet cons",
-          subtitle1: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
+          subtitle1:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate explicabo dolorum accusantium quaerat in qui fuga nulla officiis voluptates exercitationem, ullam eligendi ut sequi doloremque architecto! Amet ducimus fugit quas?",
           subtitle2: "16 feb",
-          
+          icon: "mdi-file-document",
         },
       ],
     };
