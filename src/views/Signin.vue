@@ -7,7 +7,7 @@
             <v-card class tile>
               <v-window v-model="step">
                 <v-window-item :value="1">
-                  <v-row class="mr-0">
+                  <v-row class="mx-0">
                     <v-col cols="12" md="8">
                       <v-card-text class="mt-12">
                         <h1
@@ -32,7 +32,7 @@
                             <v-icon>fab fa-linkedin-in</v-icon>
                           </v-btn>
                         </div>
-                        <v-form>
+                        <v-form @submit.prevent>
                           <v-row justify="center">
                             <v-col cols="8">
                               <v-text-field
@@ -69,7 +69,7 @@
                       </v-card-text>
                       <div class="text-center mt-3">
                         <v-btn
-                          @click="goHome()"
+                          @click="signIn()"
                           rounded
                           class="text-capitalize px-8"
                           color="#00A368"
@@ -102,7 +102,7 @@
                   </v-row>
                 </v-window-item>
                 <v-window-item :value="2">
-                  <v-row class="fill-height ml-0">
+                  <v-row class="fill-height">
                     <v-col cols="12" md="4" class="custom__col">
                       <v-card-text class="white--text mt-12">
                         <h2 class="text-center display-1 font-weight-thin">
@@ -350,6 +350,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import ForgotPasswordPopup from "../components/ForgotPasswordPopup";
 export default {
   components: {
@@ -397,13 +398,33 @@ export default {
     date: null,
     menu: false,
     modal: false,
+    fname: "",
+    lname: "",
+    email: "",
     password: "",
     confirmPassword: "",
     showPassword: "",
+    output: "",
   }),
   methods: {
-    goHome() {
-      return this.$router.push("/");
+    signIn() {
+      axios
+        .post("http://192.168.1.4:3000/api/v1/auth/login", {
+          username: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response.data.payload);
+          // this.output = response.data
+          localStorage.setItem("token", response.data.payload.token);
+          localStorage.setItem(
+            "refreshToken",
+            response.data.payload.refreshToken
+          );
+          localStorage.setItem('user', JSON.stringify(response.data.payload.user));
+          this.$router.push("/users");
+        })
+        .catch((error) => console.log(error));
     },
   },
   computed: {

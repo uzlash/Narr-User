@@ -328,7 +328,7 @@ export default {
     logout() {
       this.$router.push("/signin");
     },
-  },
+  }
 };
 </script>
 

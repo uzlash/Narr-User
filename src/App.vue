@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style>
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
@@ -31,5 +31,5 @@ export default {
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(170, 170, 170);
-}
+} */
 </style>
