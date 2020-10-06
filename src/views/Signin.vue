@@ -7,7 +7,7 @@
             <v-card class tile>
               <v-window v-model="step">
                 <v-window-item :value="1">
-                  <v-row>
+                  <v-row class="mx-0">
                     <v-col cols="12" md="8">
                       <v-card-text class="mt-12">
                         <h1
@@ -32,10 +32,11 @@
                             <v-icon>fab fa-linkedin-in</v-icon>
                           </v-btn>
                         </div>
-                        <v-form method="post" action="form @submit.prevent">
+                        <v-form @submit.prevent>
                           <v-row justify="center">
                             <v-col cols="8">
                               <v-text-field
+                                v-model="email"
                                 solo
                                 class="mt-4"
                                 label="Email"
@@ -43,18 +44,23 @@
                                 prepend-icon="email"
                                 type="text"
                                 color="#00A368"
-                                v-model="email"
+                                :rules="[rules.required, rules.email]"
                               />
                             </v-col>
                             <v-col cols="8">
                               <v-text-field
+                                v-model="password"
+                                :append-icon="
+                                  showPassword ? 'mdi-eye' : 'mdi-eye-off'
+                                "
+                                :type="showPassword ? 'text' : 'password'"
                                 solo
                                 label="Password"
                                 name="password"
                                 prepend-icon="lock"
-                                type="password"
                                 color="#00A368"
-                                v-model="password"
+                                @click:append="showPassword = !showPassword"
+                                :rules="[rules.required, rules.password]"
                               />
                             </v-col>
                           </v-row>
@@ -63,7 +69,7 @@
                       </v-card-text>
                       <div class="text-center mt-3">
                         <v-btn
-                          @click="submit"
+                          @click="signIn()"
                           rounded
                           class="text-capitalize px-8"
                           color="#00A368"
@@ -147,17 +153,17 @@
                               <v-icon>fab fa-linkedin-in</v-icon>
                             </v-btn>
                           </div>
-                          <v-form >
+                          <v-form>
                             <v-row justify="center">
                               <v-col cols="12" md="6">
                                 <v-text-field
-                                aria-required="true"
                                   solo
                                   class="mt-4"
                                   label="First Name"
                                   prepend-icon="person"
                                   type="text"
                                   color="#00A368"
+                                  :rules="[rules.required, rules.counter]"
                                 />
                               </v-col>
                               <v-col cols="12" md="6">
@@ -168,33 +174,37 @@
                                   prepend-icon="person"
                                   type="text"
                                   color="#00A368"
+                                  :rules="[rules.required, rules.counter]"
                                 />
                               </v-col>
-                              <v-col cols="12" md="10">
+                              <v-col cols="12" md="12">
                                 <v-text-field
                                   solo
                                   label="Email"
                                   prepend-icon="email"
                                   type="text"
                                   color="#00A368"
+                                  :rules="[rules.required, rules.email]"
                                 />
                               </v-col>
-                              <v-col cols="12" md="10">
+                              <v-col cols="12" md="12">
                                 <v-text-field
                                   solo
                                   label="+2348000000000"
                                   prepend-icon="phone"
                                   type="text"
                                   color="#00A368"
+                                  :rules="[rules.required]"
                                 />
                               </v-col>
-                              <v-col cols="12" md="10">
+                              <v-col cols="12" md="12">
                                 <v-text-field
                                   solo
                                   label="Address"
                                   prepend-icon="home"
                                   type="text"
                                   color="#00A368"
+                                  :rules="[rules.required, rules.counter]"
                                 />
                               </v-col>
                               <!-- <v-col cols="12" md="6">
@@ -218,7 +228,9 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-select
-                                  v-show="selectedInstitutionType !== 'Organization'"
+                                  v-show="
+                                    selectedInstitutionType !== 'Organization'
+                                  "
                                   v-model="selectedInstitution"
                                   solo
                                   label="Institution"
@@ -227,9 +239,11 @@
                                   color="#00A368"
                                 />
                               </v-col>
-                              <v-col cols="12" md="10">
+                              <v-col cols="12" md="12">
                                 <v-text-field
-                                  v-show="selectedInstitutionType === 'Organization'"
+                                  v-show="
+                                    selectedInstitutionType === 'Organization'
+                                  "
                                   solo
                                   label="Name of Organization (Optional)"
                                   prepend-icon="mdi-office-building"
@@ -237,7 +251,7 @@
                                   color="#00A368"
                                 />
                               </v-col>
-                              <v-col cols="12" md="10">
+                              <v-col cols="12" md="12">
                                 <v-menu
                                   ref="menu"
                                   v-model="menu"
@@ -290,6 +304,8 @@
                                   prepend-icon="lock"
                                   type="password"
                                   color="#00A368"
+                                  v-model="password"
+                                  :rules="[rules.required, rules.password]"
                                 />
                               </v-col>
                               <v-col cols="12" md="6">
@@ -299,6 +315,12 @@
                                   prepend-icon="lock"
                                   type="password"
                                   color="#00A368"
+                                  v-model="confirmPassword"
+                                  :rules="[
+                                    rules.required,
+                                    rules.password,
+                                    passwordConfirmationRule,
+                                  ]"
                                 />
                               </v-col>
                             </v-row>
@@ -328,16 +350,24 @@
 </template>
 
 <script>
-import ForgotPasswordPopup from '../components/ForgotPasswordPopup'
-import axios from 'axios'
+import axios from "axios";
+import ForgotPasswordPopup from "../components/ForgotPasswordPopup";
 export default {
-  name: 'signin',
   components: {
-    ForgotPasswordPopup
+    ForgotPasswordPopup,
   },
   data: () => ({
-   
     step: 1,
+    rules: {
+      required: (v) => !!v || "Field is required",
+      counter: (v) => (v && v.length >= 3) || "Minimum length is 3 characters",
+      email: (value) => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "Invalid e-mail.";
+      },
+      password: (value) =>
+        (value && value.length >= 6) || "Minimum length is 6 characters",
+    },
     userTypes: ["Student", "Staff", "Independent Researcher"],
     institutionTypes: [
       "University",
@@ -352,27 +382,64 @@ export default {
       { text: "Bayero University Kano", type: "university" },
       { text: "Kaduna Polytechnique", type: "polytechnique" },
       { text: "Nuhu Bamalli", type: "polytechnique" },
-      { text: "Federal College of Education Zaria", type: "college of education" },
-      { text: "Federal College of Education Katsina", type: "college of education" },
-      { text: "Dialogue", type: "monotechnique" },
-      { text: "Khemsafe", type: "monotechnique" },
+      {
+        text: "Federal College of Education Zaria",
+        type: "college of education",
+      },
+      {
+        text: "Federal College of Education Katsina",
+        type: "college of education",
+      },
+      { text: "Dialogue Institute of Technology", type: "monotechnique" },
+      { text: "Khemsafe Computers", type: "monotechnique" },
     ],
     selectedInstitutionType: "",
     selectedInstitution: "",
     date: null,
     menu: false,
     modal: false,
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    showPassword: "",
+    output: "",
   }),
-  
-     
-    
+  methods: {
+    signIn() {
+      axios
+        .post("http://192.168.1.4:3000/api/v1/auth/login", {
+          username: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response.data.payload);
+          // this.output = response.data
+          localStorage.setItem("token", response.data.payload.token);
+          localStorage.setItem(
+            "refreshToken",
+            response.data.payload.refreshToken
+          );
+          localStorage.setItem('user', JSON.stringify(response.data.payload.user));
+          this.$router.push("/users");
+        })
+        .catch((error) => console.log(error));
+    },
+  },
   computed: {
-    filteredInstitutions () {
-      return this.institutions.filter( (institution) => {
-        return institution.type.match(this.selectedInstitutionType.toLowerCase())
-      })
-    }
-  }
+    filteredInstitutions() {
+      return this.institutions.filter((institution) => {
+        return institution.type.match(
+          this.selectedInstitutionType.toLowerCase()
+        );
+      });
+    },
+    passwordConfirmationRule() {
+      return () =>
+        this.password === this.confirmPassword || "Password must match";
+    },
+  },
 };
 </script>
 
