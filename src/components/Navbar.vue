@@ -248,6 +248,13 @@ export default {
     ],
     offset: true,
   }),
+  methods: {
+    // logout: function () {
+    //   this.$store.dispatch(AUTH_LOGOUT).then(() => {
+    //     this.$router.push("/login");
+    //   });
+    // },
+  }
 };
 </script>
 

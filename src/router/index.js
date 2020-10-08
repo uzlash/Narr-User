@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -11,7 +12,8 @@ const routes = [
     component: Home,
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/analytics",
@@ -20,7 +22,8 @@ const routes = [
       import(/* webpackChunkName: "Analytics" */ "../views/Analytics.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/profile",
@@ -29,19 +32,10 @@ const routes = [
       import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
 
-  {
-    path: "/user",
-    name: "user",
-    component: () =>
-      import(/* webpackChunkName: "Analytics" */ "../views/user.vue"),
-    meta: {
-      showHeader: true,
-    },
-  },
-  
   {
     path: "/grants",
     name: "Grants",
@@ -49,7 +43,8 @@ const routes = [
       import(/* webpackChunkName: "Grants" */ "../views/Grants.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/upload",
@@ -58,7 +53,8 @@ const routes = [
       import(/* webpackChunkName: "Upload" */ "../views/Upload.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/history",
@@ -67,7 +63,8 @@ const routes = [
       import(/* webpackChunkName: "History" */ "../views/History.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/profile",
@@ -76,7 +73,8 @@ const routes = [
       import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/chat",
@@ -84,7 +82,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "Chat" */ "../views/Chat.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/ocr",
@@ -93,7 +92,8 @@ const routes = [
       import(/* webpackChunkName: "Upload" */ "../views/OCR.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/convert",
@@ -102,6 +102,7 @@ const routes = [
       import(/* webpackChunkName: "Upload" */ "../views/Convert.vue"),
     meta: {
       showHeader: true,
+      requiresAuth: true
     },
   },
   {
@@ -111,7 +112,8 @@ const routes = [
       import(/* webpackChunkName: "Upload" */ "../views/Video.vue"),
     meta: {
       showHeader: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/signin",
@@ -129,8 +131,9 @@ const routes = [
       import(/* webpackChunkName: "Signin" */ "../views/Users.vue"),
     meta: {
       showHeader: false,
+      requiresAuth: true
     },
-  },
+  }
 ];
 
 const router = new VueRouter({
@@ -138,5 +141,21 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+
+  if (requiresAuth && !store.state.token) {
+    next('/signin')
+  } else {
+    next()
+  }
+  // if (!store.state.token) {
+  //   next('signin')
+  // } 
+  // else {
+  //   next()
+  // }
+})
 
 export default router;

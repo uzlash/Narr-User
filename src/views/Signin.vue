@@ -153,10 +153,11 @@
                               <v-icon>fab fa-linkedin-in</v-icon>
                             </v-btn>
                           </div>
-                          <v-form>
+                          <v-form @submit.prevent>
                             <v-row justify="center">
                               <v-col cols="12" md="6">
                                 <v-text-field
+                                  v-model="fname"
                                   solo
                                   class="mt-4"
                                   label="First Name"
@@ -168,6 +169,7 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-text-field
+                                  v-model="lname"
                                   solo
                                   class="mt-4"
                                   label="Last Name"
@@ -179,6 +181,7 @@
                               </v-col>
                               <v-col cols="12" md="12">
                                 <v-text-field
+                                  v-model="email"
                                   solo
                                   label="Email"
                                   prepend-icon="email"
@@ -189,6 +192,7 @@
                               </v-col>
                               <v-col cols="12" md="12">
                                 <v-text-field
+                                  v-model="phone"
                                   solo
                                   label="+2348000000000"
                                   prepend-icon="phone"
@@ -199,6 +203,7 @@
                               </v-col>
                               <v-col cols="12" md="12">
                                 <v-text-field
+                                  v-model="address"
                                   solo
                                   label="Address"
                                   prepend-icon="home"
@@ -207,15 +212,6 @@
                                   :rules="[rules.required, rules.counter]"
                                 />
                               </v-col>
-                              <!-- <v-col cols="12" md="6">
-                                <v-select
-                                  solo
-                                  label="User Type"
-                                  prepend-icon="person"
-                                  :items="userTypes"
-                                  color="#00A368"
-                                />
-                              </v-col> -->
                               <v-col cols="12" md="6">
                                 <v-select
                                   v-model="selectedInstitutionType"
@@ -244,6 +240,7 @@
                                   v-show="
                                     selectedInstitutionType === 'Organization'
                                   "
+                                  v-model="organization"
                                   solo
                                   label="Name of Organization (Optional)"
                                   prepend-icon="mdi-office-building"
@@ -350,7 +347,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import ForgotPasswordPopup from "../components/ForgotPasswordPopup";
 export default {
   components: {
@@ -358,6 +355,20 @@ export default {
   },
   data: () => ({
     step: 1,
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    address: "",
+    organization: "",
+    selectedInstitutionType: "",
+    selectedInstitution: "",
+    password: "",
+    confirmPassword: "",
+    date: null,
+    menu: false,
+    modal: false,
+    showPassword: "",
     rules: {
       required: (v) => !!v || "Field is required",
       counter: (v) => (v && v.length >= 3) || "Minimum length is 3 characters",
@@ -393,39 +404,51 @@ export default {
       { text: "Dialogue Institute of Technology", type: "monotechnique" },
       { text: "Khemsafe Computers", type: "monotechnique" },
     ],
-    selectedInstitutionType: "",
-    selectedInstitution: "",
-    date: null,
-    menu: false,
-    modal: false,
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    showPassword: "",
-    output: "",
   }),
   methods: {
     signIn() {
-      axios
-        .post("http://192.168.1.4:3000/api/v1/auth/login", {
-          username: this.email,
-          password: this.password,
-        })
-        .then((response) => {
-          console.log(response.data.payload);
-          // this.output = response.data
-          localStorage.setItem("token", response.data.payload.token);
-          localStorage.setItem(
-            "refreshToken",
-            response.data.payload.refreshToken
-          );
-          localStorage.setItem('user', JSON.stringify(response.data.payload.user));
-          this.$router.push("/users");
-        })
-        .catch((error) => console.log(error));
+      const signInData = {
+        username: this.email,
+        password: this.password,
+      }
+      this.$store.dispatch('signIn', signInData)
     },
+    signUp() {
+      const signUpData = {
+        fname: this.fname,
+        lname: this.lname,
+        username: this.email,
+        phone: this.phone,
+        address: this.address,
+        organization: this.organization,
+        selectedInstitutionType: this.selectedInstitutionType,
+        selectedInstitution: this.selectedInstitution,
+        password: this.confirmPassword,
+      }
+      this.$store.dispatch('SignUp', signUpData)
+    }
+    // signIn() {
+    //   axios
+    //     .post("http://192.168.1.4:3000/api/v1/auth/login", {
+    //       username: this.email,
+    //       password: this.password,
+    //     })
+    //     .then((response) => {
+    //       console.log(response.data.payload);
+    //       // this.output = response.data
+    //       localStorage.setItem("token", response.data.payload.token);
+    //       localStorage.setItem(
+    //         "refreshToken",
+    //         response.data.payload.refreshToken
+    //       );
+    //       localStorage.setItem(
+    //         "user",
+    //         JSON.stringify(response.data.payload.user)
+    //       );
+    //       this.$router.push("/users");
+    //     })
+    //     .catch((error) => console.log(error));
+    // },
   },
   computed: {
     filteredInstitutions() {
