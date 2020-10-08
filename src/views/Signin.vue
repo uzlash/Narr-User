@@ -325,7 +325,7 @@
                         </v-card-text>
                         <div class="text-center mt-3">
                           <v-btn
-                            @click="goHome()"
+                            @click="signUp()"
                             rounded
                             class="text-capitalize px-8 mb-4"
                             color="#00A368"
@@ -411,7 +411,7 @@ export default {
         username: this.email,
         password: this.password,
       }
-      this.$store.dispatch('signIn', signInData)
+      this.$store.dispatch('SIGN_IN', signInData)
     },
     signUp() {
       const signUpData = {
@@ -425,7 +425,7 @@ export default {
         selectedInstitution: this.selectedInstitution,
         password: this.confirmPassword,
       }
-      this.$store.dispatch('SignUp', signUpData)
+      this.$store.dispatch('SIGN_UP', signUpData)
     }
     // signIn() {
     //   axios

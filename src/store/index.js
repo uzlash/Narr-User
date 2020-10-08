@@ -11,16 +11,16 @@ const store = new Vuex.Store({
     refreshToken: localStorage.getItem("refreshToken") || null,
     user: localStorage.getItem("user") || null,
   },
-  getters: {
-  },
+  getters: {},
   mutations: {
     authUser(state, userData) {
       state.token = userData.token;
-      state.userId = userData.userId;
+      state.refreshToken = userData.refreshToken;
+      state.user = userData.user;
     },
   },
   actions: {
-    signIn({ commit }, authData) {
+    SIGN_IN({ commit }, authData) {
       axios
         .post("http://192.168.1.4:3000/api/v1/auth/login", {
           username: authData.username,
@@ -46,7 +46,7 @@ const store = new Vuex.Store({
         })
         .catch((error) => console.log(error));
     },
-    signUp({ commit }, authData) {
+    SIGN_UP({ commit }, authData) {
       axios
         .post("http://192.168.1.4:3000/api/v1/auth/register", {
           fname: authData.fname,
