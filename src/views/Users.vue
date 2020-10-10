@@ -13,7 +13,10 @@
         </v-col>
         <v-col cols="12" md="8" sm="8">
           <ul>
-            <li v-for="user in users" :key="user._id">{{ user }}</li>
+            <li v-for="user in users" :key="user._id">
+              {{ user.fullName }} | {{ user.institution.name }} |
+              {{ user.username }} | {{ user.phone }}
+            </li>
           </ul>
           <p v-show="error != null">{{ error }}</p>
         </v-col>
@@ -59,7 +62,7 @@ export default {
             this.fetchUsers();
           }
         });
-    }
+    },
   },
   mounted() {
     this.user = JSON.parse(localStorage.getItem("user"));

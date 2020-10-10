@@ -32,7 +32,7 @@
                             <v-icon>fab fa-linkedin-in</v-icon>
                           </v-btn>
                         </div>
-                        <v-form @submit.prevent>
+                        <v-form @submit.prevent ref="form">
                           <v-row justify="center">
                             <v-col cols="8">
                               <v-text-field
@@ -70,6 +70,7 @@
                       <div class="text-center mt-3">
                         <v-btn
                           @click="signIn()"
+                          :loading="signInLoading"
                           rounded
                           class="text-capitalize px-8"
                           color="#00A368"
@@ -153,7 +154,7 @@
                               <v-icon>fab fa-linkedin-in</v-icon>
                             </v-btn>
                           </div>
-                          <v-form @submit.prevent>
+                          <v-form @submit.prevent ref="form">
                             <v-row justify="center">
                               <v-col cols="12" md="6">
                                 <v-text-field
@@ -194,7 +195,7 @@
                                 <v-text-field
                                   v-model="phone"
                                   solo
-                                  label="+2348000000000"
+                                  label="08012345678"
                                   prepend-icon="phone"
                                   type="text"
                                   color="#00A368"
@@ -326,6 +327,7 @@
                         <div class="text-center mt-3">
                           <v-btn
                             @click="signUp()"
+                            :loading="signUpLoading"
                             rounded
                             class="text-capitalize px-8 mb-4"
                             color="#00A368"
@@ -340,6 +342,26 @@
               </v-window>
             </v-card>
           </v-col>
+          <v-snackbar
+            v-model="signUpSnackbarSuccess"
+            :timeout="10000"
+            bottom
+            color="#00A368"
+            >User registered successfully, check your email for confirmation.
+            <v-btn outlined color="white" @click="signUpSnackbarSuccess = false"
+              >Close</v-btn
+            >
+          </v-snackbar>
+          <v-snackbar
+            v-model="signUpSnackbarError"
+            :timeout="10000"
+            bottom
+            color="red"
+            >Error signing up, please try again.
+            <v-btn outlined color="white" @click="signUpSnackbarError = false"
+              >Close</v-btn
+            >
+          </v-snackbar>
         </v-row>
       </v-container>
     </v-main>
@@ -369,6 +391,10 @@ export default {
     menu: false,
     modal: false,
     showPassword: "",
+    signUpSnackbarSuccess: false,
+    signUpSnackbarError: false,
+    signUpLoading: false,
+    signInLoading: false,
     rules: {
       required: (v) => !!v || "Field is required",
       counter: (v) => (v && v.length >= 3) || "Minimum length is 3 characters",
@@ -382,17 +408,17 @@ export default {
     userTypes: ["Student", "Staff", "Independent Researcher"],
     institutionTypes: [
       "University",
-      "Polytechnique",
+      "Polytechnic",
       "College of Education",
-      "Monotechnique",
+      "Monotechnic",
       "Independent Researcher",
       "Organization",
     ],
     institutions: [
       { text: "Ahmadu Bello University", type: "university" },
       { text: "Bayero University Kano", type: "university" },
-      { text: "Kaduna Polytechnique", type: "polytechnique" },
-      { text: "Nuhu Bamalli", type: "polytechnique" },
+      { text: "Kaduna Polytechnique", type: "polytechnic" },
+      { text: "Nuhu Bamalli", type: "polytechnic" },
       {
         text: "Federal College of Education Zaria",
         type: "college of education",
@@ -401,8 +427,8 @@ export default {
         text: "Federal College of Education Katsina",
         type: "college of education",
       },
-      { text: "Dialogue Institute of Technology", type: "monotechnique" },
-      { text: "Khemsafe Computers", type: "monotechnique" },
+      { text: "Dialogue Institute of Technology", type: "monotechnic" },
+      { text: "Khemsafe Computers", type: "monotechnic" },
     ],
   }),
   methods: {
@@ -410,8 +436,10 @@ export default {
       const signInData = {
         username: this.email,
         password: this.password,
+      };
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch("SIGN_IN", signInData);
       }
-      this.$store.dispatch('SIGN_IN', signInData)
     },
     signUp() {
       const signUpData = {
@@ -419,36 +447,22 @@ export default {
         lname: this.lname,
         username: this.email,
         phone: this.phone,
+        dob: this.date,
         address: this.address,
         organization: this.organization,
-        selectedInstitutionType: this.selectedInstitutionType,
-        selectedInstitution: this.selectedInstitution,
+        institution: {
+          type: this.selectedInstitutionType,
+          name: this.selectedInstitution,
+        },
         password: this.confirmPassword,
+      };
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch("SIGN_UP", signUpData).then(() => {
+          this.signUpSnackbar = true;
+        });
+        console.log(signUpData);
       }
-      this.$store.dispatch('SIGN_UP', signUpData)
     }
-    // signIn() {
-    //   axios
-    //     .post("http://192.168.1.4:3000/api/v1/auth/login", {
-    //       username: this.email,
-    //       password: this.password,
-    //     })
-    //     .then((response) => {
-    //       console.log(response.data.payload);
-    //       // this.output = response.data
-    //       localStorage.setItem("token", response.data.payload.token);
-    //       localStorage.setItem(
-    //         "refreshToken",
-    //         response.data.payload.refreshToken
-    //       );
-    //       localStorage.setItem(
-    //         "user",
-    //         JSON.stringify(response.data.payload.user)
-    //       );
-    //       this.$router.push("/users");
-    //     })
-    //     .catch((error) => console.log(error));
-    // },
   },
   computed: {
     filteredInstitutions() {

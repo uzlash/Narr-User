@@ -2,16 +2,18 @@
   <div class="home">
     <v-app class="grey lighten-4">
       <v-container>
-        <v-row class="my-n6">
+        <!-- <v-row class="my-n6">
           <v-col cols="12">
             <span class="text-h4 font-weight-thin">Home</span>
           </v-col>
-        </v-row>
+        </v-row> -->
         <v-row align="center" justify="center">
-          <v-col cols="12" md="8" sm="8">
+          <v-col cols="12" md="8" sm="8" class="pa-0">
             <v-text-field
               solo
               rounded
+              hide-details
+              class="mb-2"
               label="Search NARR"
               append-icon="search"
             ></v-text-field>
@@ -21,56 +23,29 @@
           </v-col>
         </v-row>
         <v-row align="center" justify="center">
-          <v-col cols="3" lg="3" md="6" sm="12">
+          <v-col
+            cols="12"
+            lg="3"
+            md="6"
+            sm="12"
+            class="pa-2"
+            v-for="card in CardDocuments"
+            :key="card.title"
+          >
             <v-card tile>
+              <v-card-title class="pa-2 body-1 grey--text text--darken-2">{{
+                card.title
+              }}</v-card-title>
+              <v-divider></v-divider>
               <div class="d-flex pa-3 align-center">
-                <v-btn class="mx-2" fab dark color="#00a368">
-                  <v-icon dark> mdi-file </v-icon>
+                <v-btn class="mx-2" small fab dark :color="card.color">
+                  <v-icon dark> {{ card.icon }} </v-icon>
                 </v-btn>
                 <div class="">
-                  <h2 class="font-weight-light green--text text--darken-2">
-                    3 documents
+                  <h2 class="text-h6 font-weight-light">
+                    {{ card.value }}
                   </h2>
-                  <h5 class="font-weight-light">Documents uploaded</h5>
-                </div>
-              </div>
-            </v-card>
-          </v-col>
-          <v-col cols="3" lg="3" md="6" sm="12">
-            <v-card tile>
-              <div class="d-flex pa-3 align-center">
-                <v-btn class="mx-2" fab dark color="blue">
-                  <v-icon dark> mdi-book-open-page-variant </v-icon>
-                </v-btn>
-                <div class="">
-                  <h2 class="font-weight-light blue--text">33 documents</h2>
-                  <h5 class="font-weight-light">Suggestions</h5>
-                </div>
-              </div>
-            </v-card>
-          </v-col>
-          <v-col cols="3" lg="3" md="6" sm="12">
-            <v-card tile>
-              <div class="d-flex pa-3 align-center">
-                <v-btn class="mx-2" fab dark color="orange">
-                  <v-icon dark> mdi-account </v-icon>
-                </v-btn>
-                <div class="">
-                  <h2 class="font-weight-light orange--text">21 mentions</h2>
-                  <h5 class="font-weight-light">Mentions</h5>
-                </div>
-              </div>
-            </v-card>
-          </v-col>
-          <v-col cols="3" lg="3" md="6" sm="12" xs="12">
-            <v-card tile>
-              <div class="d-flex pa-3 align-center">
-                <v-btn class="mx-2" fab dark color="pink">
-                  <v-icon dark> mdi-book-open-variant </v-icon>
-                </v-btn>
-                <div class="">
-                  <h2 class="font-weight-light pink--text">1 active</h2>
-                  <h5 class="font-weight-light">Research Grants</h5>
+                  <h5 class="font-weight-light">{{ card.subtitle }}</h5>
                 </div>
               </div>
             </v-card>
@@ -78,40 +53,119 @@
         </v-row>
         <v-row>
           <v-col cols="12" lg="4" md="6" sm="12">
-            <h1 class="headline mb-2 font-weight-light">Reading history</h1>
-          </v-col>
-          <v-col cols="12" lg="8" md="6" sm="12">
-            <h1 class="headline mb-2 font-weight-light">Usage History</h1>
-          </v-col>
-          <v-col cols="6" lg="4" md="6" sm="12">
-            <v-card height="320" class="cutom__card--overflow">
-              <v-list v-for="item in History" :key="item.id">
-                <v-list-item>
-                  <v-list-item-avatar :color="item.color">
+            <v-card tile>
+              <v-card-title class="body-1 grey--text text--darken-2 pa-2"
+                >Reading History</v-card-title
+              >
+            </v-card>
+            <v-card tile height="320" class="cutom__card--overflow">
+              <v-list v-for="item in History" :key="item.id" class="py-0">
+                <v-list-item to="/user" class="px-2">
+                  <v-list-item-avatar color="blue">
                     <v-icon dark>{{ item.icon }}</v-icon>
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title class="font-weight-light">{{
+                    <v-list-item-title class="font-weight-light body-1 text-wrap">{{
                       item.title1
                     }}</v-list-item-title>
                     <v-list-item-subtitle class="font-weight-light">{{
-                      item.subtitle1
+                      item.authors
                     }}</v-list-item-subtitle>
                   </v-list-item-content>
-                  <v-list-item-content align="right">
+                  <div>
                     <v-list-item-title class="green--text font-weight-light">{{
                       item.title2
                     }}</v-list-item-title>
                     <v-list-item-subtitle class="font-weight-light">{{
                       item.subtitle2
                     }}</v-list-item-subtitle>
-                  </v-list-item-content>
+                  </div>
                 </v-list-item>
                 <v-divider inset></v-divider>
               </v-list>
             </v-card>
           </v-col>
-          <v-col cols="6" lg="8" md="6" sm="12">
+          <v-col cols="12" lg="5" md="6" sm="12">
+            <v-card tile>
+              <v-card-title class="body-1 grey--text text--darken-1 pa-2"
+                >Suggestions</v-card-title
+              >
+            </v-card>
+            <v-card tile height="320" class="cutom__card--overflow">
+              <v-list v-for="item in History" :key="item.id" class="py-0">
+                <v-list-item to="/user" class="px-2">
+                  <v-list-item-avatar color="accent">
+                    <v-icon dark>{{ item.icon }}</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title class="font-weight-light body-1 text-wrap">{{
+                      item.title1
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.authors
+                    }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                  <div>
+                    <!-- <v-list-item-title class="green--text font-weight-light">{{
+                      item.title2
+                    }}</v-list-item-title> -->
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.date
+                    }}</v-list-item-subtitle>
+                  </div>
+                </v-list-item>
+                <v-divider inset></v-divider>
+              </v-list>
+            </v-card>
+          </v-col>
+          <v-col cols="12" lg="3" md="6" sm="12">
+            <!-- <v-card tile>
+              <v-card-title class="text-h6 font-weight-light pa-2"
+                >Profile</v-card-title
+              >
+            </v-card> -->
+            <v-card
+              tile
+              height="360"
+              class="cutom__card--overflow d-flex flex-column align-center justify-center"
+            >
+              <div>
+                <v-avatar size="120" color="grey">
+                  <v-img src="../assets/avatar-1.jpg"></v-img>
+                </v-avatar>
+              </div>
+
+              <v-card-text class="text-h5 pa-0 text-center font-weight-light"
+                >Usman Murtala</v-card-text
+              >
+              <v-card-text class="body-1 pa-0 text-center font-weight-light"
+                >uzlash16@gmail.com</v-card-text
+              >
+              <v-card-text class="body-2 pa-0 text-center font-weight-light"
+                >Ahmadu Bello University</v-card-text
+              >
+              <div class="d-flex justify-center">
+                <!-- <v-icon size="20" color="orange darken-2">mdi-clock</v-icon> -->
+                <span class="font-weight-light mx-2 body-2">Last Login:</span>
+                <span class="font-weight-light orange--text body-2"
+                  >26 minutes ago</span
+                >
+              </div>
+              <div class="d-flex justify-center">
+                <v-btn outlined small class="mt-2" color="#00a368">
+                  <v-icon>mdi-circle-edit-outline</v-icon>
+                  Edit Profile</v-btn
+                >
+              </div>
+            </v-card>
+            <!-- <v-card height="60" class="my-2 pa-1">
+              <v-card-text class="pa-0"
+                >Lorem ipsum dolor sit amet consectetur, adipisicing
+                elit.</v-card-text
+              >
+            </v-card> -->
+          </v-col>
+          <v-col cols="12" lg="12" md="12" sm="12" class="py-0">
             <v-card height="">
               <template>
                 <div class="chart">
@@ -128,19 +182,19 @@
                 </span></v-card-text
               >
             </v-card>
-            <v-card class="mt-4 pa-4 d-flex align-center">
-              <v-icon color="orange darken-2">mdi-clock</v-icon>
-              <span class="font-weight-light mx-2">Last Login:</span>
-              <span class="font-weight-light orange--text">26 minutes ago</span>
-            </v-card>
           </v-col>
-          <v-col cols="12" lg="12" md="8" sm="12">
+          <v-col cols="12" lg="12" md="12" sm="12">
             <v-card>
               <GChart
                 type="ColumnChart"
                 :data="columnChartData"
                 :options="chartOptions"
               />
+              <v-card-text>
+                <span class="text-center">
+                  Time spent reading
+                </span></v-card-text
+              >
             </v-card>
           </v-col>
         </v-row>
@@ -153,78 +207,117 @@
 export default {
   components: {},
   data: () => ({
+    CardDocuments: [
+      {
+        title: "Documents Uploaded",
+        value: "5 Documents",
+        subtitle: "Total Uploads",
+        icon: "mdi-file",
+        color: "#00a368",
+      },
+      {
+        title: "Read Sugestions",
+        value: "33 Documents",
+        subtitle: "Daily Suggestions",
+        icon: "mdi-book-open-page-variant",
+        color: "light-blue",
+      },
+      {
+        title: "Mentions",
+        value: "26 Mentions",
+        subtitle: "Mentions in the last 1 year",
+        icon: "mdi-account",
+        color: "orange",
+      },
+      {
+        title: "Research Grants",
+        value: "2 Active",
+        subtitle: "Researches Working On",
+        icon: "mdi-book-open-variant",
+        color: "pink",
+      },
+    ],
     History: [
       {
         id: 1,
         color: "blue",
         icon: "mdi-file-document",
         title1: "A research on neural networks with backwards propagation",
-        subtitle1: "35 pages left",
+        authors: "Gol D. Roger, Edward Newgate & Monkey D. Garp et.al",
         title2: "N1200",
-        subtitle2: "Paid",
+        subtitle2: "35 pages",
+        date: "20-03-2018",
       },
       {
         id: 2,
         color: "blue",
         icon: "mdi-file-document",
-        title1: "linear regression and SVM",
-        subtitle1: "10 pages left",
+        title1: "Linear regression and SVM",
+        authors: "Johnny Cage, Sub Zero & Scorpion et.al",
         title2: "N700",
-        subtitle2: "Paid",
+        subtitle2: "21 pages",
+        date: "20-03-2018",
       },
       {
         id: 3,
         color: "blue",
         icon: "mdi-file-document",
         title1: "An intensive research on KNN & Random forest",
-        subtitle1: "20 pages left",
-        title2: "N500/month",
-        subtitle2: "Subscription",
+        authors: "Monkey D. Luffy, Roronoa Zoro & Vinsmoke Sanji et.al",
+        title2: "N500",
+        subtitle2: "17 pages",
+        date: "20-03-2018",
       },
       {
         id: 4,
         color: "blue",
         icon: "mdi-file-document",
         title1: "Election violence, a case of 2011 presidential election",
-        subtitle1: "all pages read",
+        authors: "Shanks, Marshall D. Teach, Big Mom & Kaido et.al",
         title2: "FREE",
-        subtitle2: "Free",
+        subtitle2: "20 pages",
+        date: "20-03-2018",
       },
       {
         id: 5,
         color: "blue",
         icon: "mdi-file-document",
         title1: "A research on neural networks with backwards propagation",
-        subtitle1: "35 pages left",
+        authors: "Magellan & Hanyyabal et.al",
         title2: "N1200",
-        subtitle2: "Paid",
+        subtitle2: "10 pages",
+        date: "20-03-2018",
       },
       {
         id: 6,
         color: "blue",
         icon: "mdi-file-document",
-        title1: "linear regression and SVM",
-        subtitle1: "10 pages left",
+        title1: "Linear regression of the 7 Cassanovas and SVM",
+        authors:
+          "Eustass Kid, Trafalgar Law, Luffy, Capone Bege, Basil Hawkins, Mad Monk Euroge, Scratchmen Apoo & Jewelery Bonny et.al",
         title2: "N700",
-        subtitle2: "Paid",
+        subtitle2: "5 pages",
+        date: "20-03-2018",
       },
       {
         id: 7,
         color: "blue",
         icon: "mdi-file-document",
         title1: "An intensive research on KNN & Random forest",
-        subtitle1: "20 pages left",
-        title2: "N500/month",
-        subtitle2: "Subscription",
+        authors: "Emperor Kaido",
+        title2: "N500",
+        subtitle2: "15 pages",
+        date: "20-03-2018",
       },
       {
         id: 8,
         color: "blue",
         icon: "mdi-file-document",
         title1: "Election violence, a case of 2011 presidential election",
-        subtitle1: "all pages read",
+        authors: "Prtogas D Ace, Sabo & Monkey D. Luffy et.al",
         title2: "FREE",
-        subtitle2: "Free",
+        subtitle2: "20 pages",
+        date: "20-03-2018",
       },
     ],
     Grants: [
@@ -328,7 +421,7 @@ export default {
     logout() {
       this.$router.push("/signin");
     },
-  }
+  },
 };
 </script>
 

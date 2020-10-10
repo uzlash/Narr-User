@@ -5,7 +5,7 @@
         <v-card class="ma-5 text-center my-12" elevation-10>
           <v-card-title> </v-card-title>
           <v-avatar class="mb-4" size="100" circle elevation-12>
-            <img src="../assets/avatar-1.png" alt="" />
+            <img src="../assets/avatar-1.jpg" alt="" />
           </v-avatar>
           <h2 class="display-2">Umar Abubakar</h2>
           <h3 class="text-h5 font-weight-light"> <v-icon>mdi-email</v-icon> umarabubakar@gmail.com</h3>
