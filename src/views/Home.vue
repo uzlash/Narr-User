@@ -75,14 +75,14 @@
               </div>
             </v-card>
           </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12" lg="4" md="6" sm="12">
+        </v-row><v-col cols="12" lg="4" md="6" sm="12">
             <h1 class="headline mb-2 font-weight-light">Reading history</h1>
           </v-col>
           <v-col cols="12" lg="8" md="6" sm="12">
             <h1 class="headline mb-2 font-weight-light">Usage History</h1>
           </v-col>
+        <v-row>
+          
           <v-col cols="6" lg="4" md="6" sm="12">
             <v-card height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id">
@@ -328,7 +328,7 @@ export default {
     logout() {
       this.$router.push("/signin");
     },
-  }
+  },
 };
 </script>
 

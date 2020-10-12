@@ -70,9 +70,9 @@
             <v-card-title primary-title> Notifications </v-card-title>
 
             <v-list>
-              <v-list-tile-sub-title class="ml-3"
-                >Earlier</v-list-tile-sub-title
-              >
+              <v-list-item-subtitle class="ml-3">
+                Earlier </v-list-item-subtitle>
+             
               <v-list-item
                 v-for="message in messages"
                 :key="message.title"
@@ -97,7 +97,9 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn to="/profile" v-bind="attrs" v-on="on" rounded icon>
               <v-list-item-avatar class="ml-4">
-                <v-img src="../assets/avatar-1.png"></v-img>
+                <v-img
+                  src="https://www.w3schools.com/howto/img_avatar.png"
+                ></v-img>
               </v-list-item-avatar>
             </v-btn>
           </template>
@@ -234,17 +236,17 @@ export default {
       { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
       { title: "usman murtala", subtitle: "hi", tile: "mention you" },
       { title: "abba kabir", subtitle: "hello", tile: "mention you" },
+      { title: "aliyu ibrahim", subtitle: "hello", tile: "mention you" },
+      { title: "mubarak ", subtitle: "hi", tile: "mention you" },
+      { title: "abubakar", subtitle: "hi", tile: "mention you" },
+      { title: "titus", subtitle: "hi", tile: "mention you" },
+      { title: "abba usman", subtitle: "hello", tile: "mention you" },
       { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
-      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
-      { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
-      { title: "usman murtala", subtitle: "hi", tile: "mention you" },
-      { title: "abba kabir", subtitle: "hello", tile: "mention you" },
-      { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
-      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
-      { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
-      { title: "usman murtala", subtitle: "hi", tile: "mention you" },
-      { title: "abba kabir", subtitle: "hello", tile: "mention you" },
-      { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
+      { title: "john doe", subtitle: "hi", tile: "mention you" },
+      { title: "musa ", subtitle: "hi", tile: "mention you" },
+      { title: "flate", subtitle: "hi", tile: "mention you" },
+      { title: "abba abba", subtitle: "hello", tile: "mention you" },
+      { title: "shehu sani", subtitle: "hello", tile: "mention you" },
     ],
     offset: true,
   }),
@@ -254,7 +256,7 @@ export default {
     //     this.$router.push("/login");
     //   });
     // },
-  }
+  },
 };
 </script>
 
