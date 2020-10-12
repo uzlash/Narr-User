@@ -3,8 +3,7 @@
     <!-- color="#00a368" -->
     <v-app-bar app dense flat color="white">
       <v-app-bar-nav-icon
-      dark
-        large
+        dark
         @click="drawer = !drawer"
         class="accent"
       ></v-app-bar-nav-icon>
@@ -106,7 +105,6 @@
         </v-tooltip>
       </div>
     </v-app-bar>
-    <v-divider class="green"></v-divider>
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-10 mb-8">
