@@ -342,26 +342,6 @@
               </v-window>
             </v-card>
           </v-col>
-          <v-snackbar
-            v-model="signUpSnackbarSuccess"
-            :timeout="10000"
-            bottom
-            color="#00A368"
-            >User registered successfully, check your email for confirmation.
-            <v-btn outlined color="white" @click="signUpSnackbarSuccess = false"
-              >Close</v-btn
-            >
-          </v-snackbar>
-          <v-snackbar
-            v-model="signUpSnackbarError"
-            :timeout="10000"
-            bottom
-            color="red"
-            >Error signing up, please try again.
-            <v-btn outlined color="white" @click="signUpSnackbarError = false"
-              >Close</v-btn
-            >
-          </v-snackbar>
         </v-row>
       </v-container>
     </v-main>
@@ -391,8 +371,6 @@ export default {
     menu: false,
     modal: false,
     showPassword: "",
-    signUpSnackbarSuccess: false,
-    signUpSnackbarError: false,
     signUpLoading: false,
     signInLoading: false,
     rules: {
@@ -458,9 +436,12 @@ export default {
       };
       if (this.$refs.form.validate()) {
         this.$store.dispatch("SIGN_UP", signUpData).then(() => {
-          this.signUpSnackbar = true;
-        });
-        console.log(signUpData);
+          //success logic
+         })
+         .catch(err => {
+           //error logic
+           console.log("Error>>>>", err)
+           })
       }
     }
   },
