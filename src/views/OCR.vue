@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="12" md="12" sm="12">
           <v-card>
-            <v-form v-model="valid">
+            <v-form>
               <v-container>
                 <v-row>
                   <v-col cols="12" md="12" sm="12">

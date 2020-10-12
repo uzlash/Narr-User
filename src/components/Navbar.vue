@@ -70,9 +70,9 @@
             <v-card-title primary-title> Notifications </v-card-title>
 
             <v-list>
-              <v-list-tile-sub-title class="ml-3"
-                >Earlier</v-list-tile-sub-title
-              >
+              <v-list-item-subtitle class="ml-3">
+                Earlier </v-list-item-subtitle>
+             
               <v-list-item
                 v-for="message in messages"
                 :key="message.title"
@@ -235,16 +235,31 @@ export default {
         tile: "mention you",
         avatar: "mdi-user",
       },
-      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
+       
       { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
       { title: "usman murtala", subtitle: "hi", tile: "mention you" },
       { title: "abba kabir", subtitle: "hello", tile: "mention you" },
+      { title: "aliyu ibrahim", subtitle: "hello", tile: "mention you" },
+      { title: "mubarak ", subtitle: "hi", tile: "mention you" },
+      { title: "abubakar", subtitle: "hi", tile: "mention you" },
+      { title: "titus", subtitle: "hi", tile: "mention you" },
+      { title: "abba usman", subtitle: "hello", tile: "mention you" },
       { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
+      { title: "john doe", subtitle: "hi", tile: "mention you" },
+      { title: "musa ", subtitle: "hi", tile: "mention you" },
+      { title: "flate", subtitle: "hi", tile: "mention you" },
+      { title: "abba abba", subtitle: "hello", tile: "mention you" },
+      { title: "shehu sani", subtitle: "hello", tile: "mention you" },
       { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
     ],
     offset: true,
   }),
   methods: {
+    // logout: function () {
+    //   this.$store.dispatch(AUTH_LOGOUT).then(() => {
+    //     this.$router.push("/login");
+    //   });
+    // },
     logOut() {
       this.$store.dispatch("SIGN_OUT").then(() => {
         this.$router.push("/signin");

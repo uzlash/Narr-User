@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="12" md="12" sm="12">
           <v-card>
-            <v-form v-model="valid">
+            <v-form>
               <v-container>
                 <v-row>
                   <v-col cols="12" md="12" sm="12">
@@ -14,8 +14,6 @@
                   </v-col>
                   <v-col cols="12" md="4">
                     <v-text-field
-                      v-model="firstname"
-                      :rules="nameRules"
                       :counter="10"
                       label="Title"
                       required
@@ -24,8 +22,6 @@
 
                   <v-col cols="12" md="4">
                     <v-text-field
-                      v-model="lastname"
-                      :rules="nameRules"
                       :counter="10"
                       label="Authors"
                       required
@@ -34,8 +30,6 @@
 
                   <v-col cols="12" md="4">
                     <v-text-field
-                      v-model="email"
-                      :rules="emailRules"
                       label="Year"
                       required
                     ></v-text-field>
