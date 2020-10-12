@@ -3,98 +3,53 @@
     <v-container>
       <v-row>
         <v-col cols="6" md6 xs12>
-        
-            <v-card class="mx-auto" max-width="1000" tile>
-              <v-img height="200" src="../assets/logo.png"></v-img>
-              <v-row style="margin: 2.5%; position: absolute; top: 130px">
-                <v-list-item>
-                  <v-list-item-avatar size="100">
-                    <img
-                      src="https://www.w3schools.com/howto/img_avatar.png"
-                      alt="image"
-                    />
-                  </v-list-item-avatar>
+          <v-card class="text-center" elevation-10>
+            <v-card-title> </v-card-title>
+            <v-avatar class="mb-4" size="100" circle elevation-12>
+              <img src="../assets/avatar-1.jpg" alt="" />
+            </v-avatar>
+            <h2 class="">Usman Murtala</h2>
 
-                  <v-list-item-content>
-                    <v-list-item-title class="title" style="margin-top: 50px"
-                      >Umar abubakar</v-list-item-title
-                    >
-                    <v-list-item-subtitle icon-and-text>
-                      <v-icon left>mdi-email</v-icon> umarabubakar@gmail.com
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list class="custom__style">
-                  <v-card flat>
-                    <v-list-item>
-                      <v-list-item-content>
-                        <v-list-item-title icon-and-text>
-                          <v-icon left> mdi-school</v-icon
-                          >Institution</v-list-item-title
-                        >
-                        <v-divider></v-divider>
-                        <v-list-item-subtitle
-                          >Kaduna State University</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item>
-                      <v-list-item-content>
-                        <v-list-item-title icon-and-text>
-                          <v-icon left> mdi-cake</v-icon>Date of
-                          Birth</v-list-item-title
-                        >
-                        <v-divider></v-divider>
-                        <v-list-item-subtitle
-                          >2nd august 2002</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
+            <h3 class="text-h5 font-weight-light">
+              <v-icon>mdi-school</v-icon> Ahmadu bello university
+            </h3>
+            <v-divider></v-divider>
+            <v-col cols="12" md12>
+              <v-list>
+                <v-list-item-content>
+                  <v-list-item-title class="mr-10">
+                    <v-icon left>mdi-email</v-icon>Email</v-list-item-title
+                  >
+                  <v-divider></v-divider>
+                  <v-list-item-subtitle>uzlash@gmail.com</v-list-item-subtitle>
+                </v-list-item-content>
 
-                    <v-list-item>
-                      <v-list-item-content>
-                        <v-list-item-title icon-and-text>
-                          <v-icon left> mdi-email</v-icon
-                          >Email</v-list-item-title
-                        >
-                        <v-divider></v-divider>
-                        <v-list-item-subtitle
-                          >umarabubakarfta@gmail.com</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item>
-                      <v-list-item-content>
-                        <v-list-item-title icon-and-text>
-                          <v-icon left> mdi-phone</v-icon
-                          >Phone</v-list-item-title
-                        >
-                        <v-divider></v-divider>
-                        <v-list-item-subtitle
-                          >+2347016505825</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item>
-                      <v-list-item-content>
-                        <v-list-item-title icon-and-text>
-                          <v-icon left> mdi-home</v-icon
-                          >Address</v-list-item-title
-                        >
-                        <v-divider></v-divider>
-                        <v-list-item-subtitle
-                          >Kabala road
-                        </v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-card>
-                </v-list>
-              </v-row>
-            </v-card>
-            <v-spacer></v-spacer>
-            <v-divider light></v-divider>
-          
+                <v-list-item-content>
+                  <v-list-item-title class="mr-10">
+                    <v-icon left>mdi-phone</v-icon>Phone</v-list-item-title
+                  >
+                  <v-divider></v-divider>
+                  <v-list-item-subtitle>07016505825</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title class="mr-10">
+                    <v-icon left>mdi-home</v-icon>Address</v-list-item-title
+                  >
+                  <v-divider></v-divider>
+                  <v-list-item-subtitle>Tudun wada kaduna</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title class="mr-10">
+                    <v-icon left>mdi-cake</v-icon>Birth day</v-list-item-title
+                  >
+                  <v-divider></v-divider>
+                  <v-list-item-subtitle>2nd august 2002</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list>
+            </v-col>
+          </v-card>
         </v-col>
+
         <v-col cols="6" md12 xs12>
           <v-card class="overflow-hidden">
             <v-toolbar flat color="#00a368">

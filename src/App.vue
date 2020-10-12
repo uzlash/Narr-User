@@ -25,11 +25,11 @@ export default {
 <style>
 /* ::-webkit-scrollbar {
   width: 10px;
-}
-::-webkit-scrollbar-track {
+} */
+/* ::-webkit-scrollbar-track {
   background: #bdbdbd;
-}
-::-webkit-scrollbar-thumb {
+} */
+/* ::-webkit-scrollbar-thumb {
   background: rgb(170, 170, 170);
 } */
 </style>

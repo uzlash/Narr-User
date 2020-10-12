@@ -18,6 +18,15 @@ const store = new Vuex.Store({
       state.refreshToken = userData.refreshToken;
       state.user = userData.user;
     },
+    registerUser(state, userData) {
+      state.user = userData.user;
+    },
+    signOut(state) {
+      state.user = null;
+      state.token = null;
+      state.refreshToken = null;
+      localStorage.clear();
+    },
   },
   actions: {
     SIGN_IN({ commit }, authData) {
@@ -54,38 +63,32 @@ const store = new Vuex.Store({
           username: authData.username,
           phone: authData.phone,
           address: authData.address,
+          dob: authData.dob,
           organization: authData.organization,
-          selectedInstitutionType: authData.selectedInstitutionType,
-          selectedInstitution: authData.selectedInstitution,
-          password: authData.confirmPassword,
+          institution: {
+            type: authData.institution.type,
+            name: authData.institution.name,
+          },
+          // selectedInstitutionType: .selectedInstitutionType,
+          // selectedInstitution: authData.selectedInstitution,
+          password: authData.password,
         })
         .then((response) => {
-          console.log(response.data.payload);
-          commit("authUser", {
-            token: response.data.payload.token,
-            refreshToken: response.data.payload.refreshToken,
-            user: response.data.payload.user,
+          console.log(response);
+          commit("registerUser", {
+            user: response.data.payload,
           });
-          localStorage.setItem("token", response.data.payload.token);
-          localStorage.setItem(
-            "refreshToken",
-            response.data.payload.refreshToken
-          );
           localStorage.setItem(
             "user",
             JSON.stringify(response.data.payload.user)
           );
-          router.push("/");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => alert(error));
     },
-    // AUTH_LOGOUT: ({commit, dispatch}) => {
-    //     return new Promise((resolve, reject) => {
-    //       commit('AUTH_LOGOUT')
-    //       localStorage.removeItem('user-token') // clear your user's token from localstorage
-    //       resolve()
-    //     })
-    //   }
+    SIGN_OUT: ({ commit }) => {
+      commit("signOut");
+      // router.push("signin");
+    },
   },
 });
 

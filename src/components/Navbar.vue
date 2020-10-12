@@ -1,17 +1,19 @@
 <template>
   <nav>
-    <v-app-bar app flat>
+    <!-- color="#00a368" -->
+    <v-app-bar app dense flat color="white">
       <v-app-bar-nav-icon
+      dark
         large
         @click="drawer = !drawer"
-        class="grey--text"
+        class="accent"
       ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <div>
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon class="mr-2" v-on="on" v-bind="attrs">
-              <v-badge content="11" color="red" overlap>
+            <v-btn icon small class="mr-2" v-on="on" v-bind="attrs">
+              <v-badge content="7" bordered color="accent" overlap>
                 <v-icon color="grey">mdi-email</v-icon>
               </v-badge>
             </v-btn>
@@ -23,7 +25,6 @@
             width="350"
           >
             <v-card-title primary-title> Messages </v-card-title>
-
             <v-text-field
               filled
               rounded
@@ -40,7 +41,7 @@
                 to="/chat"
               >
                 <v-avatar>
-                  <img src="../assets/avatar-1.png" alt="alt" class="mr-2" />
+                  <img src="../assets/avatar-1.jpg" alt="alt" class="mr-2" />
                 </v-avatar>
 
                 <v-list-item-content>
@@ -55,8 +56,8 @@
         </v-menu>
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon class="mr-2" v-on="on" v-bind="attrs">
-              <v-badge content="7" color="red" overlap>
+            <v-btn small icon class="mx-2" v-on="on" v-bind="attrs">
+              <v-badge content="7" color="orange darken-2" dot overlap>
                 <v-icon color="grey">mdi-bell</v-icon>
               </v-badge>
             </v-btn>
@@ -79,7 +80,7 @@
                 to=""
               >
                 <v-avatar>
-                  <img src="../assets/avatar-1.png" alt="alt" class="mr-2" />
+                  <img src="../assets/avatar-1.jpg" alt="alt" class="mr-2" />
                 </v-avatar>
 
                 <v-list-item-content>
@@ -96,10 +97,8 @@
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn to="/profile" v-bind="attrs" v-on="on" rounded icon>
-              <v-list-item-avatar class="ml-4">
-                <v-img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                ></v-img>
+              <v-list-item-avatar color="grey" class="ml-4">
+                <v-img src="../assets/avatar-1.jpg"></v-img>
               </v-list-item-avatar>
             </v-btn>
           </template>
@@ -107,6 +106,7 @@
         </v-tooltip>
       </div>
     </v-app-bar>
+    <v-divider class="green"></v-divider>
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-10 mb-8">
@@ -134,7 +134,7 @@
       <v-divider></v-divider>
       <template v-slot:append>
         <div class="pa-2 d-flex justify-center">
-          <v-btn dark outlined color="white">
+          <v-btn dark outlined color="white" @click="logOut()">
             <span>Logout</span>
             <v-icon>mdi-exit-to-app</v-icon>
           </v-btn>
@@ -161,6 +161,11 @@ export default {
         icon: "mdi-google-analytics",
         text: "Analytics",
         route: "/analytics",
+      },
+      {
+        icon: "mdi-account",
+        text: "Users",
+        route: "/user",
       },
       {
         icon: "mdi-chat",
@@ -232,7 +237,7 @@ export default {
         tile: "mention you",
         avatar: "mdi-user",
       },
-      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
+       
       { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
       { title: "usman murtala", subtitle: "hi", tile: "mention you" },
       { title: "abba kabir", subtitle: "hello", tile: "mention you" },
@@ -247,6 +252,7 @@ export default {
       { title: "flate", subtitle: "hi", tile: "mention you" },
       { title: "abba abba", subtitle: "hello", tile: "mention you" },
       { title: "shehu sani", subtitle: "hello", tile: "mention you" },
+      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
     ],
     offset: true,
   }),
@@ -256,6 +262,11 @@ export default {
     //     this.$router.push("/login");
     //   });
     // },
+    logOut() {
+      this.$store.dispatch("SIGN_OUT").then(() => {
+        this.$router.push("/signin");
+      });
+    },
   },
 };
 </script>

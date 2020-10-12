@@ -2,7 +2,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import "material-design-icons-iconfont/dist/material-design-icons.css"
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
-import { colors } from 'vuetify/lib';
+// import { colors } from 'vuetify/lib';
 import vueGoogleCharts from 'vue-google-charts'
 
 Vue.use(Vuetify);
@@ -15,11 +15,8 @@ export default new Vuetify({
     theme: {
         themes: {
             light: {
-                background: colors.green.lighten1
+                accent: '#00a368',
             },
-            dark: {
-                background: colors.green
-            }
         }
     }
 });

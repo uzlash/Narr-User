@@ -125,12 +125,12 @@ const routes = [
     },
   },
   {
-    path: "/users",
+    path: "/user",
     name: "users",
     component: () =>
       import(/* webpackChunkName: "Signin" */ "../views/Users.vue"),
     meta: {
-      showHeader: false,
+      showHeader: true,
       requiresAuth: true
     },
   }
