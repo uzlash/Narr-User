@@ -5,7 +5,7 @@
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="8">
             <v-card class tile>
-              <v-window v-model="step">
+              <v-window v-model="changeStep">
                 <v-window-item :value="1">
                   <v-row class="mx-0">
                     <v-col cols="12" md="8">
@@ -71,10 +71,10 @@
                         <v-btn
                           @click="signIn()"
                           :loading="signInLoading"
+                          :disabled="signInDisabled"
                           rounded
-                          class="text-capitalize px-8"
+                          class="text-capitalize px-8 white--text"
                           color="#00A368"
-                          dark
                           >Sign In</v-btn
                         >
                       </div>
@@ -94,7 +94,7 @@
                             rounded
                             outlined
                             dark
-                            @click="step++"
+                            @click="createAccountStep()"
                             >Create Account</v-btn
                           >
                         </div>
@@ -119,7 +119,7 @@
                           rounded
                           outlined
                           dark
-                          @click="step--"
+                          @click="signInStep"
                           >Sign In</v-btn
                         >
                       </div>
@@ -327,11 +327,11 @@
                         <div class="text-center mt-3">
                           <v-btn
                             @click="signUp()"
-                            :loading="signUpLoading"
+                            :loading="signInLoading"
+                            :disabled="signInDisabled"
                             rounded
-                            class="text-capitalize px-8 mb-4"
+                            class="text-capitalize white--text px-8 mb-4"
                             color="#00A368"
-                            dark
                             >Create Account</v-btn
                           >
                         </div>
@@ -339,7 +339,65 @@
                     </v-col>
                   </v-row>
                 </v-window-item>
+                <v-window-item :value="3">
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <h2 class="text-h4 font-weight-light">
+                          User Registered Successfully! Please Check your Email
+                          for Confirmation.
+                        </h2>
+                      </v-col>
+                      <v-col cols="3">
+                        <v-btn
+                          @click="step = 1"
+                          rounded
+                          class="text-capitalize px-8 mb-4"
+                          color="#00A368"
+                          dark
+                          >Signin</v-btn
+                        >
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-window-item>
               </v-window>
+              <v-snackbar
+                bottom
+                color="red"
+                timeout="5000"
+                v-model="signInErrorSnackbar"
+              >
+                Error Signing in, Please try again.
+                <!-- <template v-slot:action="{ attrs }">
+                  <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="signInErrorSnackbar = false"
+                  >
+                    Close
+                  </v-btn>
+                </template> -->
+              </v-snackbar>
+              <v-snackbar
+                bottom
+                color="red"
+                timeout="5000"
+                v-model="signUpErrorSnackbar"
+              >
+                Error Creating Account, Please try again.
+                <!-- <template v-slot:action="{ attrs }">
+                  <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="signInErrorSnackbar = false"
+                  >
+                    Close
+                  </v-btn>
+                </template> -->
+              </v-snackbar>
             </v-card>
           </v-col>
         </v-row>
@@ -356,7 +414,6 @@ export default {
     ForgotPasswordPopup,
   },
   data: () => ({
-    step: 1,
     fname: "",
     lname: "",
     email: "",
@@ -371,8 +428,6 @@ export default {
     menu: false,
     modal: false,
     showPassword: "",
-    signUpLoading: false,
-    signInLoading: false,
     rules: {
       required: (v) => !!v || "Field is required",
       counter: (v) => (v && v.length >= 3) || "Minimum length is 3 characters",
@@ -435,15 +490,15 @@ export default {
         password: this.confirmPassword,
       };
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("SIGN_UP", signUpData).then(() => {
-          //success logic
-         })
-         .catch(err => {
-           //error logic
-           console.log("Error>>>>", err)
-           })
+        this.$store.dispatch("SIGN_UP", signUpData);
       }
-    }
+    },
+    createAccountStep() {
+      return this.$store.dispatch("CREATE_ACCOUNT_STEP");
+    },
+    signInStep() {
+      return this.$store.dispatch("SIGN_IN_STEP");
+    },
   },
   computed: {
     filteredInstitutions() {
@@ -456,6 +511,21 @@ export default {
     passwordConfirmationRule() {
       return () =>
         this.password === this.confirmPassword || "Password must match";
+    },
+    signInLoading() {
+      return this.$store.state.signInLoading;
+    },
+    signInDisabled() {
+      return this.$store.state.signInDisabled;
+    },
+    changeStep() {
+      return this.$store.state.step;
+    },
+    signInErrorSnackbar() {
+      return this.$store.state.signInErrorSnackbar;
+    },
+    signUpErrorSnackbar() {
+      return this.$store.state.signUpErrorSnackbar;
     },
   },
 };

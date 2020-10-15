@@ -2,11 +2,6 @@
   <div class="home">
     <v-app class="grey lighten-4">
       <v-container>
-        <!-- <v-row class="my-n6">
-          <v-col cols="12">
-            <span class="text-h4 font-weight-thin">Home</span>
-          </v-col>
-        </v-row> -->
         <v-row align="center" justify="center">
           <v-col cols="12" md="8" sm="8" class="pa-0">
             <v-text-field
@@ -17,9 +12,61 @@
               label="Search NARR"
               append-icon="search"
             ></v-text-field>
-            <v-btn class="mt-n4 text-capitalize" color="#00a368" small text
-              >Search Filter</v-btn
-            >
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" md="7" sm="7" class="pa-0 mx-2">
+            <v-card class="pa-2" outlined width="100%">
+              <v-card-title class="pa-2 body-1 grey--text text--darken-2"
+                >EXPLORE</v-card-title
+              >
+              <v-divider class="mb-2"></v-divider>
+              <v-row>
+                <v-col cols="12" md="5" lg="4">
+                  <v-btn
+                    @click="goResearch()"
+                    dark
+                    class="text-capitalize"
+                    color="#00a368"
+                  >
+                    <v-icon class="mr-2">mdi-cloud-upload</v-icon>Upload
+                    Research</v-btn
+                  >
+                </v-col>
+                <v-col cols="12" md="4" lg="4">
+                  <v-btn
+                    @click="goGrants()"
+                    dark
+                    class="text-capitalize"
+                    color="#00a368"
+                  >
+                    <v-icon class="mr-2">mdi-book-open-variant</v-icon>Research
+                    Grants</v-btn
+                  >
+                </v-col>
+                <v-col cols="12" md="4" lg="4">
+                  <v-btn
+                    @click="goAnalytics()"
+                    dark
+                    class="text-capitalize"
+                    color="#00a368"
+                    ><v-icon class="mr-2">mdi-google-analytics</v-icon
+                    >Analytics</v-btn
+                  >
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="4" sm="4" class="pa-0 mx-2">
+            <v-card class="pa-2" outlined width="100%">
+              <v-card-title class="pa-2 body-1 grey--text text--darken-2"
+                >Lorem Heading</v-card-title
+              >
+              <v-divider class="mb-2"></v-divider>
+              <v-card-text class="pa-1"
+                >Lorem ipsum dolor sit amet.</v-card-text
+              >
+            </v-card>
           </v-col>
         </v-row>
         <v-row align="center" justify="center">
@@ -28,11 +75,11 @@
             lg="3"
             md="6"
             sm="12"
-            class="pa-2"
+            class="pa-0"
             v-for="card in CardDocuments"
             :key="card.title"
           >
-            <v-card tile>
+            <v-card outlined tile class="ma-2">
               <v-card-title class="pa-2 body-1 grey--text text--darken-2">{{
                 card.title
               }}</v-card-title>
@@ -52,22 +99,23 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12" lg="4" md="6" sm="12">
-            <v-card tile>
+          <v-col cols="12" lg="4" md="6" sm="12" class="pa-0 px-2">
+            <v-card tile outlined>
               <v-card-title class="body-1 grey--text text--darken-2 pa-2"
                 >Reading History</v-card-title
               >
             </v-card>
-            <v-card tile height="320" class="cutom__card--overflow">
+            <v-card tile outlined height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id" class="py-0">
                 <v-list-item to="/user" class="px-2">
                   <v-list-item-avatar color="blue">
                     <v-icon dark>{{ item.icon }}</v-icon>
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title class="font-weight-light body-1 text-wrap">{{
-                      item.title1
-                    }}</v-list-item-title>
+                    <v-list-item-title
+                      class="font-weight-light body-1 text-wrap"
+                      >{{ item.title1 }}</v-list-item-title
+                    >
                     <v-list-item-subtitle class="font-weight-light">{{
                       item.authors
                     }}</v-list-item-subtitle>
@@ -85,22 +133,23 @@
               </v-list>
             </v-card>
           </v-col>
-          <v-col cols="12" lg="5" md="6" sm="12">
-            <v-card tile>
+          <v-col cols="12" lg="5" md="6" sm="12" class="pa-0 px-2">
+            <v-card tile outlined>
               <v-card-title class="body-1 grey--text text--darken-1 pa-2"
                 >Suggestions</v-card-title
               >
             </v-card>
-            <v-card tile height="320" class="cutom__card--overflow">
+            <v-card tile outlined height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id" class="py-0">
                 <v-list-item to="/user" class="px-2">
                   <v-list-item-avatar color="accent">
                     <v-icon dark>{{ item.icon }}</v-icon>
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title class="font-weight-light body-1 text-wrap">{{
-                      item.title1
-                    }}</v-list-item-title>
+                    <v-list-item-title
+                      class="font-weight-light body-1 text-wrap"
+                      >{{ item.title1 }}</v-list-item-title
+                    >
                     <v-list-item-subtitle class="font-weight-light">{{
                       item.authors
                     }}</v-list-item-subtitle>
@@ -118,13 +167,20 @@
               </v-list>
             </v-card>
           </v-col>
-          <v-col cols="12" lg="3" md="6" sm="12">
+          <v-col
+            cols="12"
+            lg="3"
+            md="6"
+            sm="12"
+            class="hidden-sm-and-down pa-0 px-2"
+          >
             <!-- <v-card tile>
               <v-card-title class="text-h6 font-weight-light pa-2"
                 >Profile</v-card-title
               >
             </v-card> -->
             <v-card
+              outlined
               tile
               height="360"
               class="cutom__card--overflow d-flex flex-column align-center justify-center"
@@ -165,8 +221,8 @@
               >
             </v-card> -->
           </v-col>
-          <v-col cols="12" lg="12" md="12" sm="12" class="py-0">
-            <v-card height="">
+          <v-col cols="12" lg="12" md="12" sm="12" class="pa-2">
+            <v-card outlined>
               <template>
                 <div class="chart">
                   <GChart
@@ -183,8 +239,8 @@
               >
             </v-card>
           </v-col>
-          <v-col cols="12" lg="12" md="12" sm="12">
-            <v-card>
+          <v-col cols="12" lg="12" md="12" sm="12" class="pa-0 px-2">
+            <v-card outlined>
               <GChart
                 type="ColumnChart"
                 :data="columnChartData"
@@ -420,6 +476,15 @@ export default {
   methods: {
     logout() {
       this.$router.push("/signin");
+    },
+    goResearch() {
+      this.$router.push("/upload");
+    },
+    goGrants() {
+      this.$router.push("/grants");
+    },
+    goAnalytics() {
+      this.$router.push("/analytics");
     },
   },
 };

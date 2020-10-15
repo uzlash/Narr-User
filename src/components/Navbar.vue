@@ -4,8 +4,9 @@
     <v-app-bar app dense flat color="white">
       <v-app-bar-nav-icon
         dark
+        small
         @click="drawer = !drawer"
-        class="accent"
+        class="accent pa-5"
       ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <div>
@@ -24,15 +25,7 @@
             width="350"
           >
             <v-card-title primary-title> Messages </v-card-title>
-            <v-text-field
-              filled
-              rounded
-              dense
-              label="Search Messages"
-              append-icon="search"
-            ></v-text-field>
-
-            <v-list>
+            <v-list color="grey lighten-4">
               <span class="mx-4">Earlier</span>
               <v-list-item
                 v-for="message in messages"
@@ -48,6 +41,7 @@
                   <v-list-item-subtitle>{{
                     message.subtitle
                   }}</v-list-item-subtitle>
+                  <v-divider></v-divider>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -69,7 +63,7 @@
           >
             <v-card-title primary-title> Notifications </v-card-title>
 
-            <v-list>
+            <v-list class="grey lighten-4">
               <v-list-item-subtitle class="ml-3">
                 Earlier </v-list-item-subtitle>
              
@@ -87,6 +81,7 @@
                   <v-list-item-subtitle>{{
                     message.tile
                   }}</v-list-item-subtitle>
+                  <v-divider></v-divider>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -128,6 +123,24 @@
             }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-divider></v-divider>
+        <v-subheader class="mt-4 body-1 font-weight-light white--text">SERVICES</v-subheader>
+        <v-divider></v-divider>
+        <v-list-item
+          active-class="border"
+          v-for="link in services"
+          :key="link.icon"
+          :to="link.route"
+        >
+          <v-list-item-action>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-light">{{
+              link.text
+            }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-divider></v-divider>
       <template v-slot:append>
@@ -147,24 +160,26 @@ export default {
   data: () => ({
     drawer: true,
     links: [
-      { icon: "mdi-home", text: "Home", route: "/" },
-      { icon: "mdi-cloud-upload", text: "Upload Research", route: "/upload" },
-      { icon: "mdi-read", text: "Reading History", route: "/history" },
-      {
-        icon: "mdi-book-open-variant",
-        text: "Research Grants",
-        route: "/grants",
-      },
-      {
-        icon: "mdi-google-analytics",
-        text: "Analytics",
-        route: "/analytics",
-      },
-      {
-        icon: "mdi-account",
-        text: "Users",
-        route: "/user",
-      },
+      { icon: "mdi-home", text: "Home", route: "/", divider: false },
+      // { icon: "mdi-cloud-upload", text: "Upload Research", route: "/upload", divider: false },
+      { icon: "mdi-read", text: "Reading History", route: "/history", divider: false },
+      // {
+      //   icon: "mdi-book-open-variant",
+      //   text: "Research Grants",
+      //   route: "/grants",
+      // },
+      // {
+      //   icon: "mdi-google-analytics",
+      //   text: "Analytics",
+      //   route: "/analytics",
+      // },
+      // {
+      //   icon: "mdi-account",
+      //   text: "Users",
+      //   route: "/user",
+      // }
+    ],
+    services: [
       {
         icon: "mdi-chat",
         text: "Chat",
