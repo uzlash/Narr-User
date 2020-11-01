@@ -70,8 +70,8 @@
                       <div class="text-center mt-3">
                         <v-btn
                           @click="signIn()"
-                          :loading="signInLoading"
-                          :disabled="signInDisabled"
+                          :loading="signInMetaData.signInLoading"
+                          :disabled="signInMetaData.signInDisabled"
                           rounded
                           class="text-capitalize px-8 white--text"
                           color="#00A368"
@@ -327,8 +327,8 @@
                         <div class="text-center mt-3">
                           <v-btn
                             @click="signUp()"
-                            :loading="signInLoading"
-                            :disabled="signInDisabled"
+                            :loading="signInMetaData.signInLoading"
+                            :disabled="signInMetaData.signInDisabled"
                             rounded
                             class="text-capitalize white--text px-8 mb-4"
                             color="#00A368"
@@ -366,9 +366,9 @@
                 bottom
                 color="red"
                 timeout="5000"
-                v-model="signInErrorSnackbar"
+                v-model="signInMetaData.signInErrorSnackbar"
               >
-                Error Signing in, Please try again.
+                {{signInMetaData.signInErrorPayload}}
                 <!-- <template v-slot:action="{ attrs }">
                   <v-btn
                     color="pink"
@@ -384,9 +384,10 @@
                 bottom
                 color="red"
                 timeout="5000"
-                v-model="signUpErrorSnackbar"
+                v-model="signUpMetaData.signUpErrorSnackbar"
               >
-                Error Creating Account, Please try again.
+              {{signUpMetaData.signUpErrorPayload}}
+                <!-- Error Creating Account, Please try again. -->
                 <!-- <template v-slot:action="{ attrs }">
                   <v-btn
                     color="pink"
@@ -466,13 +467,14 @@ export default {
   }),
   methods: {
     signIn() {
-      const signInData = {
-        username: this.email,
-        password: this.password,
-      };
-      if (this.$refs.form.validate()) {
-        this.$store.dispatch("SIGN_IN", signInData);
-      }
+      // const signInData = {
+      //   username: this.email,
+      //   password: this.password,
+      // };
+      // if (this.$refs.form.validate()) {
+      //   this.$store.dispatch("SIGN_IN", signInData);
+      // }
+      this.$router.push('/')
     },
     signUp() {
       const signUpData = {
@@ -512,21 +514,15 @@ export default {
       return () =>
         this.password === this.confirmPassword || "Password must match";
     },
-    signInLoading() {
-      return this.$store.state.signInLoading;
-    },
-    signInDisabled() {
-      return this.$store.state.signInDisabled;
-    },
     changeStep() {
       return this.$store.state.step;
     },
-    signInErrorSnackbar() {
-      return this.$store.state.signInErrorSnackbar;
+    signInMetaData() {
+      return this.$store.state.signIn
     },
-    signUpErrorSnackbar() {
-      return this.$store.state.signUpErrorSnackbar;
-    },
+    signUpMetaData() {
+      return this.$store.state.signUp
+    }
   },
 };
 </script>

@@ -11,12 +11,18 @@ const store = new Vuex.Store({
     refreshToken: localStorage.getItem("refreshToken") || null,
     user: localStorage.getItem("user") || null,
     step: 1,
-    signInLoading: false,
-    signInDisabled: false,
-    signUpLoading: false,
-    signUpDisabled: false,
-    signInErrorSnackbar: false,
-    signUpErrorSnackbar: false
+    signIn: {
+      signInLoading: false,
+      signInDisabled: false,
+      signInErrorSnackbar: false,
+      signInErrorPayload: null
+    },
+    signUp: {
+      signUpLoading: false,
+      signUpDisabled: false,
+      signUpErrorSnackbar: false,
+      signUpErrorPayload: null
+    }
   },
   getters: {},
   mutations: {
@@ -26,8 +32,8 @@ const store = new Vuex.Store({
       state.user = userData.user;
     },
     registerUser(state, userData) {
-      state.signUpLoading = true;
-      state.signUpDisabled = true;
+      state.signUp.signUpLoading = true;
+      state.signUp.signUpDisabled = true;
       state.user = userData.user;
     },
     signOut(state) {
@@ -37,12 +43,12 @@ const store = new Vuex.Store({
       localStorage.clear();
     },
     startLoader(state) {
-      state.signInLoading = true;
-      state.signInDisabled = true;
+      state.signIn.signInLoading = true;
+      state.signIn.signInDisabled = true;
     },
     stopLoader(state) {
-      state.signInLoading = false;
-      state.signInDisabled = false;
+      state.signIn.signInLoading = false;
+      state.signIn.signInDisabled = false;
     },
     changeToCreateAccount(state) {
       state.step = 2;
@@ -53,18 +59,20 @@ const store = new Vuex.Store({
     SignUpSuccessful(state) {
       state.step = 3;
     },
-    signInError(state) {
-      state.signInErrorSnackbar = true
+    signInError(state, error) {
+      state.signIn.signInErrorSnackbar = true
+      state.signIn.signInErrorPayload = error
     },
-    signUpError(state) {
-      state.signUpErrorSnackbar = true
-    }
+    signUpError(state, error) {
+      state.signUp.signUpErrorSnackbar = true,
+      state.signUp.signUpErrorPayload = error
+    },
   },
   actions: {
     SIGN_IN({ commit }, authData) {
       commit("startLoader");
       axios
-        .post("http://192.168.1.4:3000/api/v1/auth/login", {
+        .post("http://192.168.43.219:3000/api/v1/auth/login", {
           username: authData.username,
           password: authData.password,
         })
@@ -89,13 +97,13 @@ const store = new Vuex.Store({
         .catch((error) => {
           console.log(error);
           commit("stopLoader");
-          commit("signInError")
+          commit("signInError", error)
         });
     },
     SIGN_UP({ commit }, authData) {
       commit("startLoader");
       axios
-        .post("http://192.168.1.4:3000/api/v1/auth/register", {
+        .post("http://192.168.43.219:3000/api/v1/auth/register", {
           fname: authData.fname,
           lname: authData.lname,
           username: authData.username,
@@ -124,7 +132,7 @@ const store = new Vuex.Store({
         .catch((error) => {
           console.log(error);
           commit("stopLoader");
-          commit("signUpError")
+          commit("signUpError", error)
         });
     },
     SIGN_OUT: ({ commit }) => {

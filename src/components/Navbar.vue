@@ -65,8 +65,9 @@
 
             <v-list class="grey lighten-4">
               <v-list-item-subtitle class="ml-3">
-                Earlier </v-list-item-subtitle>
-             
+                Earlier
+              </v-list-item-subtitle>
+
               <v-list-item
                 v-for="message in messages"
                 :key="message.title"
@@ -102,7 +103,7 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
-        <v-flex class="mt-10 mb-8">
+        <v-flex class="mt-6 mb-4">
           <span class="text-h4 white--text font-weight-light">NARR</span>
         </v-flex>
       </v-layout>
@@ -124,7 +125,29 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-subheader class="mt-4 body-1 font-weight-light white--text">SERVICES</v-subheader>
+        <v-subheader class="body-1 font-weight-light white--text"
+          >Research Funding</v-subheader
+        >
+        <v-divider></v-divider>
+        <v-list-item
+          active-class="border"
+          v-for="link in researchFunding"
+          :key="link.icon"
+          :to="link.route"
+        >
+          <v-list-item-action>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-light">{{
+              link.text
+            }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-subheader class="body-1 font-weight-light white--text"
+          >Services</v-subheader
+        >
         <v-divider></v-divider>
         <v-list-item
           active-class="border"
@@ -143,6 +166,12 @@
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
+      <!-- <div class="pa-2 d-flex justify-center">
+        <v-btn dark outlined color="white" @click="logOut()">
+          <span>Contact US</span>
+          <v-icon>mdi-exit-to-app</v-icon>
+        </v-btn>
+      </div> -->
       <template v-slot:append>
         <div class="pa-2 d-flex justify-center">
           <v-btn dark outlined color="white" @click="logOut()">
@@ -162,22 +191,24 @@ export default {
     links: [
       { icon: "mdi-home", text: "Home", route: "/", divider: false },
       // { icon: "mdi-cloud-upload", text: "Upload Research", route: "/upload", divider: false },
-      { icon: "mdi-read", text: "Reading History", route: "/history", divider: false },
-      // {
-      //   icon: "mdi-book-open-variant",
-      //   text: "Research Grants",
-      //   route: "/grants",
-      // },
-      // {
-      //   icon: "mdi-google-analytics",
-      //   text: "Analytics",
-      //   route: "/analytics",
-      // },
-      // {
-      //   icon: "mdi-account",
-      //   text: "Users",
-      //   route: "/user",
-      // }
+      {
+        icon: "mdi-read",
+        text: "Reading List",
+        route: "/history",
+        divider: false,
+      },
+    ],
+    researchFunding: [
+      {
+        icon: "mdi-book-open-variant",
+        text: "Grants",
+        route: "/grants",
+      },
+      {
+        icon: "mdi-book",
+        text: "Crowd Funding",
+        route: "/analytics",
+      },
     ],
     services: [
       {
@@ -250,7 +281,7 @@ export default {
         tile: "mention you",
         avatar: "mdi-user",
       },
-       
+
       { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
       { title: "usman murtala", subtitle: "hi", tile: "mention you" },
       { title: "abba kabir", subtitle: "hello", tile: "mention you" },

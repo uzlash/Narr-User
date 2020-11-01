@@ -3,7 +3,7 @@
     <v-app class="grey lighten-4">
       <v-container>
         <v-row align="center" justify="center">
-          <v-col cols="12" md="8" sm="8" class="pa-0">
+          <v-col cols="12" md="8" sm="8" class="py-0">
             <v-text-field
               solo
               rounded
@@ -15,16 +15,75 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12" md="7" sm="7" class="pa-0 mx-2">
-            <v-card class="pa-2" outlined width="100%">
+          <v-col cols="12" class="pa-0 ma-2">
+            <v-card tile class="pa-2" outlined width="100%">
               <v-card-title class="pa-2 body-1 grey--text text--darken-2"
-                >EXPLORE</v-card-title
+                >EXPLORE
+                <span class="caption ml-2">
+                  (Click on any of the buttons below to get started)
+                </span></v-card-title
               >
               <v-divider class="mb-2"></v-divider>
-              <v-row>
-                <v-col cols="12" md="5" lg="4">
-                  <v-btn
+              <v-row no-gutters>
+                <v-col cols="12" sm="6" md="3">
+                  <div class="text-center mb-2">
+                    <v-btn
+                      @click="goResearch()"
+                      outlined
+                      dark
+                      class="text-capitalize"
+                      color="#00a368"
+                    >
+                      <v-icon class="mr-2">mdi-cloud-upload</v-icon>Upload
+                      Research</v-btn
+                    >
+                  </div>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <div class="text-center mb-2">
+                    <v-btn
+                      @click="goGrants()"
+                      outlined
+                      dark
+                      class="text-capitalize"
+                      color="#00a368"
+                    >
+                      <v-icon class="mr-2">mdi-book-open-variant</v-icon
+                      >Research Grants</v-btn
+                    >
+                  </div>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <div class="text-center mb-2">
+                    <v-btn
+                      @click="goCrowdFunding()"
+                      outlined
+                      dark
+                      class="text-capitalize"
+                      color="#00a368"
+                      ><v-icon class="mr-2">mdi-google-analytics</v-icon
+                      >Crowd Funding</v-btn
+                    >
+                  </div>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <div class="text-center mb-2">
+                    <v-btn
+                      @click="goAnalytics()"
+                      outlined
+                      dark
+                      class="text-capitalize"
+                      color="#00a368"
+                      ><v-icon class="mr-2">mdi-google-analytics</v-icon
+                      >Usage/Analytics</v-btn
+                    >
+                  </div>
+                </v-col>
+              </v-row>
+              <!-- <div class="d-flex align-center justify-space-around">
+                <v-btn
                     @click="goResearch()"
+                    outlined
                     dark
                     class="text-capitalize"
                     color="#00a368"
@@ -32,10 +91,9 @@
                     <v-icon class="mr-2">mdi-cloud-upload</v-icon>Upload
                     Research</v-btn
                   >
-                </v-col>
-                <v-col cols="12" md="4" lg="4">
                   <v-btn
                     @click="goGrants()"
+                    outlined
                     dark
                     class="text-capitalize"
                     color="#00a368"
@@ -43,29 +101,25 @@
                     <v-icon class="mr-2">mdi-book-open-variant</v-icon>Research
                     Grants</v-btn
                   >
-                </v-col>
-                <v-col cols="12" md="4" lg="4">
                   <v-btn
-                    @click="goAnalytics()"
+                    @click="goCrowdFunding()"
+                    outlined
                     dark
                     class="text-capitalize"
                     color="#00a368"
                     ><v-icon class="mr-2">mdi-google-analytics</v-icon
-                    >Analytics</v-btn
+                    >Research Crowd Funding</v-btn
                   >
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
-          <v-col cols="12" md="4" sm="4" class="pa-0 mx-2">
-            <v-card class="pa-2" outlined width="100%">
-              <v-card-title class="pa-2 body-1 grey--text text--darken-2"
-                >Lorem Heading</v-card-title
-              >
-              <v-divider class="mb-2"></v-divider>
-              <v-card-text class="pa-1"
-                >Lorem ipsum dolor sit amet.</v-card-text
-              >
+                  <v-btn
+                    @click="goAnalytics()"
+                    outlined
+                    dark
+                    class="text-capitalize"
+                    color="#00a368"
+                    ><v-icon class="mr-2">mdi-google-analytics</v-icon
+                    >Usage/Analytics</v-btn
+                  >
+              </div> -->
             </v-card>
           </v-col>
         </v-row>
@@ -85,7 +139,7 @@
               }}</v-card-title>
               <v-divider></v-divider>
               <div class="d-flex pa-3 align-center">
-                <v-btn class="mx-2" small fab dark :color="card.color">
+                <v-btn class="mx-2" small fab dark :color="card.color" outlined>
                   <v-icon dark> {{ card.icon }} </v-icon>
                 </v-btn>
                 <div class="">
@@ -108,7 +162,7 @@
             <v-card tile outlined height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id" class="py-0">
                 <v-list-item to="/user" class="px-2">
-                  <v-list-item-avatar color="blue">
+                  <v-list-item-avatar color="blue" aria-dropeffect>
                     <v-icon dark>{{ item.icon }}</v-icon>
                   </v-list-item-avatar>
                   <v-list-item-content>

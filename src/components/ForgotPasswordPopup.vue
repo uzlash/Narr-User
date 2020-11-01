@@ -20,7 +20,7 @@
           Reset Password
           <v-spacer></v-spacer>
           <v-btn text @click="dialog = false">
-            <v-icon large>mdi-close</v-icon>
+            <v-icon large color="red">mdi-close</v-icon>
           </v-btn>
         </v-card-title>
         <v-card-text>

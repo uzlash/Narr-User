@@ -12,7 +12,7 @@ const routes = [
     component: Home,
     meta: {
       showHeader: true,
-      requiresAuth: true
+      // requiresAuth: true
     }
   },
   {
@@ -53,7 +53,7 @@ const routes = [
       import(/* webpackChunkName: "Upload" */ "../views/Upload.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
+      // requiresAuth: true
     }
   },
   {
