@@ -71,9 +71,25 @@ const store = new Vuex.Store({
   actions: {
     SIGN_IN({ commit }, authData) {
       commit("startLoader");
+      // fetch('http://auth:80/api/v1/auth/login', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     email: authData.username,
+      //     password: authData.password
+      //   })
+      // })
+      // .then(response => response.json())
+      // .then(
+      //   data => {
+      //     console.log(data)
+      //   }
+      // ).catch(err => console.log(err)) 
       axios
-        .post("http://192.168.43.219:3000/api/v1/auth/login", {
-          username: authData.username,
+        .post('http://localhost:3000/api/v1/auth/login', {
+          email: authData.username,
           password: authData.password,
         })
         .then((response) => {
@@ -103,10 +119,10 @@ const store = new Vuex.Store({
     SIGN_UP({ commit }, authData) {
       commit("startLoader");
       axios
-        .post("http://192.168.43.219:3000/api/v1/auth/register", {
+        .post('http://localhost:3000/api/v1/auth/register', {
           fname: authData.fname,
           lname: authData.lname,
-          username: authData.username,
+          emial: authData.username,
           phone: authData.phone,
           address: authData.address,
           dob: authData.dob,

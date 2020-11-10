@@ -467,14 +467,13 @@ export default {
   }),
   methods: {
     signIn() {
-      // const signInData = {
-      //   username: this.email,
-      //   password: this.password,
-      // };
-      // if (this.$refs.form.validate()) {
-      //   this.$store.dispatch("SIGN_IN", signInData);
-      // }
-      this.$router.push('/')
+      const signInData = {
+        email: this.email,
+        password: this.password,
+      };
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch("SIGN_IN", signInData);
+      }
     },
     signUp() {
       const signUpData = {

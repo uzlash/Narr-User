@@ -94,17 +94,22 @@
                 </v-row>
                 <v-row>
                   <v-col class="ma-0 pa-0">
+                    <!-- Below line of code belongs to uploader -->
+                    <!-- v-on:file-success(rootFile,file,message,chunk)="submit()" -->
+                    <!-- @file-added="onFileAdded"
+                    @file-success="onFileSuccess"
+                    @file-progress="onFileProgress"
+                    @file-error="onFileError" -->
                     <uploader
-                      v-on:file-success(rootFile,file,message,chunk)="
-                        helloworld()
-                      "
-                      :options="options"
-                      class="uploader-example"
+                    ref="uploader"
+                    class="uploader"
+                    :options="options"
+                    :autoStart="false"
                     >
                       <uploader-unsupport></uploader-unsupport>
                       <uploader-drop>
-                        <p>Drop files here to upload or</p>
-                        <uploader-btn>select files</uploader-btn>
+                        <p>Drop a file here to upload or Click on the upload button</p>
+                        <uploader-btn>Select single file</uploader-btn>
                       </uploader-drop>
                       <uploader-list></uploader-list>
                     </uploader>
@@ -118,7 +123,7 @@
               <v-btn color="blue darken-1" text @click="dialog = false">
                 Close
               </v-btn>
-              <v-btn color="blue darken-1" text @click="submitResearch">
+              <v-btn color="blue darken-1" text @click="submitResearch()">
                 Submit
               </v-btn>
             </v-card-actions>
@@ -134,6 +139,8 @@
 export default {
   data() {
     return {
+      isConnected: false,
+      socketMessage: '',
       dialog: false,
       search: "",
       hidden: false,
@@ -167,12 +174,13 @@ export default {
         },
       ],
       options: {
-        target: "//localhost:3000/upload",
+        target: "http://localhost:3000/upload",
         testChunks: false,
         autoStart: false,
+        singleFile: true
       },
       attrs: {
-        accept: "image/*",
+        accept: "doc/*",
       },
       categoryMap: {
         document: [
@@ -195,10 +203,6 @@ export default {
   },
 
   methods: {
-    helloworld() {
-      alert("welcome to nigeria");
-      console.log("THIS IS THE MOVE");
-    },
     submitResearch() {
       let uploader = this.$refs.uploader.uploader;
       uploader.upload();
@@ -206,9 +210,10 @@ export default {
         title: this.newResearch.title,
         date: "31/09/2020",
       });
-      //this.dialog = false;
+      this.dialog = false;
     },
   },
+
 };
 // uploader.on('fileAdded', function (file, event) {
 //   console.log(file, event)
@@ -222,20 +227,35 @@ export default {
 // uploader.on('fileError', function (rootFile, file, message) {
 //   console.log(rootFile, file, message)
 // })
+
+// sockets: {
+//     connect() {
+//       console.log('socket connected')
+//     },
+//     customEmit(val) {
+//       console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+//     }
+//   },
+//   methods: {
+//     clickButton(val) {
+//       // this.$socket.client is `socket.io-client` instance
+//       this.$socket.client.emit('emit_method', val);
+//     }
+//   }
 </script>
 
 <style>
-.uploader-example {
+.uploader {
   width: 500px;
   padding: 15px;
   margin: 40px auto 0;
   font-size: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
-.uploader-example .uploader-btn {
+.uploader .uploader-btn {
   margin-right: 4px;
 }
-.uploader-example .uploader-list {
+.uploader .uploader-list {
   max-height: 440px;
   overflow: auto;
   overflow-x: hidden;

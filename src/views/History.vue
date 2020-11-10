@@ -3,7 +3,7 @@
      <v-container fluid>
       <v-row>
         <v-col cols="12" md="8" sm="8">
-          <span class="text-h4 font-weight-thin">Reading History</span>
+          <span class="text-h4 font-weight-thin">Reading List</span>
         </v-col>
         <v-col cols="12" md="12" sm="12">
           <v-card>
@@ -22,21 +22,15 @@
               <template v-slot:item.cont="">
                 <v-progress-linear
                     v-model="percentage"
-                    height="18" color="#00a368">
-                    <strong>{{ Math.ceil(percentage) }}%</strong>
+                    height="15" color="#00a368">
+                    <strong class="white--text">{{ Math.ceil(percentage) }}%</strong>
                 </v-progress-linear>
               </template>
               <template v-slot:item.controls="props">
-                <v-btn class="ma-2" color="#00a368" @click="onButtonClick(props.item)">
+                <v-btn dark class="ma-2" color="#00a368" @click="onButtonClick(props.item)">
                   Resume
                 </v-btn>
               </template>
-
-              <!-- <template v-slot:item.knowledge="{ knowledge }">
-                <v-chip :color="getColor(item.knowledge)" dark>
-                  {{ item.calories }}
-                </v-chip>
-              </template> -->
             </v-data-table>
           </v-card>
         </v-col>
@@ -70,7 +64,7 @@ export default {
         {
           name: "The Role of cloud computing in educational sector",
           date: "24/10/2020",
-          percentage: 50,
+          percentage: 13,
           page: 10,
         },
         {
@@ -130,5 +124,10 @@ export default {
       ],
     };
   },
+  methods: {
+    onButtonClick(propItem) {
+      console.log('Prop Item' + propItem)
+    }
+  }
 };
 </script>

@@ -202,12 +202,12 @@ export default {
       {
         icon: "mdi-book-open-variant",
         text: "Grants",
-        route: "/grants",
+        route: "/grant",
       },
       {
         icon: "mdi-book",
         text: "Crowd Funding",
-        route: "/analytics",
+        route: "/crowd",
       },
     ],
     services: [
