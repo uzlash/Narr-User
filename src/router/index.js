@@ -6,6 +6,11 @@ import store from "../store/index.js";
 Vue.use(VueRouter);
 
 const routes = [
+
+  //#################
+  //Researcher Routes
+  //#################
+
   {
     path: "/",
     name: "Home",
@@ -15,6 +20,7 @@ const routes = [
       requiresAuth: true
     }
   },
+
   {
     path: "/analytics",
     name: "Analytics",
@@ -25,6 +31,7 @@ const routes = [
       requiresAuth: true
     }
   },
+
   {
     path: "/profile",
     name: "profile",
@@ -37,8 +44,8 @@ const routes = [
   },
 
   {
-    path: "/grant",
-    name: "Grants",
+    path: "/viewgrant",
+    name: 'ViewGrants',
     component: () =>
       import(/* webpackChunkName: "Grants" */ "../views/Grants.vue"),
     meta: {
@@ -48,8 +55,39 @@ const routes = [
   },
 
   {
-    path: "/crowd",
-    name: "Crowd",
+    path: '/viewgrant/:id',
+    name: 'viewSingleGrant',
+    component: () => import('../views/GrantView.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: "/managegrant",
+    name: 'manageGrants',
+    component: () =>
+      import(/* webpackChunkName: "Grants" */ "../views/ManageGrant.vue"),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: '/managegrant/:id',
+    name: 'manageSingleGrant',
+    component: () => import('../views/ManageGrantView.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: "/viewcrowd",
+    name: 'ViewCrowd',
     component: () =>
       import(/* webpackChunkName: "Grants" */ "../views/Crowd.vue"),
     meta: {
@@ -58,6 +96,37 @@ const routes = [
     }
   },
 
+  {
+    path: '/viewcrowd/:id',
+    name: 'ViewSingleCrowd',
+    component: () => import('../views/CrowdView.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: "/managecrowd",
+    name: 'ManageCrowd',
+    component: () =>
+      import(/* webpackChunkName: "Grants" */ "../views/ManageCrowd.vue"),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: '/managecrowd/:id',
+    name: 'ManageSingleCrowd',
+    component: () => import('../views/ManageCrowdView.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+ 
   {
     path: "/upload",
     name: "Upload",
@@ -104,7 +173,7 @@ const routes = [
       import(/* webpackChunkName: "Upload" */ "../views/OCR.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
+      requiresAuth: false
     }
   },
   {
@@ -137,6 +206,33 @@ const routes = [
       requiresAuth: false
     },
   },
+
+  {
+    path: "/signin",
+    name: "signin",
+    component: () =>
+      import(/* webpackChunkName: "Signin" */ "../views/Signin.vue"),
+    meta: {
+      showHeader: false,
+      requiresAuth: false
+    },
+  },
+
+  //########### 
+  //Admin Route
+  //###########
+
+  {
+    path: "/admin",
+    name: "AdminView",
+    component: () =>
+      import(/* webpackChunkName: "AdminView" */ "../admin/AdminView.vue"),
+    meta: {
+      showHeader: true,
+      requiresAuth: true,
+      requiresAdmin: true
+    },
+  },
   {
     path: "/user",
     name: "users",
@@ -155,20 +251,46 @@ const router = new VueRouter({
   routes,
 });
 
+//Working Route Guard
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
 
   if (requiresAuth && !store.state.token) {
     next('/signin')
-  } else {
-    next()
   }
-  // if (!store.state.token) {
-  //   next('signin')
-  // } 
-  // else {
-  //   next()
-  // }
+  else {
+    if(requiresAdmin && store.state.user.userType === 'admin') {
+      next('/admin')
+    } else {
+      next()
+    }
+  }
 })
+
+//Test Roue Guard
+// router.beforeEach((to, from, next) => {
+//   if(to.matched.some(record => record.meta.requiresAuth)) {
+//     if (store.state.token == null) {
+//         next({
+//             path: '/signin',
+//             params: { nextUrl: to.fullPath }
+//         })
+//     } else {
+//         if(to.matched.some(record => record.meta.requiresAdmin)) {
+//             if(store.state.user.userType === 'admin'){
+//                 next('/admin')
+//             }
+//             else{
+//                 next()
+//             }
+//         }else {
+//             next()
+//         }
+//     }
+//   } else {
+//       next('/signin')
+//   }
+// })
 
 export default router;

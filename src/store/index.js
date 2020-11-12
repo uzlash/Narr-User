@@ -109,6 +109,7 @@ const store = new Vuex.Store({
             JSON.stringify(response.data.payload.user)
           );
           router.push("/");
+          commit("stopLoader");
         })
         .catch((error) => {
           console.log(error);

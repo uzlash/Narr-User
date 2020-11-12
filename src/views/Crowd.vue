@@ -4,8 +4,6 @@
       <v-row>
         <v-col cols="12" class="d-flex">
           <span class="text-h4 font-weight-thin">Crowd Funding - Fund a Research</span>
-          <v-spacer></v-spacer>
-          <v-btn dark color="#00a368">Start a crowd funding</v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -16,7 +14,7 @@
             >
                 <v-img
                 height="200"
-                src="https://nachred.org.ng/wp-content/uploads/2019/06/Journals-1.jpg"
+                src="https://miro.medium.com/max/1146/1*KhUes1b3TtkStUXseSseEA.png"
                 ></v-img>
                 <v-card-title>Support SVM & Regression Research</v-card-title>
                 <v-card-text>

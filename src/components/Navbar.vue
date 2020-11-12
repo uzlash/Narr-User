@@ -119,9 +119,7 @@
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-light">{{
-              link.text
-            }}</v-list-item-title>
+            <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -129,21 +127,47 @@
           >Research Funding</v-subheader
         >
         <v-divider></v-divider>
-        <v-list-item
-          active-class="border"
-          v-for="link in researchFunding"
-          :key="link.icon"
-          :to="link.route"
-        >
-          <v-list-item-action>
-            <v-icon>{{ link.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title class="font-weight-light">{{
-              link.text
-            }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+
+        <v-list-group no-action sub-group color="white">
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>Research Grants</v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="element in researchGrants"
+            :key="element.icon"
+            :to="element.route"
+            active-class="border"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ element.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{ element.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <v-list-group no-action sub-group color="white">
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>Crowd Funding</v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="element in crowdFundings"
+            :key="element.icon"
+            :to="element.route"
+            active-class="border"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ element.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{ element.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
         <v-divider></v-divider>
         <v-subheader class="body-1 font-weight-light white--text"
           >Services</v-subheader
@@ -159,19 +183,12 @@
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-light">{{
-              link.text
-            }}</v-list-item-title>
+            <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
-      <!-- <div class="pa-2 d-flex justify-center">
-        <v-btn dark outlined color="white" @click="logOut()">
-          <span>Contact US</span>
-          <v-icon>mdi-exit-to-app</v-icon>
-        </v-btn>
-      </div> -->
+
       <template v-slot:append>
         <div class="pa-2 d-flex justify-center">
           <v-btn dark outlined color="white" @click="logOut()">
@@ -190,7 +207,6 @@ export default {
     drawer: true,
     links: [
       { icon: "mdi-home", text: "Home", route: "/", divider: false },
-      // { icon: "mdi-cloud-upload", text: "Upload Research", route: "/upload", divider: false },
       {
         icon: "mdi-read",
         text: "Reading List",
@@ -198,16 +214,28 @@ export default {
         divider: false,
       },
     ],
-    researchFunding: [
+    researchGrants: [
       {
         icon: "mdi-book-open-variant",
-        text: "Grants",
-        route: "/grant",
+        text: "View",
+        route: "/viewgrant",
       },
       {
         icon: "mdi-book",
-        text: "Crowd Funding",
-        route: "/crowd",
+        text: "Manage",
+        route: "/managegrant",
+      },
+    ],
+    crowdFundings: [
+      {
+        icon: "mdi-book-open-variant",
+        text: "View",
+        route: "/viewcrowd",
+      },
+      {
+        icon: "mdi-book",
+        text: "Manage",
+        route: "/managecrowd",
       },
     ],
     services: [
@@ -232,48 +260,6 @@ export default {
         route: "/video",
       },
     ],
-    slides: [
-      "Maintenance scheduled for 03/12/2020",
-      "OCR & Document conversion features now live",
-      "Research grants can now be paid directly on the platform for research works",
-    ],
-    items: [
-      { header: "Today" },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        title: "Brunch this weekend?",
-        subtitle:
-          "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-        title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-        subtitle:
-          "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        title: "Oui oui",
-        subtitle:
-          "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Birthday gift",
-        subtitle:
-          "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-        title: "Recipe to try",
-        subtitle:
-          "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-      },
-    ],
     messages: [
       {
         title: "umar abubakar",
@@ -288,24 +274,10 @@ export default {
       { title: "aliyu ibrahim", subtitle: "hello", tile: "mention you" },
       { title: "mubarak ", subtitle: "hi", tile: "mention you" },
       { title: "abubakar", subtitle: "hi", tile: "mention you" },
-      { title: "titus", subtitle: "hi", tile: "mention you" },
-      { title: "abba usman", subtitle: "hello", tile: "mention you" },
-      { title: "aliyu kabir", subtitle: "hello", tile: "mention you" },
-      { title: "john doe", subtitle: "hi", tile: "mention you" },
-      { title: "musa ", subtitle: "hi", tile: "mention you" },
-      { title: "flate", subtitle: "hi", tile: "mention you" },
-      { title: "abba abba", subtitle: "hello", tile: "mention you" },
-      { title: "shehu sani", subtitle: "hello", tile: "mention you" },
-      { title: "mubarak saeed", subtitle: "hi", tile: "mention you" },
     ],
     offset: true,
   }),
   methods: {
-    // logout: function () {
-    //   this.$store.dispatch(AUTH_LOGOUT).then(() => {
-    //     this.$router.push("/login");
-    //   });
-    // },
     logOut() {
       this.$store.dispatch("SIGN_OUT").then(() => {
         this.$router.push("/signin");

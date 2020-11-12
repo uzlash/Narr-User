@@ -8,8 +8,6 @@
         <v-col cols="12" md="12" sm="12">
           <v-card>
             <v-card-title class="font-weight-light">
-              <!-- Available Grants -->
-
               <v-spacer></v-spacer>
               <v-text-field
                 v-model="search"
@@ -20,27 +18,33 @@
               ></v-text-field>
             </v-card-title>
             <v-data-table :headers="headers" :items="research" :search="search">
-              <template v-slot:item.controls="props">
+              <template v-slot:[`item.controls`]="props">
                 <v-btn icon color="pink" @click="deleteResearch(props.id)">
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
               </template>
-
-              <!-- <template v-slot:item.knowledge="{ knowledge }">
-                <v-chip :color="getColor(item.knowledge)" dark>
-                  {{ item.calories }}
-                </v-chip>
-              </template> -->
             </v-data-table>
           </v-card>
         </v-col>
+        <!-- <v-col cols="12">
+          <h1>Files on the server</h1>
+          <v-card v-if="fileInfos.length > 0" class="mx-auto">
+            <v-list>
+              <v-subheader>List of Files</v-subheader>
+              <v-list-item-group color="primary">
+                <v-list-item v-for="(file, index) in fileInfos" :key="index">
+                  <a :href="file.url">{{ file.name }}</a>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+        </v-col> -->
       </v-row>
-      <v-row justify="end">
-        <v-dialog v-model="dialog" persistent max-width="600px">
+      <v-row>
+        <v-dialog v-model="dialogUpload" persistent max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              class="custom__btn text-capitalize"
-              v-show="!hidden"
+              class="custom__btn"
               color="#00a368"
               dark
               absolute
@@ -59,6 +63,7 @@
                 <v-row>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
+                      color="#00a368"
                       label="Research Title*"
                       required
                       v-model="newResearch.title"
@@ -67,52 +72,57 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-combobox
+                      color="#00a368"
                       class="ma-0 pa-0"
                       v-model="newResearch.authors"
                       label="Author(s)"
-                      hint="Press enter to add an author"
+                      hint="Press Enter key to add an author"
                       multiple
                       chips
                     ></v-combobox>
                   </v-col>
                   <v-col cols="12" sm="12">
                     <v-autocomplete
+                      color="#00a368"
                       class="ma-0 pa-0"
-                      :items="[
-                        'Science',
-                        'Health',
-                        'Technology',
-                        'Medicine',
-                        'Data Science',
-                        'Physics',
-                        'DevOps',
-                      ]"
+                      :items="['Science', 'Health', 'Technology', 'Medicine']"
                       label="Subject"
                       multiple
                     ></v-autocomplete>
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col class="ma-0 pa-0">
-                    <!-- Below line of code belongs to uploader -->
-                    <!-- v-on:file-success(rootFile,file,message,chunk)="submit()" -->
-                    <!-- @file-added="onFileAdded"
-                    @file-success="onFileSuccess"
-                    @file-progress="onFileProgress"
-                    @file-error="onFileError" -->
-                    <uploader
-                    ref="uploader"
-                    class="uploader"
-                    :options="options"
-                    :autoStart="false"
+                  <v-col cols="12">
+                    <v-file-input
+                      color="#00a368"
+                      show-size
+                      label="Select a Single Research Document/File"
+                      @change="selectFile"
+                    ></v-file-input>
+                  </v-col>
+                  <v-col class="ma-0 pa-0"> </v-col>
+                  <v-col cols="12">
+                    <div v-if="currentFile">
+                      <div>
+                        <v-progress-linear
+                          v-model="progress"
+                          color="#00a368"
+                          height="25"
+                          reactive
+                        >
+                          <strong>{{ progress }} %</strong>
+                        </v-progress-linear>
+                      </div>
+                    </div>
+                  </v-col>
+                  <v-col cols="">
+                    <v-alert
+                      v-if="message"
+                      border="left"
+                      color="#00a368"
+                      dark
+                      >{{ message }}</v-alert
                     >
-                      <uploader-unsupport></uploader-unsupport>
-                      <uploader-drop>
-                        <p>Drop a file here to upload or Click on the upload button</p>
-                        <uploader-btn>Select single file</uploader-btn>
-                      </uploader-drop>
-                      <uploader-list></uploader-list>
-                    </uploader>
                   </v-col>
                 </v-row>
               </v-container>
@@ -120,10 +130,10 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">
+              <v-btn color="blue darken-1" text @click="dialogUpload = false">
                 Close
               </v-btn>
-              <v-btn color="blue darken-1" text @click="submitResearch()">
+              <v-btn color="blue darken-1" text @click="uploadResearch()">
                 Submit
               </v-btn>
             </v-card-actions>
@@ -134,14 +144,18 @@
   </v-app>
 </template>
 
-
 <script>
+import helpers from "../services/helpers.js";
 export default {
   data() {
     return {
+      currentFile: undefined,
+      progress: 0,
+      message: "",
+      fileInfos: [],
       isConnected: false,
-      socketMessage: '',
-      dialog: false,
+      socketMessage: "",
+      dialogUpload: false,
       search: "",
       hidden: false,
       newResearch: { title: "", authors: "" },
@@ -173,60 +187,46 @@ export default {
           date: "31/09/2020",
         },
       ],
-      options: {
-        target: "http://localhost:3000/upload",
-        testChunks: false,
-        autoStart: false,
-        singleFile: true
-      },
-      attrs: {
-        accept: "doc/*",
-      },
-      categoryMap: {
-        document: [
-          "doc",
-          "txt",
-          "docx",
-          "pages",
-          "epub",
-          "pdf",
-          "numbers",
-          "csv",
-          "xls",
-          "xlsx",
-          "keynote",
-          "ppt",
-          "pptx",
-        ],
-      },
     };
   },
 
   methods: {
-    submitResearch() {
-      let uploader = this.$refs.uploader.uploader;
-      uploader.upload();
-      this.research.push({
-        title: this.newResearch.title,
-        date: "31/09/2020",
-      });
-      this.dialog = false;
+    selectFile(file) {
+      this.progress = 0;
+      this.currentFile = file;
+    },
+
+    uploadResearch() {
+      if (!this.currentFile) {
+        this.message = "Please select a file!";
+        return;
+      }
+
+      this.message = "";
+
+      helpers
+        .upload(this.currentFile, (event) => {
+          this.progress = Math.round((100 * event.loaded) / event.total);
+        })
+        .then((response) => {
+          console.log("Response>>>", response);
+          this.message = response.data.message;
+          console.log("Message>>>", this.message);
+          return helpers.getFiles();
+        })
+        .then((files) => {
+          console.log("Files Response>>>", files);
+          this.files = files.data;
+          console.log("FIles Data>>>", this.files);
+        })
+        .catch(() => {
+          this.progress = 0;
+          this.message = "Could not upload the file!";
+          this.currentFile = undefined;
+        });
     },
   },
-
 };
-// uploader.on('fileAdded', function (file, event) {
-//   console.log(file, event)
-// })
-// uploader.on('fileSuccess', function (rootFile, file, message) {
-//   console.log(rootFile, file, message)
-// })
-// uploader.on('fileComplete', function (rootFile) {
-//   console.log(rootFile)
-// })
-// uploader.on('fileError', function (rootFile, file, message) {
-//   console.log(rootFile, file, message)
-// })
 
 // sockets: {
 //     connect() {
@@ -245,24 +245,8 @@ export default {
 </script>
 
 <style>
-.uploader {
-  width: 500px;
-  padding: 15px;
-  margin: 40px auto 0;
-  font-size: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-}
-.uploader .uploader-btn {
-  margin-right: 4px;
-}
-.uploader .uploader-list {
-  max-height: 440px;
-  overflow: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
 .custom__btn {
-  position: absolute;
+  position: fixed;
   bottom: 70px;
   right: 40px;
 }

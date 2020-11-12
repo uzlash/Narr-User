@@ -6,9 +6,6 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuetify from './plugins/vuetify'
 
-import uploader from 'vue-simple-uploader'
-
-Vue.use(uploader)
 Vue.use(VueAxios, axios)
 
 const token = localStorage.getItem('user-token')

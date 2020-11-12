@@ -61,8 +61,8 @@
                       dark
                       class="text-capitalize"
                       color="#00a368"
-                      ><v-icon class="mr-2">mdi-google-analytics</v-icon
-                      >Crowd Funding</v-btn
+                      ><v-icon class="mr-2">mdi-google-analytics</v-icon>Crowd
+                      Funding</v-btn
                     >
                   </div>
                 </v-col>
@@ -528,9 +528,6 @@ export default {
     ],
   }),
   methods: {
-    logout() {
-      this.$router.push("/signin");
-    },
     goResearch() {
       this.$router.push("/upload");
     },
@@ -542,6 +539,35 @@ export default {
     },
   },
 };
+
+//Socket
+// import io from 'socket.io-client'
+
+// export default {
+//   name: 'App',
+//   components: {},
+//   data: function() {
+//     return {
+//       username: "",
+//       socket: io('http://localhost:3366'),
+//       messages: [],
+//       users: []
+//     }
+//   },
+//   methods: {
+//     joinServer() {
+//       this.socket.on('loggedIn', data => {
+//         this.messages = data.messages
+//         this.users = data.users
+//         this.socket.emit('newUser', this.username)
+//       })
+//     }
+//   },
+//   mounted() {
+//     this.username = 'Uzlash'
+//     this.joinServer()
+//   }
+// }
 </script>
 
 <style>
