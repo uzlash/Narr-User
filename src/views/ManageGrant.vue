@@ -109,7 +109,7 @@
                 <v-icon
                     color="blue"
                     class="mr-2"
-                    @click="viewGrant(item)"
+                    @click="viewGrant(item.id)"
                 >
                     mdi-eye
                 </v-icon>
@@ -330,8 +330,9 @@
         ]
       },
 
-      viewGrant (item) {
-        console.log('Current Grant' + item.id)
+      viewGrant (id) {
+        console.log('Current Grant' + id)
+        this.$router.push(`/manageGrant/${id}`)
       },
 
       editGrant (item) {

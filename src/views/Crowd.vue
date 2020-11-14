@@ -32,7 +32,7 @@
                     <span class="font-weight-bold">N3000</span> raised of <span class="font-weight-bold">N10,000 </span>
                 </div>
                 <v-card-actions>
-                    <v-btn outlined color="#00a368" @click="reserve">
+                    <v-btn outlined color="#00a368">
                         Fund Research
                     </v-btn>
                 </v-card-actions>
