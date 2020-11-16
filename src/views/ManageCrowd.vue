@@ -101,7 +101,7 @@
                 <v-icon
                     color="blue"
                     class="mr-2"
-                    @click="viewCrowdFund(item)"
+                    @click="viewCrowdFund(item.id)"
                 >
                     mdi-eye
                 </v-icon>
@@ -302,8 +302,9 @@
         ]
       },
 
-      viewCrowdFund (item) {
-        console.log('Current Crowd Funding' + item.id)
+      viewCrowdFund (id) {
+        console.log('Current Crowd Funding' + id)
+         this.$router.push(`/managecrowd/${id}`)
       },
 
       editCrowdFund (item) {
