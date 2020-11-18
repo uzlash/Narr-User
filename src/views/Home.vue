@@ -14,8 +14,9 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        <!---Working-->
         <v-row>
-          <v-col cols="12" class="pa-0 ma-2">
+          <v-col cols="12" class="">
             <v-card tile class="pa-2" outlined width="100%">
               <v-card-title class="pa-2 body-1 grey--text text--darken-2"
                 >EXPLORE
@@ -80,49 +81,10 @@
                   </div>
                 </v-col>
               </v-row>
-              <!-- <div class="d-flex align-center justify-space-around">
-                <v-btn
-                    @click="goResearch()"
-                    outlined
-                    dark
-                    class="text-capitalize"
-                    color="#00a368"
-                  >
-                    <v-icon class="mr-2">mdi-cloud-upload</v-icon>Upload
-                    Research</v-btn
-                  >
-                  <v-btn
-                    @click="goGrants()"
-                    outlined
-                    dark
-                    class="text-capitalize"
-                    color="#00a368"
-                  >
-                    <v-icon class="mr-2">mdi-book-open-variant</v-icon>Research
-                    Grants</v-btn
-                  >
-                  <v-btn
-                    @click="goCrowdFunding()"
-                    outlined
-                    dark
-                    class="text-capitalize"
-                    color="#00a368"
-                    ><v-icon class="mr-2">mdi-google-analytics</v-icon
-                    >Research Crowd Funding</v-btn
-                  >
-                  <v-btn
-                    @click="goAnalytics()"
-                    outlined
-                    dark
-                    class="text-capitalize"
-                    color="#00a368"
-                    ><v-icon class="mr-2">mdi-google-analytics</v-icon
-                    >Usage/Analytics</v-btn
-                  >
-              </div> -->
             </v-card>
           </v-col>
         </v-row>
+
         <v-row align="center" justify="center">
           <v-col
             cols="12"

@@ -17,7 +17,7 @@
                 hide-details
               ></v-text-field>
             </v-card-title>
-            <v-data-table :headers="headers" :items="research" :search="search">
+            <v-data-table :search="search">
               <template v-slot:[`item.controls`]="props">
                 <v-btn icon color="pink" @click="deleteResearch(props.id)">
                   <v-icon>mdi-delete</v-icon>
@@ -26,19 +26,6 @@
             </v-data-table>
           </v-card>
         </v-col>
-        <!-- <v-col cols="12">
-          <h1>Files on the server</h1>
-          <v-card v-if="fileInfos.length > 0" class="mx-auto">
-            <v-list>
-              <v-subheader>List of Files</v-subheader>
-              <v-list-item-group color="primary">
-                <v-list-item v-for="(file, index) in fileInfos" :key="index">
-                  <a :href="file.url">{{ file.name }}</a>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-card>
-        </v-col> -->
       </v-row>
       <v-row>
         <v-dialog v-model="dialogUpload" persistent max-width="600px">
@@ -66,7 +53,6 @@
                       color="#00a368"
                       label="Research Title*"
                       required
-                      v-model="newResearch.title"
                       class="ma-0 pa-0"
                     ></v-text-field>
                   </v-col>
@@ -74,14 +60,13 @@
                     <v-combobox
                       color="#00a368"
                       class="ma-0 pa-0"
-                      v-model="newResearch.authors"
                       label="Author(s)"
                       hint="Press Enter key to add an author"
                       multiple
                       chips
                     ></v-combobox>
                   </v-col>
-                  <v-col cols="12" sm="12">
+                  <!-- <v-col cols="12" sm="12">
                     <v-autocomplete
                       color="#00a368"
                       class="ma-0 pa-0"
@@ -89,39 +74,44 @@
                       label="Subject"
                       multiple
                     ></v-autocomplete>
-                  </v-col>
+                  </v-col> -->
                 </v-row>
                 <v-row>
                   <v-col cols="12">
                     <v-file-input
+                      accept=".doc,.docx,.pdf,.odt"
                       color="#00a368"
                       show-size
                       label="Select a Single Research Document/File"
                       @change="selectFile"
                     ></v-file-input>
                   </v-col>
-                  <v-col class="ma-0 pa-0"> </v-col>
                   <v-col cols="12">
                     <div v-if="currentFile">
-                      <div>
+                      <div v-if="showProgress">
                         <v-progress-linear
                           v-model="progress"
                           color="#00a368"
-                          height="25"
+                          height="20"
                           reactive
+                          dark
                         >
                           <strong>{{ progress }} %</strong>
                         </v-progress-linear>
+                        <span
+                          >Uploaded: {{ loadedData }} bytes of Total:
+                          {{ totalData }} bytes</span
+                        >
                       </div>
                     </div>
                   </v-col>
-                  <v-col cols="">
+                  <v-col cols="12">
                     <v-alert
-                      v-if="message"
+                      v-if="messageSuccess || messageError"
                       border="left"
-                      color="#00a368"
+                      :color="messageSuccess ? '#00a368' : 'red'"
                       dark
-                      >{{ message }}</v-alert
+                      >{{ messageSuccess || messageError }}</v-alert
                     >
                   </v-col>
                 </v-row>
@@ -150,43 +140,14 @@ export default {
   data() {
     return {
       currentFile: undefined,
+      showProgress: false,
       progress: 0,
-      message: "",
-      fileInfos: [],
-      isConnected: false,
-      socketMessage: "",
+      messageSuccess: "",
+      messageError: "",
       dialogUpload: false,
       search: "",
       hidden: false,
-      newResearch: { title: "", authors: "" },
-      skill: 20,
-      power: 78,
-      percentage: 50,
-      headers: [
-        {
-          text: "Title",
-          align: "start",
-          sortable: false,
-          value: "title",
-        },
-        { text: "Date Uploaded", value: "date", sortable: false },
-        { text: "", value: "controls", sortable: false },
-      ],
-      research: [
-        {
-          title: "Cyber Security and protecting of banks information",
-          date: "31/09/2020",
-        },
-        {
-          title: "Implementing Javascript in Backend using Node.js",
-          date: "31/09/2020",
-        },
-
-        {
-          title: "Rising insecurity in Nigeria",
-          date: "31/09/2020",
-        },
-      ],
+      researcherObject: {},
     };
   },
 
@@ -198,50 +159,45 @@ export default {
 
     uploadResearch() {
       if (!this.currentFile) {
-        this.message = "Please select a file!";
+        this.messageError = "Please select a File!";
+        setTimeout(() => {
+          this.messageError = "";
+        }, 5000);
         return;
       }
-
-      this.message = "";
-
       helpers
-        .upload(this.currentFile, (event) => {
-          this.progress = Math.round((100 * event.loaded) / event.total);
-        })
+        .uploadFileResearch(
+          this.currentFile,
+          this.researcherObject,
+          (event) => {
+            console.log(event);
+            this.showProgress = true;
+            this.progress = Math.round((100 * event.loaded) / event.total);
+            this.loadedData = event.loaded;
+            this.totalData = event.total;
+          }
+        )
         .then((response) => {
           console.log("Response>>>", response);
-          this.message = response.data.message;
+          this.messageSuccess = "Successfully Uploaded File!";
+          setTimeout(() => {
+            this.messageSuccess = "";
+          }, 5000);
           console.log("Message>>>", this.message);
-          return helpers.getFiles();
         })
-        .then((files) => {
-          console.log("Files Response>>>", files);
-          this.files = files.data;
-          console.log("FIles Data>>>", this.files);
-        })
-        .catch(() => {
+        .catch((err) => {
+          console.log("Error>>", err);
           this.progress = 0;
-          this.message = "Could not upload the file!";
+          this.messageError = "Error Uploading Document/File";
           this.currentFile = undefined;
+
+          setTimeout(() => {
+            this.messageError = "";
+          }, 5000);
         });
     },
   },
 };
-
-// sockets: {
-//     connect() {
-//       console.log('socket connected')
-//     },
-//     customEmit(val) {
-//       console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
-//     }
-//   },
-//   methods: {
-//     clickButton(val) {
-//       // this.$socket.client is `socket.io-client` instance
-//       this.$socket.client.emit('emit_method', val);
-//     }
-//   }
 </script>
 
 <style>

@@ -2,20 +2,33 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
-//   devServer: {
-//     proxy: 'https://shamskhalil.ngrok.io/tika/form',
-// }
 devServer: {
   proxy: {
-    // proxy all requests starting with /api to jsonplaceholder
-    'api': {
-      target: 'http://192.168.1.4:4000',
+    // proxy all requests starting with /api to target
+    'ocr': {
+      target: 'https://image2text.narr.ng',
       changeOrigin: true,
       pathRewrite: {
-        '^/api': ''
+        '^/ocr': ''
+      }
+    },
+    'doc': {
+      target: 'https://doc2pdf.narr.ng',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/doc': ''
+      }
+    },
+    'water': {
+      target: 'https://shamskhalil.ngrok.io',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/water': ''
       }
     }
   }
 }
 }
-//['http://localhost:3000/','http://localhost:3003/']
+//['https://shamskhalil.ngrok.io/tika/form']
+//'https://image2text.narr.ng'
+// https://doc2pdf.narr.ng/

@@ -104,7 +104,8 @@
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-6 mb-4">
-          <span class="text-h4 white--text font-weight-light">NARR</span>
+          <!-- <span class="text-h4 white--text font-weight-light">NARR</span> -->
+          <v-img src="../assets/narrLogo.png" alt="Narr Logo"></v-img>
         </v-flex>
       </v-layout>
       <v-divider></v-divider>

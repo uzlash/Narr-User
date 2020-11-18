@@ -1,6 +1,6 @@
 <template>
   <v-app class="grey lighten-4">
-    <v-container fluid>
+    <v-container>
       <v-row>
         <v-col cols="12">
           <span class="text-h4 font-weight-thin">Document Conversion</span>
@@ -8,7 +8,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-card>
+          <v-card outlined tile>
             <v-card-title class="text-h6 font-weight-medium"
               >How it works</v-card-title
             >
@@ -19,8 +19,9 @@
                   <li>Select a document using the file picker below.</li>
                   <li>Click on upload and wait as the file uploads.</li>
                   <li>
-                    The converted document will be returned back to you as a pdf
-                    file.
+                    The converted document/file will be returned back to you as
+                    a pdf file which you can either view in the browser or
+                    download.
                   </li>
                 </ol>
               </div>
@@ -31,13 +32,14 @@
                       hide-details
                       show-size
                       filled
-                      accept="doc/*"
+                      accept=".pdf,.doc,.docx,.txt,.pptx,.odt,.rtf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                       color="#00a368"
                       label="Select File"
                       prepend-icon="mdi-file-document"
                       @change="selectFile"
                     ></v-file-input>
                     <v-btn
+                      :loading="loading"
                       dark
                       class="ml-4"
                       color="#00a368"
@@ -50,22 +52,44 @@
                 </div>
                 <v-col cols="6">
                   <div v-if="currentFile">
-                    <div>
+                    <div v-if="showProgress">
                       <v-progress-linear
                         v-model="progress"
                         color="#00a368"
-                        height="25"
+                        height="20"
                         reactive
+                        dark
                       >
                         <strong>{{ progress }} %</strong>
                       </v-progress-linear>
+                      <span
+                        >Uploaded: {{ loadedData }} bytes of Total:
+                        {{ totalData }} bytes</span
+                      >
+                      <div>
+                        <span class="mr-2 text-h6"
+                          >Please wait while your document finishes
+                          processing/converting and downloads.</span
+                        >
+                      </div>
                     </div>
                   </div>
-                </v-col>
-                <v-col cols="6">
-                  <v-alert v-if="message" border="left" color="#00a368" dark>{{
-                    message
-                  }}</v-alert>
+                  <v-alert
+                    class="mt-2"
+                    v-if="messageSuccess"
+                    border="left"
+                    color="#00a368"
+                    dark
+                    >{{ messageSuccess }}</v-alert
+                  >
+                  <v-alert
+                    class="mt-2"
+                    v-if="messageError"
+                    border="left"
+                    color="red"
+                    dark
+                    >{{ messageError }}</v-alert
+                  >
                 </v-col>
               </v-form>
             </v-card-text>
@@ -77,45 +101,52 @@
 </template>
 
 <script>
-// import helpers from "../services/helpers";
+import helpers from "../services/helpers";
 export default {
   data() {
     return {
       currentFile: undefined,
+      loading: false,
       progress: 0,
-      message: "",
+      messageSuccess: "",
+      messageError: "",
+      showProgress: false,
       File: "",
+      loadedData: 0,
+      totalData: 0,
     };
   },
   methods: {
     selectFile(file) {
       this.progress = 0;
       this.currentFile = file;
+      console.log(this.currentFile);
     },
 
-    uploadFile(file) {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const myheaders = new Headers();
-
-      const requestOptions = {
-        method: "POST",
-        headers: myheaders,
-        body: formData,
-        redirect: "follow",
-      };
-
-      fetch("/api/convert/office", requestOptions)
-        .then(async (data) => ({
-          blob: await data.blob(),
-          filename: "download.pdf",
-        }))
-        .then((response) => {
-          const obj = new Blob([response.blob], {
+    uploadFile() {
+      if (!this.currentFile) {
+        this.messageError = "Please select a File!";
+        setTimeout(() => {
+          this.messageError = "";
+        }, 5000);
+        return;
+      }
+      this.loading = true;
+      helpers
+        .uploadFileConvert(this.currentFile, (event) => {
+          console.log(event);
+          this.showProgress = true;
+          this.progress = Math.round((100 * event.loaded) / event.total);
+          this.loadedData = event.loaded;
+          this.totalData = event.total;
+        })
+        .then(async (response) => {
+          console.log("Response Data", response);
+          const blob = await response.data;
+          const obj = new Blob([blob], {
             type: "application/pdf",
           });
-          console.log("Blob Object", obj);
+          console.log("Object", obj);
 
           //Polyfill
           if (window.navigator && window.navigator.msSaveOrOpenBlob) {
@@ -127,37 +158,31 @@ export default {
             link.href = objUrl;
             link.download = "download.pdf";
             link.click();
+            this.loading = false;
+            this.currentFile = undefined;
+            this.messageSuccess = "Document to PDF Conversion Successful";
 
             setTimeout(() => {
               window.URL.revokeObjectURL(objUrl);
             }, 250);
+
+            setTimeout(() => {
+              this.messageSuccess = "";
+            }, 5000);
           }
         })
-        .catch((err) => console.log("Error>>", err));
+        .catch((err) => {
+          console.log("Error>>", err.message);
+          this.progress = 0;
+          this.loading = false;
+          this.messageError = err.message;
+          this.currentFile = undefined;
+
+          setTimeout(() => {
+            this.messageError = "";
+          }, 5000);
+        });
     },
-
-    // uploadFileFetch() {
-    //   if (!this.currentFile) {
-    //     this.message = "Please select a Valid Document!";
-    //     return;
-    //   }
-
-    //   this.message = "";
-
-    //   helpers
-    //     .uploadFile(this.currentFile, (event) => {
-    //       this.progress = Math.round((100 * event.loaded) / event.total);
-    //     })
-    //     .then((response) => console.log(response))
-    //     .catch((err) => {
-    //       console.log("Errr>>>", err);
-    //       this.progress = 0;
-    //       this.message = "Could not upload the Image!";
-    //       this.currentFile = undefined;
-    //     });
-    // },
   },
 };
 </script>
-
-<style></style>
