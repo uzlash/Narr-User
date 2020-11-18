@@ -40,61 +40,48 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-simple-table>
-        <template v-slot:default>
-          <thead>
-            <tr>
-              <th class="text-left">
-                Name
-              </th>
-              <th class="text-left">
-                Number of Applicants
-              </th>
-              <th class="text-center">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="item in desserts"
-              :key="item.title"
-            >
-              <td>{{ item.title }}</td>
-              <td>{{ item.applicants }}</td>
-              <td>
-                <v-btn
-                    class="ma-2"
-                    color="primary"
-                    dark
-                >
-                    Accept
-                    <v-icon
-                      dark
-                      right
-                    >
-                      mdi-checkbox-marked-circle
-                    </v-icon>
-                </v-btn>
+      <div>
+        <span class="text-h3 font-weight-black">Names of Applicants:</span>
+      </div>
+      <v-row>
+        <v-col>
+          <v-card outlined tile shaped class="mx-auto" width="auto" v-for="name in names" :key="name.title">
+              <v-card-text>
+                <div>Name of Researcher:</div>
+                  <p class="display-1 text--primary">
+                  {{ name.researcher }}
+                  </p>
+                  <p>{{ name.title }}</p>
+                  <div class="text--primary">
+                  To contribute in the on going research work.<br>
+                  "in concept of quantum computing."
+                </div>
+              </v-card-text>
+            <v-card-actions>
+              <v-btn class="ma-2" color="green" dark outlined small>
+                Accept
+                  <v-icon dark right>
+                    mdi-checkbox-marked-circle
+                  </v-icon>
+              </v-btn>
 
-                <v-btn
-                    class="ma-2"
-                    color="red"
-                    dark
-                >
-                    Decline
-                    <v-icon
-                      dark
-                      right
-                    >
-                      mdi-cancel
-                    </v-icon>
-                </v-btn>
-              </td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
+              <v-btn class="ma-2" color="red" dark outlined small>
+                Decline
+                  <v-icon dark right>
+                    mdi-cancel
+                  </v-icon>
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                color="orange"
+              >
+                  View Profile...
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </v-app>    
 </template>
@@ -103,47 +90,15 @@
 export default {
     data () {
       return {
-        desserts: [
-          {
-            title: 'Undertake research on the superposition of quantum qubits 1',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 2',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 3',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 4',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 5',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 6',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 7',
-           applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 8',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 9',
-            applicants: 159,
-          },
-          {
-            title: 'Undertake research on the superposition of quantum qubits 10',
-            applicants: 159,
-          },
+        names: [
+          {researcher: "Dr. Abdulsalam Gital", title: "B.Tech, M.sc, Ph.D"},
+          {researcher: "Prof. Bakari Souley", title: "B.Tech, PGDE, M.sc, Ph.D"},
+          {researcher: "Mrs. Fatima Zambuk", title: "ND, HND, M.sc, Ph.D"},
+          {researcher: "Mr. Sunusi Kabir Alaramma", title: "B.Sc, M.sc, Ph.D"},
+          {researcher: "Sir. Abubakar Umar", title: "B.Tech, M.sc"},
+          {researcher: "Mr. Ismail Ahmad", title: "B.Sc, M.sc, Ph.D"},
+          {researcher: "Dr. Abdulsalam Gital", title: "B.Sc, M.sc"},
+          {researcher: "Dr. Abdulsalam Gital", title: "B.Tech, M.sc, Ph.D"},
         ],
       }
     },
