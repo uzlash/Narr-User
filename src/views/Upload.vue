@@ -8,6 +8,7 @@
         <v-col cols="12" md="12" sm="12">
           <v-card>
             <v-card-title class="font-weight-light">
+              <h4>Uploaded Research</h4>
               <v-spacer></v-spacer>
               <v-text-field
                 v-model="search"

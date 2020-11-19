@@ -108,6 +108,42 @@
             </template>
           </v-data-table>
         </v-col>
+                    <v-dialog v-model="dialogDelete" max-width="600px">
+                    <v-card>
+                        <v-card-title class="red--text text-h6 font-weight-light">Are you sure you want to delete this item?</v-card-title>
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="#00a368" text @click="closeDelete">Cancel</v-btn>
+                        <v-btn color="#00a368" text @click="deleteItemConfirm">OK</v-btn>
+                        <v-spacer></v-spacer>
+                        </v-card-actions>
+                    </v-card>
+                    </v-dialog>
+                </template>
+                <template v-slot:[`item.actions`]="{ item }">
+                <v-icon
+                    color="blue"
+                    class="mr-2"
+                    @click="viewGrant(item.id)"
+                >
+                    mdi-eye
+                </v-icon>
+                <v-icon
+                    color="#00a368"
+                    class="mr-2"
+                    @click="editGrant(item)"
+                >
+                    mdi-pencil
+                </v-icon>
+                <v-icon
+                    color="red"
+                    @click="deleteGrant(item)"
+                >
+                    mdi-delete
+                </v-icon>
+                </template>
+            </v-data-table>
+          </v-col>
       </v-row>
     </v-container>
     <!-- Dialog Add -->
@@ -305,9 +341,16 @@ export default {
       ];
     },
 
+<<<<<<< HEAD
     viewGrant(item) {
       console.log("Current Grant" + item.id);
     },
+=======
+      viewGrant (id) {
+        console.log('Current Grant' + id)
+        this.$router.push(`/manageGrant/${id}`)
+      },
+>>>>>>> 59c4b14f83f35b466a4973b1fe5c36ebeddb08de
 
     editGrant(item) {
       this.editedIndex = this.grants.indexOf(item);

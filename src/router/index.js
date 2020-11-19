@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import store from "../store/index.js";
+// import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -252,21 +252,21 @@ const router = new VueRouter({
 });
 
 //Working Route Guard
-router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
+// router.beforeEach((to, from, next) => {
+//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+//   const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
 
-  if (requiresAuth && !store.state.token) {
-    next('/signin')
-  }
-  else {
-    if(requiresAdmin && store.state.user.userType === 'admin') {
-      next('/admin')
-    } else {
-      next()
-    }
-  }
-})
+//   if (requiresAuth && !store.state.token) {
+//     next('/signin')
+//   }
+//   else {
+//     if(requiresAdmin && store.state.user.userType === 'admin') {
+//       next('/admin')
+//     } else {
+//       next()
+//     }
+//   }
+// })
 
 //Test Roue Guard
 // router.beforeEach((to, from, next) => {

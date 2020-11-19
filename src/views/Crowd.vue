@@ -32,6 +32,7 @@
                   Incidunt molestias nostrum ab dolorem saepe alias voluptatum
                   recusandae nemo ratione esse!</span
                 >
+<<<<<<< HEAD
               </div>
             </v-card-text>
             <v-divider class="mx-4"></v-divider>
@@ -52,6 +53,23 @@
               </v-btn>
             </v-card-actions>
           </v-card>
+=======
+                </v-row>
+                <div><span class="body-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt molestias nostrum ab dolorem saepe alias voluptatum recusandae nemo ratione esse!</span></div>
+                </v-card-text>
+                <v-divider class="mx-4"></v-divider>
+                <div class="px-4 py-2">
+                    <span class="body-1 font-weight-light">Funding</span>
+                    <v-progress-linear class="my-2" color="#00a368" height="10" value="30"></v-progress-linear>
+                    <span class="font-weight-bold">N3000</span> raised of <span class="font-weight-bold">N10,000 </span>
+                </div>
+                <v-card-actions>
+                    <v-btn outlined color="#00a368">
+                        Fund Research
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+>>>>>>> 59c4b14f83f35b466a4973b1fe5c36ebeddb08de
         </v-col>
       </v-row>
     </v-container>
