@@ -41,17 +41,21 @@
         </v-col>
       </v-row>
       <div>
-        <span class="text-h3 font-weight-black">Names of Applicants:</span>
+        <span class="text-h6 font-weight-medium grey--text text--darken-3">Applicants:</span>
       </div>
       <v-row>
         <v-col>
           <v-card outlined tile shaped class="mx-auto" width="auto" v-for="name in names" :key="name.title">
               <v-card-text>
                 <div>Name of Researcher:</div>
-                  <p class="display-1 text--primary">
+                <div>
+                  <span class="text-h6 font-weight-medium grey--text text--darken-3">
                   {{ name.researcher }}
-                  </p>
-                  <p>{{ name.title }}</p>
+                  </span>
+                </div>
+                <div class="mb-2">
+                   <span class="font-weight-medium">{{ name.title }}</span>
+                </div>
                   <div class="text--primary">
                   To contribute in the on going research work.<br>
                   "in concept of quantum computing."
@@ -74,9 +78,9 @@
               <v-spacer></v-spacer>
               <v-btn
                 text
-                color="orange"
+                color="blue"
               >
-                  View Profile...
+                  View Profile
               </v-btn>
             </v-card-actions>
           </v-card>
