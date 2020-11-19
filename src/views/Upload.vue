@@ -1,14 +1,16 @@
 <template>
   <v-app class="grey lighten-4">
-    <v-container fluid>
+    <v-container>
       <v-row>
         <v-col cols="12" md="8" sm="8">
           <span class="text-h4 font-weight-thin">Upload Research</span>
         </v-col>
-        <v-col cols="12" md="12" sm="12">
+      </v-row>
+      <v-row>
+        <v-col cols="9" md="9" sm="9">
           <v-card>
             <v-card-title class="font-weight-light">
-              <h4>Uploaded Research</h4>
+              <h4 class="font-weight-regular">Uploaded Research</h4>
               <v-spacer></v-spacer>
               <v-text-field
                 v-model="search"
@@ -25,6 +27,55 @@
                 </v-btn>
               </template>
             </v-data-table>
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-card>
+            <v-card-title class="font-weight-regular"
+              >Upload Progress</v-card-title
+            >
+            <v-divider></v-divider>
+            <v-card-text>
+              <div>
+                <span>Stage 1:</span>
+                <span> Completed</span>
+                <v-progress-linear
+                  color="#00a368"
+                  height="10"
+                  reactive
+                  dark
+                  value="100"
+                >
+                  <!-- <strong>{{ progress }} %</strong> -->
+                </v-progress-linear>
+                <span>Stage 2:</span>
+                <span> In Progress</span>
+                <v-progress-linear
+                  color="#00a368"
+                  height="10"
+                  reactive
+                  dark
+                  indeterminate
+                >
+                  <!-- <strong>{{ progress }} %</strong> -->
+                </v-progress-linear>
+                <span>Stage 3:</span>
+                <span> Not Started</span>
+                <v-progress-linear color="#00a368" height="10" reactive dark>
+                  <!-- <strong>{{ progress }} %</strong> -->
+                </v-progress-linear>
+                <span>Stage 4:</span>
+                <span> Not Started</span>
+                <v-progress-linear color="#00a368" height="10" reactive dark>
+                  <!-- <strong>{{ progress }} %</strong> -->
+                </v-progress-linear>
+                <span>Stage 5:</span>
+                <span> Not Started</span>
+                <v-progress-linear color="#00a368" height="10" reactive dark>
+                  <!-- <strong>{{ progress }} %</strong> -->
+                </v-progress-linear>
+              </div>
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -131,6 +182,15 @@
           </v-card>
         </v-dialog>
       </v-row>
+
+      <v-row>
+        <div class="px-4 text-h5">
+          <span>Socket Connection Test: </span>
+          <span :class="$socket.connected ? 'green--text' : 'red--text'">{{
+            $socket.connected ? "Connected" : "Disconnected"
+          }}</span>
+        </div>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -149,6 +209,7 @@ export default {
       search: "",
       hidden: false,
       researcherObject: {},
+      tweets: [],
     };
   },
 
@@ -196,6 +257,14 @@ export default {
             this.messageError = "";
           }, 5000);
         });
+    },
+  },
+  sockets: {
+    connect() {
+      console.log("socket connected");
+    },
+    loggedIn(data) {
+      console.log("Logged In", data);
     },
   },
 };

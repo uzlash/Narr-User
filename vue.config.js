@@ -25,7 +25,7 @@ devServer: {
       pathRewrite: {
         '^/water': ''
       }
-    }
+    },
   }
 }
 }

@@ -124,7 +124,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-subheader class="body-1 font-weight-light white--text"
+        <v-subheader class="body-1 font-weight-bold white--text"
           >Research Funding</v-subheader
         >
         <v-divider></v-divider>
@@ -170,7 +170,7 @@
         </v-list-group>
 
         <v-divider></v-divider>
-        <v-subheader class="body-1 font-weight-light white--text"
+        <v-subheader class="body-1 font-weight-bold white--text"
           >Services</v-subheader
         >
         <v-divider></v-divider>
