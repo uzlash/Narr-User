@@ -2,56 +2,61 @@
   <v-app class="custom__style">
     <v-container>
       <v-row>
-        <v-col cols="6" md6 xs12>
-          <v-card class="text-center" elevation-10>
+        <v-col cols="12" md="6" lg="6">
+          <v-card class="text-center" outlined tile>
             <v-card-title> </v-card-title>
             <v-avatar class="mb-4" size="100" circle elevation-12>
               <img src="../assets/avatar-1.jpg" alt="" />
             </v-avatar>
-            <h2 class="">Usman Murtala</h2>
-
-            <h3 class="text-h5 font-weight-light">
-              <v-icon>mdi-school</v-icon> Ahmadu bello university
+            <h3 class="text-h6 font-weight-light py-2">
+              <v-icon class="mr-2">mdi-pencil</v-icon>John Doe
             </h3>
             <v-divider></v-divider>
-            <v-col cols="12" md12>
-              <v-list>
-                <v-list-item-content>
-                  <v-list-item-title class="mr-10">
-                    <v-icon left>mdi-email</v-icon>Email</v-list-item-title
-                  >
-                  <v-divider></v-divider>
-                  <v-list-item-subtitle>uzlash@gmail.com</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-content>
-                  <v-list-item-title class="mr-10">
-                    <v-icon left>mdi-phone</v-icon>Phone</v-list-item-title
-                  >
-                  <v-divider></v-divider>
-                  <v-list-item-subtitle>07016505825</v-list-item-subtitle>
-                </v-list-item-content>
-                <v-list-item-content>
-                  <v-list-item-title class="mr-10">
-                    <v-icon left>mdi-home</v-icon>Address</v-list-item-title
-                  >
-                  <v-divider></v-divider>
-                  <v-list-item-subtitle>Tudun wada kaduna</v-list-item-subtitle>
-                </v-list-item-content>
-                <v-list-item-content>
-                  <v-list-item-title class="mr-10">
-                    <v-icon left>mdi-cake</v-icon>Birth day</v-list-item-title
-                  >
-                  <v-divider></v-divider>
-                  <v-list-item-subtitle>2nd august 2002</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list>
-            </v-col>
+            <h3 class="text-h6 font-weight-light py-2">
+              <v-icon class="mr-2">mdi-email</v-icon>johndoe@gmail.com
+            </h3>
+            <v-divider></v-divider>
+            <h3 class="text-h6 font-weight-light py-2">
+              <v-icon class="mr-2">mdi-phone</v-icon>08012345678
+            </h3>
+            <v-divider></v-divider>
+            <h3 class="text-h6 font-weight-light py-2">
+              <v-icon class="mr-2">mdi-calendar</v-icon>28-August-1995
+            </h3>
+            <v-divider></v-divider>
+            <h3 class="text-h6 font-weight-light py-2">
+              <v-icon class="mr-2">mdi-home</v-icon>No 1 doesville, lorem town,
+              Ipsum.
+            </h3>
+            <v-divider></v-divider>
+            <h3 class="text-h6 font-weight-light py-2">
+              <v-icon class="mr-2">mdi-school-outline</v-icon> University
+            </h3>
+            <v-divider></v-divider>
+            <h3 class="text-h6 font-weight-light py-2">
+              <v-icon class="mr-2">mdi-school</v-icon> Abubakar Tafawa Balewa
+              University
+            </h3>
+            <v-divider></v-divider>
+          </v-card>
+          <v-card tile outlined class="mt-2">
+            <v-card-title class="font-weight-regular"
+              >Uploaded Researches</v-card-title
+            >
+            <v-card-text>
+              <v-data-table>
+                <template v-slot:[`item.controls`]="props">
+                  <v-btn icon color="pink" @click="deleteResearch(props.id)">
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </template>
+              </v-data-table>
+            </v-card-text>
           </v-card>
         </v-col>
 
-        <v-col cols="6" md12 xs12>
-          <v-card class="overflow-hidden">
+        <v-col cols="12" md="6" lg="6">
+          <v-card class="overflow-hidden" outlined tile>
             <v-toolbar flat color="#00a368">
               <v-icon color="white" left> mdi-account</v-icon>
               <v-toolbar-title class="white--text">
@@ -127,13 +132,6 @@
                 prepend-icon="mdi-home"
                 color="#00a368"
               ></v-text-field>
-              <v-text-field
-                :disabled="!isEditing"
-                label="email"
-                color="#00a368"
-                prepend-icon="mdi-email"
-              ></v-text-field>
-
               <v-autocomplete
                 :disabled="!isEditing"
                 :items="institutionTypes"

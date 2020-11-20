@@ -2,17 +2,19 @@
   <v-app class="grey lighten-4">
     <v-container>
       <v-row>
-        <v-col cols="12" md="8" sm="8">
+        <v-col cols="12">
           <span class="text-h4 font-weight-thin">Upload Research</span>
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="9" md="9" sm="9">
+        <v-col cols="12" md="9" lg="9">
           <v-card>
             <v-card-title class="font-weight-light">
               <h4 class="font-weight-regular">Uploaded Research</h4>
               <v-spacer></v-spacer>
               <v-text-field
+                color="#00a368"
+                clearable
                 v-model="search"
                 append-icon="mdi-magnify"
                 label="Search"
@@ -29,10 +31,10 @@
             </v-data-table>
           </v-card>
         </v-col>
-        <v-col>
+        <v-col cols="12" md="3" lg="3">
           <v-card>
             <v-card-title class="font-weight-regular"
-              >Upload Progress</v-card-title
+              >Document Processing</v-card-title
             >
             <v-divider></v-divider>
             <v-card-text>
@@ -46,7 +48,7 @@
                   dark
                   value="100"
                 >
-                  <!-- <strong>{{ progress }} %</strong> -->
+                  <strong>{{ progress || "100%" }} %</strong>
                 </v-progress-linear>
                 <span>Stage 2:</span>
                 <span> In Progress</span>
@@ -80,7 +82,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-dialog v-model="dialogUpload" persistent max-width="600px">
+        <v-dialog v-model="dialogUpload" max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               class="custom__btn"
@@ -103,7 +105,7 @@
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
                       color="#00a368"
-                      label="Research Title*"
+                      label="Research Title *"
                       required
                       class="ma-0 pa-0"
                     ></v-text-field>
@@ -112,10 +114,11 @@
                     <v-combobox
                       color="#00a368"
                       class="ma-0 pa-0"
-                      label="Author(s)"
+                      label="Author(s) *"
                       hint="Press Enter key to add an author"
                       multiple
                       chips
+                      required
                     ></v-combobox>
                   </v-col>
                   <!-- <v-col cols="12" sm="12">
@@ -138,6 +141,7 @@
                       @change="selectFile"
                     ></v-file-input>
                   </v-col>
+                  <!--Test Begin-->
                   <v-col cols="12">
                     <div v-if="currentFile">
                       <div v-if="showProgress">
@@ -154,42 +158,47 @@
                           >Uploaded: {{ loadedData }} bytes of Total:
                           {{ totalData }} bytes</span
                         >
+                        <div>
+                          <span class="mr-2 text-h6"
+                            >Please wait while your document finishes uploading
+                            and processing</span
+                          >
+                        </div>
                       </div>
                     </div>
-                  </v-col>
-                  <v-col cols="12">
                     <v-alert
-                      v-if="messageSuccess || messageError"
+                      class="mt-2"
+                      v-if="messageSuccess"
                       border="left"
-                      :color="messageSuccess ? '#00a368' : 'red'"
+                      color="#00a368"
                       dark
-                      >{{ messageSuccess || messageError }}</v-alert
+                      >{{ messageSuccess }}</v-alert
+                    >
+                    <v-alert
+                      class="mt-2"
+                      v-if="messageError"
+                      border="left"
+                      color="red"
+                      dark
+                      >{{ messageError }}</v-alert
                     >
                   </v-col>
+                  <!--Test End-->
                 </v-row>
               </v-container>
               <small>*indicates required field</small>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialogUpload = false">
+              <v-btn color="red" text @click="dialogUpload = false">
                 Close
               </v-btn>
-              <v-btn color="blue darken-1" text @click="uploadResearch()">
+              <v-btn color="#00a368" text @click="uploadFile()">
                 Submit
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
-      </v-row>
-
-      <v-row>
-        <div class="px-4 text-h5">
-          <span>Socket Connection Test: </span>
-          <span :class="$socket.connected ? 'green--text' : 'red--text'">{{
-            $socket.connected ? "Connected" : "Disconnected"
-          }}</span>
-        </div>
       </v-row>
     </v-container>
   </v-app>
@@ -203,13 +212,18 @@ export default {
       currentFile: undefined,
       showProgress: false,
       progress: 0,
+      loadedData: 0,
+      totalData: 0,
       messageSuccess: "",
       messageError: "",
       dialogUpload: false,
       search: "",
       hidden: false,
-      researcherObject: {},
-      tweets: [],
+      researcherObject: {
+        title: "SVM and Regression",
+        author: "John Doe",
+      },
+      //sockets
     };
   },
 
@@ -219,7 +233,7 @@ export default {
       this.currentFile = file;
     },
 
-    uploadResearch() {
+    uploadFile() {
       if (!this.currentFile) {
         this.messageError = "Please select a File!";
         setTimeout(() => {
@@ -227,6 +241,7 @@ export default {
         }, 5000);
         return;
       }
+      this.loading = true;
       helpers
         .uploadFileResearch(
           this.currentFile,
@@ -239,32 +254,49 @@ export default {
             this.totalData = event.total;
           }
         )
-        .then((response) => {
-          console.log("Response>>>", response);
-          this.messageSuccess = "Successfully Uploaded File!";
-          setTimeout(() => {
-            this.messageSuccess = "";
-          }, 5000);
-          console.log("Message>>>", this.message);
+        .then(async (response) => {
+          console.log("Response Data", response);
+          const blob = await response.data;
+          const obj = new Blob([blob], {
+            type: "application/pdf",
+          });
+          console.log("Object", obj);
+
+          //Polyfill
+          if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(obj);
+          } else {
+            const objUrl = window.URL.createObjectURL(obj);
+
+            const link = document.createElement("a");
+            link.href = objUrl;
+            link.download = "download.pdf";
+            link.click();
+            this.loading = false;
+            this.currentFile = undefined;
+            this.messageSuccess = "Document to PDF Conversion Successful";
+
+            setTimeout(() => {
+              window.URL.revokeObjectURL(objUrl);
+            }, 250);
+
+            setTimeout(() => {
+              this.messageSuccess = "";
+              this.dialogUpload = false;
+            }, 5000);
+          }
         })
         .catch((err) => {
-          console.log("Error>>", err);
+          console.log("Error>>", err.message);
           this.progress = 0;
-          this.messageError = "Error Uploading Document/File";
+          this.loading = false;
+          this.messageError = err.message;
           this.currentFile = undefined;
 
           setTimeout(() => {
             this.messageError = "";
           }, 5000);
         });
-    },
-  },
-  sockets: {
-    connect() {
-      console.log("socket connected");
-    },
-    loggedIn(data) {
-      console.log("Logged In", data);
     },
   },
 };

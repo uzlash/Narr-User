@@ -2,7 +2,7 @@
   <v-app class="grey lighten-4">
     <v-container>
       <v-row>
-        <v-col cols="12" md="8" sm="8">
+        <v-col cols="12">
           <span class="text-h4 font-weight-thin">Manage Grants</span>
         </v-col>
       </v-row>
@@ -21,7 +21,7 @@
                 <v-spacer></v-spacer>
 
                 <!-- Dialog Edit -->
-                <v-dialog v-model="dialogEdit" max-width="500px">
+                <v-dialog v-model="dialogEdit" max-width="800px">
                   <v-card>
                     <v-card-title class="font-weight-light"
                       >Edit Research Grant</v-card-title
@@ -31,14 +31,16 @@
                         <v-row>
                           <v-col cols="12">
                             <v-text-field
+                              hide-details
                               color="#00a368"
                               filled
                               v-model="editedGrant.title"
-                              label="Grant Title"
+                              label="Title"
                             ></v-text-field>
                           </v-col>
                           <v-col cols="12">
                             <v-text-field
+                              hide-details
                               color="#00a368"
                               filled
                               v-model="editedGrant.budget"
@@ -47,6 +49,7 @@
                           </v-col>
                           <v-col cols="12">
                             <v-text-field
+                              hide-details
                               color="#00a368"
                               filled
                               v-model="editedGrant.duration"
@@ -55,6 +58,7 @@
                           </v-col>
                           <v-col cols="12">
                             <v-textarea
+                              hide-details
                               color="#00a368"
                               filled
                               v-model="editedGrant.description"
@@ -66,7 +70,7 @@
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn color="#00a368" text @click="close">
+                      <v-btn color="red" text @click="close">
                         Cancel
                       </v-btn>
                       <v-btn color="#00a368" text @click="save">
@@ -78,12 +82,12 @@
 
                 <v-dialog v-model="dialogDelete" max-width="600px">
                   <v-card>
-                    <v-card-title class="red--text text-h6 font-weight-light"
+                    <v-card-title class="text-h6 font-weight-light"
                       >Are you sure you want to delete this item?</v-card-title
                     >
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn color="#00a368" text @click="closeDelete"
+                      <v-btn color="red" text @click="closeDelete"
                         >Cancel</v-btn
                       >
                       <v-btn color="#00a368" text @click="deleteItemConfirm"
@@ -111,7 +115,7 @@
       </v-row>
     </v-container>
     <!-- Dialog Add -->
-    <v-dialog v-model="dialogAdd" max-width="500px">
+    <v-dialog v-model="dialogAdd" max-width="800px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           fab
@@ -132,14 +136,16 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
+                  hide-details
                   color="#00a368"
                   filled
                   v-model="newItem.title"
-                  label="Grant Title"
+                  label="Title"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
+                  hide-details
                   color="#00a368"
                   filled
                   v-model="newItem.budget"
@@ -148,6 +154,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
+                  hide-details
                   color="#00a368"
                   filled
                   v-model="newItem.duration"
@@ -156,6 +163,7 @@
               </v-col>
               <v-col cols="12">
                 <v-textarea
+                  hide-details
                   color="#00a368"
                   filled
                   v-model="newItem.description"
@@ -167,7 +175,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="#00a368" text @click="close">
+          <v-btn color="red" text @click="close">
             Cancel
           </v-btn>
           <v-btn color="#00a368" text @click="save">
@@ -199,7 +207,7 @@ export default {
       title: "",
       date: "",
       budget: 0,
-      duration: 0,
+      duration: "",
       applicants: 0,
       description: "",
     },
@@ -207,7 +215,7 @@ export default {
       title: "",
       date: "",
       budget: 0,
-      duration: 0,
+      duration: "",
       applicants: 0,
       description: "",
     },
@@ -322,10 +330,6 @@ export default {
     close() {
       this.dialogEdit = false;
       this.dialogAdd = false;
-      // this.$nextTick(() => {
-      //   this.editedItem = Object.assign({}, this.defaultItem)
-      //   this.editedIndex = -1
-      // })
     },
     closeDelete() {
       this.dialogDelete = false;

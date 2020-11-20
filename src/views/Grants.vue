@@ -132,6 +132,32 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-speed-dial
+        v-model="fab"
+        direction="left"
+        transition="slide-x"
+        class="custom__btn-up"
+      >
+        <template v-slot:activator>
+          <v-btn v-model="fab" x-large color="#00a368" dark fab>
+            <v-icon v-if="fab">
+              mdi-close
+            </v-icon>
+            <span v-else class="body-2 font-weight-bold">
+              Manage
+            </span>
+          </v-btn>
+        </template>
+        <v-btn fab dark small color="#00a368" @click="goManageGrants()">
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <v-btn fab dark small color="indigo">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        <v-btn fab dark small color="red">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </v-speed-dial>
     </v-container>
   </v-app>
 </template>
@@ -143,6 +169,7 @@ export default {
       search: "",
       grantFavorite: false,
       grantFlag: false,
+      fab: false,
     };
   },
   methods: {
@@ -158,6 +185,9 @@ export default {
       console.log("clicked " + id);
       this.$router.push(`/viewgrant/${id}`);
     },
+    goManageGrants() {
+      this.$router.push("/managegrant");
+    },
   },
 };
 </script>
@@ -165,10 +195,13 @@ export default {
 <style>
 .custom__research-card:hover {
   background-color: #fafafa;
-  /* background-color: #F5F5F5; */
-  /* background-color: #EEEEEE; */
 }
 .grant__body-info:hover {
   cursor: pointer;
+}
+.custom__btn-up {
+  position: fixed;
+  top: 55px;
+  right: 40px;
 }
 </style>

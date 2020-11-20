@@ -104,8 +104,7 @@
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-6 mb-4">
-          <!-- <span class="text-h4 white--text font-weight-light">NARR</span> -->
-          <v-img src="../assets/narrLogo.png" alt="Narr Logo"></v-img>
+          <v-img src="../assets/logo-narr2.png" alt="Narr Logo"></v-img>
         </v-flex>
       </v-layout>
       <v-divider></v-divider>
@@ -123,24 +122,22 @@
             <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-divider></v-divider>
-        <v-subheader class="body-1 font-weight-bold white--text"
-          >Research Funding</v-subheader
-        >
-        <v-divider></v-divider>
 
-        <v-list-group no-action sub-group color="white">
+        <v-list-group sub-group color="white" class="ml-n4">
           <template v-slot:activator>
             <v-list-item-content>
-              <v-list-item-title>Research Grants</v-list-item-title>
+              <v-list-item-title class="ml-4"
+                >Grants &amp; Funding</v-list-item-title
+              >
             </v-list-item-content>
           </template>
 
           <v-list-item
-            v-for="element in researchGrants"
+            v-for="element in researchFunding"
             :key="element.icon"
             :to="element.route"
             active-class="border"
+            class="custom__research--item"
           >
             <v-list-item-icon>
               <v-icon>{{ element.icon }}</v-icon>
@@ -149,31 +146,6 @@
           </v-list-item>
         </v-list-group>
 
-        <v-list-group no-action sub-group color="white">
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>Crowd Funding</v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list-item
-            v-for="element in crowdFundings"
-            :key="element.icon"
-            :to="element.route"
-            active-class="border"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ element.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>{{ element.text }}</v-list-item-title>
-          </v-list-item>
-        </v-list-group>
-
-        <v-divider></v-divider>
-        <v-subheader class="body-1 font-weight-bold white--text"
-          >Services</v-subheader
-        >
-        <v-divider></v-divider>
         <v-list-item
           active-class="border"
           v-for="link in services"
@@ -212,33 +184,22 @@ export default {
         icon: "mdi-read",
         text: "Reading List",
         route: "/history",
-        divider: false,
       },
     ],
-    researchGrants: [
+
+    researchFunding: [
       {
         icon: "mdi-book-open-variant",
-        text: "View",
+        text: "Grants",
         route: "/viewgrant",
       },
       {
-        icon: "mdi-book",
-        text: "Manage",
-        route: "/managegrant",
-      },
-    ],
-    crowdFundings: [
-      {
-        icon: "mdi-book-open-variant",
-        text: "View",
+        icon: "mdi-account-cash",
+        text: "Crowdfund",
         route: "/viewcrowd",
       },
-      {
-        icon: "mdi-book",
-        text: "Manage",
-        route: "/managecrowd",
-      },
     ],
+
     services: [
       {
         icon: "mdi-chat",
@@ -261,6 +222,7 @@ export default {
         route: "/video",
       },
     ],
+
     messages: [
       {
         title: "umar abubakar",
@@ -300,5 +262,8 @@ export default {
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(170, 170, 170);
+}
+.custom__research--item {
+  padding-left: 84px !important;
 }
 </style>

@@ -24,29 +24,35 @@
               <v-form @submit.prevent ref="form" class="mt-4">
                 <div>
                   <v-col cols="6" class="d-flex align-center">
-                    <v-file-input
-                      hide-details
-                      show-size
-                      filled
-                      accept="image/*"
-                      color="#00a368"
-                      label="Select Image"
-                      prepend-icon="mdi-image"
-                      @change="selectImage"
-                    ></v-file-input>
-                    <v-btn
-                      :loading="loading"
-                      dark
-                      class="ml-4"
-                      color="#00a368"
-                      @click="uploadImage(currentImage)"
-                    >
-                      <v-icon class="mr-2">mdi-cloud-upload-outline</v-icon>
-                      Upload Image
-                    </v-btn>
+                    <v-row>
+                      <v-col cols="12" md="6">
+                        <v-file-input
+                          hide-details
+                          show-size
+                          filled
+                          accept="image/*"
+                          color="#00a368"
+                          label="Select Image"
+                          prepend-icon="mdi-image"
+                          @change="selectImage"
+                        ></v-file-input>
+                      </v-col>
+                      <v-col cols="12" md="6">
+                        <v-btn
+                          :loading="loading"
+                          dark
+                          class="ml-4"
+                          color="#00a368"
+                          @click="uploadImage(currentImage)"
+                        >
+                          <v-icon class="mr-2">mdi-cloud-upload-outline</v-icon>
+                          Upload Image
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-col>
                 </div>
-                <v-col cols="6">
+                <v-col cols="12" md="6" lg="6">
                   <div v-if="currentImage">
                     <div v-if="showProgress">
                       <v-progress-linear
@@ -157,7 +163,6 @@ export default {
       console.log(this.currentImage);
     },
 
-    //Method to upload image for Optical Character Recognition
     uploadImage() {
       if (!this.currentImage) {
         this.messageError = "Please select an Image!";
@@ -181,9 +186,9 @@ export default {
           this.messageSuccess = "Image Conversion to Text Successful";
           setTimeout(() => {
             this.messageSuccess = "";
+            this.currentImage = undefined;
           }, 5000);
           this.loading = false;
-          this.currentImage = undefined;
           console.log("Image Text>>>", this.imageText);
         })
         .catch((err) => {

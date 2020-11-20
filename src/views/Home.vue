@@ -123,7 +123,7 @@
             </v-card>
             <v-card tile outlined height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id" class="py-0">
-                <v-list-item to="/user" class="px-2">
+                <v-list-item to="/read" class="px-2">
                   <v-list-item-avatar color="blue" aria-dropeffect>
                     <v-icon dark>{{ item.icon }}</v-icon>
                   </v-list-item-avatar>
@@ -157,7 +157,7 @@
             </v-card>
             <v-card tile outlined height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id" class="py-0">
-                <v-list-item to="/user" class="px-2">
+                <v-list-item to="/read" class="px-2">
                   <v-list-item-avatar color="accent">
                     <v-icon dark>{{ item.icon }}</v-icon>
                   </v-list-item-avatar>
@@ -171,9 +171,6 @@
                     }}</v-list-item-subtitle>
                   </v-list-item-content>
                   <div>
-                    <!-- <v-list-item-title class="green--text font-weight-light">{{
-                      item.title2
-                    }}</v-list-item-title> -->
                     <v-list-item-subtitle class="font-weight-light">{{
                       item.date
                     }}</v-list-item-subtitle>
@@ -190,15 +187,28 @@
             sm="12"
             class="hidden-sm-and-down pa-0 px-2"
           >
-            <!-- <v-card tile>
-              <v-card-title class="text-h6 font-weight-light pa-2"
-                >Profile</v-card-title
-              >
-            </v-card> -->
             <v-card
               outlined
               tile
-              height="360"
+              height="60"
+              class="mb-2 body-1 d-flex align-center"
+            >
+              <v-btn class="mx-2" small fab dark color="indigo" outlined>
+                <v-icon>mdi-account-group</v-icon>
+              </v-btn>
+              <span>Users Online: </span>
+              <span>1,000,000</span>
+              <!-- <span class="ml-2 font-weight-light black--text">{{
+                users.length
+              }}</span> -->
+              <!-- <span :class="$socket.connected ? 'green--text' : 'red--text'">{{
+                $socket.connected ? "Connected" : "Disconnected"
+              }}</span> -->
+            </v-card>
+            <v-card
+              outlined
+              tile
+              height="292"
               class="cutom__card--overflow d-flex flex-column align-center justify-center"
             >
               <div>
@@ -208,16 +218,15 @@
               </div>
 
               <v-card-text class="text-h5 pa-0 text-center font-weight-light"
-                >Usman Murtala</v-card-text
+                >John Doe</v-card-text
               >
               <v-card-text class="body-1 pa-0 text-center font-weight-light"
-                >uzlash16@gmail.com</v-card-text
+                >johndoe@gmail.com</v-card-text
               >
               <v-card-text class="body-2 pa-0 text-center font-weight-light"
                 >Ahmadu Bello University</v-card-text
               >
               <div class="d-flex justify-center">
-                <!-- <v-icon size="20" color="orange darken-2">mdi-clock</v-icon> -->
                 <span class="font-weight-light mx-2 body-2">Last Login:</span>
                 <span class="font-weight-light orange--text body-2"
                   >26 minutes ago</span
@@ -230,12 +239,6 @@
                 >
               </div>
             </v-card>
-            <!-- <v-card height="60" class="my-2 pa-1">
-              <v-card-text class="pa-0"
-                >Lorem ipsum dolor sit amet consectetur, adipisicing
-                elit.</v-card-text
-              >
-            </v-card> -->
           </v-col>
           <v-col cols="12" lg="12" md="12" sm="12" class="pa-2">
             <v-card outlined>
@@ -279,6 +282,7 @@
 export default {
   components: {},
   data: () => ({
+    users: [],
     CardDocuments: [
       {
         title: "Documents Uploaded",
@@ -494,10 +498,26 @@ export default {
       this.$router.push("/upload");
     },
     goGrants() {
-      this.$router.push("/grants");
+      this.$router.push("/viewgrant");
+    },
+    goCrowdFunding() {
+      this.$router.push("/viewcrowd");
     },
     goAnalytics() {
       this.$router.push("/analytics");
+    },
+  },
+  sockets: {
+    connect() {
+      console.log("socket connected");
+    },
+    loggedIn(data) {
+      console.log("Logged In", data);
+      this.users = data.users;
+      this.$socket.client.emit("newUser", "Usman Murtala");
+    },
+    userOnline(data) {
+      console.log("User Online", data);
     },
   },
 };

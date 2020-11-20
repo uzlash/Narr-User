@@ -28,29 +28,35 @@
               <v-form @submit.prevent ref="form" class="mt-4">
                 <div>
                   <v-col cols="6" class="d-flex align-center">
-                    <v-file-input
-                      hide-details
-                      show-size
-                      filled
-                      accept=".pdf,.doc,.docx,.txt,.pptx,.odt,.rtf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                      color="#00a368"
-                      label="Select File"
-                      prepend-icon="mdi-file-document"
-                      @change="selectFile"
-                    ></v-file-input>
-                    <v-btn
-                      :loading="loading"
-                      dark
-                      class="ml-4"
-                      color="#00a368"
-                      @click="uploadFile(currentFile)"
-                    >
-                      <v-icon class="mr-2">mdi-cloud-upload-outline</v-icon>
-                      Upload FIle
-                    </v-btn>
+                    <v-row>
+                      <v-col cols="12" md="6" lg="6">
+                        <v-file-input
+                          hide-details
+                          show-size
+                          filled
+                          accept=".pdf,.doc,.docx,.txt,.pptx,.odt,.rtf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          color="#00a368"
+                          label="Select File"
+                          prepend-icon="mdi-file-document"
+                          @change="selectFile"
+                        ></v-file-input>
+                      </v-col>
+                      <v-col cols="12" md="6" lg="6">
+                        <v-btn
+                          :loading="loading"
+                          dark
+                          class="ml-4"
+                          color="#00a368"
+                          @click="uploadFile(currentFile)"
+                        >
+                          <v-icon class="mr-2">mdi-cloud-upload-outline</v-icon>
+                          Upload FIle
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-col>
                 </div>
-                <v-col cols="6">
+                <v-col cols="12" md="6" lg="6">
                   <div v-if="currentFile">
                     <div v-if="showProgress">
                       <v-progress-linear

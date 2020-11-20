@@ -20,7 +20,7 @@ devServer: {
       }
     },
     'water': {
-      target: 'https://shamskhalil.ngrok.io',
+      target: 'https://water.narr.ng',
       changeOrigin: true,
       pathRewrite: {
         '^/water': ''

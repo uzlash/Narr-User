@@ -8,9 +8,7 @@
         <v-col>
           <v-btn @click="fetchUsers()">Fetch Users</v-btn>
         </v-col>
-        <v-col>
-          <!-- <v-btn @click="fetchUsers()">Refresh Token</v-btn> -->
-        </v-col>
+        <v-col> </v-col>
         <v-col cols="12" md="8" sm="8">
           <ul>
             <li v-for="user in users" :key="user._id">

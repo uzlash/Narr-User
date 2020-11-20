@@ -71,22 +71,6 @@ const store = new Vuex.Store({
   actions: {
     SIGN_IN({ commit }, authData) {
       commit("startLoader");
-      // fetch('http://auth:80/api/v1/auth/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     email: authData.username,
-      //     password: authData.password
-      //   })
-      // })
-      // .then(response => response.json())
-      // .then(
-      //   data => {
-      //     console.log(data)
-      //   }
-      // ).catch(err => console.log(err)) 
       axios
         .post('http://localhost:3000/api/v1/auth/login', {
           email: authData.username,
@@ -141,10 +125,6 @@ const store = new Vuex.Store({
           });
           commit("SignUpSuccessful");
           commit("stopLoader");
-          // localStorage.setItem(
-          //   "user",
-          //   JSON.stringify(response.data.payload.user)
-          // );
         })
         .catch((error) => {
           console.log(error);

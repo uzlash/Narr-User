@@ -2,7 +2,9 @@
   <v-app>
     <Navbar v-if="$route.meta.showHeader == true" />
     <v-main>
-      <router-view></router-view>
+      <transition name="slide-fade">
+        <router-view></router-view>
+      </transition>
     </v-main>
   </v-app>
 </template>
@@ -23,13 +25,15 @@ export default {
 </script>
 
 <style>
-/* ::-webkit-scrollbar {
-  width: 10px;
-} */
-/* ::-webkit-scrollbar-track {
-  background: #bdbdbd;
-} */
-/* ::-webkit-scrollbar-thumb {
-  background: rgb(170, 170, 170);
-} */
+.slide-fade-enter-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-fade-leave-active {
+  transition: all 0.2s ease-out;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(1000px);
+  opacity: 0;
+}
 </style>

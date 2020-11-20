@@ -28,14 +28,9 @@
                 height="10"
                 value="30"
               ></v-progress-linear>
-              <span class="font-weight-bold">N3000</span> raised of
-              <span class="font-weight-bold">N10,000 </span>
+              <span class="font-weight-bold">N7,000,000</span> raised of
+              <span class="font-weight-bold">N10,000,000 </span>
             </div>
-            <!-- <v-card-actions>
-                    <v-btn outlined color="#00a368">
-                        Fund Research
-                    </v-btn>
-                </v-card-actions> -->
           </v-card>
         </v-col>
 
@@ -48,36 +43,14 @@
                     Name
                   </th>
                   <th class="text-left">
-                    Number of Applicants
+                    Funds Donated
                   </th>
-                  <!-- <th class="text-center">
-                    Actions
-                  </th> -->
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in desserts" :key="item.title">
+                <tr v-for="item in fundings" :key="item.title">
                   <td>{{ item.title }}</td>
-                  <td>{{ item.applicants }}</td>
-                  <td>
-                    <div>
-                      
-                          
-                      <v-btn class="ma-2" color="green" dark outlined small>
-                        Accept
-                        <v-icon dark right>
-                          mdi-checkbox-marked-circle
-                        </v-icon>
-                      </v-btn>
-
-                      <v-btn class="ma-2" color="red" dark outlined small>
-                        Decline
-                        <v-icon dark right>
-                          mdi-cancel
-                        </v-icon>
-                      </v-btn>
-                    </div>
-                  </td>
+                  <td class="green--text">N{{ item.donations }}</td>
                 </tr>
               </tbody>
             </template>
@@ -91,30 +64,30 @@
 export default {
   data() {
     return {
-      desserts: [
+      fundings: [
         {
-          title: "Support SVM & Regression Research",
-          applicants: 90,
+          title: "Bill and Melinda Foundation",
+          donations: 100000,
         },
         {
-          title: "Support SVM & Regression Research",
-          applicants: 90,
+          title: "Prof Ishaq Bala",
+          donations: 55000,
         },
         {
-          title: "Support SVM & Regression Research",
-          applicants: 90,
+          title: "Mr Musa Damu",
+          donations: 20000,
         },
         {
-          title: "Support SVM & Regression Research",
-          applicants: 90,
+          title: "Dangote Group",
+          donations: 1300000,
         },
         {
-          title: "Support SVM & Regression Research",
-          applicants: 90,
+          title: "John Doe",
+          donations: 10900,
         },
         {
-          title: "Support SVM & Regression Research",
-          applicants: 90,
+          title: "Dr Hamisu Dauda",
+          donations: 250000,
         },
       ],
     };

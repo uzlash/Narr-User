@@ -8,18 +8,17 @@ import vuetify from './plugins/vuetify'
 import VueClipboard from 'vue-clipboard2'
 
 //Socket for socket io extended
-import VueSocketIOExt from 'vue-socket.io-extended'
-import io from 'socket.io-client'
+// import VueSocketIOExt from 'vue-socket.io-extended'
+// import io from 'socket.io-client'
 
-const socket = io('http://localhost:3366');
+// const socket = io('http://localhost:3366');
  
-Vue.use(VueSocketIOExt, socket);
+// Vue.use(VueSocketIOExt, socket);
 
 // import VueFriendlyIframe from 'vue-friendly-iframe'
 
 Vue.use(VueAxios, axios)
 Vue.use(VueClipboard)
-// Vue.use(VueFriendlyIframe)
 
 const token = localStorage.getItem('user-token')
 if (token) {

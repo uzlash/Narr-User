@@ -368,17 +368,7 @@
                 timeout="5000"
                 v-model="signInMetaData.signInErrorSnackbar"
               >
-                {{signInMetaData.signInErrorPayload}}
-                <!-- <template v-slot:action="{ attrs }">
-                  <v-btn
-                    color="pink"
-                    text
-                    v-bind="attrs"
-                    @click="signInErrorSnackbar = false"
-                  >
-                    Close
-                  </v-btn>
-                </template> -->
+                {{ signInMetaData.signInErrorPayload }}
               </v-snackbar>
               <v-snackbar
                 bottom
@@ -386,18 +376,7 @@
                 timeout="5000"
                 v-model="signUpMetaData.signUpErrorSnackbar"
               >
-              {{signUpMetaData.signUpErrorPayload}}
-                <!-- Error Creating Account, Please try again. -->
-                <!-- <template v-slot:action="{ attrs }">
-                  <v-btn
-                    color="pink"
-                    text
-                    v-bind="attrs"
-                    @click="signInErrorSnackbar = false"
-                  >
-                    Close
-                  </v-btn>
-                </template> -->
+                {{ signUpMetaData.signUpErrorPayload }}
               </v-snackbar>
             </v-card>
           </v-col>
@@ -517,11 +496,11 @@ export default {
       return this.$store.state.step;
     },
     signInMetaData() {
-      return this.$store.state.signIn
+      return this.$store.state.signIn;
     },
     signUpMetaData() {
-      return this.$store.state.signUp
-    }
+      return this.$store.state.signUp;
+    },
   },
 };
 </script>

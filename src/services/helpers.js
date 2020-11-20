@@ -1,9 +1,12 @@
- import axios from "axios";
+// Document Conversion - /doc/convert/office
+// OCR - /ocr/tika/form
+// Watermark - /water/watermark
+import axios from "axios";
 
 export default {
   refreshToken() {
     return axios
-      .post(`http://192.168.1.4:3000/api/v1/refreshtoken`, {}, {
+      .post(`https://api.narr.ng/refreshtoken`, {}, {
         headers: {
         "x-token": localStorage.getItem("token"),
           'refreshtoken': localStorage.getItem("refreshToken"),
@@ -13,11 +16,10 @@ export default {
         return response.data;
       });
   },
-
   uploadImageOcr(file, onUploadProgress) {
     const formData = new FormData();
     formData.append("image", file);
-    return axios.post("/ocr/tika/form", formData, {
+    return axios.post("https://image2text.narr.ng/tika/form", formData, {
       headers: { 
         'Accept': 'text/plain', 
       }, onUploadProgress
@@ -27,8 +29,7 @@ export default {
   uploadFileConvert(file, onUploadProgress) {
     const formData = new FormData();
     formData.append("file", file);
-    // /doc/convert/office
-    return axios.post("/water/watermark", formData, {
+    return axios.post("https://doc2pdf.narr.ng/convert/office", formData, {
       headers: { 
         'Accept': 'multipart/form-data', 
       },responseType: 'blob', onUploadProgress
@@ -39,7 +40,7 @@ export default {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("researchUserObject", researchUserObject);
-    return axios.post("/", formData, {
+    return axios.post("https://doc2pdf.narr.ng/convert/office", formData, {
       headers: { 
         'Accept': 'multipart/form-data', 
       },responseType: 'blob', onUploadProgress

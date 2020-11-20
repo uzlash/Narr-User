@@ -2,15 +2,16 @@
   <v-app class="grey lighten-4">
     <v-container>
       <v-row>
-        <v-col cols="12" md="8" sm="8">
+        <v-col cols="12">
           <span class="text-h4 font-weight-thin">Reading List</span>
         </v-col>
-        <v-col cols="12" md="12" sm="12">
+        <v-col cols="12">
           <v-card outlined tile>
             <v-card-title class="font-weight-light">
-              <!-- Available Grants -->
               <v-spacer></v-spacer>
               <v-text-field
+                color="#00a368"
+                clearable
                 v-model="search"
                 append-icon="mdi-magnify"
                 label="Search"
@@ -19,7 +20,7 @@
               ></v-text-field>
             </v-card-title>
             <v-data-table :headers="headers" :items="research" :search="search">
-              <template v-slot:item.cont="">
+              <template v-slot:[`item.cont`]="">
                 <v-progress-linear
                   v-model="percentage"
                   height="15"
@@ -30,8 +31,9 @@
                   >
                 </v-progress-linear>
               </template>
-              <template v-slot:item.controls="props">
+              <template v-slot:[`item.controls`]="props">
                 <v-btn
+                  outlined
                   dark
                   class="ma-2"
                   color="#00a368"
