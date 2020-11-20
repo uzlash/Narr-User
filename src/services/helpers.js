@@ -40,7 +40,7 @@ export default {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("researchUserObject", researchUserObject);
-    return axios.post("/ocr/tika/form", formData, {
+    return axios.post("/doc/convert/office", formData, {
       headers: { 
         'Accept': 'multipart/form-data', 
       },responseType: 'blob', onUploadProgress
