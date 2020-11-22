@@ -46,7 +46,7 @@
               <span class="font-weight-bold">N10,000,000 </span>
             </div>
             <v-card-actions>
-              <v-btn outlined color="#00a368">
+              <v-btn outlined color="#00a368" @click="goCrowdView(id)">
                 Fund Research
               </v-btn>
             </v-card-actions>
@@ -96,6 +96,9 @@ export default {
     },
     goManageCrowd() {
       this.$router.push("/managecrowd");
+    },
+    goCrowdView(id){
+      this.$router.push(`/viewcrowd/${id}`);
     },
   },
 };
