@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 import router from "../router/index";
 
 Vue.use(Vuex);
@@ -15,7 +14,9 @@ const store = new Vuex.Store({
       signInLoading: false,
       signInDisabled: false,
       signInErrorSnackbar: false,
-      signInErrorPayload: null
+      signInErrorPayload: null,
+      signInSuccessSnackbar: false,
+      signInSuccessPayload: null
     },
     signUp: {
       signUpLoading: false,
@@ -64,73 +65,91 @@ const store = new Vuex.Store({
       state.signIn.signInErrorPayload = error
     },
     signUpError(state, error) {
-      state.signUp.signUpErrorSnackbar = true,
+      state.signUp.signUpErrorSnackbar = true
       state.signUp.signUpErrorPayload = error
     },
+    signInSuccess(state, payload) {
+      state.signIn.signInSuccessSnackbar = true
+      state.signIn.signInSuccessPayload = payload
+    }
   },
   actions: {
     SIGN_IN({ commit }, authData) {
       commit("startLoader");
-      axios
-        .post('http://localhost:3000/api/v1/auth/login', {
-          email: authData.username,
-          password: authData.password,
-        })
-        .then((response) => {
-          console.log(response.data.payload);
+      console.log(authData)
+      fetch('http://localhost:3000/api/v1/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email: authData.email, password: authData.password})
+      })
+      .then((r) => r.json())
+      .then(response =>{
+        if(response.status === 'failed') {
+          commit('stopLoader')
+          commit("signInError", response.message)
+        }
+        else {
           commit("loginUser", {
-            token: response.data.payload.token,
-            refreshToken: response.data.payload.refreshToken,
-            user: response.data.payload.user,
+            token: response.payload.token,
+            refreshToken: response.payload.refreshToken,
+            user: response.payload.user,
           });
-          localStorage.setItem("token", response.data.payload.token);
+          localStorage.setItem("token", response.payload.token);
           localStorage.setItem(
             "refreshToken",
-            response.data.payload.refreshToken
+            response.payload.refreshToken
           );
           localStorage.setItem(
             "user",
-            JSON.stringify(response.data.payload.user)
+            JSON.stringify(response.payload.user)
           );
           router.push("/");
           commit("stopLoader");
-        })
-        .catch((error) => {
-          console.log(error);
-          commit("stopLoader");
-          commit("signInError", error)
-        });
+        }
+      })
+      .catch(error => console.log('Catch Error', error))
     },
     SIGN_UP({ commit }, authData) {
-      commit("startLoader");
-      axios
-        .post('http://localhost:3000/api/v1/auth/register', {
-          fname: authData.fname,
-          lname: authData.lname,
-          emial: authData.username,
+      const data = {
+          fName: authData.fName,
+          lName: authData.lName,
+          email: authData.email,
           phone: authData.phone,
           address: authData.address,
           dob: authData.dob,
-          organization: authData.organization,
           institution: {
             type: authData.institution.type,
             name: authData.institution.name,
           },
           password: authData.password,
-        })
-        .then((response) => {
-          console.log(response);
-          commit("registerUser", {
-            user: response.data.payload,
-          });
+      }
+      commit("startLoader");
+      fetch('http://localhost:3000/api/v1/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(r => r.json())
+      .then(response => {
+        if(response.status === 'failed') {
+          commit('stopLoader')
+          commit("signInError", response.message)
+        }
+        else {
+          commit("registerUser", { user: response.payload });
+          console.log(response.payload)
           commit("SignUpSuccessful");
           commit("stopLoader");
-        })
-        .catch((error) => {
-          console.log(error);
-          commit("stopLoader");
-          commit("signUpError", error)
-        });
+        }
+      }).catch((error) => {
+        console.log('Error>>>>>>>>>>>>>', error.message);
+        commit("stopLoader");
+        commit("signUpError", error.message)
+      });
     },
     SIGN_OUT: ({ commit }) => {
       commit("signOut");

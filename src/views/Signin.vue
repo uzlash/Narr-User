@@ -36,6 +36,7 @@
                           <v-row justify="center">
                             <v-col cols="8">
                               <v-text-field
+                                hide-details="auto"
                                 v-model="email"
                                 solo
                                 class="mt-4"
@@ -49,6 +50,7 @@
                             </v-col>
                             <v-col cols="8">
                               <v-text-field
+                                hide-details="auto"
                                 v-model="password"
                                 :append-icon="
                                   showPassword ? 'mdi-eye' : 'mdi-eye-off'
@@ -158,6 +160,7 @@
                             <v-row justify="center">
                               <v-col cols="12" md="6">
                                 <v-text-field
+                                  hide-details="auto"
                                   v-model="fname"
                                   solo
                                   class="mt-4"
@@ -170,6 +173,7 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-text-field
+                                  hide-details="auto"
                                   v-model="lname"
                                   solo
                                   class="mt-4"
@@ -182,6 +186,7 @@
                               </v-col>
                               <v-col cols="12" md="12">
                                 <v-text-field
+                                  hide-details="auto"
                                   v-model="email"
                                   solo
                                   label="Email"
@@ -193,6 +198,7 @@
                               </v-col>
                               <v-col cols="12" md="12">
                                 <v-text-field
+                                  hide-details="auto"
                                   v-model="phone"
                                   solo
                                   label="08012345678"
@@ -204,6 +210,7 @@
                               </v-col>
                               <v-col cols="12" md="12">
                                 <v-text-field
+                                  hide-details="auto"
                                   v-model="address"
                                   solo
                                   label="Address"
@@ -215,6 +222,7 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-select
+                                  hide-details="auto"
                                   v-model="selectedInstitutionType"
                                   solo
                                   label="Institution Type"
@@ -225,6 +233,7 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-select
+                                  hide-details="auto"
                                   v-show="
                                     selectedInstitutionType !== 'Organization'
                                   "
@@ -236,7 +245,7 @@
                                   color="#00A368"
                                 />
                               </v-col>
-                              <v-col cols="12" md="12">
+                              <!-- <v-col cols="12" md="12">
                                 <v-text-field
                                   v-show="
                                     selectedInstitutionType === 'Organization'
@@ -248,9 +257,10 @@
                                   type="text"
                                   color="#00A368"
                                 />
-                              </v-col>
+                              </v-col> -->
                               <v-col cols="12" md="12">
                                 <v-menu
+                                  hide-details="auto"
                                   ref="menu"
                                   v-model="menu"
                                   :close-on-content-click="false"
@@ -262,6 +272,8 @@
                                 >
                                   <template v-slot:activator="{ on, attrs }">
                                     <v-text-field
+                                      hide-details="auto"
+                                      color="#00a368"
                                       solo
                                       v-model="date"
                                       label="Date Of Birth"
@@ -272,6 +284,7 @@
                                     ></v-text-field>
                                   </template>
                                   <v-date-picker
+                                    color="#00a368"
                                     v-model="date"
                                     type="date"
                                     no-title
@@ -280,14 +293,14 @@
                                     <v-spacer></v-spacer>
                                     <v-btn
                                       text
-                                      color="primary"
+                                      color="red"
                                       @click="menu = false"
                                     >
                                       Cancel
                                     </v-btn>
                                     <v-btn
                                       text
-                                      color="primary"
+                                      color="#00a368"
                                       @click="$refs.menu.save(date)"
                                     >
                                       OK
@@ -297,6 +310,7 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-text-field
+                                  hide-details="auto"
                                   solo
                                   label="Password"
                                   prepend-icon="lock"
@@ -308,6 +322,7 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-text-field
+                                  hide-details="auto"
                                   solo
                                   label="Confirm Password"
                                   prepend-icon="lock"
@@ -343,14 +358,14 @@
                   <v-container>
                     <v-row>
                       <v-col cols="12">
-                        <h2 class="text-h4 font-weight-light">
+                        <h2 class="text-h6 font-weight-light">
                           User Registered Successfully! Please Check your Email
                           for Confirmation.
                         </h2>
                       </v-col>
                       <v-col cols="3">
                         <v-btn
-                          @click="step = 1"
+                          @click="signInStep"
                           rounded
                           class="text-capitalize px-8 mb-4"
                           color="#00A368"
@@ -364,7 +379,7 @@
               </v-window>
               <v-snackbar
                 bottom
-                color="red"
+                color="warning"
                 timeout="5000"
                 v-model="signInMetaData.signInErrorSnackbar"
               >
@@ -377,6 +392,14 @@
                 v-model="signUpMetaData.signUpErrorSnackbar"
               >
                 {{ signUpMetaData.signUpErrorPayload }}
+              </v-snackbar>
+              <v-snackbar
+                bottom
+                color="#00a368"
+                timeout="5000"
+                v-model="signInMetaData.signInSuccessSnackbar"
+              >
+                {{ signInMetaData.signInSuccessPayload }}
               </v-snackbar>
             </v-card>
           </v-col>
@@ -425,9 +448,9 @@ export default {
       "College of Education",
       "Monotechnic",
       "Independent Researcher",
-      "Organization",
     ],
     institutions: [
+      { text: "Abubakar Tafawa Balewa University", type: "university" },
       { text: "Ahmadu Bello University", type: "university" },
       { text: "Bayero University Kano", type: "university" },
       { text: "Kaduna Polytechnique", type: "polytechnic" },
@@ -456,13 +479,12 @@ export default {
     },
     signUp() {
       const signUpData = {
-        fname: this.fname,
-        lname: this.lname,
-        username: this.email,
+        fName: this.fname,
+        lName: this.lname,
+        email: this.email,
         phone: this.phone,
         dob: this.date,
         address: this.address,
-        organization: this.organization,
         institution: {
           type: this.selectedInstitutionType,
           name: this.selectedInstitution,
@@ -507,7 +529,7 @@ export default {
 
 <style>
 .custom__bg {
-  background-image: url("../assets/background.svg");
+  background-image: url("../assets/background1.svg");
   background-size: cover;
   background-attachment: fixed;
 }
