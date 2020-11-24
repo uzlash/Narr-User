@@ -133,7 +133,7 @@
                         outlined
                         placeholder="John doe"
                         solo
-                        :rules="[rules.required, r]"
+                        :rules="[rules.required, ]"
                         color="#00a368"
                       >
                       </v-text-field>
