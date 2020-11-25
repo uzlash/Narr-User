@@ -6,7 +6,6 @@
           <v-col cols="12" md="8" sm="8" class="py-0">
             <v-text-field
               solo
-              rounded
               hide-details
               class="mb-2"
               label="Search NARR"

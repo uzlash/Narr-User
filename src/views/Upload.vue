@@ -209,6 +209,8 @@ import helpers from "../services/helpers.js";
 export default {
   data() {
     return {
+      title: "",
+      author: [],
       currentFile: undefined,
       showProgress: false,
       progress: 0,
@@ -219,10 +221,6 @@ export default {
       dialogUpload: false,
       search: "",
       hidden: false,
-      researcherObject: {
-        title: "SVM and Regression",
-        author: "John Doe",
-      },
       //sockets
     };
   },
@@ -242,49 +240,24 @@ export default {
         return;
       }
       this.loading = true;
+      helpers.uploadFileResearch();
       helpers
-        .uploadFileResearch(
-          this.currentFile,
-          this.researcherObject,
-          (event) => {
-            console.log(event);
-            this.showProgress = true;
-            this.progress = Math.round((100 * event.loaded) / event.total);
-            this.loadedData = event.loaded;
-            this.totalData = event.total;
-          }
-        )
-        .then(async (response) => {
-          console.log("Response Data", response);
-          const blob = await response.data;
-          const obj = new Blob([blob], {
-            type: "application/pdf",
-          });
-          console.log("Object", obj);
+        .uploadFileResearch(this.currentFile, (event) => {
+          console.log(event);
+          this.showProgress = true;
+          this.progress = Math.round((100 * event.loaded) / event.total);
+          this.loadedData = event.loaded;
+          this.totalData = event.total;
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Data", data);
+          this.messageSuccess = data.message;
 
-          //Polyfill
-          if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(obj);
-          } else {
-            const objUrl = window.URL.createObjectURL(obj);
-
-            const link = document.createElement("a");
-            link.href = objUrl;
-            link.download = "download.pdf";
-            link.click();
-            this.loading = false;
-            this.currentFile = undefined;
-            this.messageSuccess = "Document to PDF Conversion Successful";
-
-            setTimeout(() => {
-              window.URL.revokeObjectURL(objUrl);
-            }, 250);
-
-            setTimeout(() => {
-              this.messageSuccess = "";
-              this.dialogUpload = false;
-            }, 5000);
-          }
+          setTimeout(() => {
+            this.messageSuccess = "";
+            this.dialogUpload = false;
+          }, 5000);
         })
         .catch((err) => {
           console.log("Error>>", err.message);

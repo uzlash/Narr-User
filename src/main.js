@@ -5,7 +5,14 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuetify from './plugins/vuetify'
+
+//Vue clipboard
 import VueClipboard from 'vue-clipboard2'
+
+// Vue Cropper
+// import VueCropper from 'vue-cropperjs';
+// import 'cropperjs/dist/cropper.css';
+// Vue.use(VueCropper);
 
 //Socket for socket io extended
 // import VueSocketIOExt from 'vue-socket.io-extended'

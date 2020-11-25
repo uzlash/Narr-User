@@ -88,6 +88,7 @@ export default {
   data() {
     return {
       search: "",
+      fab: false,
     };
   },
   methods: {

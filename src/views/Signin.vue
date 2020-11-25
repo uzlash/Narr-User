@@ -228,36 +228,23 @@
                                   label="Institution Type"
                                   prepend-icon="mdi-school"
                                   :items="institutionTypes"
+                                  :rules="[rules.required]"
                                   color="#00A368"
                                 />
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-select
                                   hide-details="auto"
-                                  v-show="
-                                    selectedInstitutionType !== 'Organization'
-                                  "
+                                  v-if="selectedInstitutionType"
                                   v-model="selectedInstitution"
                                   solo
                                   label="Institution"
                                   prepend-icon="mdi-school"
                                   :items="filteredInstitutions"
+                                  :rules="[rules.required]"
                                   color="#00A368"
                                 />
                               </v-col>
-                              <!-- <v-col cols="12" md="12">
-                                <v-text-field
-                                  v-show="
-                                    selectedInstitutionType === 'Organization'
-                                  "
-                                  v-model="organization"
-                                  solo
-                                  label="Name of Organization (Optional)"
-                                  prepend-icon="mdi-office-building"
-                                  type="text"
-                                  color="#00A368"
-                                />
-                              </v-col> -->
                               <v-col cols="12" md="12">
                                 <v-menu
                                   hide-details="auto"
@@ -272,6 +259,7 @@
                                 >
                                   <template v-slot:activator="{ on, attrs }">
                                     <v-text-field
+                                      :rules="[rules.required]"
                                       hide-details="auto"
                                       color="#00a368"
                                       solo
@@ -356,7 +344,7 @@
                 </v-window-item>
                 <v-window-item :value="3">
                   <v-container>
-                    <v-row>
+                    <v-row class="fill-height">
                       <v-col cols="12">
                         <h2 class="text-h6 font-weight-light">
                           User Registered Successfully! Please Check your Email
@@ -392,14 +380,6 @@
                 v-model="signUpMetaData.signUpErrorSnackbar"
               >
                 {{ signUpMetaData.signUpErrorPayload }}
-              </v-snackbar>
-              <v-snackbar
-                bottom
-                color="#00a368"
-                timeout="5000"
-                v-model="signInMetaData.signInSuccessSnackbar"
-              >
-                {{ signInMetaData.signInSuccessPayload }}
               </v-snackbar>
             </v-card>
           </v-col>

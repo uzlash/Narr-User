@@ -1,7 +1,6 @@
-
 <template>
   <v-app class="grey lighten-4">
-    <v-container fluid>
+    <v-container>
       <v-row>
         <v-col cols="12" md="8" sm="8">
           <span class="text-h4 font-weight-thin">CHAT</span>

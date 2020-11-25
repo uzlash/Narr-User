@@ -1,49 +1,43 @@
-// Document Conversion - /doc/convert/office -- https://doc2pdf.narr.ng/convert/office
-// OCR - /ocr/tika/form -- https://image2text.narr.ng/tika/form
-// Watermark - /water/watermark
 import axios from "axios";
 
 export default {
-  refreshToken() {
-    return axios
-      .post(`https://api.narr.ng/refreshtoken`, {}, {
-        headers: {
-        "x-token": localStorage.getItem("token"),
-          'refreshtoken': localStorage.getItem("refreshToken"),
-        },
-      })
-      .then((response) => {
-        return response.data;
-      });
-  },
+  //Ocr Image to Text
   uploadImageOcr(file, onUploadProgress) {
     const formData = new FormData();
     formData.append("image", file);
-    return axios.post("/ocr/tika/form", formData, {
+    return axios.post("http://image2text.narr.ng/tika/form", formData, {
       headers: { 
         'Accept': 'text/plain', 
       }, onUploadProgress
     });
   },
-
+  //Document Conversion
   uploadFileConvert(file, onUploadProgress) {
     const formData = new FormData();
     formData.append("file", file);
-    return axios.post("/doc/convert/office", formData, {
+    return axios.post("http://doc2pdf.narr.ng/convert/office", formData, {
       headers: { 
         'Accept': 'multipart/form-data', 
       },responseType: 'blob', onUploadProgress
     })
   },
-
-  uploadFileResearch(file, researchUserObject, onUploadProgress) {
+  //Upload Research Document
+  uploadFileResearch(file, onUploadProgress) {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("researchUserObject", researchUserObject);
-    return axios.post("/doc/convert/office", formData, {
+    return axios.post("http://narr.ng/api/v1/research/upload", formData, {
       headers: { 
-        'Accept': 'multipart/form-data', 
-      },responseType: 'blob', onUploadProgress
+        'Accept': 'multipart/form-data',
+      }, onUploadProgress
     })
+  },
+
+  fetchResearches() {
+    return axios
+      .get("http://localhost:3005/repository")
+  },
+  fetchSingleResearch(id) {
+    return axios
+      .get("http://localhost:3005/repository/" + id)
   },
 };

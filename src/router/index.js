@@ -22,6 +22,81 @@ const routes = [
   },
 
   {
+    path: "/upload",
+    name: "Upload",
+    component: () =>
+      import(/* webpackChunkName: "Upload" */ "../views/Upload.vue"),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: "/repository",
+    name: "Repository",
+    component: () =>
+      import(/* webpackChunkName: "Repository" */ '../views/RepositoryViewRouter.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: '',
+        component: () => import('../views/Repository.vue'),
+        meta: {
+          showHeader: true,
+          requiresAuth: true
+        }
+      },
+      {
+        path: ':id',
+        name: 'RepositoryView',
+        component: () => import(/* webpackChunkName: "Repository View" */ '../views/RepositoryView.vue'),
+        props: true,
+        meta: {
+          showHeader: true,
+          requiresAuth: true
+        }
+      },
+      {
+        path: ':id/read',
+        name: 'RepositoryViewRead',
+        component: () => import(/* webpackChunkName: "Repository View Read" */ '../views/RepositoryViewRead.vue'),
+        props: true,
+        meta: {
+          requiresAuth: true,
+          showHeader: true
+        }
+      },
+    ]
+  },
+
+  // {
+  //   path: "/repository/:id",
+  //   name: "Repository",
+  //   props: true,
+  //   component: () =>
+  //     import(/* webpackChunkName: "Repository View" */ "../views/RepositoryView.vue"),
+  //   meta: {
+  //     showHeader: true,
+  //     requiresAuth: true
+  //   },
+  // },
+
+  {
+    path: "/history",
+    name: "History",
+    component: () =>
+      import(/* webpackChunkName: "History" */ "../views/History.vue"),
+    meta: {
+      showHeader: true,
+      requiresAuth: true
+    }
+  },
+
+  {
     path: "/analytics",
     name: "Analytics",
     component: () =>
@@ -34,7 +109,7 @@ const routes = [
 
   {
     path: "/profile",
-    name: "profile",
+    name: "Profile",
     component: () =>
       import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
     meta: {
@@ -126,37 +201,7 @@ const routes = [
       requiresAuth: true
     }
   },
- 
-  {
-    path: "/upload",
-    name: "Upload",
-    component: () =>
-      import(/* webpackChunkName: "Upload" */ "../views/Upload.vue"),
-    meta: {
-      showHeader: true,
-      requiresAuth: true
-    }
-  },
-  {
-    path: "/history",
-    name: "History",
-    component: () =>
-      import(/* webpackChunkName: "History" */ "../views/History.vue"),
-    meta: {
-      showHeader: true,
-      requiresAuth: true
-    }
-  },
-  {
-    path: "/profile",
-    name: "Profile",
-    component: () =>
-      import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
-    meta: {
-      showHeader: true,
-      requiresAuth: true
-    }
-  },
+
   {
     path: "/chat",
     name: "Chat",
@@ -166,6 +211,7 @@ const routes = [
       requiresAuth: true
     }
   },
+
   {
     path: "/ocr",
     name: "OCR",
@@ -176,6 +222,7 @@ const routes = [
       requiresAuth: true
     }
   },
+
   {
     path: "/convert",
     name: "Convert",
@@ -186,6 +233,7 @@ const routes = [
       requiresAuth: true
     },
   },
+
   {
     path: "/video",
     name: "Video",
@@ -196,6 +244,7 @@ const routes = [
       requiresAuth: true
     }
   },
+
   {
     path: "/signin",
     name: "signin",
@@ -233,6 +282,7 @@ const routes = [
       requiresAdmin: true
     },
   },
+
   {
     path: "/user",
     name: "users",

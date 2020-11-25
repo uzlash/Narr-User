@@ -104,7 +104,7 @@
     <v-navigation-drawer v-model="drawer" dark app color="#00a368">
       <v-layout column align-center>
         <v-flex class="mt-6 mb-4">
-          <v-img src="../assets/logo-narr2.png" alt="Narr Logo"></v-img>
+          <v-img src="../assets/NARR logo 2.png" alt="Narr Logo"></v-img>
         </v-flex>
       </v-layout>
       <v-divider></v-divider>
@@ -180,6 +180,11 @@ export default {
     drawer: true,
     links: [
       { icon: "mdi-home", text: "Home", route: "/", divider: false },
+      {
+        icon: "mdi-database",
+        text: "Repository",
+        route: "/repository",
+      },
       {
         icon: "mdi-read",
         text: "Reading List",
