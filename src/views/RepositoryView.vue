@@ -144,7 +144,8 @@
 </template>
 
 <script>
-import store from "../store/index";
+// import store from "../store/index";
+import helpers from "../services/helpers";
 export default {
   props: ["id"],
   data: () => ({
@@ -154,21 +155,29 @@ export default {
   methods: {
     readResearch(id) {
       this.$router.push(id + "/read");
-      console.log(id);
     },
   },
   created() {
-    fetch("/research/" + this.id, {
-      headers: {
-        "x-token": store.state.token,
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        console.log("DATA", data);
-        this.research = data.payload;
+    // fetch("/research/" + this.id, {
+    //   headers: {
+    //     "x-token": store.state.token,
+    //   },
+    // })
+    //   .then((r) => r.json())
+    //   .then((data) => {
+    //     this.research = data.payload;
+    //   })
+    //   .catch((e) => console.log(e));
+
+    helpers
+      .fetchSingleResearch(this.id)
+      .then((response) => {
+        console.log(response);
+        this.research = response.data.payload;
       })
-      .catch((e) => console.log(e));
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

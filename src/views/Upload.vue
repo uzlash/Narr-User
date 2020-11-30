@@ -377,15 +377,12 @@ export default {
         this.loading = true;
         helpers
           .uploadFileResearch(this.meta, this.currentFile, (event) => {
-            console.log("Research File", this.currentFile);
-            console.log("Research Object>>>", this.meta);
             this.showProgress = true;
             this.progress = Math.round((100 * event.loaded) / event.total);
             this.loadedData = event.loaded;
             this.totalData = event.total;
           })
           .then((data) => {
-            console.log("DATA>>>", data);
             this.messageSuccess = data.message;
 
             setTimeout(() => {

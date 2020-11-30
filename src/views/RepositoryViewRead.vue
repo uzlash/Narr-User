@@ -30,42 +30,17 @@
                 : 'cropper__container d-flex justify-center white'
             "
           >
-            <vue-cropper
+            <v-img
+              @click="dialog = true"
+              class="custom__image"
               :class="
                 darkMode === true
-                  ? 'invert__image image__box'
-                  : 'image__box white'
+                  ? 'invert__image image__box custom__image-zoomin'
+                  : 'image__box custom__image-zoomin white'
               "
-              :src="`https://narr.ng/${research.readPath}${page}.jpg`"
-              ref="cropper"
-              alt="Research Page"
-              :autoCrop="false"
-              :autoCropArea="1"
-              :zoomOnWheel="false"
-              :center="false"
-              dragMode="none"
-            >
-            </vue-cropper>
-            <!-- <vue-cropper
-              :class="
-                darkMode === true
-                  ? 'invert__image image__box'
-                  : 'image__box white'
-              "
-              ref="cropper"
-              :src="src"
-              alt="Research Page"
-              :autoCrop="false"
-              :autoCropArea="1"
-              :zoomOnWheel="false"
-              :center="false"
-              dragMode="none"
-            >
-            </vue-cropper> -->
-            <!-- <v-img
               width="100%"
-              :src="`https://narr.ng/${research.readPath}${page}.jpg`"
-            ></v-img> -->
+              :src="computedSrc"
+            ></v-img>
           </div>
         </v-col>
       </v-row>
@@ -73,7 +48,7 @@
     <div class="d-flex justify-center">
       <div class="custom__static d-flex flex-column">
         <div class="d-flex align-center">
-          <v-btn large icon color="white">
+          <v-btn large icon color="white" @click="firstPage()">
             <v-icon>mdi-rewind</v-icon>
           </v-btn>
           <v-btn large icon color="white" @click="prevPage()">
@@ -83,83 +58,28 @@
           <v-btn large icon color="white" @click="nextPage()">
             <v-icon>mdi-skip-next</v-icon>
           </v-btn>
-          <v-btn large icon color="white">
+          <v-btn large icon color="white" @click="lastPage()">
             <v-icon>mdi-fast-forward</v-icon>
           </v-btn>
           <div class="d-flex align-center justify-center">
             <label for="page" class="white--text hidden-sm-and-down mx-2"
               >Jump to page:
             </label>
-            <!-- <select name="page" id="page" class="grey lighten-4 mx-4 px-4">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select> -->
-            <!-- <select name="page" id="page" class="grey lighten-4 mx-4 px-4">
+            <select
+              @change="changePage($event)"
+              v-model="selectedPage"
+              name="page"
+              id="page"
+              class="grey lighten-4 mx-4 px-4"
+            >
               <option
-                v-for="(page, index) in researchData"
-                :key="index"
-                :value="page.length"
-                @select="changePage(index)"
-                >{{ index + 1 }}</option
+                v-for="page in research.nPages"
+                :key="page"
+                :value="page"
+                >{{ page }}</option
               >
-            </select> -->
+            </select>
           </div>
-          <v-btn
-            large
-            icon
-            class="hidden-sm-and-down"
-            color="white"
-            @click="zoom(0.2)"
-          >
-            <v-icon>mdi-magnify-plus-outline</v-icon>
-          </v-btn>
-          <v-btn
-            large
-            icon
-            class="hidden-sm-and-down"
-            color="white"
-            @click="zoom(-0.2)"
-          >
-            <v-icon>mdi-magnify-minus-outline</v-icon>
-          </v-btn>
-          <v-btn
-            large
-            icon
-            class="hidden-sm-and-down"
-            color="white"
-            @click.prevent="move(0, 50)"
-          >
-            <v-icon>mdi-arrow-up-drop-circle-outline</v-icon>
-          </v-btn>
-          <v-btn
-            large
-            icon
-            class="hidden-sm-and-down"
-            color="white"
-            @click.prevent="move(0, -50)"
-          >
-            <v-icon>mdi-arrow-down-drop-circle-outline</v-icon>
-          </v-btn>
-          <v-btn
-            large
-            icon
-            class="hidden-sm-and-down"
-            color="white"
-            @click.prevent="move(50, 0)"
-          >
-            <v-icon>mdi-arrow-left-drop-circle-outline</v-icon>
-          </v-btn>
-          <v-btn
-            large
-            icon
-            class="hidden-sm-and-down"
-            color="white"
-            @click.prevent="move(-50, 0)"
-          >
-            <v-icon>mdi-arrow-right-drop-circle-outline</v-icon>
-          </v-btn>
           <div class="mr-2 white--text">
             Dark <span class="hidden-sm-and-down">Mode:</span>
           </div>
@@ -172,73 +92,88 @@
         </div>
       </div>
     </div>
+    <div class="text-center">
+      <v-dialog v-model="dialog" width="90%">
+        <v-img
+          @click="dialog = false"
+          class="custom__image"
+          :class="
+            darkMode === true
+              ? 'invert__image image__box custom__image-zoomout'
+              : 'image__box custom__image-zoomout white'
+          "
+          width="100%"
+          :src="computedSrc"
+        ></v-img>
+      </v-dialog>
+    </div>
   </v-app>
 </template>
 
 <script>
-import store from "../store/index";
-import VueCropper from "vue-cropperjs";
-import "cropperjs/dist/cropper.css";
+import helpers from "../services/helpers";
 
 export default {
   props: ["id"],
-  components: { VueCropper },
   data: () => ({
     a: 0,
     b: 1,
     research: {},
     page: 1,
+    first: 1,
+    selectedPage: 1,
     darkMode: false,
     next: false,
-    showCropper: false,
-    src: "https://i.imgur.com/aA9SSMA.jpg",
+    dialog: false,
+    // src: "https://i.imgur.com/aA9SSMA.jpg",
   }),
   methods: {
     fetchResearch() {
-      fetch("https://narr.ng/api/v1/research/" + this.id, {
-        headers: {
-          "x-token": store.state.token,
-        },
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          console.log("DATA", data);
-          this.research = data.payload;
-          console.log("research", this.research);
+      helpers
+        .fetchSingleResearch(this.id)
+        .then((response) => {
+          console.log(response);
+          this.research = response.data.payload;
         })
-        .catch((e) => console.log(e));
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    zoom(percent) {
-      console.log(this.$refs.cropper.getCanvasData());
-      this.$refs.cropper.relativeZoom(percent);
-    },
-    move(offsetX, offsetY) {
-      this.$refs.cropper[0].move(offsetX, offsetY);
+    firstPage() {
+      this.page = this.first;
+      this.fetchResearch();
     },
     nextPage() {
-      // if (this.researchData.length - 1 == this.a) {
-      //   console.log("Finished");
-      // } else {
-      //   console.log("Next Page");
-      //   this.a++;
-      //   this.b++;
-      // }
-      this.page++;
-      this.fetchResearch();
+      if (this.page >= this.research.nPages) {
+        console.log("Finished");
+      } else {
+        console.log("Next Page");
+        this.page++;
+        this.fetchResearch();
+      }
     },
     prevPage() {
-      this.page--;
-      this.fetchResearch();
-      // if (this.a === 0) {
-      //   console.log("First Page");
-      // } else {
-      //   console.log("Previous Page");
-      //   this.a--;
-      //   this.b--;
-      // }
+      if (this.page <= 1) {
+        console.log("First Page");
+      } else {
+        this.page--;
+        this.fetchResearch();
+      }
     },
-    changePage(e) {
-      console.log(e);
+    lastPage() {
+      this.page = this.research.nPages;
+      this.fetchResearch();
+    },
+    changePage(event) {
+      console.log(event.target.value);
+      this.page = event.target.value;
+      this.selectedPage = event.target.value;
+      this.fetchResearch();
+    },
+  },
+  computed: {
+    computedSrc() {
+      return `https://narr.ng/${this.research.readPath}${this.page}.jpg`;
     },
   },
   created() {
@@ -271,5 +206,11 @@ export default {
 }
 .cropper__container {
   width: 100%;
+}
+.custom__image-zoomin:hover {
+  cursor: zoom-in;
+}
+.custom__image-zoomout:hover {
+  cursor: zoom-out;
 }
 </style>

@@ -6,9 +6,10 @@ export default {
   uploadImageOcr(file, onUploadProgress) {
     const formData = new FormData();
     formData.append("image", file);
-    return axios.post("https://narr.ng/ocr", formData, {
+    return axios.post("/ocr", formData, {
       headers: { 
-        'Accept': 'text/plain', 
+        'Accept': 'text/plain',
+        'x-token': store.state.token 
       }, onUploadProgress
     });
   },
@@ -16,9 +17,10 @@ export default {
   uploadFileConvert(file, onUploadProgress) {
     const formData = new FormData();
     formData.append("file", file);
-    return axios.post("https://narr.ng/pdf", formData, {
+    return axios.post("/doc", formData, {
       headers: { 
-        'Accept': 'multipart/form-data', 
+        'Accept': 'multipart/form-data',
+        'x-token': store.state.token 
       },responseType: 'blob', onUploadProgress
     })
   },
@@ -45,12 +47,12 @@ export default {
       }
     })
   },
-  // fetchSingleResearch(id) {
-  //   return axios
-  //     .get(`/research/${id}`, {
-  //       headers: { 
-  //       'x-token': store.state.token
-  //     }
-  //   })
-  // },
+  fetchSingleResearch(id) {
+    return axios
+      .get("/research" + id, {
+        headers: { 
+        'x-token': store.state.token
+      }
+    })
+  },
 };

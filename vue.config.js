@@ -6,14 +6,14 @@ module.exports = {
     proxy: {
       // Allow our proxy to handle our requests
       'ocr': {
-        target: 'https://image2text.narr.ng',
+        target: 'https://image2text.narr.ng/tika/form',
         changeOrigin: true,
         pathRewrite: {
           '^/ocr': ''
         }
       },
       'doc': {
-        target: 'https://doc2pdf.narr.ng',
+        target: 'https://doc2pdf.narr.ng/convert/office',
         changeOrigin: true,
         pathRewrite: {
           '^/doc': ''

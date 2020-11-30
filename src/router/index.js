@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Repository from '../views/Repository.vue'
+import RepositoryView from '../views/RepositoryView.vue'
+import RepositoryViewRead from '../views/RepositoryViewRead.vue'
+import RepositoryViewRouter from '../views/RepositoryViewRouter.vue'
 import store from "../store/index.js";
 
 Vue.use(VueRouter);
@@ -35,8 +39,7 @@ const routes = [
   {
     path: "/repository",
     name: "Repository",
-    component: () =>
-      import(/* webpackChunkName: "repository" */ '../views/RepositoryViewRouter.vue'),
+    component: RepositoryViewRouter,
     meta: {
       showHeader: true,
       requiresAuth: true
@@ -44,7 +47,7 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import(/* webpackChunkName: "repositoryrouterview" */ '../views/Repository.vue'),
+        component: Repository,
         meta: {
           showHeader: true,
           requiresAuth: true
@@ -54,7 +57,7 @@ const routes = [
       {
         path: ':id',
         name: 'RepositoryView',
-        component: () => import(/* webpackChunkName: "repositoryview" */ '../views/RepositoryView.vue'),
+        component: RepositoryView,
         props: true,
         meta: {
           showHeader: true,
@@ -64,7 +67,7 @@ const routes = [
       {
         path: ':id/read',
         name: 'RepositoryViewRead',
-        component: () => import(/* webpackChunkName: "repositoryviewread" */ '../views/RepositoryViewRead.vue'),
+        component: RepositoryViewRead,
         props: true,
         meta: {
           requiresAuth: true,

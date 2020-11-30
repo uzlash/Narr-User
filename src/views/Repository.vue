@@ -119,14 +119,12 @@ export default {
   methods: {
     goResearchView(id) {
       this.$router.push("/repository/" + id);
-      console.log(id);
     },
   },
   created() {
     helpers
       .fetchResearches()
       .then((response) => {
-        console.log("Response -> Data -> Payload", response.data.payload);
         this.Repository = response.data.payload;
       })
       .catch((error) => {

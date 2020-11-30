@@ -83,8 +83,8 @@
             tile
             class="mx-auto"
             width="auto"
-            v-for="name in names"
-            :key="name.title"
+            v-for="(name, index) in names"
+            :key="index"
           >
             <v-card-text class="py-0">
               <div class="mt-2">Name of Researcher:</div>

@@ -34,7 +34,7 @@
                           hide-details
                           show-size
                           filled
-                          accept=".pdf,.doc,.docx,.txt,.pptx,.odt,.rtf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          accept=".doc,.docx,.txt,.pptx,.odt,.rtf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                           color="#00a368"
                           label="Select File"
                           prepend-icon="mdi-file-document"
