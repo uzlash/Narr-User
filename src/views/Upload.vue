@@ -119,6 +119,7 @@
                     </v-col>
                     <v-col cols="12">
                       <v-textarea
+                        :rules="[rules.required]"
                         auto-grow
                         autofocus
                         clearable
