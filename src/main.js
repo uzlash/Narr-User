@@ -5,26 +5,11 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuetify from './plugins/vuetify'
-
-//Vue clipboard
+import VueGoogleCharts from 'vue-google-charts'
 import VueClipboard from 'vue-clipboard2'
 
-// Vue Cropper
-// import VueCropper from 'vue-cropperjs';
-// import 'cropperjs/dist/cropper.css';
-// Vue.use(VueCropper);
-
-//Socket for socket io extended
-// import VueSocketIOExt from 'vue-socket.io-extended'
-// import io from 'socket.io-client'
-
-// const socket = io('http://localhost:3366');
- 
-// Vue.use(VueSocketIOExt, socket);
-
-// import VueFriendlyIframe from 'vue-friendly-iframe'
-
 Vue.use(VueAxios, axios)
+Vue.use(VueGoogleCharts)
 Vue.use(VueClipboard)
 
 const token = localStorage.getItem('user-token')

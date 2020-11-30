@@ -6,7 +6,7 @@
           <span class="text-h4 font-weight-thin">Reading List</span>
         </v-col>
         <v-col cols="12">
-          <v-card outlined tile>
+          <v-card tile outlined>
             <v-card-title class="font-weight-light">
               <v-spacer></v-spacer>
               <v-text-field
@@ -35,6 +35,7 @@
                 <v-btn
                   outlined
                   dark
+                  small
                   class="ma-2"
                   color="#00a368"
                   @click="onButtonClick(props.item)"

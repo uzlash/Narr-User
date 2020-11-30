@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="6" lg="6">
-          <v-card class="text-center" outlined tile>
+          <v-card class="text-center" tile>
             <v-card-title> </v-card-title>
             <v-avatar class="mb-4" size="100" circle elevation-12>
               <img src="../assets/avatar-1.jpg" alt="" />
@@ -39,7 +39,7 @@
             </h3>
             <v-divider></v-divider>
           </v-card>
-          <v-card tile outlined class="mt-2">
+          <v-card tile class="mt-2">
             <v-card-title class="font-weight-regular"
               >Uploaded Researches</v-card-title
             >
@@ -56,7 +56,7 @@
         </v-col>
 
         <v-col cols="12" md="6" lg="6">
-          <v-card class="overflow-hidden" outlined tile>
+          <v-card class="overflow-hidden" tile>
             <v-toolbar flat color="#00a368">
               <v-icon color="white" left> mdi-account</v-icon>
               <v-toolbar-title class="white--text">

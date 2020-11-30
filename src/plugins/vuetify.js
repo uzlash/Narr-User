@@ -1,16 +1,16 @@
 import '@fortawesome/fontawesome-free/css/all.css'
 import "material-design-icons-iconfont/dist/material-design-icons.css"
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
-// import { colors } from 'vuetify/lib';
-import vueGoogleCharts from 'vue-google-charts'
+import '@mdi/font/css/materialdesignicons.css'
+import 'typeface-roboto/index.css'
+import Vue from 'vue'
+import VueCardFormat from 'vue-credit-card-validation'
+import Vuetify from 'vuetify/lib'
 
 Vue.use(Vuetify);
-Vue.use(vueGoogleCharts);
-
+Vue.use(VueCardFormat);
 export default new Vuetify({
     icons: {
-        iconfont: 'md' || 'fa'
+        iconfont: 'mdi' || 'fa'
     },
     theme: {
         themes: {

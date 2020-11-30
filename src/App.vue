@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .slide-fade-enter-active {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

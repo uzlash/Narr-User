@@ -3,7 +3,7 @@
     <v-container class="">
       <v-row>
         <v-col cols="12">
-          <v-card class="mx-auto" flat>
+          <v-card tile outlined class="mx-auto">
             <v-img
               height="250"
               src="https://miro.medium.com/max/1146/1*KhUes1b3TtkStUXseSseEA.png"
@@ -35,26 +35,28 @@
         </v-col>
 
         <v-col cols="12">
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">
-                    Name
-                  </th>
-                  <th class="text-left">
-                    Funds Donated
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in fundings" :key="item.title">
-                  <td>{{ item.title }}</td>
-                  <td class="green--text">N{{ item.donations }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+          <v-card outlined tile>
+            <v-simple-table class="elevation-2">
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th class="text-left">
+                      Name
+                    </th>
+                    <th class="text-left">
+                      Funds Donated
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in fundings" :key="item.title">
+                    <td>{{ item.title }}</td>
+                    <td class="green--text">N{{ item.donations }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>

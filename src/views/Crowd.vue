@@ -11,42 +11,42 @@
       <v-row>
         <v-col
           cols="12"
-          md="4"
-          lg="4"
-          xl="3"
+          md="6"
+          lg="3"
           v-for="(crowdFund, index) in 6"
           :key="index"
         >
-          <v-card class="mx-auto" max-width="374">
+          <v-card tile outlined class="mx-auto" max-width="374">
             <v-img
               height="200"
               src="https://miro.medium.com/max/1146/1*KhUes1b3TtkStUXseSseEA.png"
             ></v-img>
-            <v-card-title>Support SVM & Regression Research</v-card-title>
-            <v-card-text>
-              <v-row align="center" class="mx-0"> </v-row>
-              <div>
-                <span class="body-1"
-                  >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Incidunt molestias nostrum ab dolorem saepe alias voluptatum
-                  recusandae nemo ratione esse!</span
-                >
-              </div>
+            <v-card-title
+              class="body-2 font-weight-medium green--text text--darken-4 py-2"
+              >Support Vector Machines & Regression Research
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text class="py-1">
+              <span class="body-2 font-weight-regular black--text"
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Incidunt molestias nostrum ab dolorem saepe alias voluptatum
+                recusandae nemo ratione esse!</span
+              >
             </v-card-text>
             <v-divider class="mx-4"></v-divider>
-            <div class="px-4 py-2">
-              <span class="body-1 font-weight-light">Funding</span>
+            <div class="px-4 py-1">
+              <span class="body-2 font-weight-bold">Funding</span>
               <v-progress-linear
-                class="my-2"
+                class="my-1"
                 color="#00a368"
                 height="10"
                 value="30"
               ></v-progress-linear>
-              <span class="font-weight-bold">N7,000,000</span> raised of
-              <span class="font-weight-bold">N10,000,000 </span>
+              <span class="font-weight-bold body-2">N7,000,000</span> raised of
+              <span class="font-weight-bold body-2">N10,000,000 </span>
             </div>
             <v-card-actions>
-              <v-btn outlined color="#00a368">
+              <v-btn outlined small color="#00a368" @click="goCrowdView(index)">
                 Fund Research
               </v-btn>
             </v-card-actions>
@@ -92,11 +92,12 @@ export default {
     };
   },
   methods: {
-    clicked(id) {
-      console.log("clicked " + id);
-    },
     goManageCrowd() {
       this.$router.push("/managecrowd");
+    },
+    goCrowdView(id) {
+      console.log("clicked " + id);
+      this.$router.push(`/viewcrowd/${id}`);
     },
   },
 };

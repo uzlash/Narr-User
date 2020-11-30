@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-card outlined tile>
+          <v-card tile outlined>
             <v-card-text class="pb-0">
               <div
                 class="d-flex text-h6 font-weight-medium grey--text text--darken-3"
@@ -16,11 +16,13 @@
               <div>
                 <span class="mr-4 body-1 font-weight-medium"
                   >Research Budget -
-                  <span class="green--text">N17,000,000</span></span
+                  <span class="green--text text--darken-4"
+                    >N17,000,000</span
+                  ></span
                 >
                 <span class="body-1 font-weight-medium"
                   >Estimated Project Duration -
-                  <span class="blue--text">7 months</span></span
+                  <span class="amber--text text--darken-4">7 months</span></span
                 >
               </div>
               <div class="mt-2">

@@ -8,54 +8,103 @@
       </v-row>
       <v-row>
         <v-col cols="12" sm="6" md="6" lg="6">
-          <v-img
-            v-if="research"
-            :src="research.image"
-            height="400px"
-            width="100%"
-          ></v-img>
+          <v-card outlined tile @click="dialog = true">
+            <v-img
+              v-if="research"
+              :src="`https://narr.ng/${research.thumbnail}`"
+              width="100%"
+              height="446"
+            ></v-img>
+          </v-card>
           <!-- <span class="text-h4" v-else>Loading...</span> -->
         </v-col>
         <v-divider vertical class="my-3 hidden-sm-and-down"></v-divider>
         <v-col cols="12" sm="6" md="5" lg="5">
-          <v-card tile outlined min-height="400px">
-            <v-card-title>
-              {{ research.title }}
+          <v-card outlined tile min-height="400px">
+            <v-card-title
+              class="body-1 green--text text--darken-4 font-weight-bold"
+            >
+              {{ research.researchTitle }}
             </v-card-title>
             <v-divider></v-divider>
-            <v-card-text class="body-1 font-weight-bold">
-              Authors(s):
-              <span class="grey--text text--darken-3 font-weight-light">{{
-                research.author
-              }}</span>
-            </v-card-text>
-            <v-card-text class="body-1 font-weight-bold">
-              Category:
-              <span class="grey--text text--darken-3 font-weight-light">{{
-                research.category
-              }}</span>
-            </v-card-text>
-            <v-card-text class="body-1 font-weight-bold">
-              Date Published:
-              <span class="grey--text text--darken-3 font-weight-light">{{
-                research.date
-              }}</span>
-            </v-card-text>
-            <v-card-text class="body-1 font-weight-bold">
-              Pages:
-              <span class="grey--text text--darken-3 font-weight-light">{{
-                research.pages
-              }}</span>
+            <v-card-text>
+              <div class=" body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Authors(s):</span
+                >
+                <span
+                  v-for="(r, i) in research.authors"
+                  :key="i"
+                  class="grey--text text--darken-3"
+                  >{{ r + " " }}</span
+                >
+              </div>
+              <div class="body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Category:</span
+                >
+                <span class="grey--text text--darken-3">{{
+                  research.category
+                }}</span>
+              </div>
+              <div class="body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Genre:</span
+                >
+                <span class="grey--text text--darken-3">{{
+                  research.genre
+                }}</span>
+              </div>
+              <div class="body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Access Type:</span
+                >
+                <span class="grey--text text--darken-3">{{
+                  research.accessType
+                }}</span>
+              </div>
+              <div class="body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Monthly Fee (N):</span
+                >
+                <span class="grey--text text--darken-3">{{
+                  research.monthlyFee
+                }}</span>
+              </div>
+              <div class="body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Pages:</span
+                >
+                <span class="grey--text text--darken-3">{{
+                  research.nPages
+                }}</span>
+              </div>
+              <div class="body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Status:</span
+                >
+                <span class="grey--text text--darken-3">{{
+                  research.status
+                }}</span>
+              </div>
+              <div class="body-1 my-2">
+                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                  >Year:</span
+                >
+                <span class="grey--text text--darken-3">{{
+                  research.year
+                }}</span>
+              </div>
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
-                @click="readResearch(research.id)"
+                outlined
+                @click="readResearch(research._id)"
                 class="mt-4 px-4 text-capitalize"
                 color="#00a368"
                 depressed
                 dark
-                outlined
                 >Read</v-btn
               >
               <v-divider vertical class="mt-4 ml-2"></v-divider>
@@ -77,57 +126,49 @@
               Description
             </v-tab>
             <v-tab-item class="pa-4">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea magni
-              neque unde itaque officia explicabo quod. Debitis recusandae illum
-              tenetur harum! Quos illo pariatur non modi repudiandae vero enim
-              eos praesentium similique, explicabo corporis vitae natus minima
-              iure porro! Ipsa doloremque quidem nostrum maiores natus molestias
-              cumque quasi repellendus ipsum! Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Ea magni neque unde itaque officia
-              explicabo quod. Debitis recusandae illum tenetur harum! Quos illo
-              pariatur non modi repudiandae vero enim eos praesentium similique,
-              explicabo corporis vitae natus minima iure porro! Ipsa doloremque
-              quidem nostrum maiores natus molestias cumque quasi repellendus
-              ipsum! Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Ea magni neque unde itaque officia explicabo quod. Debitis
-              recusandae illum tenetur harum! Quos illo pariatur non modi
-              repudiandae vero enim eos praesentium similique, explicabo
-              corporis vitae natus minima iure porro! Ipsa doloremque quidem
-              nostrum maiores natus molestias cumque quasi repellendus ipsum!
+              {{ research.description }}
             </v-tab-item>
           </v-tabs>
         </v-col>
       </v-row>
     </v-container>
+    <div class="text-center">
+      <v-dialog v-model="dialog" width="1000">
+        <v-img
+          v-if="research"
+          :src="`https://narr.ng/${research.thumbnail}`"
+        ></v-img>
+      </v-dialog>
+    </div>
   </v-app>
 </template>
 
 <script>
-import helpers from "../services/helpers";
+import store from "../store/index";
 export default {
   props: ["id"],
   data: () => ({
     research: [],
-    current: {},
+    dialog: false,
   }),
   methods: {
     readResearch(id) {
-      this.$router.push(`${id}/read`);
+      this.$router.push(id + "/read");
+      console.log(id);
     },
   },
   created() {
-    helpers
-      .fetchSingleResearch(this.id)
-      .then((response) => {
-        console.log("Response", response.data.payload);
-        this.research = response.data.payload;
-        console.log("Research", this.research);
-        this.current = this.research.researchData[0];
-        console.log("Current", this.current);
+    fetch("/research/" + this.id, {
+      headers: {
+        "x-token": store.state.token,
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log("DATA", data);
+        this.research = data.payload;
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((e) => console.log(e));
   },
 };
 </script>

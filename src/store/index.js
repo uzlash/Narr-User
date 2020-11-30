@@ -76,8 +76,7 @@ const store = new Vuex.Store({
   actions: {
     SIGN_IN({ commit }, authData) {
       commit("startLoader");
-      console.log(authData)
-      fetch('http://localhost:3000/api/v1/auth/login', {
+      fetch('https://narr.ng/api/v1/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -109,7 +108,7 @@ const store = new Vuex.Store({
           commit("stopLoader");
         }
       })
-      .catch(error => console.log('Catch Error', error))
+      .catch(error => console.log('Error>>>', error))
     },
     SIGN_UP({ commit }, authData) {
       const data = {
@@ -126,7 +125,7 @@ const store = new Vuex.Store({
           password: authData.password,
       }
       commit("startLoader");
-      fetch('http://localhost:3000/api/v1/auth/register', {
+      fetch('https://narr.ng/api/v1/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -141,14 +140,15 @@ const store = new Vuex.Store({
         }
         else {
           commit("registerUser", { user: response.payload });
-          console.log(response.payload)
           commit("SignUpSuccessful");
           commit("stopLoader");
         }
-      }).catch((error) => {
-        console.log('Error>>>>>>>>>>>>>', error.message);
+      })
+      .then(data => console.log(data))
+      .catch((error) => {
+        console.log('Error>>>>>>>>>>>>>', error);
         commit("stopLoader");
-        commit("signUpError", error.message)
+        commit("signUpError", error)
       });
     },
     SIGN_OUT: ({ commit }) => {

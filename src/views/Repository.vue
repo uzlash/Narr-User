@@ -12,6 +12,7 @@
             dense
             solo
             hide-details
+            color="#00a368"
             class="mb-2"
             label="Search Repository"
             append-icon="search"
@@ -36,20 +37,6 @@
             solo
           ></v-select>
         </v-col>
-        <!-- <v-col cols="6" sm="6" md="2">
-          <v-select
-            hide-details
-            class="d-inline"
-            dense
-            :items="[
-              'Dennis Ritchie, John Doe & Jane Doe',
-              'Bjarne Stroustrup, John Doe & Jax Doe',
-              'James Gosling, Jax Doe & Jane Doe',
-            ]"
-            label="By Author"
-            solo
-          ></v-select>
-        </v-col> -->
         <v-col cols="6" sm="6" md="2">
           <v-select
             hide-details
@@ -73,41 +60,47 @@
           sm="6"
           class="pa-2"
           v-for="research in Repository"
-          :key="research.id"
+          :key="research._id"
         >
-          <v-card class="pa-2">
+          <v-card class="pa-2" tile>
             <v-card
-              @click="goResearchView(research.id)"
-              tile
               outlined
+              @click="goResearchView(research._id)"
+              tile
               class="mx-auto custom__card"
               max-width="344"
             >
-              <v-img :src="research.image" height="200px"></v-img>
+              <!-- :src="'https://narr.ng/' + research.thumbnail" -->
+              <v-img
+                :src="`https://narr.ng/${research.thumbnail}`"
+                height="200px"
+              ></v-img>
               <v-card-title
                 class="font-weight-bold px-2 body-2 green--text text--darken-4"
               >
-                <span>{{ research.title }}</span>
+                <span>{{ research.researchTitle }}</span>
               </v-card-title>
               <v-divider></v-divider>
               <v-divider class="grey lighten-1"></v-divider>
               <v-card-subtitle class="pa-0 px-2">
-                <span class="font-weight-bold green--text text--darken-4"
+                <span class="font-weight-bold green--text text--darken-4 mr-1"
                   >Authors:</span
                 >
-                <span>{{ research.author }}</span>
+                <span>{{
+                  research.authors.toString().replace(/,/g, " and ")
+                }}</span>
               </v-card-subtitle>
               <v-card-subtitle class="pa-0 px-2">
                 <span
                   class="caption font-weight-bold amber--text text--darken-4"
                   >Published:
                 </span>
-                <span class="caption mr-2">{{ research.date }}</span>
+                <span class="caption mr-2">{{ research.year }}</span>
                 <span
                   class="caption font-weight-bold amber--text text--darken-4"
                   >Pages:</span
                 >
-                <span class="caption mr-1">{{ 1000 }}</span>
+                <span class="caption ml-1">{{ research.nPages }}</span>
               </v-card-subtitle>
             </v-card>
           </v-card>
@@ -126,6 +119,7 @@ export default {
   methods: {
     goResearchView(id) {
       this.$router.push("/repository/" + id);
+      console.log(id);
     },
   },
   created() {

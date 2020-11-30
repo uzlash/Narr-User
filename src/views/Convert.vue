@@ -8,7 +8,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-card outlined tile>
+          <v-card tile outlined>
             <v-card-title class="text-h6 font-weight-medium"
               >How it works</v-card-title
             >
@@ -126,7 +126,6 @@ export default {
     selectFile(file) {
       this.progress = 0;
       this.currentFile = file;
-      console.log(this.currentFile);
     },
 
     uploadFile() {
@@ -140,19 +139,16 @@ export default {
       this.loading = true;
       helpers
         .uploadFileConvert(this.currentFile, (event) => {
-          console.log(event);
           this.showProgress = true;
           this.progress = Math.round((100 * event.loaded) / event.total);
           this.loadedData = event.loaded;
           this.totalData = event.total;
         })
         .then(async (response) => {
-          console.log("Response Data", response);
           const blob = await response.data;
           const obj = new Blob([blob], {
             type: "application/pdf",
           });
-          console.log("Object", obj);
 
           //Polyfill
           if (window.navigator && window.navigator.msSaveOrOpenBlob) {

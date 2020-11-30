@@ -3,35 +3,25 @@
     <v-container>
       <v-row no-gutters>
         <v-col cols="12">
-          <v-card outlined tile class="">
+          <v-card tile outlined>
             <v-row>
               <v-col cols="6">
-                <div class="font-weight-bold pl-2">
-                  Title: {{ research.title }}
+                <div class="font-weight-bold pl-2 green--text text--darken-4">
+                  Title: {{ research.researchTitle }}
                 </div>
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="6">
-                <div class="font-weight-bold">
-                  Authors: {{ research.author }}
+                <div class="font-weight-bold amber--text text--darken-4">
+                  <span v-for="(r, i) in research.authors" :key="i">{{
+                    r + " "
+                  }}</span>
                 </div>
               </v-col>
             </v-row>
           </v-card>
-          <!-- <div class="body-1 font-weight-regular">
-            <v-spacer></v-spacer>
-          </div> -->
           <div class="body-1 font-weight-regular"></div>
         </v-col>
-        <!-- <v-col cols="12">
-          <div class="">
-            <v-img
-              v-for="research in researchData.slice(a, b)"
-              :key="research.id"
-              :src="research.src"
-            ></v-img>
-          </div>
-        </v-col> -->
         <v-col cols="12">
           <div
             :class="
@@ -40,17 +30,14 @@
                 : 'cropper__container d-flex justify-center white'
             "
           >
-            <!-- v-for="element in researchData.slice(a, b)" :key="element.id" -->
             <vue-cropper
-              v-for="research in researchData.slice(a, b)"
-              :key="research.id"
               :class="
                 darkMode === true
                   ? 'invert__image image__box'
                   : 'image__box white'
               "
+              :src="`https://narr.ng/${research.readPath}${page}.jpg`"
               ref="cropper"
-              :src="research.src"
               alt="Research Page"
               :autoCrop="false"
               :autoCropArea="1"
@@ -59,11 +46,25 @@
               dragMode="none"
             >
             </vue-cropper>
+            <!-- <vue-cropper
+              :class="
+                darkMode === true
+                  ? 'invert__image image__box'
+                  : 'image__box white'
+              "
+              ref="cropper"
+              :src="src"
+              alt="Research Page"
+              :autoCrop="false"
+              :autoCropArea="1"
+              :zoomOnWheel="false"
+              :center="false"
+              dragMode="none"
+            >
+            </vue-cropper> -->
             <!-- <v-img
-              v-for="element in researchData.slice(a, b)"
-              :key="element.id"
               width="100%"
-              :src="element.src"
+              :src="`https://narr.ng/${research.readPath}${page}.jpg`"
             ></v-img> -->
           </div>
         </v-col>
@@ -78,7 +79,7 @@
           <v-btn large icon color="white" @click="prevPage()">
             <v-icon>mdi-skip-previous</v-icon>
           </v-btn>
-          <span class="text-center grey lighten-3 my-3 px-4">{{ b }}</span>
+          <span class="text-center grey lighten-3 my-3 px-4">{{ page }}</span>
           <v-btn large icon color="white" @click="nextPage()">
             <v-icon>mdi-skip-next</v-icon>
           </v-btn>
@@ -95,7 +96,7 @@
               <option value="3">3</option>
               <option value="4">4</option>
             </select> -->
-            <select name="page" id="page" class="grey lighten-4 mx-4 px-4">
+            <!-- <select name="page" id="page" class="grey lighten-4 mx-4 px-4">
               <option
                 v-for="(page, index) in researchData"
                 :key="index"
@@ -103,7 +104,7 @@
                 @select="changePage(index)"
                 >{{ index + 1 }}</option
               >
-            </select>
+            </select> -->
           </div>
           <v-btn
             large
@@ -168,15 +169,6 @@
             hide-details
             class="mt-n1"
           ></v-checkbox>
-          <!-- <div class="d-inline">
-            <v-autocomplete
-              class="d-inline"
-              dense
-              :items="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
-              label="Go to page"
-              solo
-            ></v-autocomplete>
-          </div> -->
         </div>
       </div>
     </div>
@@ -184,8 +176,7 @@
 </template>
 
 <script>
-import helpers from "../services/helpers";
-
+import store from "../store/index";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
@@ -196,55 +187,62 @@ export default {
     a: 0,
     b: 1,
     research: {},
-    researchData: [],
-    imgSrc: "https://i.imgur.com/aA9SSMA.jpg",
-    autoCrop: false,
+    page: 1,
     darkMode: false,
     next: false,
+    showCropper: false,
+    src: "https://i.imgur.com/aA9SSMA.jpg",
   }),
   methods: {
+    fetchResearch() {
+      fetch("https://narr.ng/api/v1/research/" + this.id, {
+        headers: {
+          "x-token": store.state.token,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log("DATA", data);
+          this.research = data.payload;
+          console.log("research", this.research);
+        })
+        .catch((e) => console.log(e));
+    },
     zoom(percent) {
-      this.$refs.cropper[0].relativeZoom(percent);
+      console.log(this.$refs.cropper.getCanvasData());
+      this.$refs.cropper.relativeZoom(percent);
     },
     move(offsetX, offsetY) {
       this.$refs.cropper[0].move(offsetX, offsetY);
     },
     nextPage() {
-      if (this.researchData.length - 1 == this.a) {
-        console.log("Finished");
-      } else {
-        console.log("Next Page");
-        this.a++;
-        this.b++;
-      }
+      // if (this.researchData.length - 1 == this.a) {
+      //   console.log("Finished");
+      // } else {
+      //   console.log("Next Page");
+      //   this.a++;
+      //   this.b++;
+      // }
+      this.page++;
+      this.fetchResearch();
     },
     prevPage() {
-      if (this.a === 0) {
-        console.log("First Page");
-      } else {
-        console.log("Previous Page");
-        this.a--;
-        this.b--;
-      }
+      this.page--;
+      this.fetchResearch();
+      // if (this.a === 0) {
+      //   console.log("First Page");
+      // } else {
+      //   console.log("Previous Page");
+      //   this.a--;
+      //   this.b--;
+      // }
     },
     changePage(e) {
       console.log(e);
     },
   },
   created() {
-    helpers
-      .fetchSingleResearch(this.id)
-      .then((response) => {
-        this.research = response.data.payload;
-        console.log("Research", this.research);
-        this.researchData = response.data.payload.researchData;
-        console.log("Research Data", this.researchData);
-        this.current = response.data.payload.researchData[0];
-        console.log("Current", this.images);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.fetchResearch();
   },
 };
 </script>

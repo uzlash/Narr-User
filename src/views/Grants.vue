@@ -8,7 +8,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-card outlined tile>
+          <v-card tile outlined>
             <v-card-title class="text-h5 font-weight-light"
               >Research Grants Feed</v-card-title
             >
@@ -28,8 +28,8 @@
                 <v-spacer></v-spacer>
                 <v-btn
                   @click="clickedFavorite(index)"
-                  fab
                   outlined
+                  fab
                   small
                   color="grey lighten-4"
                   elevation="2"
@@ -40,9 +40,9 @@
                   >
                 </v-btn>
                 <v-btn
+                  outlined
                   @click="clickedFlag(index)"
                   fab
-                  outlined
                   small
                   color="grey lighten-4"
                   elevation="2"
@@ -60,13 +60,15 @@
                 <div>
                   <span class="mr-4 body-1 font-weight-medium"
                     >Research Budget -
-                    <span class="green--text text--darken-2"
+                    <span class="green--text text--darken-4"
                       >N17,000,000</span
                     ></span
                   >
                   <span class="body-1 font-weight-medium"
                     >Estimated Project Duration -
-                    <span class="blue--text">7 months</span></span
+                    <span class="amber--text text--darken-4"
+                      >7 months</span
+                    ></span
                   >
                 </div>
                 <div class="mt-2">

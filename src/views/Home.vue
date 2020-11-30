@@ -13,10 +13,9 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <!---Working-->
-        <v-row>
-          <v-col cols="12" class="">
-            <v-card tile class="pa-2" outlined width="100%">
+        <v-row align="center" justify="center">
+          <v-col cols="12" class="px-2">
+            <v-card outlined tile class="pa-2" width="100%">
               <v-card-title class="pa-2 body-1 grey--text text--darken-2"
                 >EXPLORE
                 <span class="caption ml-2">
@@ -28,8 +27,8 @@
                 <v-col cols="12" sm="6" md="3">
                   <div class="text-center mb-2">
                     <v-btn
-                      @click="goResearch()"
                       outlined
+                      @click="goResearch()"
                       dark
                       class="text-capitalize"
                       color="#00a368"
@@ -42,8 +41,8 @@
                 <v-col cols="12" sm="6" md="3">
                   <div class="text-center mb-2">
                     <v-btn
-                      @click="goGrants()"
                       outlined
+                      @click="goGrants()"
                       dark
                       class="text-capitalize"
                       color="#00a368"
@@ -56,12 +55,12 @@
                 <v-col cols="12" sm="6" md="3">
                   <div class="text-center mb-2">
                     <v-btn
-                      @click="goCrowdFunding()"
                       outlined
+                      @click="goCrowdFunding()"
                       dark
-                      class="text-capitalize"
+                      class="text-capitalize px-6"
                       color="#00a368"
-                      ><v-icon class="mr-2">mdi-google-analytics</v-icon>Crowd
+                      ><v-icon class="mr-2">mdi-account-cash</v-icon>Crowd
                       Funding</v-btn
                     >
                   </div>
@@ -69,8 +68,8 @@
                 <v-col cols="12" sm="6" md="3">
                   <div class="text-center mb-2">
                     <v-btn
-                      @click="goAnalytics()"
                       outlined
+                      @click="goAnalytics()"
                       dark
                       class="text-capitalize"
                       color="#00a368"
@@ -94,13 +93,13 @@
             v-for="card in CardDocuments"
             :key="card.title"
           >
-            <v-card outlined tile class="ma-2">
+            <v-card tile outlined class="ma-2">
               <v-card-title class="pa-2 body-1 grey--text text--darken-2">{{
                 card.title
               }}</v-card-title>
               <v-divider></v-divider>
               <div class="d-flex pa-3 align-center">
-                <v-btn class="mx-2" small fab dark :color="card.color" outlined>
+                <v-btn outlined class="mx-2" small fab dark :color="card.color">
                   <v-icon dark> {{ card.icon }} </v-icon>
                 </v-btn>
                 <div class="">
@@ -115,12 +114,12 @@
         </v-row>
         <v-row>
           <v-col cols="12" lg="4" md="6" sm="12" class="pa-0 px-2">
-            <v-card tile outlined>
+            <v-card outlined tile>
               <v-card-title class="body-1 grey--text text--darken-2 pa-2"
                 >Reading History</v-card-title
               >
             </v-card>
-            <v-card tile outlined height="320" class="cutom__card--overflow">
+            <v-card outlined tile height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id" class="py-0">
                 <v-list-item to="/read" class="px-2">
                   <v-list-item-avatar color="blue" aria-dropeffect>
@@ -149,12 +148,12 @@
             </v-card>
           </v-col>
           <v-col cols="12" lg="5" md="6" sm="12" class="pa-0 px-2">
-            <v-card tile outlined>
+            <v-card outlined tile>
               <v-card-title class="body-1 grey--text text--darken-1 pa-2"
                 >Suggestions</v-card-title
               >
             </v-card>
-            <v-card tile outlined height="320" class="cutom__card--overflow">
+            <v-card outlined tile height="320" class="cutom__card--overflow">
               <v-list v-for="item in History" :key="item.id" class="py-0">
                 <v-list-item to="/read" class="px-2">
                   <v-list-item-avatar color="accent">
@@ -192,7 +191,7 @@
               height="60"
               class="mb-2 body-1 d-flex align-center"
             >
-              <v-btn class="mx-2" small fab dark color="indigo" outlined>
+              <v-btn outlined class="mx-2" small fab dark color="indigo">
                 <v-icon>mdi-account-group</v-icon>
               </v-btn>
               <span>Users Online: </span>
@@ -240,7 +239,7 @@
             </v-card>
           </v-col>
           <v-col cols="12" lg="12" md="12" sm="12" class="pa-2">
-            <v-card outlined>
+            <v-card outlined tile>
               <template>
                 <div class="chart">
                   <GChart
@@ -258,7 +257,7 @@
             </v-card>
           </v-col>
           <v-col cols="12" lg="12" md="12" sm="12" class="pa-0 px-2">
-            <v-card outlined>
+            <v-card outlined tile>
               <GChart
                 type="ColumnChart"
                 :data="columnChartData"
@@ -506,49 +505,20 @@ export default {
       this.$router.push("/analytics");
     },
   },
-  sockets: {
-    connect() {
-      console.log("socket connected");
-    },
-    loggedIn(data) {
-      console.log("Logged In", data);
-      this.users = data.users;
-      this.$socket.client.emit("newUser", "Usman Murtala");
-    },
-    userOnline(data) {
-      console.log("User Online", data);
-    },
-  },
+  // sockets: {
+  //   connect() {
+  //     console.log("socket connected");
+  //   },
+  //   loggedIn(data) {
+  //     console.log("Logged In", data);
+  //     this.users = data.users;
+  //     this.$socket.client.emit("newUser", "Usman Murtala");
+  //   },
+  //   userOnline(data) {
+  //     console.log("User Online", data);
+  //   },
+  // },
 };
-
-//Socket
-// import io from 'socket.io-client'
-
-// export default {
-//   name: 'App',
-//   components: {},
-//   data: function() {
-//     return {
-//       username: "",
-//       socket: io('http://localhost:3366'),
-//       messages: [],
-//       users: []
-//     }
-//   },
-//   methods: {
-//     joinServer() {
-//       this.socket.on('loggedIn', data => {
-//         this.messages = data.messages
-//         this.users = data.users
-//         this.socket.emit('newUser', this.username)
-//       })
-//     }
-//   },
-//   mounted() {
-//     this.username = 'Uzlash'
-//     this.joinServer()
-//   }
-// }
 </script>
 
 <style>

@@ -8,109 +8,112 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-data-table
-            :headers="headers"
-            :items="grants"
-            sort-by="title"
-            class="elevation-1"
-          >
-            <template v-slot:top>
-              <v-toolbar flat>
-                <v-toolbar-title>My Research Grants</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
+          <v-card outlined tile>
+            <v-data-table
+              :headers="headers"
+              :items="grants"
+              sort-by="title"
+              class="elevation-1"
+            >
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-toolbar-title>My Research Grants</v-toolbar-title>
+                  <v-divider class="mx-4" inset vertical></v-divider>
+                  <v-spacer></v-spacer>
 
-                <!-- Dialog Edit -->
-                <v-dialog v-model="dialogEdit" max-width="800px">
-                  <v-card>
-                    <v-card-title class="font-weight-light"
-                      >Edit Research Grant</v-card-title
-                    >
-                    <v-card-text>
-                      <v-container>
-                        <v-row>
-                          <v-col cols="12">
-                            <v-text-field
-                              hide-details
-                              color="#00a368"
-                              filled
-                              v-model="editedGrant.title"
-                              label="Title"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              hide-details
-                              color="#00a368"
-                              filled
-                              v-model="editedGrant.budget"
-                              label="Budget"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              hide-details
-                              color="#00a368"
-                              filled
-                              v-model="editedGrant.duration"
-                              label="Duration"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-textarea
-                              hide-details
-                              color="#00a368"
-                              filled
-                              v-model="editedGrant.description"
-                              label="Description"
-                            ></v-textarea>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="red" text @click="close">
-                        Cancel
-                      </v-btn>
-                      <v-btn color="#00a368" text @click="save">
-                        Update Grant
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
+                  <!-- Dialog Edit -->
+                  <v-dialog v-model="dialogEdit" max-width="800px">
+                    <v-card>
+                      <v-card-title class="font-weight-light"
+                        >Edit Research Grant</v-card-title
+                      >
+                      <v-card-text>
+                        <v-container>
+                          <v-row>
+                            <v-col cols="12">
+                              <v-text-field
+                                hide-details
+                                color="#00a368"
+                                filled
+                                v-model="editedGrant.title"
+                                label="Title"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-text-field
+                                hide-details
+                                color="#00a368"
+                                filled
+                                v-model="editedGrant.budget"
+                                label="Budget"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-text-field
+                                hide-details
+                                color="#00a368"
+                                filled
+                                v-model="editedGrant.duration"
+                                label="Duration"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-textarea
+                                hide-details
+                                color="#00a368"
+                                filled
+                                v-model="editedGrant.description"
+                                label="Description"
+                              ></v-textarea>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="red" text @click="close">
+                          Cancel
+                        </v-btn>
+                        <v-btn color="#00a368" text @click="save">
+                          Update Grant
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
 
-                <v-dialog v-model="dialogDelete" max-width="600px">
-                  <v-card>
-                    <v-card-title class="text-h6 font-weight-light"
-                      >Are you sure you want to delete this item?</v-card-title
-                    >
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="red" text @click="closeDelete"
-                        >Cancel</v-btn
+                  <v-dialog v-model="dialogDelete" max-width="600px">
+                    <v-card>
+                      <v-card-title class="text-h6 font-weight-light"
+                        >Are you sure you want to delete this
+                        item?</v-card-title
                       >
-                      <v-btn color="#00a368" text @click="deleteItemConfirm"
-                        >OK</v-btn
-                      >
-                      <v-spacer></v-spacer>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-toolbar>
-            </template>
-            <template v-slot:[`item.actions`]="{ item }">
-              <v-icon color="blue" class="mr-2" @click="viewGrant(item.id)">
-                mdi-eye
-              </v-icon>
-              <v-icon color="#00a368" class="mr-2" @click="editGrant(item)">
-                mdi-pencil
-              </v-icon>
-              <v-icon color="red" @click="deleteGrant(item)">
-                mdi-delete
-              </v-icon>
-            </template>
-          </v-data-table>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="red" text @click="closeDelete"
+                          >Cancel</v-btn
+                        >
+                        <v-btn color="#00a368" text @click="deleteItemConfirm"
+                          >OK</v-btn
+                        >
+                        <v-spacer></v-spacer>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-toolbar>
+              </template>
+              <template v-slot:[`item.actions`]="{ item }">
+                <v-icon color="blue" class="mr-2" @click="viewGrant(item.id)">
+                  mdi-eye
+                </v-icon>
+                <v-icon color="#00a368" class="mr-2" @click="editGrant(item)">
+                  mdi-pencil
+                </v-icon>
+                <v-icon color="red" @click="deleteGrant(item)">
+                  mdi-delete
+                </v-icon>
+              </template>
+            </v-data-table>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>

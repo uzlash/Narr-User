@@ -164,7 +164,7 @@
 
       <template v-slot:append>
         <div class="pa-2 d-flex justify-center">
-          <v-btn dark outlined color="white" @click="logOut()">
+          <v-btn outlined dark color="white" @click="logOut()">
             <span>Logout</span>
             <v-icon>mdi-exit-to-app</v-icon>
           </v-btn>
@@ -179,7 +179,7 @@ export default {
   data: () => ({
     drawer: true,
     links: [
-      { icon: "mdi-home", text: "Home", route: "/", divider: false },
+      { icon: "mdi-home", text: "Home", route: "/" },
       {
         icon: "mdi-database",
         text: "Repository",

@@ -3,7 +3,7 @@
     <v-main class="grey lighten-4 custom__container custom__bg">
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="8">
+          <v-col cols="12" sm="8" md="8" class="pa-0">
             <v-card class tile>
               <v-window v-model="changeStep">
                 <v-window-item :value="1">
@@ -16,25 +16,25 @@
                           SIGN IN
                         </h1>
                         <div class="text-center mt-4">
-                          <v-btn class="mx-2" color="blue" fab small outlined>
+                          <v-btn outlined class="mx-2" color="blue" fab small>
                             <v-icon>fab fa-facebook-f</v-icon>
                           </v-btn>
-                          <v-btn class="mx-2" color="red" fab small outlined>
+                          <v-btn outlined class="mx-2" color="red" fab small>
                             <v-icon>fab fa-google-plus-g</v-icon>
                           </v-btn>
                           <v-btn
+                            outlined
                             class="mx-2"
                             color="blue darken-4"
                             fab
                             small
-                            outlined
                           >
                             <v-icon>fab fa-linkedin-in</v-icon>
                           </v-btn>
                         </div>
                         <v-form @submit.prevent ref="form">
                           <v-row justify="center">
-                            <v-col cols="8">
+                            <v-col cols="12" md="8">
                               <v-text-field
                                 hide-details="auto"
                                 v-model="email"
@@ -48,7 +48,7 @@
                                 :rules="[rules.required, rules.email]"
                               />
                             </v-col>
-                            <v-col cols="8">
+                            <v-col cols="12" md="8">
                               <v-text-field
                                 hide-details="auto"
                                 v-model="password"
@@ -92,9 +92,9 @@
                         </h3>
                         <div class="text-center mt-4">
                           <v-btn
+                            outlined
                             class="text-capitalize"
                             rounded
-                            outlined
                             dark
                             @click="createAccountStep()"
                             >Create Account</v-btn
@@ -105,7 +105,7 @@
                   </v-row>
                 </v-window-item>
                 <v-window-item :value="2">
-                  <v-row class="fill-height">
+                  <v-row class="fill-height mx-0">
                     <v-col cols="12" md="4" class="custom__col">
                       <v-card-text class="white--text mt-12">
                         <h2 class="text-center display-1 font-weight-thin">
@@ -117,16 +117,16 @@
                       </v-card-text>
                       <div class="text-center">
                         <v-btn
+                          outlined
                           class="text-capitalize"
                           rounded
-                          outlined
                           dark
                           @click="signInStep"
                           >Sign In</v-btn
                         >
                       </div>
                     </v-col>
-                    <v-col cols="12" md="8" class="py-0">
+                    <v-col cols="12" md="8" class="pa-0">
                       <v-card
                         class="custom__scrollable__div"
                         height="500"
@@ -140,18 +140,18 @@
                             CREATE ACCOUNT
                           </h2>
                           <div class="text-center mt-4">
-                            <v-btn class="mx-2" color="blue" fab small outlined>
+                            <v-btn outlined class="mx-2" color="blue" fab small>
                               <v-icon>fab fa-facebook-f</v-icon>
                             </v-btn>
-                            <v-btn class="mx-2" color="red" fab small outlined>
+                            <v-btn outlined class="mx-2" color="red" fab small>
                               <v-icon>fab fa-google-plus-g</v-icon>
                             </v-btn>
                             <v-btn
+                              outlined
                               class="mx-2"
                               color="blue darken-4"
                               fab
                               small
-                              outlined
                             >
                               <v-icon>fab fa-linkedin-in</v-icon>
                             </v-btn>
@@ -445,6 +445,7 @@ export default {
       },
       { text: "Dialogue Institute of Technology", type: "monotechnic" },
       { text: "Khemsafe Computers", type: "monotechnic" },
+      { text: "Independent", type: "independent researcher" },
     ],
   }),
   methods: {

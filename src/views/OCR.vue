@@ -8,7 +8,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-card outlined tile>
+          <v-card tile outlined>
             <v-card-title class="text-h6 font-weight-medium"
               >How it works</v-card-title
             >
@@ -160,7 +160,6 @@ export default {
     selectImage(image) {
       this.progress = 0;
       this.currentImage = image;
-      console.log(this.currentImage);
     },
 
     uploadImage() {
@@ -174,14 +173,12 @@ export default {
       this.loading = true;
       helpers
         .uploadImageOcr(this.currentImage, (event) => {
-          console.log(event);
           this.showProgress = true;
           this.progress = Math.round((100 * event.loaded) / event.total);
           this.loadedData = event.loaded;
           this.totalData = event.total;
         })
         .then((response) => {
-          console.log(JSON.stringify(response.data));
           this.imageText = response.data;
           this.messageSuccess = "Image Conversion to Text Successful";
           setTimeout(() => {
@@ -189,7 +186,6 @@ export default {
             this.currentImage = undefined;
           }, 5000);
           this.loading = false;
-          console.log("Image Text>>>", this.imageText);
         })
         .catch((err) => {
           console.log("Error>>", err);

@@ -4,7 +4,7 @@ module.exports = {
   ],
   devServer: {
     proxy: {
-      // proxy all requests starting with /api to target
+      // Allow our proxy to handle our requests
       'ocr': {
         target: 'https://image2text.narr.ng',
         changeOrigin: true,
@@ -26,6 +26,20 @@ module.exports = {
           '^/water': ''
         }
       },
+      'upload': {
+        target: 'https://narr.ng/api/v1/research/upload',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/upload': ''
+        }
+      },
+      'research': {
+        target: 'https://narr.ng/api/v1/research',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/research': ''
+        }
+      }
     }
   }
 }
