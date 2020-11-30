@@ -10,6 +10,15 @@
                   <v-row class="mx-0">
                     <v-col cols="12" md="8">
                       <v-card-text class="mt-12">
+                        <div class="d-flex justify-center">
+                          <v-card flat color="transparent">
+                            <v-img
+                              width="300"
+                              src="../assets/logo (2).png"
+                              alt="Narr Logo"
+                            ></v-img>
+                          </v-card>
+                        </div>
                         <h1
                           class="text-center font-weight-thin text-h4 green--text text--darken-2"
                         >
@@ -134,6 +143,15 @@
                         color="transparent"
                       >
                         <v-card-text class="mt-12">
+                          <div class="d-flex justify-center">
+                            <v-card flat color="transparent">
+                              <v-img
+                                width="300"
+                                src="../assets/logo (2).png"
+                                alt="Narr Logo"
+                              ></v-img>
+                            </v-card>
+                          </div>
                           <h2
                             class="text-center font-weight-thin text-h4 green--text text--darken-2"
                           >
