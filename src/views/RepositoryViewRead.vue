@@ -4,8 +4,13 @@
       <v-row no-gutters>
         <v-col cols="12">
           <v-card tile outlined>
-            <v-row>
-              <v-col cols="6">
+            <v-row align="center">
+              <v-col cols="1">
+                <v-btn @click="goBack()" icon class="mr-4" color="">
+                  <v-icon size="30">mdi-arrow-left</v-icon>
+                </v-btn>
+              </v-col>
+              <v-col cols="5">
                 <div class="font-weight-bold pl-2 green--text text--darken-4">
                   Title: {{ research.researchTitle }}
                 </div>
@@ -13,6 +18,9 @@
               <v-spacer></v-spacer>
               <v-col cols="6">
                 <div class="font-weight-bold amber--text text--darken-4">
+                  <span>
+                    Authors:
+                  </span>
                   <span v-for="(r, i) in research.authors" :key="i">{{
                     r + " "
                   }}</span>
@@ -49,17 +57,17 @@
       <div class="custom__static d-flex flex-column">
         <div class="d-flex align-center">
           <v-btn large icon color="white" @click="firstPage()">
-            <v-icon>mdi-rewind</v-icon>
+            <v-icon>mdi-skip-previous</v-icon>
           </v-btn>
           <v-btn large icon color="white" @click="prevPage()">
-            <v-icon>mdi-skip-previous</v-icon>
+            <v-icon>mdi-rewind</v-icon>
           </v-btn>
           <span class="text-center grey lighten-3 my-3 px-4">{{ page }}</span>
           <v-btn large icon color="white" @click="nextPage()">
-            <v-icon>mdi-skip-next</v-icon>
+            <v-icon>mdi-fast-forward</v-icon>
           </v-btn>
           <v-btn large icon color="white" @click="lastPage()">
-            <v-icon>mdi-fast-forward</v-icon>
+            <v-icon>mdi-skip-next</v-icon>
           </v-btn>
           <div class="d-flex align-center justify-center">
             <label for="page" class="white--text hidden-sm-and-down mx-2"
@@ -125,9 +133,11 @@ export default {
     darkMode: false,
     next: false,
     dialog: false,
-    // src: "https://i.imgur.com/aA9SSMA.jpg",
   }),
   methods: {
+    goBack() {
+      this.$router.go(-2);
+    },
     fetchResearch() {
       helpers
         .fetchSingleResearch(this.id)

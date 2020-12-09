@@ -1,16 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Repository from '../views/Repository.vue'
-import RepositoryView from '../views/RepositoryView.vue'
-import RepositoryViewRead from '../views/RepositoryViewRead.vue'
-import RepositoryViewRouter from '../views/RepositoryViewRouter.vue'
+import Repository from "../views/Repository.vue";
+import RepositoryView from "../views/RepositoryView.vue";
+import RepositoryViewRead from "../views/RepositoryViewRead.vue";
+import RepositoryViewRouter from "../views/RepositoryViewRouter.vue";
 import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
 const routes = [
-
   //#################
   //Researcher Routes
   //#################
@@ -21,8 +20,8 @@ const routes = [
     component: Home,
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -32,8 +31,8 @@ const routes = [
       import(/* webpackChunkName: "upload" */ "../views/Upload.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -42,39 +41,39 @@ const routes = [
     component: RepositoryViewRouter,
     meta: {
       showHeader: true,
-      requiresAuth: true
+      requiresAuth: true,
     },
     children: [
       {
-        path: '',
+        path: "",
         component: Repository,
         meta: {
           showHeader: true,
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       //working
       {
-        path: ':id',
-        name: 'RepositoryView',
+        path: ":id",
+        name: "RepositoryView",
         component: RepositoryView,
         props: true,
         meta: {
           showHeader: true,
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       {
-        path: ':id/read',
-        name: 'RepositoryViewRead',
+        path: ":id/read",
+        name: "RepositoryViewRead",
         component: RepositoryViewRead,
         props: true,
         meta: {
           requiresAuth: true,
-          showHeader: true
-        }
+          showHeader: true,
+        },
       },
-    ]
+    ],
   },
 
   {
@@ -84,8 +83,8 @@ const routes = [
       import(/* webpackChunkName: "history" */ "../views/History.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -95,8 +94,8 @@ const routes = [
       import(/* webpackChunkName: "analytics" */ "../views/Analytics.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -106,92 +105,104 @@ const routes = [
       import(/* webpackChunkName: "profile" */ "../views/Profile.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/viewgrant",
-    name: 'ViewGrants',
+    name: "ViewGrants",
     component: () =>
       import(/* webpackChunkName: "viewgrants" */ "../views/Grants.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
-    path: '/viewgrant/:id',
-    name: 'viewSingleGrant',
-    component: () => import(/* webpackChunkName: "viewsinglegrant" */ '../views/GrantView.vue'),
+    path: "/viewgrant/:id",
+    name: "viewSingleGrant",
+    component: () =>
+      import(
+        /* webpackChunkName: "viewsinglegrant" */ "../views/GrantView.vue"
+      ),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/managegrant",
-    name: 'manageGrants',
+    name: "manageGrants",
     component: () =>
       import(/* webpackChunkName: "managegrant" */ "../views/ManageGrant.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
-    path: '/managegrant/:id',
-    name: 'manageSingleGrant',
-    component: () => import(/* webpackChunkName: "managesinglegrant" */ '../views/ManageGrantView.vue'),
+    path: "/managegrant/:id",
+    name: "manageSingleGrant",
+    component: () =>
+      import(
+        /* webpackChunkName: "managesinglegrant" */ "../views/ManageGrantView.vue"
+      ),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/viewcrowd",
-    name: 'ViewCrowd',
+    name: "ViewCrowd",
     component: () =>
       import(/* webpackChunkName: "viewcrowd" */ "../views/Crowd.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
-    path: '/viewcrowd/:id',
-    name: 'ViewSingleCrowd',
-    component: () => import(/* webpackChunkName: "viewsinglecrowd" */ '../views/CrowdView.vue'),
+    path: "/viewcrowd/:id",
+    name: "ViewSingleCrowd",
+    component: () =>
+      import(
+        /* webpackChunkName: "viewsinglecrowd" */ "../views/CrowdView.vue"
+      ),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/managecrowd",
-    name: 'ManageCrowd',
+    name: "ManageCrowd",
     component: () =>
       import(/* webpackChunkName: "managecrowd" */ "../views/ManageCrowd.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
-    path: '/managecrowd/:id',
-    name: 'ManageSingleCrowd',
-    component: () => import(/* webpackChunkName: "managesinglecrowd" */  '../views/ManageCrowdView.vue'),
+    path: "/managecrowd/:id",
+    name: "ManageSingleCrowd",
+    component: () =>
+      import(
+        /* webpackChunkName: "managesinglecrowd" */ "../views/ManageCrowdView.vue"
+      ),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -200,19 +211,18 @@ const routes = [
     component: () => import(/* webpackChunkName: "chat" */ "../views/Chat.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/ocr",
     name: "OCR",
-    component: () =>
-      import(/* webpackChunkName: "ocr" */ "../views/OCR.vue"),
+    component: () => import(/* webpackChunkName: "ocr" */ "../views/OCR.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -222,7 +232,7 @@ const routes = [
       import(/* webpackChunkName: "convert" */ "../views/Convert.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
+      requiresAuth: true,
     },
   },
 
@@ -233,8 +243,8 @@ const routes = [
       import(/* webpackChunkName: "video" */ "../views/Video.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -244,11 +254,11 @@ const routes = [
       import(/* webpackChunkName: "signin" */ "../views/Signin.vue"),
     meta: {
       showHeader: false,
-      requiresAuth: false
+      requiresAuth: false,
     },
   },
 
-  //########### 
+  //###########
   //Admin Route
   //###########
 
@@ -260,7 +270,6 @@ const routes = [
     meta: {
       showHeader: true,
       requiresAuth: true,
-      requiresAdmin: true
     },
   },
 
@@ -271,11 +280,11 @@ const routes = [
       import(/* webpackChunkName: "users" */ "../views/Users.vue"),
     meta: {
       showHeader: true,
-      requiresAuth: true
+      requiresAuth: true,
     },
   },
 
-  { path: '*', redirect: '/' }
+  { path: "*", redirect: "/" },
 ];
 
 const router = new VueRouter({
@@ -286,14 +295,13 @@ const router = new VueRouter({
 
 // // Working Route Guard
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
   if (requiresAuth && !store.state.token) {
-    next('/signin')
+    next("/signin");
+  } else {
+    next();
   }
-  else {
-    next()
-   }
-})
+});
 
 export default router;

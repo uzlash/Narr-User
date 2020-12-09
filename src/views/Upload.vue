@@ -319,6 +319,10 @@
           </v-card>
         </v-dialog>
       </v-row>
+      <!-- Sockets -->
+      <div>
+        <span>{{ $socket.connected ? "Connected" : "Disconnected" }}</span>
+      </div>
     </v-container>
   </v-app>
 </template>
@@ -356,6 +360,8 @@ export default {
         required: (v) => !!v || "Field is required",
       },
       //sockets
+      randNumbers: [],
+      connection: null,
     };
   },
 
@@ -402,6 +408,16 @@ export default {
             }, 5000);
           });
       }
+    },
+  },
+  sockets: {
+    connect() {
+      console.log("socket connected");
+    },
+    newdata(data) {
+      console.log("New Data", data);
+      this.randNumbers.push(data);
+      console.log(this.randNumbers);
     },
   },
 };

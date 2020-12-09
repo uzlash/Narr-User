@@ -215,15 +215,15 @@
                 </v-avatar>
               </div>
 
-              <v-card-text class="text-h5 pa-0 text-center font-weight-light"
-                >John Doe</v-card-text
-              >
-              <v-card-text class="body-1 pa-0 text-center font-weight-light"
-                >johndoe@gmail.com</v-card-text
-              >
-              <v-card-text class="body-2 pa-0 text-center font-weight-light"
-                >Ahmadu Bello University</v-card-text
-              >
+              <v-card-text class="text-h5 pa-0 text-center font-weight-light">{{
+                user.fullName
+              }}</v-card-text>
+              <v-card-text class="body-1 pa-0 text-center font-weight-light">{{
+                user.email
+              }}</v-card-text>
+              <v-card-text class="body-2 pa-0 text-center font-weight-light">{{
+                user.institution.text
+              }}</v-card-text>
               <div class="d-flex justify-center">
                 <span class="font-weight-light mx-2 body-2">Last Login:</span>
                 <span class="font-weight-light orange--text body-2"
@@ -280,6 +280,7 @@
 export default {
   components: {},
   data: () => ({
+    user: JSON.parse(localStorage.getItem("user")),
     users: [],
     CardDocuments: [
       {
@@ -505,19 +506,6 @@ export default {
       this.$router.push("/analytics");
     },
   },
-  // sockets: {
-  //   connect() {
-  //     console.log("socket connected");
-  //   },
-  //   loggedIn(data) {
-  //     console.log("Logged In", data);
-  //     this.users = data.users;
-  //     this.$socket.client.emit("newUser", "Usman Murtala");
-  //   },
-  //   userOnline(data) {
-  //     console.log("User Online", data);
-  //   },
-  // },
 };
 </script>
 

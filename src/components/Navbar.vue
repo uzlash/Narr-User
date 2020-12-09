@@ -114,6 +114,7 @@
           v-for="link in links"
           :key="link.icon"
           :to="link.route"
+          v-show="user.userRole === 'researcher'"
         >
           <v-list-item-action>
             <v-icon>{{ link.icon }}</v-icon>
@@ -123,7 +124,12 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-group sub-group color="white" class="ml-n4">
+        <v-list-group
+          sub-group
+          color="white"
+          class="ml-n4"
+          v-show="user.userRole === 'researcher'"
+        >
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title class="ml-4"
@@ -151,6 +157,7 @@
           v-for="link in services"
           :key="link.icon"
           :to="link.route"
+          v-show="user.userRole === 'researcher'"
         >
           <v-list-item-action>
             <v-icon>{{ link.icon }}</v-icon>
@@ -160,6 +167,21 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-list-item
+        color="white"
+        active-class="border"
+        v-for="link in admin"
+        :key="link.icon"
+        :to="link.route"
+        v-show="user.userRole === 'admin'"
+      >
+        <v-list-item-action>
+          <v-icon>{{ link.icon }}</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>{{ link.text }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
       <v-divider></v-divider>
 
       <template v-slot:append>
@@ -177,6 +199,7 @@
 <script>
 export default {
   data: () => ({
+    user: JSON.parse(localStorage.getItem("user")),
     drawer: true,
     links: [
       { icon: "mdi-home", text: "Home", route: "/" },
@@ -225,6 +248,13 @@ export default {
         icon: "mdi-message-video",
         text: "Video Conferencing",
         route: "/video",
+      },
+    ],
+    admin: [
+      {
+        icon: "mdi-account",
+        text: "Admin",
+        route: "/admin",
       },
     ],
 

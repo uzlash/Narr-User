@@ -20,7 +20,6 @@
                   <v-toolbar-title>My Crowd Funding</v-toolbar-title>
                   <v-divider class="mx-4" inset vertical></v-divider>
                   <v-spacer></v-spacer>
-
                   <!-- Dialog Edit -->
                   <v-dialog v-model="dialogEdit" max-width="800px">
                     <v-card>
