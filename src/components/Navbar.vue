@@ -252,9 +252,14 @@ export default {
     ],
     admin: [
       {
-        icon: "mdi-account",
-        text: "Admin",
+        icon: "mdi-chart-box-outline",
+        text: "Overview",
         route: "/admin",
+      },
+      {
+        icon: "mdi-account",
+        text: "Users",
+        route: "/user",
       },
     ],
 

@@ -1,64 +1,64 @@
-import axios from "axios";
-import store from "../store/index";
+import axios from 'axios'
+import store from '../store/index'
 
 export default {
   //Base Auth URL
   // https://api.narr.ng/
-  apiBaseUrl: "http://localhost:3000/",
-  appBaseUrl: "https://narr.ng/",
+  apiBaseUrl: 'https://api.narr.ng/',
+  appBaseUrl: 'https://narr.ng/',
   //Ocr Image to Text
   uploadImageOcr(file, onUploadProgress) {
-    const formData = new FormData();
-    formData.append("image", file);
-    return axios.post("/ocr", formData, {
+    const formData = new FormData()
+    formData.append('image', file)
+    return axios.post('/ocr', formData, {
       headers: {
-        Accept: "text/plain",
+        Accept: 'text/plain',
         // 'x-token': store.state.token
       },
       onUploadProgress,
-    });
+    })
   },
   //Document Conversion
   uploadFileConvert(file, onUploadProgress) {
-    const formData = new FormData();
-    formData.append("file", file);
-    return axios.post("/doc", formData, {
+    const formData = new FormData()
+    formData.append('file', file)
+    return axios.post('/doc', formData, {
       headers: {
-        Accept: "multipart/form-data",
+        Accept: 'multipart/form-data',
         // 'x-token': store.state.token
       },
-      responseType: "blob",
+      responseType: 'blob',
       onUploadProgress,
-    });
+    })
   },
   //Upload Research Document
   uploadFileResearch(meta, file, onUploadProgress) {
-    const formData = new FormData();
-    const strMeta = JSON.stringify(meta);
-    formData.append("meta", strMeta);
-    formData.append("file", file);
-    return axios.post("/upload", formData, {
+    const formData = new FormData()
+    const strMeta = JSON.stringify(meta)
+    formData.append('meta', strMeta)
+    formData.append('file', file)
+    return axios.post('/upload', formData, {
       headers: {
-        Accept: "multipart/form-data",
+        Accept: 'multipart/form-data',
         // 'x-token': store.state.token
       },
       onUploadProgress,
-    });
+    })
   },
   //Get all research document
   fetchResearches() {
-    return axios.get("/research", {
+    return axios.get('/research', {
       headers: {
         // 'x-token': store.state.token
       },
-    });
+    })
   },
   //Get one research document
   fetchSingleResearch(id) {
-    return axios.get("/research/" + id, {
+    return axios.get('/research/' + id, {
       headers: {
-        "x-token": store.state.token,
+        'x-token': store.state.token,
       },
-    });
+    })
   },
-};
+}

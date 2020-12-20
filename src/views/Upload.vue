@@ -48,7 +48,7 @@
                   dark
                   value="100"
                 >
-                  <strong>{{ progress || "100%" }}</strong>
+                  <strong>{{ progress || '100%' }}</strong>
                 </v-progress-linear>
                 <span>Stage 2:</span>
                 <span> In Progress</span>
@@ -321,27 +321,27 @@
       </v-row>
       <!-- Sockets -->
       <div>
-        <span>{{ $socket.connected ? "Connected" : "Disconnected" }}</span>
+        <span>{{ $socket.connected ? 'Connected' : 'Disconnected' }}</span>
       </div>
     </v-container>
   </v-app>
 </template>
 
 <script>
-const user = JSON.parse(localStorage.getItem("user"));
-import helpers from "../services/helpers.js";
+const user = JSON.parse(localStorage.getItem('user'))
+import helpers from '../services/helpers.js'
 export default {
   data() {
     return {
       meta: {
-        researchTitle: "",
-        description: "",
+        researchTitle: '',
+        description: '',
         authors: [],
-        category: "",
-        genre: "",
-        accessType: "",
+        category: '',
+        genre: '',
+        accessType: '',
         monthlyFee: 0,
-        year: "",
+        year: '',
         ownerEmail: user.email,
       },
       currentFile: undefined,
@@ -349,78 +349,76 @@ export default {
       progress: 0,
       loadedData: 0,
       totalData: 0,
-      messageSuccess: "",
-      messageError: "",
+      messageSuccess: '',
+      messageError: '',
       dialogUpload: false,
-      search: "",
+      search: '',
       hidden: false,
       date: null,
       menu: false,
       rules: {
-        required: (v) => !!v || "Field is required",
+        required: (v) => !!v || 'Field is required',
       },
       //sockets
       randNumbers: [],
       connection: null,
-    };
+    }
   },
 
   methods: {
     selectFile(file) {
-      this.progress = 0;
-      this.currentFile = file;
+      this.progress = 0
+      this.currentFile = file
     },
 
     uploadFile() {
       if (this.$refs.form.validate()) {
         if (!this.currentFile) {
-          this.messageError = "Please select a File!";
+          this.messageError = 'Please select a File!'
           setTimeout(() => {
-            this.messageError = "";
-          }, 5000);
-          return;
+            this.messageError = ''
+          }, 5000)
+          return
         }
-        this.loading = true;
+        this.loading = true
         helpers
           .uploadFileResearch(this.meta, this.currentFile, (event) => {
-            this.showProgress = true;
-            this.progress = Math.round((100 * event.loaded) / event.total);
-            this.loadedData = event.loaded;
-            this.totalData = event.total;
+            this.showProgress = true
+            this.progress = Math.round((100 * event.loaded) / event.total)
+            this.loadedData = event.loaded
+            this.totalData = event.total
           })
           .then((data) => {
-            this.messageSuccess = data.message;
+            this.messageSuccess = data.message
 
             setTimeout(() => {
-              this.messageSuccess = "";
-              this.dialogUpload = false;
-            }, 5000);
+              this.messageSuccess = ''
+              this.dialogUpload = false
+            }, 5000)
           })
           .catch((err) => {
-            console.log("Error>>", err.message);
-            this.progress = 0;
-            this.loading = false;
-            this.messageError = err.message;
-            this.currentFile = undefined;
+            console.log('Error>>', err.message)
+            this.progress = 0
+            this.loading = false
+            this.messageError = err.message
+            this.currentFile = undefined
 
             setTimeout(() => {
-              this.messageError = "";
-            }, 5000);
-          });
+              this.messageError = ''
+            }, 5000)
+          })
       }
     },
   },
   sockets: {
     connect() {
-      console.log("socket connected");
-    },
-    newdata(data) {
-      console.log("New Data", data);
-      this.randNumbers.push(data);
-      console.log(this.randNumbers);
+      console.log('socket connected')
     },
   },
-};
+  created() {
+    console.log('Socket Object', this.$socket)
+  },
+}
 </script>
 
 <style>

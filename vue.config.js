@@ -1,44 +1,44 @@
 // const httpProxyMiddleware = require('http-proxy-middleware');
 
 module.exports = {
-  transpileDependencies: ["vuetify"],
+  transpileDependencies: ['vuetify'],
   devServer: {
     proxy: {
       // Allow our proxy to handle our requests
       ocr: {
-        target: "https://image2text.narr.ng/tika/form",
+        target: 'https://image2text.narr.ng/tika/form',
         changeOrigin: true,
         pathRewrite: {
-          "^/ocr": "",
+          '^/ocr': '',
         },
       },
       doc: {
-        target: "https://doc2pdf.narr.ng/convert/office",
+        target: 'https://doc2pdf.narr.ng/convert/office',
         changeOrigin: true,
         pathRewrite: {
-          "^/doc": "",
+          '^/doc': '',
         },
       },
       upload: {
-        target: "https://narr.ng/api/v1/research/upload",
+        target: 'https://narr.ng/api/v1/research/upload',
         changeOrigin: true,
         pathRewrite: {
-          "^/upload": "",
+          '^/upload': '',
         },
       },
       research: {
-        target: "https://narr.ng/api/v1/research",
+        target: 'https://narr.ng/api/v1/research',
         changeOrigin: true,
         pathRewrite: {
-          "^/research": "",
+          '^/research': '',
         },
       },
       socketServer: {
-        target: "https://api.narr.ng",
-        ws: true,
+        target: 'wss://api.narr.ng',
+        wss: true,
         changeOrigin: true,
         pathRewrite: {
-          "^/socketServer": "",
+          '^/socketServer': '',
         },
       },
     },
@@ -51,4 +51,4 @@ module.exports = {
     //     app.use('/socketServer', wsProxy);
     // }
   },
-};
+}

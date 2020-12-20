@@ -9,6 +9,7 @@ import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
+const user = JSON.parse(localStorage.getItem("user"));
 const routes = [
   //#################
   //Researcher Routes
@@ -271,16 +272,31 @@ const routes = [
       showHeader: true,
       requiresAuth: true,
     },
+    beforeEnter: (to, from, next) => {
+      if (user.userRole === "admin") {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
   },
 
   {
     path: "/user",
     name: "users",
     component: () =>
-      import(/* webpackChunkName: "users" */ "../views/Users.vue"),
+      import(/* webpackChunkName: "users" */ "../admin/Users.vue"),
     meta: {
       showHeader: true,
       requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      console.log("userRole", user.userRole);
+      if (user.userRole === "admin") {
+        next();
+      } else {
+        next("/signin");
+      }
     },
   },
 
