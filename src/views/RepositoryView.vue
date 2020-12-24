@@ -11,7 +11,7 @@
           <v-card outlined tile @click="dialog = true">
             <v-img
               v-if="research"
-              :src="`https://narr.ng/${research.thumbnail}`"
+              :src="`https://api.narr.ng/${research.thumbnail}`"
               width="100%"
               height="446"
             ></v-img>
@@ -36,7 +36,7 @@
                   v-for="(r, i) in research.authors"
                   :key="i"
                   class="grey--text text--darken-3"
-                  >{{ r + " " }}</span
+                  >{{ r + ' ' }}</span
                 >
               </div>
               <div class="body-1 my-2">
@@ -136,7 +136,7 @@
       <v-dialog v-model="dialog" width="1000">
         <v-img
           v-if="research"
-          :src="`https://narr.ng/${research.thumbnail}`"
+          :src="`https://api.narr.ng/${research.thumbnail}`"
         ></v-img>
       </v-dialog>
     </div>
@@ -145,16 +145,16 @@
 
 <script>
 // import store from "../store/index";
-import helpers from "../services/helpers";
+import helpers from '../services/helpers'
 export default {
-  props: ["id"],
+  props: ['id'],
   data: () => ({
     research: [],
     dialog: false,
   }),
   methods: {
     readResearch(id) {
-      this.$router.push(id + "/read");
+      this.$router.push(id + '/read')
     },
   },
   created() {
@@ -172,14 +172,14 @@ export default {
     helpers
       .fetchSingleResearch(this.id)
       .then((response) => {
-        console.log(response);
-        this.research = response.data.payload;
+        console.log(response)
+        this.research = response.data.payload
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   },
-};
+}
 </script>
 
 <style></style>

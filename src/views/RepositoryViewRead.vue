@@ -22,7 +22,7 @@
                     Authors:
                   </span>
                   <span v-for="(r, i) in research.authors" :key="i">{{
-                    r + " "
+                    r + ' '
                   }}</span>
                 </div>
               </v-col>
@@ -119,10 +119,10 @@
 </template>
 
 <script>
-import helpers from "../services/helpers";
+import helpers from '../services/helpers'
 
 export default {
-  props: ["id"],
+  props: ['id'],
   data: () => ({
     a: 0,
     b: 1,
@@ -136,67 +136,67 @@ export default {
   }),
   methods: {
     goBack() {
-      this.$router.go(-2);
+      this.$router.go(-2)
     },
     fetchResearch() {
       helpers
         .fetchSingleResearch(this.id)
         .then((response) => {
-          console.log(response);
-          this.research = response.data.payload;
+          console.log(response)
+          this.research = response.data.payload
         })
         .catch((error) => {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     firstPage() {
-      this.page = this.first;
-      this.fetchResearch();
+      this.page = this.first
+      this.fetchResearch()
     },
     nextPage() {
       if (this.page >= this.research.nPages) {
-        console.log("Finished");
+        console.log('Finished')
       } else {
-        console.log("Next Page");
-        this.page++;
-        this.fetchResearch();
+        console.log('Next Page')
+        this.page++
+        this.fetchResearch()
       }
     },
     prevPage() {
       if (this.page <= 1) {
-        console.log("First Page");
+        console.log('First Page')
       } else {
-        this.page--;
-        this.fetchResearch();
+        this.page--
+        this.fetchResearch()
       }
     },
     lastPage() {
-      this.page = this.research.nPages;
-      this.fetchResearch();
+      this.page = this.research.nPages
+      this.fetchResearch()
     },
     changePage(event) {
-      console.log(event.target.value);
-      this.page = event.target.value;
-      this.selectedPage = event.target.value;
-      this.fetchResearch();
+      console.log(event.target.value)
+      this.page = event.target.value
+      this.selectedPage = event.target.value
+      this.fetchResearch()
     },
   },
   computed: {
     computedSrc() {
-      return `https://narr.ng/${this.research.readPath}${this.page}.jpg`;
+      return `https://api.narr.ng/${this.research.readPath}${this.page}.jpg`
     },
   },
   created() {
-    this.fetchResearch();
+    this.fetchResearch()
   },
-};
+}
 </script>
 
 <style>
 .custom__container {
   overflow-x: hidden;
   overflow-y: auto;
-  height: "500px";
+  height: '500px';
 }
 .custom__static {
   position: fixed;

@@ -506,14 +506,6 @@ export default {
       this.$router.push('/analytics')
     },
   },
-  sockets: {
-    'EVENT:USER:LOGIN'(data) {
-      console.log('EVENT DATA>>>>', data)
-    },
-    'EVENT:USER:LOGOUT'(data) {
-      console.log('User Logged Out', data)
-    },
-  }
 }
 </script>
 

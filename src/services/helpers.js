@@ -2,8 +2,7 @@ import axios from 'axios'
 import store from '../store/index'
 
 export default {
-  //Base Auth URL
-  // https://api.narr.ng/
+  //Base URL
   apiBaseUrl: 'https://api.narr.ng/',
   appBaseUrl: 'https://narr.ng/',
   //Ocr Image to Text
@@ -13,7 +12,7 @@ export default {
     return axios.post('/ocr', formData, {
       headers: {
         Accept: 'text/plain',
-        // 'x-token': store.state.token
+        'x-token': store.state.token,
       },
       onUploadProgress,
     })
@@ -25,7 +24,7 @@ export default {
     return axios.post('/doc', formData, {
       headers: {
         Accept: 'multipart/form-data',
-        // 'x-token': store.state.token
+        'x-token': store.state.token,
       },
       responseType: 'blob',
       onUploadProgress,
@@ -37,25 +36,26 @@ export default {
     const strMeta = JSON.stringify(meta)
     formData.append('meta', strMeta)
     formData.append('file', file)
-    return axios.post('/upload', formData, {
+    console.log(store.state.token)
+    return axios.post(this.apiBaseUrl + 'api/v1/research/upload', formData, {
       headers: {
         Accept: 'multipart/form-data',
-        // 'x-token': store.state.token
+        'x-token': store.state.token,
       },
       onUploadProgress,
     })
   },
   //Get all research document
   fetchResearches() {
-    return axios.get('/research', {
+    return axios.get(this.apiBaseUrl + 'api/v1/research', {
       headers: {
-        // 'x-token': store.state.token
+        'x-token': store.state.token,
       },
     })
   },
   //Get one research document
   fetchSingleResearch(id) {
-    return axios.get('/research/' + id, {
+    return axios.get(this.apiBaseUrl + 'api/v1/research/' + id, {
       headers: {
         'x-token': store.state.token,
       },

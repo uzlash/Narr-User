@@ -26,13 +26,24 @@ const store = new Vuex.Store({
     },
     //Socket
     socket: {
-      users: [],
-      usersOnline: null,
+      signIn: {
+        user: {},
+      },
+      logout: {
+        user: {},
+      },
+      microserviceStatus: '',
     },
   },
   getters: {
     getUser: (state) => {
       return state.user
+    },
+    getLoginUserSocket: (state) => {
+      return state.socket.signIn.user
+    },
+    getMstatus: (state) => {
+      return state.socket.mStatus
     },
   },
   mutations: {
@@ -82,9 +93,14 @@ const store = new Vuex.Store({
       state.signIn.signInSuccessPayload = payload
     },
     //Sockets
-    socketUser(state, payload) {
-      state.socket.users = payload
-      state.socket.usersOnline = payload.length()
+    socketUserLogin(state, payload) {
+      state.socket.signIn.user = payload
+    },
+    socketUserLogout(state, payload) {
+      state.socket.logout.user = payload
+    },
+    microserviceStatus(state, payload) {
+      state.socket.microserviceStatus = payload
     },
   },
   actions: {
@@ -113,7 +129,7 @@ const store = new Vuex.Store({
             })
             //Emit Socket Event
             this._vm.$socket.client.emit('LOGIN', { token, user })
-            console.log('Socket VM>>>', this._vm.$socket.client)
+            //Save To Local Storage
             localStorage.setItem('token', response.payload.token)
             localStorage.setItem('user', JSON.stringify(response.payload.user))
             if (user.userRole === 'admin') {
@@ -163,7 +179,6 @@ const store = new Vuex.Store({
             commit('stopLoader')
           }
         })
-        .then((data) => console.log(data))
         .catch((error) => {
           console.log('Error>>>>>>>>>>>>>', error)
           commit('signUpError', error)
@@ -179,9 +194,26 @@ const store = new Vuex.Store({
     SIGN_IN_STEP: ({ commit }) => {
       commit('changeToSignIn')
     },
-    //Socekts
-    'SOCKET_EVENT:USER:LOGIN': ({ commit }, user) => {
-      commit('socketUser', user)
+    //Socekts - Note Dont use arrow functions
+    socket_connect(data) {
+      console.log('Socket Connected!', data)
+    },
+    'socket_event:user:login'({ commit }, user) {
+      console.log('Logged in using socket!', user)
+      this._vm.$toast.success(`User logged in: ${user.fullName}`)
+      commit('socketUserLogin', user)
+    },
+    'socket_event:microservice:statuses'({ commit }, data) {
+      console.log('Microservice Statuses>>>', data)
+      commit('microserviceStatus', data)
+    },
+    'socket_event:user:logout'({ commit }, user) {
+      console.log('User Logged Out using socket!', user)
+      this._vm.$toast.warning(`User Logged Out: ${user}`)
+      commit('socketUserLogout', user)
+    },
+    socket_disconnect(data) {
+      console.log('Socket disconnected!', data)
     },
   },
 })

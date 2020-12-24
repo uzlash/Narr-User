@@ -12,7 +12,10 @@ import io from 'socket.io-client'
 import VueSocketIOExt from 'vue-socket.io-extended'
 import VueApexCharts from 'vue-apexcharts'
 
-const socket = io('https://api.narr.ng')
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
+
+const socket = io('wss://api.narr.ng')
 
 Vue.use(VueAxios, axios)
 Vue.use(VueGoogleCharts)
@@ -21,8 +24,9 @@ Vue.use(VueCardFormat)
 Vue.use(VueSocketIOExt, socket, { store })
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
-
 Vue.use(VueSocketIOExt, socket)
+Vue.use(Toast)
+
 const token = localStorage.getItem('user-token')
 if (token) {
   axios.defaults.headers.common['x-token'] = token

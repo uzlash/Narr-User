@@ -110,7 +110,8 @@
                       <v-text-field
                         v-model="meta.researchTitle"
                         :rules="[rules.required]"
-                        solo
+                        autofocus
+                        outlined
                         hide-details="auto"
                         color="#00a368"
                         label="Research Title"
@@ -121,9 +122,8 @@
                       <v-textarea
                         :rules="[rules.required]"
                         auto-grow
-                        autofocus
+                        outlined
                         clearable
-                        solo
                         color="#00a368"
                         label="Research Description"
                         v-model="meta.description"
@@ -133,10 +133,11 @@
                       <v-combobox
                         v-model="meta.authors"
                         :rules="[rules.required]"
-                        solo
+                        outlined
                         color="#00a368"
                         class="ma-0 pa-0"
                         label="Author(s)"
+                        hide-details="auto"
                         hint="Press Enter key to add an author"
                         multiple
                         chips
@@ -146,7 +147,7 @@
                       <v-select
                         v-model="meta.category"
                         :rules="[rules.required]"
-                        solo
+                        outlined
                         hide-details="auto"
                         color="#00a368"
                         class="ma-0 pa-0"
@@ -164,7 +165,7 @@
                       <v-select
                         v-model="meta.genre"
                         :rules="[rules.required]"
-                        solo
+                        outlined
                         hide-details="auto"
                         color="#00a368"
                         class="ma-0 pa-0"
@@ -181,7 +182,7 @@
                       <v-select
                         :rules="[rules.required]"
                         v-model="meta.accessType"
-                        solo
+                        outlined
                         hide-details="auto"
                         color="#00a368"
                         class="ma-0 pa-0"
@@ -193,7 +194,7 @@
                       <v-text-field
                         v-show="meta.accessType === 'Paid'"
                         v-model="meta.monthlyFee"
-                        solo
+                        outlined
                         type="number"
                         color="#00a368"
                         class="ma-0 pa-0"
@@ -217,7 +218,7 @@
                             :rules="[rules.required]"
                             hide-details="auto"
                             color="#00a368"
-                            solo
+                            outlined
                             v-model="meta.year"
                             label="Research Date"
                             readonly
@@ -254,11 +255,10 @@
                         accept=".doc,.docx,.pdf,.odt"
                         color="#00a368"
                         show-size
-                        solo
+                        outlined
                         label="Select a Single Research Document/File"
                         @change="selectFile"
                       ></v-file-input>
-                      <span class="red--text">*</span>
                     </v-col>
                     <!--Test Begin-->
                     <v-col cols="12">
@@ -308,10 +308,15 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="red" text @click="dialogUpload = false">
+                <v-btn dark color="red" @click="dialogUpload = false">
                   Close
                 </v-btn>
-                <v-btn color="#00a368" text @click="uploadFile()">
+                <v-btn
+                  dark
+                  :loading="loading"
+                  color="#00a368"
+                  @click="uploadFile()"
+                >
                   Submit
                 </v-btn>
               </v-card-actions>
@@ -319,9 +324,11 @@
           </v-card>
         </v-dialog>
       </v-row>
-      <!-- Sockets -->
       <div>
-        <span>{{ $socket.connected ? 'Connected' : 'Disconnected' }}</span>
+        <h3>Microservice statuses</h3>
+        <div>
+          {{ microserviceStatuses }}
+        </div>
       </div>
     </v-container>
   </v-app>
@@ -352,6 +359,7 @@ export default {
       messageSuccess: '',
       messageError: '',
       dialogUpload: false,
+      loading: false,
       search: '',
       hidden: false,
       date: null,
@@ -359,9 +367,6 @@ export default {
       rules: {
         required: (v) => !!v || 'Field is required',
       },
-      //sockets
-      randNumbers: [],
-      connection: null,
     }
   },
 
@@ -388,9 +393,10 @@ export default {
             this.loadedData = event.loaded
             this.totalData = event.total
           })
-          .then((data) => {
-            this.messageSuccess = data.message
-
+          .then((response) => {
+            console.log(response.data.message)
+            this.messageSuccess = response.data.message
+            this.loading = false
             setTimeout(() => {
               this.messageSuccess = ''
               this.dialogUpload = false
@@ -410,13 +416,11 @@ export default {
       }
     },
   },
-  sockets: {
-    connect() {
-      console.log('socket connected')
+  sockets: {},
+  computed: {
+    microserviceStatuses() {
+      return this.$store.getters.getMstatus
     },
-  },
-  created() {
-    console.log('Socket Object', this.$socket)
   },
 }
 </script>

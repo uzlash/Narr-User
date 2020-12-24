@@ -72,7 +72,7 @@
             >
               <!-- :src="'https://narr.ng/' + research.thumbnail" -->
               <v-img
-                :src="`https://narr.ng/${research.thumbnail}`"
+                :src="`https://api.narr.ng/${research.thumbnail}`"
                 height="200px"
               ></v-img>
               <v-card-title
@@ -87,7 +87,7 @@
                   >Authors:</span
                 >
                 <span>{{
-                  research.authors.toString().replace(/,/g, " and ")
+                  research.authors.toString().replace(/,/g, ' and ')
                 }}</span>
               </v-card-subtitle>
               <v-card-subtitle class="pa-0 px-2">
@@ -111,27 +111,27 @@
 </template>
 
 <script>
-import helpers from "../services/helpers";
+import helpers from '../services/helpers'
 export default {
   data: () => ({
     Repository: [],
   }),
   methods: {
     goResearchView(id) {
-      this.$router.push("/repository/" + id);
+      this.$router.push('/repository/' + id)
     },
   },
   created() {
     helpers
       .fetchResearches()
       .then((response) => {
-        this.Repository = response.data.payload;
+        this.Repository = response.data.payload
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   },
-};
+}
 </script>
 
 <style>
