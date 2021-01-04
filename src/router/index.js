@@ -1,23 +1,23 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Repository from "../views/Repository.vue";
-import RepositoryView from "../views/RepositoryView.vue";
-import RepositoryViewRead from "../views/RepositoryViewRead.vue";
-import RepositoryViewRouter from "../views/RepositoryViewRouter.vue";
-import store from "../store/index.js";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Repository from '../views/Repository.vue'
+import RepositoryView from '../views/RepositoryView.vue'
+import RepositoryViewRead from '../views/RepositoryViewRead.vue'
+import RepositoryViewRouter from '../views/RepositoryViewRouter.vue'
+import store from '../store/index.js'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem('user'))
 const routes = [
   //#################
   //Researcher Routes
   //#################
 
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     component: Home,
     meta: {
       showHeader: true,
@@ -26,10 +26,10 @@ const routes = [
   },
 
   {
-    path: "/upload",
-    name: "Upload",
+    path: '/upload',
+    name: 'Upload',
     component: () =>
-      import(/* webpackChunkName: "upload" */ "../views/Upload.vue"),
+      import(/* webpackChunkName: "upload" */ '../views/Upload.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -37,8 +37,8 @@ const routes = [
   },
 
   {
-    path: "/repository",
-    name: "Repository",
+    path: '/repository',
+    name: 'Repository',
     component: RepositoryViewRouter,
     meta: {
       showHeader: true,
@@ -46,7 +46,7 @@ const routes = [
     },
     children: [
       {
-        path: "",
+        path: '',
         component: Repository,
         meta: {
           showHeader: true,
@@ -55,8 +55,8 @@ const routes = [
       },
       //working
       {
-        path: ":id",
-        name: "RepositoryView",
+        path: ':id',
+        name: 'RepositoryView',
         component: RepositoryView,
         props: true,
         meta: {
@@ -65,8 +65,8 @@ const routes = [
         },
       },
       {
-        path: ":id/read",
-        name: "RepositoryViewRead",
+        path: ':id/read',
+        name: 'RepositoryViewRead',
         component: RepositoryViewRead,
         props: true,
         meta: {
@@ -78,10 +78,10 @@ const routes = [
   },
 
   {
-    path: "/history",
-    name: "History",
+    path: '/history',
+    name: 'History',
     component: () =>
-      import(/* webpackChunkName: "history" */ "../views/History.vue"),
+      import(/* webpackChunkName: "history" */ '../views/History.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -89,10 +89,10 @@ const routes = [
   },
 
   {
-    path: "/analytics",
-    name: "Analytics",
+    path: '/analytics',
+    name: 'Analytics',
     component: () =>
-      import(/* webpackChunkName: "analytics" */ "../views/Analytics.vue"),
+      import(/* webpackChunkName: "analytics" */ '../views/Analytics.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -100,10 +100,10 @@ const routes = [
   },
 
   {
-    path: "/profile",
-    name: "Profile",
+    path: '/profile',
+    name: 'Profile',
     component: () =>
-      import(/* webpackChunkName: "profile" */ "../views/Profile.vue"),
+      import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -111,10 +111,10 @@ const routes = [
   },
 
   {
-    path: "/viewgrant",
-    name: "ViewGrants",
+    path: '/viewgrant',
+    name: 'ViewGrants',
     component: () =>
-      import(/* webpackChunkName: "viewgrants" */ "../views/Grants.vue"),
+      import(/* webpackChunkName: "viewgrants" */ '../views/Grants.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -122,11 +122,11 @@ const routes = [
   },
 
   {
-    path: "/viewgrant/:id",
-    name: "viewSingleGrant",
+    path: '/viewgrant/:id',
+    name: 'viewSingleGrant',
     component: () =>
       import(
-        /* webpackChunkName: "viewsinglegrant" */ "../views/GrantView.vue"
+        /* webpackChunkName: "viewsinglegrant" */ '../views/GrantView.vue'
       ),
     meta: {
       showHeader: true,
@@ -135,10 +135,10 @@ const routes = [
   },
 
   {
-    path: "/managegrant",
-    name: "manageGrants",
+    path: '/managegrant',
+    name: 'manageGrants',
     component: () =>
-      import(/* webpackChunkName: "managegrant" */ "../views/ManageGrant.vue"),
+      import(/* webpackChunkName: "managegrant" */ '../views/ManageGrant.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -146,11 +146,11 @@ const routes = [
   },
 
   {
-    path: "/managegrant/:id",
-    name: "manageSingleGrant",
+    path: '/managegrant/:id',
+    name: 'manageSingleGrant',
     component: () =>
       import(
-        /* webpackChunkName: "managesinglegrant" */ "../views/ManageGrantView.vue"
+        /* webpackChunkName: "managesinglegrant" */ '../views/ManageGrantView.vue'
       ),
     meta: {
       showHeader: true,
@@ -159,10 +159,10 @@ const routes = [
   },
 
   {
-    path: "/viewcrowd",
-    name: "ViewCrowd",
+    path: '/viewcrowd',
+    name: 'ViewCrowd',
     component: () =>
-      import(/* webpackChunkName: "viewcrowd" */ "../views/Crowd.vue"),
+      import(/* webpackChunkName: "viewcrowd" */ '../views/Crowd.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -170,11 +170,11 @@ const routes = [
   },
 
   {
-    path: "/viewcrowd/:id",
-    name: "ViewSingleCrowd",
+    path: '/viewcrowd/:id',
+    name: 'ViewSingleCrowd',
     component: () =>
       import(
-        /* webpackChunkName: "viewsinglecrowd" */ "../views/CrowdView.vue"
+        /* webpackChunkName: "viewsinglecrowd" */ '../views/CrowdView.vue'
       ),
     meta: {
       showHeader: true,
@@ -183,10 +183,10 @@ const routes = [
   },
 
   {
-    path: "/managecrowd",
-    name: "ManageCrowd",
+    path: '/managecrowd',
+    name: 'ManageCrowd',
     component: () =>
-      import(/* webpackChunkName: "managecrowd" */ "../views/ManageCrowd.vue"),
+      import(/* webpackChunkName: "managecrowd" */ '../views/ManageCrowd.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -194,11 +194,11 @@ const routes = [
   },
 
   {
-    path: "/managecrowd/:id",
-    name: "ManageSingleCrowd",
+    path: '/managecrowd/:id',
+    name: 'ManageSingleCrowd',
     component: () =>
       import(
-        /* webpackChunkName: "managesinglecrowd" */ "../views/ManageCrowdView.vue"
+        /* webpackChunkName: "managesinglecrowd" */ '../views/ManageCrowdView.vue'
       ),
     meta: {
       showHeader: true,
@@ -207,9 +207,9 @@ const routes = [
   },
 
   {
-    path: "/chat",
-    name: "Chat",
-    component: () => import(/* webpackChunkName: "chat" */ "../views/Chat.vue"),
+    path: '/chat',
+    name: 'Chat',
+    component: () => import(/* webpackChunkName: "chat" */ '../views/Chat.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -217,9 +217,9 @@ const routes = [
   },
 
   {
-    path: "/ocr",
-    name: "OCR",
-    component: () => import(/* webpackChunkName: "ocr" */ "../views/OCR.vue"),
+    path: '/ocr',
+    name: 'OCR',
+    component: () => import(/* webpackChunkName: "ocr" */ '../views/OCR.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -227,10 +227,10 @@ const routes = [
   },
 
   {
-    path: "/convert",
-    name: "Convert",
+    path: '/convert',
+    name: 'Convert',
     component: () =>
-      import(/* webpackChunkName: "convert" */ "../views/Convert.vue"),
+      import(/* webpackChunkName: "convert" */ '../views/Convert.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -238,10 +238,10 @@ const routes = [
   },
 
   {
-    path: "/video",
-    name: "Video",
+    path: '/video',
+    name: 'Video',
     component: () =>
-      import(/* webpackChunkName: "video" */ "../views/Video.vue"),
+      import(/* webpackChunkName: "video" */ '../views/Video.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -249,10 +249,21 @@ const routes = [
   },
 
   {
-    path: "/signin",
-    name: "signin",
+    path: '/signin',
+    name: 'signin',
     component: () =>
-      import(/* webpackChunkName: "signin" */ "../views/Signin.vue"),
+      import(/* webpackChunkName: "signin" */ '../views/Signin.vue'),
+    meta: {
+      showHeader: false,
+      requiresAuth: false,
+    },
+  },
+
+  {
+    path: '/signout',
+    name: 'signout',
+    component: () =>
+      import(/* webpackChunkName: "signout" */ '../views/Signout.vue'),
     meta: {
       showHeader: false,
       requiresAuth: false,
@@ -264,60 +275,60 @@ const routes = [
   //###########
 
   {
-    path: "/admin",
-    name: "AdminView",
+    path: '/admin',
+    name: 'AdminView',
     component: () =>
-      import(/* webpackChunkName: "adminview" */ "../admin/AdminView.vue"),
+      import(/* webpackChunkName: "adminview" */ '../admin/AdminView.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
     },
     beforeEnter: (to, from, next) => {
-      if (user.userRole === "admin") {
-        next();
+      if (user.userRole === 'admin') {
+        next()
       } else {
-        next("/signin");
+        next('/signin')
       }
     },
   },
 
   {
-    path: "/user",
-    name: "users",
+    path: '/user',
+    name: 'users',
     component: () =>
-      import(/* webpackChunkName: "users" */ "../admin/Users.vue"),
+      import(/* webpackChunkName: "users" */ '../admin/Users.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
     },
     beforeEnter: (to, from, next) => {
-      console.log("userRole", user.userRole);
-      if (user.userRole === "admin") {
-        next();
+      console.log('userRole', user.userRole)
+      if (user.userRole === 'admin') {
+        next()
       } else {
-        next("/signin");
+        next('/signin')
       }
     },
   },
 
-  { path: "*", redirect: "/" },
-];
+  { path: '*', redirect: '/' },
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes,
-});
+})
 
 // // Working Route Guard
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
 
   if (requiresAuth && !store.state.token) {
-    next("/signin");
+    next('/signin')
   } else {
-    next();
+    next()
   }
-});
+})
 
-export default router;
+export default router
