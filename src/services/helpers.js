@@ -3,8 +3,8 @@ import store from '../store/index'
 
 export default {
   //Base URL
-  // apiBaseUrl: 'https://api.narr.ng/',
-  apiBaseUrl: 'http://localhost:3000/',
+  apiBaseUrl: 'https://api.narr.ng/',
+  // apiBaseUrl: 'http://localhost:3000/',
   appBaseUrl: 'https://narr.ng/',
   //Ocr Image to Text
   uploadImageOcr(file, onUploadProgress) {

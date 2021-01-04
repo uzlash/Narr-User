@@ -293,6 +293,24 @@ const routes = [
   },
 
   {
+    path: '/superuser',
+    name: 'superUser',
+    component: () =>
+      import(/* webpackChunkName: "adminview" */ '../admin/superUser.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      if (user.userRole === 'admin') {
+        next()
+      } else {
+        next('/signin')
+      }
+    },
+  },
+
+  {
     path: '/user',
     name: 'users',
     component: () =>

@@ -1,60 +1,7 @@
 <template>
   <v-app class="custom__style">
     <v-container>
-      <v-row>
-        <v-col cols="12" md="6" lg="6">
-          <v-card class="text-center" tile>
-            <v-card-title> </v-card-title>
-            <v-avatar class="mb-4" size="100" circle elevation-12>
-              <img src="../assets/avatar-1.jpg" alt="" />
-            </v-avatar>
-            <h3 class="text-h6 font-weight-light py-2">
-              <v-icon class="mr-2">mdi-pencil</v-icon>John Doe
-            </h3>
-            <v-divider></v-divider>
-            <h3 class="text-h6 font-weight-light py-2">
-              <v-icon class="mr-2">mdi-email</v-icon>johndoe@gmail.com
-            </h3>
-            <v-divider></v-divider>
-            <h3 class="text-h6 font-weight-light py-2">
-              <v-icon class="mr-2">mdi-phone</v-icon>08012345678
-            </h3>
-            <v-divider></v-divider>
-            <h3 class="text-h6 font-weight-light py-2">
-              <v-icon class="mr-2">mdi-calendar</v-icon>28-August-1995
-            </h3>
-            <v-divider></v-divider>
-            <h3 class="text-h6 font-weight-light py-2">
-              <v-icon class="mr-2">mdi-home</v-icon>No 1 doesville, lorem town,
-              Ipsum.
-            </h3>
-            <v-divider></v-divider>
-            <h3 class="text-h6 font-weight-light py-2">
-              <v-icon class="mr-2">mdi-school-outline</v-icon> University
-            </h3>
-            <v-divider></v-divider>
-            <h3 class="text-h6 font-weight-light py-2">
-              <v-icon class="mr-2">mdi-school</v-icon> Abubakar Tafawa Balewa
-              University
-            </h3>
-            <v-divider></v-divider>
-          </v-card>
-          <v-card tile class="mt-2">
-            <v-card-title class="font-weight-regular"
-              >Uploaded Researches</v-card-title
-            >
-            <v-card-text>
-              <v-data-table>
-                <template v-slot:[`item.controls`]="props">
-                  <v-btn icon color="pink" @click="deleteResearch(props.id)">
-                    <v-icon>mdi-delete</v-icon>
-                  </v-btn>
-                </template>
-              </v-data-table>
-            </v-card-text>
-          </v-card>
-        </v-col>
-
+      <v-row >
         <v-col cols="12" md="6" lg="6">
           <v-card class="overflow-hidden" tile>
             <v-toolbar flat color="#00a368">
@@ -71,64 +18,26 @@
             <v-card-text>
               <v-text-field
                 :disabled="!isEditing"
-                label="Name"
-                prepend-icon="mdi-pencil"
-                color="#00a368"
-              ></v-text-field>
-              <v-text-field
-                :disabled="!isEditing"
-                label="email"
-                prepend-icon="mdi-email"
-                color="#00a368"
-              ></v-text-field>
-              <v-text-field
-                :disabled="!isEditing"
                 label="phone"
+                v-model="phone"
+                :placeholder="user.phone"
                 prepend-icon="mdi-phone"
                 color="#00a368"
               ></v-text-field>
-              <v-menu
-                ref="menu"
-                v-model="menu"
-                :close-on-content-click="false"
-                :return-value.sync="date"
-                transition="scale-transition"
-                offset-y
-                max-width="290px"
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    :disabled="!isEditing"
-                    v-model="date"
-                    label="Date Of Birth"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    color="#00a368"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  color="#00a368"
-                  v-model="date"
-                  type="date"
-                  no-title
-                  scrollable
-                  header-color="#00a368"
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn text color="#00a368" @click="menu = false">
-                    Cancel
-                  </v-btn>
-                  <v-btn text color="#00a368" @click="$refs.menu.save(date)">
-                    OK
-                  </v-btn>
-                </v-date-picker>
-              </v-menu>
+              <v-text-field
+                :disabled="!isEditing"
+                label="password"
+                 :placeholder="user.password"
+                v-model="password"
+                prepend-icon="mdi-lock"
+                color="#00a368"
+              ></v-text-field>
+
               <v-text-field
                 :disabled="!isEditing"
                 label="Adress"
+                v-model="address"
+                :placeholder="user.address"
                 prepend-icon="mdi-home"
                 color="#00a368"
               ></v-text-field>
@@ -136,16 +45,22 @@
                 :disabled="!isEditing"
                 :items="institutionTypes"
                 :filter="customFilter"
+                :placeholder="user.institution.name"
                 color="#00a368"
+                v-model="institutionType"
                 item-text="name"
+                
                 label="InstitutionType"
                 prepend-icon="mdi-school-outline"
               ></v-autocomplete>
               <v-autocomplete
                 :disabled="!isEditing"
+                :placeholder="user.institution.type"
                 :items="institutions"
+                v-model="institutionName"
                 :filter="customFilter"
                 color="#00a368"
+                
                 item-text="name"
                 label="Institution"
                 prepend-icon="mdi-school"
@@ -163,6 +78,22 @@
             </v-snackbar>
           </v-card>
         </v-col>
+        <v-col cols="12" md="6" lg="6">
+          <v-card tile>
+            <v-card-title class="font-weight-regular"
+              >Uploaded Researches</v-card-title
+            >
+            <v-card-text>
+              <v-data-table>
+                <template v-slot:[`item.controls`]="props">
+                  <v-btn icon color="pink" @click="deleteResearch(props.id)">
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </template>
+              </v-data-table>
+            </v-card-text>
+          </v-card>
+        </v-col>
       </v-row>
     </v-container>
   </v-app>
@@ -170,13 +101,22 @@
 <script>
 export default {
   name: "Profile",
+  components: {},
   data() {
     return {
       hasSaved: false,
       isEditing: null,
       model: null,
+      phone: "",
+      password: "",
+      address: '',
+      institutionType: "",
+      institutionName: "",
+
       date: null,
       menu: false,
+      user: JSON.parse(localStorage.getItem("user")),
+      
 
       institutionTypes: [
         "University",
@@ -205,6 +145,7 @@ export default {
       this.isEditing = !this.isEditing;
       this.hasSaved = true;
     },
+    
   },
 };
 </script>

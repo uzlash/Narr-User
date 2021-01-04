@@ -215,23 +215,35 @@
                 </v-avatar>
               </div>
 
-              <v-card-text class="text-h5 pa-0 text-center font-weight-light">{{
-                user.fullName
-              }}</v-card-text>
-              <v-card-text class="body-1 pa-0 text-center font-weight-light">{{
-                user.email
-              }}</v-card-text>
-              <v-card-text class="body-2 pa-0 text-center font-weight-light">{{
-                user.institution.text
-              }}</v-card-text>
+              <v-card-text class="text-h5 pa-0 text-center font-weight-light ">
+                {{ user.fullName }}</v-card-text
+              >
+
+              <v-card-text
+                class="body-1 pa-0 text-center font-weight-light text-icon"
+              >
+                {{ user.email }}</v-card-text
+              >
+              <v-card-text
+                class="body-2 pa-0 text-center font-weight-light text-icon"
+              >
+                {{ user.institution.name }}</v-card-text
+              >
+
               <div class="d-flex justify-center">
                 <span class="font-weight-light mx-2 body-2">Last Login:</span>
                 <span class="font-weight-light orange--text body-2"
-                  >26 minutes ago</span
+                  >26 Minutes ago</span
                 >
               </div>
               <div class="d-flex justify-center">
-                <v-btn outlined small class="mt-2" color="#00a368">
+                <v-btn
+                  outlined
+                  small
+                  class="mt-2"
+                  color="#00a368"
+                  to="/profile"
+                >
                   <v-icon>mdi-circle-edit-outline</v-icon>
                   Edit Profile</v-btn
                 >
@@ -280,233 +292,233 @@
 export default {
   components: {},
   data: () => ({
-    user: JSON.parse(localStorage.getItem('user')),
+    user: JSON.parse(localStorage.getItem("user")),
     users: [],
     CardDocuments: [
       {
-        title: 'Documents Uploaded',
-        value: '5 Documents',
-        subtitle: 'Total Uploads',
-        icon: 'mdi-file',
-        color: '#00a368',
+        title: "Documents Uploaded",
+        value: "5 Documents",
+        subtitle: "Total Uploads",
+        icon: "mdi-file",
+        color: "#00a368",
       },
       {
-        title: 'Read Sugestions',
-        value: '33 Documents',
-        subtitle: 'Daily Suggestions',
-        icon: 'mdi-book-open-page-variant',
-        color: 'light-blue',
+        title: "Read Sugestions",
+        value: "33 Documents",
+        subtitle: "Daily Suggestions",
+        icon: "mdi-book-open-page-variant",
+        color: "light-blue",
       },
       {
-        title: 'Mentions',
-        value: '26 Mentions',
-        subtitle: 'Mentions in the last 1 year',
-        icon: 'mdi-account',
-        color: 'orange',
+        title: "Mentions",
+        value: "26 Mentions",
+        subtitle: "Mentions in the last 1 year",
+        icon: "mdi-account",
+        color: "orange",
       },
       {
-        title: 'Research Grants',
-        value: '2 Active',
-        subtitle: 'Researches Working On',
-        icon: 'mdi-book-open-variant',
-        color: 'pink',
+        title: "Research Grants",
+        value: "2 Active",
+        subtitle: "Researches Working On",
+        icon: "mdi-book-open-variant",
+        color: "pink",
       },
     ],
     History: [
       {
         id: 1,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'A research on neural networks with backwards propagation',
-        authors: 'Gol D. Roger, Edward Newgate & Monkey D. Garp et.al',
-        title2: 'N1200',
-        subtitle2: '35 pages',
-        date: '20-03-2018',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "A research on neural networks with backwards propagation",
+        authors: "Gol D. Roger, Edward Newgate & Monkey D. Garp et.al",
+        title2: "N1200",
+        subtitle2: "35 pages",
+        date: "20-03-2018",
       },
       {
         id: 2,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'Linear regression and SVM',
-        authors: 'Johnny Cage, Sub Zero & Scorpion et.al',
-        title2: 'N700',
-        subtitle2: '21 pages',
-        date: '20-03-2018',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "Linear regression and SVM",
+        authors: "Johnny Cage, Sub Zero & Scorpion et.al",
+        title2: "N700",
+        subtitle2: "21 pages",
+        date: "20-03-2018",
       },
       {
         id: 3,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'An intensive research on KNN & Random forest',
-        authors: 'Monkey D. Luffy, Roronoa Zoro & Vinsmoke Sanji et.al',
-        title2: 'N500',
-        subtitle2: '17 pages',
-        date: '20-03-2018',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "An intensive research on KNN & Random forest",
+        authors: "Monkey D. Luffy, Roronoa Zoro & Vinsmoke Sanji et.al",
+        title2: "N500",
+        subtitle2: "17 pages",
+        date: "20-03-2018",
       },
       {
         id: 4,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'Election violence, a case of 2011 presidential election',
-        authors: 'Shanks, Marshall D. Teach, Big Mom & Kaido et.al',
-        title2: 'FREE',
-        subtitle2: '20 pages',
-        date: '20-03-2018',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "Election violence, a case of 2011 presidential election",
+        authors: "Shanks, Marshall D. Teach, Big Mom & Kaido et.al",
+        title2: "FREE",
+        subtitle2: "20 pages",
+        date: "20-03-2018",
       },
       {
         id: 5,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'A research on neural networks with backwards propagation',
-        authors: 'Magellan & Hanyyabal et.al',
-        title2: 'N1200',
-        subtitle2: '10 pages',
-        date: '20-03-2018',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "A research on neural networks with backwards propagation",
+        authors: "Magellan & Hanyyabal et.al",
+        title2: "N1200",
+        subtitle2: "10 pages",
+        date: "20-03-2018",
       },
       {
         id: 6,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'Linear regression of the 7 Cassanovas and SVM',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "Linear regression of the 7 Cassanovas and SVM",
         authors:
-          'Eustass Kid, Trafalgar Law, Luffy, Capone Bege, Basil Hawkins, Mad Monk Euroge, Scratchmen Apoo & Jewelery Bonny et.al',
-        title2: 'N700',
-        subtitle2: '5 pages',
-        date: '20-03-2018',
+          "Eustass Kid, Trafalgar Law, Luffy, Capone Bege, Basil Hawkins, Mad Monk Euroge, Scratchmen Apoo & Jewelery Bonny et.al",
+        title2: "N700",
+        subtitle2: "5 pages",
+        date: "20-03-2018",
       },
       {
         id: 7,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'An intensive research on KNN & Random forest',
-        authors: 'Emperor Kaido',
-        title2: 'N500',
-        subtitle2: '15 pages',
-        date: '20-03-2018',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "An intensive research on KNN & Random forest",
+        authors: "Emperor Kaido",
+        title2: "N500",
+        subtitle2: "15 pages",
+        date: "20-03-2018",
       },
       {
         id: 8,
-        color: 'blue',
-        icon: 'mdi-file-document',
-        title1: 'Election violence, a case of 2011 presidential election',
-        authors: 'Prtogas D Ace, Sabo & Monkey D. Luffy et.al',
-        title2: 'FREE',
-        subtitle2: '20 pages',
-        date: '20-03-2018',
+        color: "blue",
+        icon: "mdi-file-document",
+        title1: "Election violence, a case of 2011 presidential election",
+        authors: "Prtogas D Ace, Sabo & Monkey D. Luffy et.al",
+        title2: "FREE",
+        subtitle2: "20 pages",
+        date: "20-03-2018",
       },
     ],
     Grants: [
       {
         id: 1,
-        title1: 'Academic research writing - design thinking',
+        title1: "Academic research writing - design thinking",
         subtitle1:
-          'Academic Research Writing on the topic of Design Thinking and Food Innovation or Food Industry.',
-        title2: 'N350,000',
+          "Academic Research Writing on the topic of Design Thinking and Food Innovation or Food Industry.",
+        title2: "N350,000",
       },
       {
         id: 1,
-        title1: 'Virtual Research assistant / Lead Search & Work',
+        title1: "Virtual Research assistant / Lead Search & Work",
         subtitle1:
-          'I am looking for a team virtual team member with experience in data scraping, finding relevant prospects (contact details) and do cold outreach',
-        title2: 'N100/hr - 40hrs/week',
+          "I am looking for a team virtual team member with experience in data scraping, finding relevant prospects (contact details) and do cold outreach",
+        title2: "N100/hr - 40hrs/week",
       },
       {
         id: 1,
         title1:
-          'Manually Research Facebook Pages, Ads and puts them into a Spreadsheet',
+          "Manually Research Facebook Pages, Ads and puts them into a Spreadsheet",
         subtitle1:
-          'Expected to get filled in two spreadsheet columns: Library URL and Countries Algorithm (see the link attached)',
-        title2: 'N5,000',
+          "Expected to get filled in two spreadsheet columns: Library URL and Countries Algorithm (see the link attached)",
+        title2: "N5,000",
       },
     ],
     chartData: [
-      ['Time', 'Mins'],
-      ['12am', 0],
-      ['1am', 0],
-      ['2am', 0],
-      ['3am', 0],
-      ['4am', 0],
-      ['5am', 0],
-      ['6am', 0],
-      ['7am', 0],
-      ['8am', 40],
-      ['9am', 30],
-      ['10am', 10],
-      ['11am', 0],
-      ['12pm', 0],
-      ['1pm', 50],
-      ['2pm', 30],
-      ['3pm', 5],
-      ['4pm', 10],
-      ['5pm', 15],
-      ['6pm', 20],
-      ['7pm', 40],
-      ['8pm', 45],
-      ['9pm', 50],
-      ['10pm', 55],
-      ['11pm', 0],
+      ["Time", "Mins"],
+      ["12am", 0],
+      ["1am", 0],
+      ["2am", 0],
+      ["3am", 0],
+      ["4am", 0],
+      ["5am", 0],
+      ["6am", 0],
+      ["7am", 0],
+      ["8am", 40],
+      ["9am", 30],
+      ["10am", 10],
+      ["11am", 0],
+      ["12pm", 0],
+      ["1pm", 50],
+      ["2pm", 30],
+      ["3pm", 5],
+      ["4pm", 10],
+      ["5pm", 15],
+      ["6pm", 20],
+      ["7pm", 40],
+      ["8pm", 45],
+      ["9pm", 50],
+      ["10pm", 55],
+      ["11pm", 0],
     ],
     columnChartData: [
-      ['Days', 'Times'],
-      ['Monday', 45],
-      ['Tuesday', 60],
-      ['Wednesday', 30],
-      ['Thursday', 30],
-      ['Friday', 55],
-      ['Saturday', 0],
-      ['Sunday', 0],
+      ["Days", "Times"],
+      ["Monday", 45],
+      ["Tuesday", 60],
+      ["Wednesday", 30],
+      ["Thursday", 30],
+      ["Friday", 55],
+      ["Saturday", 0],
+      ["Sunday", 0],
     ],
     pieChartData: [
-      ['Year', 'Usage'],
-      ['2017', 20],
-      ['2018', 20],
-      ['2019', 35],
-      ['2020', 25],
+      ["Year", "Usage"],
+      ["2017", 20],
+      ["2018", 20],
+      ["2019", 35],
+      ["2020", 25],
     ],
     chartOptions: {
       chart: {
-        title: 'Company Performance',
-        subtitle: 'Sales, Expenses, and Profit: 2017-2020',
+        title: "Company Performance",
+        subtitle: "Sales, Expenses, and Profit: 2017-2020",
       },
-      labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
+      labels: ["12am", "3am", "6am", "9am", "12pm", "3pm", "6pm", "9pm"],
       value: [200, 675, 410, 390, 310, 460, 250, 240],
     },
     mentions: [
       {
         id: 1,
-        imageSrc: 'https://i.imgur.com/WF8mSR2.png',
-        title: 'Musa Damu',
-        subtitle: 'The work of @uzlash helped me alot',
+        imageSrc: "https://i.imgur.com/WF8mSR2.png",
+        title: "Musa Damu",
+        subtitle: "The work of @uzlash helped me alot",
       },
       {
         id: 2,
-        imageSrc: 'https://i.imgur.com/Jc6fWCQ.png',
-        title: 'Mubarak Ibrahim',
-        subtitle: 'I worked with @uzlash on the research work',
+        imageSrc: "https://i.imgur.com/Jc6fWCQ.png",
+        title: "Mubarak Ibrahim",
+        subtitle: "I worked with @uzlash on the research work",
       },
       {
         id: 3,
-        imageSrc: 'https://i.imgur.com/HBOQXZp.png',
-        title: 'Kiki drake',
-        subtitle: 'We should collaborate on a research project i have',
+        imageSrc: "https://i.imgur.com/HBOQXZp.png",
+        title: "Kiki drake",
+        subtitle: "We should collaborate on a research project i have",
       },
     ],
   }),
   methods: {
     goResearch() {
-      this.$router.push('/upload')
+      this.$router.push("/upload");
     },
     goGrants() {
-      this.$router.push('/viewgrant')
+      this.$router.push("/viewgrant");
     },
     goCrowdFunding() {
-      this.$router.push('/viewcrowd')
+      this.$router.push("/viewcrowd");
     },
     goAnalytics() {
-      this.$router.push('/analytics')
+      this.$router.push("/analytics");
     },
   },
-}
+};
 </script>
 
 <style>

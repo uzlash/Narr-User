@@ -199,95 +199,100 @@
 <script>
 export default {
   data: () => ({
-    user: JSON.parse(localStorage.getItem("user")),
+    user: JSON.parse(localStorage.getItem('user')),
     drawer: true,
     links: [
-      { icon: "mdi-home", text: "Home", route: "/" },
+      { icon: 'mdi-home', text: 'Home', route: '/' },
       {
-        icon: "mdi-database",
-        text: "Repository",
-        route: "/repository",
+        icon: 'mdi-database',
+        text: 'Repository',
+        route: '/repository',
       },
       {
-        icon: "mdi-read",
-        text: "Reading List",
-        route: "/history",
+        icon: 'mdi-read',
+        text: 'Reading List',
+        route: '/history',
       },
     ],
 
     researchFunding: [
       {
-        icon: "mdi-book-open-variant",
-        text: "Grants",
-        route: "/viewgrant",
+        icon: 'mdi-book-open-variant',
+        text: 'Grants',
+        route: '/viewgrant',
       },
       {
-        icon: "mdi-account-cash",
-        text: "Crowdfund",
-        route: "/viewcrowd",
+        icon: 'mdi-account-cash',
+        text: 'Crowdfund',
+        route: '/viewcrowd',
       },
     ],
 
     services: [
       {
-        icon: "mdi-chat",
-        text: "Chat",
-        route: "/chat",
+        icon: 'mdi-chat',
+        text: 'Chat',
+        route: '/chat',
       },
       {
-        icon: "mdi-ocr",
-        text: "Image to Text",
-        route: "/ocr",
+        icon: 'mdi-ocr',
+        text: 'Image to Text',
+        route: '/ocr',
       },
       {
-        icon: "mdi-file",
-        text: "Document Conversion",
-        route: "/convert",
+        icon: 'mdi-file',
+        text: 'Document Conversion',
+        route: '/convert',
       },
       {
-        icon: "mdi-message-video",
-        text: "Video Conferencing",
-        route: "/video",
+        icon: 'mdi-message-video',
+        text: 'Video Conferencing',
+        route: '/video',
       },
     ],
     admin: [
       {
-        icon: "mdi-chart-box-outline",
-        text: "Overview",
-        route: "/admin",
+        icon: 'mdi-chart-box-outline',
+        text: 'Overview',
+        route: '/admin',
       },
       {
-        icon: "mdi-account",
-        text: "Users",
-        route: "/user",
+        icon: 'mdi-account-multiple',
+        text: 'Users',
+        route: '/user',
+      },
+      {
+        icon: 'mdi-account',
+        text: 'Super user',
+        route: '/superuser',
       },
     ],
 
     messages: [
       {
-        title: "umar abubakar",
-        subtitle: "hi",
-        tile: "mention you",
-        avatar: "mdi-user",
+        title: 'umar abubakar',
+        subtitle: 'hi',
+        tile: 'mention you',
+        avatar: 'mdi-user',
       },
 
-      { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
-      { title: "usman murtala", subtitle: "hi", tile: "mention you" },
-      { title: "abba kabir", subtitle: "hello", tile: "mention you" },
-      { title: "aliyu ibrahim", subtitle: "hello", tile: "mention you" },
-      { title: "mubarak ", subtitle: "hi", tile: "mention you" },
-      { title: "abubakar", subtitle: "hi", tile: "mention you" },
+      { title: 'musa abubakar', subtitle: 'hi', tile: 'mention you' },
+      { title: 'usman murtala', subtitle: 'hi', tile: 'mention you' },
+      { title: 'abba kabir', subtitle: 'hello', tile: 'mention you' },
+      { title: 'aliyu ibrahim', subtitle: 'hello', tile: 'mention you' },
+      { title: 'mubarak ', subtitle: 'hi', tile: 'mention you' },
+      { title: 'abubakar', subtitle: 'hi', tile: 'mention you' },
     ],
     offset: true,
   }),
   methods: {
     logOut() {
-      this.$store.dispatch("SIGN_OUT").then(() => {
-        this.$router.push("/signin");
-      });
+      this.$store.dispatch('SIGN_OUT').then(() => {
+        this.$router.push('/signin')
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped>

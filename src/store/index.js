@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     token: localStorage.getItem('token') || null,
-    user: localStorage.getItem('user') || null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
     step: 1,
     signIn: {
       signInLoading: false,
@@ -27,7 +27,7 @@ const store = new Vuex.Store({
     //Socket
     socket: {
       signIn: {
-        user: {},
+        user: JSON.parse(localStorage.getItem('user')),
       },
       logout: {
         user: {},
@@ -196,11 +196,31 @@ const store = new Vuex.Store({
     },
     //Socekts - Note Dont use arrow functions
     socket_connect(data) {
-      console.log('Socket Connected!', data)
+      const user = store.state.user
+      const token = store.state.token
+      if (token && user) {
+        console.log('User Local Storage', user)
+        console.log('Token Local Storage', token)
+        console.log('User Online Resending login...')
+        this._vm.$socket.client.emit('LOGIN', {
+          token,
+          user,
+        })
+        console.log('Socket Connected!', data)
+      } else {
+        console.log('Socket Connected!', data)
+      }
     },
     'socket_event:user:login'({ commit }, user) {
-      console.log('Logged in using socket!', user)
-      this._vm.$toast.success(`User logged in: ${user.fullName}`)
+      let obj = JSON.parse(user)
+      console.log('Logged in using socket!', obj.email)
+      console.log('Object.email', obj.email)
+      console.log('User storage. email', store.state.user.email)
+      if (obj.email === store.state.user.email) {
+        this._vm.$toast.success(`Welcome, ${obj.fullName}`)
+      } else {
+        this._vm.$toast.success(`User Logged In, ${obj.fullName}`)
+      }
       commit('socketUserLogin', user)
     },
     'socket_event:microservice:statuses'({ commit }, data) {
@@ -208,8 +228,10 @@ const store = new Vuex.Store({
       commit('microserviceStatus', data)
     },
     'socket_event:user:logout'({ commit }, user) {
+      let obj = JSON.parse(user)
       console.log('User Logged Out using socket!', user)
-      this._vm.$toast.warning(`User Logged Out: ${user}`)
+
+      this._vm.$toast.warning(`User Logged Out:  ${obj.fullName}`)
       commit('socketUserLogout', user)
     },
     socket_disconnect(data) {
