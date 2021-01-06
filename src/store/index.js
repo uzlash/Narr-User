@@ -33,6 +33,7 @@ const store = new Vuex.Store({
         user: {},
       },
       microserviceStatus: '',
+      usersOnline: [],
     },
   },
   getters: {
@@ -44,6 +45,9 @@ const store = new Vuex.Store({
     },
     getMstatus: (state) => {
       return state.socket.mStatus
+    },
+    getSocketUsersOnline: (state) => {
+      return state.socket.usersOnline
     },
   },
   mutations: {
@@ -102,6 +106,27 @@ const store = new Vuex.Store({
     microserviceStatus(state, payload) {
       state.socket.microserviceStatus = payload
     },
+    // SocketUsersOnline(state, payload) {
+    //   state.socket.usersOnline = payload
+    // },
+    'SOCKET_EVENT:USERS:CURRENTLY:ONLINE'(state, payload) {
+      state.socket.usersOnline = JSON.parse(payload)
+      console.log('Users online mutation', JSON.parse(payload))
+    },
+    AddUserToSocketUsersArray(state, payload) {
+      state.socket.usersOnline.push(JSON.parse(payload))
+      console.log('Add to Socket', state.socket.usersOnline)
+    },
+    RemoveUserFromSocketUsersArray(state, payload) {
+      const user = JSON.parse(payload)
+      state.socket.usersOnline.splice(
+        state.socket.usersOnline.findIndex(
+          (value) => value.email === user.email
+        ),
+        1
+      )
+      console.log('Remove From Socket', state.socket.usersOnline)
+    },
   },
   actions: {
     SIGN_IN({ commit }, authData) {
@@ -118,7 +143,8 @@ const store = new Vuex.Store({
       })
         .then((r) => r.json())
         .then((response) => {
-          if (response.status === 'failed') {
+          //status failed or false
+          if (response.status === 'false') {
             commit('stopLoader')
             commit('signInError', response.message)
           } else {
@@ -220,6 +246,7 @@ const store = new Vuex.Store({
         this._vm.$toast.success(`Welcome, ${obj.fullName}`)
       } else {
         this._vm.$toast.success(`User Logged In, ${obj.fullName}`)
+        commit('AddUserToSocketUsersArray', user)
       }
       commit('socketUserLogin', user)
     },
@@ -229,11 +256,17 @@ const store = new Vuex.Store({
     },
     'socket_event:user:logout'({ commit }, user) {
       let obj = JSON.parse(user)
-      console.log('User Logged Out using socket!', user)
+      console.log('User Logged Out using socket!', obj)
+      commit('RemoveUserFromSocketUsersArray', user)
 
       this._vm.$toast.warning(`User Logged Out:  ${obj.fullName}`)
       commit('socketUserLogout', user)
     },
+    // 'socket_event:users:currently:online'({ commit }, usersOnline) {
+    //   const parsedUsersOnline = JSON.parse(usersOnline)
+    //   console.log('User Currently Online', parsedUsersOnline)
+    //   commit('SocketUsersOnline', parsedUsersOnline)
+    // },
     socket_disconnect(data) {
       console.log('Socket disconnected!', data)
     },

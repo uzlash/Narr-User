@@ -9,7 +9,6 @@ import store from '../store/index.js'
 
 Vue.use(VueRouter)
 
-const user = JSON.parse(localStorage.getItem('user'))
 const routes = [
   //#################
   //Researcher Routes
@@ -284,6 +283,7 @@ const routes = [
       requiresAuth: true,
     },
     beforeEnter: (to, from, next) => {
+      const user = store.state.user
       if (user.userRole === 'admin') {
         next()
       } else {
@@ -302,6 +302,7 @@ const routes = [
       requiresAuth: true,
     },
     beforeEnter: (to, from, next) => {
+      const user = store.state.user
       if (user.userRole === 'admin') {
         next()
       } else {
@@ -320,7 +321,7 @@ const routes = [
       requiresAuth: true,
     },
     beforeEnter: (to, from, next) => {
-      console.log('userRole', user.userRole)
+      const user = store.state.user
       if (user.userRole === 'admin') {
         next()
       } else {

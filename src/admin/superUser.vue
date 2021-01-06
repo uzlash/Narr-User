@@ -189,78 +189,77 @@
 <script>
 export default {
   data: () => ({
-       selectedInstitutionType: "",
-    selectedInstitution: "",
+    selectedInstitutionType: '',
+    selectedInstitution: '',
     date: null,
     menu: false,
     modal: false,
     rules: {
-      required: (v) => !!v || "Field is required",
-      counter: (v) => (v && v.length >= 3) || "Minimum length is 3 characters",
+      required: (v) => !!v || 'Field is required',
+      counter: (v) => (v && v.length >= 3) || 'Minimum length is 3 characters',
       email: (value) => {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(value) || "Invalid e-mail.";
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        return pattern.test(value) || 'Invalid e-mail.'
       },
       password: (value) =>
-        (value && value.length >= 6) || "Minimum length is 6 characters",
+        (value && value.length >= 6) || 'Minimum length is 6 characters',
     },
     dialog: false,
     superusers: [
       {
         id: 1,
-        fName: "John",
-        lName: "Doe",
-        email: "johndoe@gmail.com",
-        phone: "08092111242",
-        institution: "Ahmadu Bello Zaria",
-        password: "xafu3a%$@",
+        fName: 'John',
+        lName: 'Doe',
+        email: 'johndoe@gmail.com',
+        phone: '08092111242',
+        institution: 'Ahmadu Bello Zaria',
+        password: 'xafu3a%$@',
       },
     ],
     superUserHeaders: [
-      { text: "First Name", value: "fName", sortable: false },
-      { text: "Last Name", value: "lName", sortable: false },
-      { text: "Email", value: "email", sortable: false },
-      { text: "Phone", value: "phone", sortable: false },
-      { text: "Institution", value: "institution", sortable: false },
-      { text: "Password", value: "password", sortable: false },
-      { text: "actions", value: "actions", sortable: false },
+      { text: 'First Name', value: 'fName', sortable: false },
+      { text: 'Last Name', value: 'lName', sortable: false },
+      { text: 'Email', value: 'email', sortable: false },
+      { text: 'Phone', value: 'phone', sortable: false },
+      { text: 'Institution', value: 'institution', sortable: false },
+      { text: 'Password', value: 'password', sortable: false },
+      { text: 'actions', value: 'actions', sortable: false },
     ],
-     userTypes: ["Student", "Staff", "Independent Researcher"],
+    userTypes: ['Student', 'Staff', 'Independent Researcher'],
     institutionTypes: [
-      "University",
-      "Polytechnic",
-      "College of Education",
-      "Monotechnic",
-      "Independent Researcher",
+      'University',
+      'Polytechnic',
+      'College of Education',
+      'Monotechnic',
+      'Independent Researcher',
     ],
     institutions: [
-      { text: "Abubakar Tafawa Balewa University", type: "university" },
-      { text: "Ahmadu Bello University", type: "university" },
-      { text: "Bayero University Kano", type: "university" },
-      { text: "Kaduna Polytechnique", type: "polytechnic" },
-      { text: "Nuhu Bamalli", type: "polytechnic" },
+      { text: 'Abubakar Tafawa Balewa University', type: 'university' },
+      { text: 'Ahmadu Bello University', type: 'university' },
+      { text: 'Bayero University Kano', type: 'university' },
+      { text: 'Kaduna Polytechnique', type: 'polytechnic' },
+      { text: 'Nuhu Bamalli', type: 'polytechnic' },
       {
-        text: "Federal College of Education Zaria",
-        type: "college of education",
+        text: 'Federal College of Education Zaria',
+        type: 'college of education',
       },
       {
-        text: "Federal College of Education Katsina",
-        type: "college of education",
+        text: 'Federal College of Education Katsina',
+        type: 'college of education',
       },
-      { text: "Dialogue Institute of Technology", type: "monotechnic" },
-      { text: "Khemsafe Computers", type: "monotechnic" },
-      { text: "Independent", type: "independent researcher" },
+      { text: 'Dialogue Institute of Technology', type: 'monotechnic' },
+      { text: 'Khemsafe Computers', type: 'monotechnic' },
+      { text: 'Independent', type: 'independent researcher' },
     ],
-    
   }),
   computed: {
     filteredInstitutions() {
       return this.institutions.filter((institution) => {
         return institution.type.match(
           this.selectedInstitutionType.toLowerCase()
-        );
-      });
+        )
+      })
     },
   },
-};
+}
 </script>

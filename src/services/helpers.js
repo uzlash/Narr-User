@@ -62,4 +62,12 @@ export default {
       },
     })
   },
+  //Get all Users
+  fetchUsers() {
+    return axios.get(this.apiBaseUrl + 'api/v1/user', {
+      headers: {
+        'x-token': store.state.token,
+      },
+    })
+  },
 }

@@ -85,12 +85,82 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span> OCR Usage:</span>
+                </div>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2">Total Processed:</span>
+                  <span class="font-weight-bold">11,234</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span> OCR Usage:</span>
+                </div>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2">Total Processed:</span>
+                  <span class="font-weight-bold">11,234</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span> OCR Usage:</span>
+                </div>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2">Total Processed:</span>
+                  <span class="font-weight-bold">11,234</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span> OCR Usage:</span>
+                </div>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2">Total Processed:</span>
+                  <span class="font-weight-bold">11,234</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="6">
           <div>
             <v-card height="300px" tile outlined>
               <apexchart
                 height="100%"
-                width="100%"
+                width="95%"
                 type="bar"
                 :options="chartOptions"
                 :series="seriesColumn"
@@ -107,7 +177,7 @@
               <v-divider></v-divider>
               <apexchart
                 height="90%"
-                width="100%"
+                width="95%"
                 type="donut"
                 :options="chartOptionsPie"
                 :series="seriesDonut"
@@ -124,7 +194,7 @@
               <v-divider></v-divider>
               <apexchart
                 height="90%"
-                width="100%"
+                width="95%"
                 type="line"
                 :options="chartOptions"
                 :series="seriesColumn"

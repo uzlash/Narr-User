@@ -27,7 +27,7 @@ Vue.component('apexchart', VueApexCharts)
 Vue.use(VueSocketIOExt, socket)
 Vue.use(Toast)
 
-const token = localStorage.getItem('user-token')
+const token = localStorage.getItem('token')
 if (token) {
   axios.defaults.headers.common['x-token'] = token
 }

@@ -13,16 +13,55 @@
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn icon small class="mr-2" v-on="on" v-bind="attrs">
+              <v-badge
+                :content="UsersCurrentlyOnline.length"
+                bordered
+                color="indigo"
+                overlap
+              >
+                <v-icon>mdi-account-group</v-icon>
+              </v-badge>
+            </v-btn>
+          </template>
+          <v-card
+            width="350"
+            class="mx-auto cutom__card--overflow"
+            max-height="400"
+          >
+            <v-card-title primary-title> Users Online </v-card-title>
+            <v-list color="grey lighten-4">
+              <v-list-item
+                v-for="user in UsersCurrentlyOnline"
+                :key="user._id"
+                to="/chat"
+              >
+                <v-avatar>
+                  <img src="../assets/avatar-1.jpg" alt="alt" class="mr-2" />
+                </v-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{ user.fullName }}</v-list-item-title>
+                  <v-list-item-subtitle class="green--text"
+                    >Online</v-list-item-subtitle
+                  >
+                  <v-divider></v-divider>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-menu>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon small class="mx-2" v-on="on" v-bind="attrs">
               <v-badge content="7" bordered color="accent" overlap>
                 <v-icon color="grey">mdi-email</v-icon>
               </v-badge>
             </v-btn>
           </template>
           <v-card
-            max-width="400"
-            class="mx-auto cutom__card--overflow"
-            height="400"
             width="350"
+            class="mx-auto cutom__card--overflow"
+            max-height="400"
           >
             <v-card-title primary-title> Messages </v-card-title>
             <v-list color="grey lighten-4">
@@ -56,10 +95,9 @@
             </v-btn>
           </template>
           <v-card
-            max-width="400"
-            class="mx-auto cutom__card--overflow"
-            height="400"
             width="350"
+            class="mx-auto cutom__card--overflow"
+            max-height="400"
           >
             <v-card-title primary-title> Notifications </v-card-title>
 
@@ -253,18 +291,53 @@ export default {
     admin: [
       {
         icon: 'mdi-chart-box-outline',
-        text: 'Overview',
+        text: 'Dashboard',
         route: '/admin',
       },
       {
         icon: 'mdi-account-multiple',
-        text: 'Users',
+        text: 'Researchers',
         route: '/user',
       },
       {
         icon: 'mdi-account',
-        text: 'Super user',
+        text: 'Admins',
         route: '/superuser',
+      },
+      {
+        icon: 'mdi-database',
+        text: 'Repository',
+        route: '/repository',
+      },
+      {
+        icon: 'mdi-book-open-variant',
+        text: 'Grants',
+        route: '/viewgrant',
+      },
+      {
+        icon: 'mdi-account-cash',
+        text: 'Crowdfund',
+        route: '/viewcrowd',
+      },
+      {
+        icon: 'mdi-chat',
+        text: 'Chat',
+        route: '/chat',
+      },
+      {
+        icon: 'mdi-ocr',
+        text: 'Image to Text',
+        route: '/ocr',
+      },
+      {
+        icon: 'mdi-file',
+        text: 'Document Conversion',
+        route: '/convert',
+      },
+      {
+        icon: 'mdi-message-video',
+        text: 'Video Conferencing',
+        route: '/video',
       },
     ],
 
@@ -289,7 +362,13 @@ export default {
     logOut() {
       this.$store.dispatch('SIGN_OUT').then(() => {
         this.$router.push('/signin')
+        this.$socket.client.emit('LOGOUT')
       })
+    },
+  },
+  computed: {
+    UsersCurrentlyOnline() {
+      return this.$store.getters.getSocketUsersOnline
     },
   },
 }

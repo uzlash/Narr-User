@@ -308,7 +308,12 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn dark color="red" @click="dialogUpload = false">
+                <v-btn
+                  :disabled="disabled"
+                  dark
+                  color="red"
+                  @click="dialogUpload = false"
+                >
                   Close
                 </v-btn>
                 <v-btn
@@ -364,6 +369,7 @@ export default {
       hidden: false,
       date: null,
       menu: false,
+      disabled: false,
       rules: {
         required: (v) => !!v || 'Field is required',
       },
@@ -386,6 +392,7 @@ export default {
           return
         }
         this.loading = true
+        this.disabled = true
         helpers
           .uploadFileResearch(this.meta, this.currentFile, (event) => {
             this.showProgress = true
@@ -397,6 +404,7 @@ export default {
             console.log(response.data.message)
             this.messageSuccess = response.data.message
             this.loading = false
+            this.disabled = false
             setTimeout(() => {
               this.messageSuccess = ''
               this.dialogUpload = false
