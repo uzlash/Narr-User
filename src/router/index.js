@@ -293,10 +293,10 @@ const routes = [
   },
 
   {
-    path: '/superuser',
-    name: 'superUser',
+    path: '/adminuser',
+    name: 'adminuser',
     component: () =>
-      import(/* webpackChunkName: "adminview" */ '../admin/superUser.vue'),
+      import(/* webpackChunkName: "adminuser" */ '../admin/Admins.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,
@@ -316,6 +316,28 @@ const routes = [
     name: 'users',
     component: () =>
       import(/* webpackChunkName: "users" */ '../admin/Users.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      const user = store.state.user
+      if (user.userRole === 'admin') {
+        next()
+      } else {
+        next('/signin')
+      }
+    },
+  },
+
+  {
+    path: '/user/:id',
+    name: 'Individual User',
+    props: true,
+    component: () =>
+      import(
+        /* webpackChunkName: "Individual User" */ '../admin/UserIndividual.vue'
+      ),
     meta: {
       showHeader: true,
       requiresAuth: true,

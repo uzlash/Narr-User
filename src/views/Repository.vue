@@ -72,7 +72,9 @@
             >
               <!-- :src="'https://narr.ng/' + research.thumbnail" -->
               <v-img
-                :src="`https://api.narr.ng/${research.thumbnail}`"
+                :src="
+                  `https://api.narr.ng/${research.thumbnail}?action=thumbnail`
+                "
                 height="200px"
               ></v-img>
               <v-card-title

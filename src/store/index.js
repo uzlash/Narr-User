@@ -111,11 +111,47 @@ const store = new Vuex.Store({
     // },
     'SOCKET_EVENT:USERS:CURRENTLY:ONLINE'(state, payload) {
       state.socket.usersOnline = JSON.parse(payload)
-      console.log('Users online mutation', JSON.parse(payload))
+      console.log('Mutation socket', state.socket.usersOnline)
     },
     AddUserToSocketUsersArray(state, payload) {
-      state.socket.usersOnline.push(JSON.parse(payload))
-      console.log('Add to Socket', state.socket.usersOnline)
+      const user = JSON.parse(payload)
+      console.log('User', user)
+      console.log('Payload', payload)
+      console.log('State socket', state.socket.usersOnline)
+
+      for (const socket of state.socket.usersOnline) {
+        console.log('Socket', socket)
+        if (socket.email === user.email) {
+          console.log('User Already Exist')
+        } else {
+          state.socket.usersOnline.push(user)
+        }
+      }
+
+      // if (user.email === state.user.email) {
+      //   state.socket.usersOnline = state.socket.usersOnline.filter(
+      //     (payload, index, self) => {
+      //       index === self.findIndex((t) => t.email === payload.email)
+      //     }
+      //   )
+      // } else {
+      //   state.socket.usersOnline.push(user)
+      // }
+
+      // if (user.email === state.user.email) {
+      //   console.log('User Already Exists')
+      // } else {
+      //   state.socket.usersOnline.push(user)
+      // }
+      // state.socket.usersOnline.forEach((userInArray) => {
+      //   console.log('User in Array', userInArray)
+      //   console.log('Normal User', user)
+      //   if (userInArray.email === user.email) {
+      //     console.log('User Already Exist')
+      //   } else {
+      //     state.socket.usersOnline.push(user)
+      //   }
+      // })
     },
     RemoveUserFromSocketUsersArray(state, payload) {
       const user = JSON.parse(payload)
@@ -125,7 +161,6 @@ const store = new Vuex.Store({
         ),
         1
       )
-      console.log('Remove From Socket', state.socket.usersOnline)
     },
   },
   actions: {
@@ -144,7 +179,7 @@ const store = new Vuex.Store({
         .then((r) => r.json())
         .then((response) => {
           //status failed or false
-          if (response.status === 'false') {
+          if (response.status === 'failed') {
             commit('stopLoader')
             commit('signInError', response.message)
           } else {

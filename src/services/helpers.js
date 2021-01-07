@@ -70,4 +70,12 @@ export default {
       },
     })
   },
+  //Get one research document
+  fetchSingleUser(id) {
+    return axios.get(this.apiBaseUrl + 'api/v1/user/' + id, {
+      headers: {
+        'x-token': store.state.token,
+      },
+    })
+  },
 }

@@ -15,6 +15,7 @@ import VueApexCharts from 'vue-apexcharts'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
+// const socket = io('http://localhost:3000')
 const socket = io('wss://api.narr.ng')
 
 Vue.use(VueAxios, axios)

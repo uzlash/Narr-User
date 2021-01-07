@@ -302,7 +302,7 @@ export default {
       {
         icon: 'mdi-account',
         text: 'Admins',
-        route: '/superuser',
+        route: '/adminuser',
       },
       {
         icon: 'mdi-database',

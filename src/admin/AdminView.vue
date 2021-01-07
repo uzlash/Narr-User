@@ -2,7 +2,7 @@
   <v-app class="grey lighten-4">
     <v-container>
       <v-row>
-        <v-col cols="3">
+        <!-- <v-col cols="3">
           <v-card outlined tile height="86px">
             <v-row>
               <v-col cols="6">
@@ -31,7 +31,102 @@
               </v-col>
             </v-row>
           </v-card>
+        </v-col> -->
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span>Users:</span>
+                </div>
+                <v-divider class="my-1"></v-divider>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2">Total:</span>
+                  <span class="font-weight-bold"> 123,000</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
         </v-col>
+
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span>Users:</span>
+                </div>
+                <v-divider class="my-1"></v-divider>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2 success--text">Active:</span>
+                  <span class="font-weight-bold"> 15,000</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span>Users:</span>
+                </div>
+                <v-divider class="my-1"></v-divider>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2 warning--text">Pending:</span>
+                  <span class="font-weight-bold"> 70,000</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span>Users:</span>
+                </div>
+                <v-divider class="my-1"></v-divider>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2 red--text text--darken-4">Inactive:</span>
+                  <span class="font-weight-bold"> 33,000</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+
+        <v-col cols="3">
+          <v-card outlined tile height="86px">
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-center align-center">
+                  <span>Users:</span>
+                </div>
+                <v-divider class="my-1"></v-divider>
+                <div
+                  class="d-flex justify-center align-center font-weight-bold"
+                >
+                  <span class="mr-2 indigo--text">Online:</span>
+                  <span class="font-weight-bold"> 2</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+
         <v-col cols="3">
           <v-card outlined tile height="86px">
             <v-row>
@@ -39,6 +134,7 @@
                 <div class="d-flex justify-center align-center">
                   <span>Documents Uploaded:</span>
                 </div>
+                <v-divider class="my-1"></v-divider>
                 <div
                   class="d-flex justify-center align-center font-weight-bold"
                 >
@@ -56,6 +152,7 @@
                 <div class="d-flex justify-center align-center">
                   <span> Document Conveter Usage:</span>
                 </div>
+                <v-divider class="my-1"></v-divider>
                 <div
                   class="d-flex justify-center align-center font-weight-bold"
                 >
@@ -73,6 +170,7 @@
                 <div class="d-flex justify-center align-center">
                   <span> OCR Usage:</span>
                 </div>
+                <v-divider class="my-1"></v-divider>
                 <div
                   class="d-flex justify-center align-center font-weight-bold"
                 >
