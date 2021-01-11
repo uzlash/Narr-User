@@ -47,7 +47,13 @@ const store = new Vuex.Store({
       return state.socket.mStatus
     },
     getSocketUsersOnline: (state) => {
-      return state.socket.usersOnline
+      console.log('Before Result', state.socket.usersOnline)
+      const uniqe = new Set(
+        state.socket.usersOnline.map((e) => JSON.stringify(e))
+      )
+      const result = Array.from(uniqe).map((e) => JSON.parse(e))
+      console.log('After Result', result)
+      return result
     },
   },
   mutations: {
@@ -106,9 +112,6 @@ const store = new Vuex.Store({
     microserviceStatus(state, payload) {
       state.socket.microserviceStatus = payload
     },
-    // SocketUsersOnline(state, payload) {
-    //   state.socket.usersOnline = payload
-    // },
     'SOCKET_EVENT:USERS:CURRENTLY:ONLINE'(state, payload) {
       state.socket.usersOnline = JSON.parse(payload)
       console.log('Mutation socket', state.socket.usersOnline)
@@ -118,40 +121,7 @@ const store = new Vuex.Store({
       console.log('User', user)
       console.log('Payload', payload)
       console.log('State socket', state.socket.usersOnline)
-
-      for (const socket of state.socket.usersOnline) {
-        console.log('Socket', socket)
-        if (socket.email === user.email) {
-          console.log('User Already Exist')
-        } else {
-          state.socket.usersOnline.push(user)
-        }
-      }
-
-      // if (user.email === state.user.email) {
-      //   state.socket.usersOnline = state.socket.usersOnline.filter(
-      //     (payload, index, self) => {
-      //       index === self.findIndex((t) => t.email === payload.email)
-      //     }
-      //   )
-      // } else {
-      //   state.socket.usersOnline.push(user)
-      // }
-
-      // if (user.email === state.user.email) {
-      //   console.log('User Already Exists')
-      // } else {
-      //   state.socket.usersOnline.push(user)
-      // }
-      // state.socket.usersOnline.forEach((userInArray) => {
-      //   console.log('User in Array', userInArray)
-      //   console.log('Normal User', user)
-      //   if (userInArray.email === user.email) {
-      //     console.log('User Already Exist')
-      //   } else {
-      //     state.socket.usersOnline.push(user)
-      //   }
-      // })
+      state.socket.usersOnline.push(user)
     },
     RemoveUserFromSocketUsersArray(state, payload) {
       const user = JSON.parse(payload)
@@ -281,8 +251,8 @@ const store = new Vuex.Store({
         this._vm.$toast.success(`Welcome, ${obj.fullName}`)
       } else {
         this._vm.$toast.success(`User Logged In, ${obj.fullName}`)
-        commit('AddUserToSocketUsersArray', user)
       }
+      commit('AddUserToSocketUsersArray', user)
       commit('socketUserLogin', user)
     },
     'socket_event:microservice:statuses'({ commit }, data) {

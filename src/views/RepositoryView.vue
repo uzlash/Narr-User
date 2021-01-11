@@ -11,9 +11,7 @@
           <v-card outlined tile @click="dialog = true">
             <v-img
               v-if="research"
-              :src="
-                `https://api.narr.ng/${research.thumbnail}?action=thumbnail`
-              "
+              :src="`${imageUrl}${research.thumbnail}?action=thumbnail`"
               width="100%"
               height="446"
             ></v-img>
@@ -138,7 +136,7 @@
       <v-dialog v-model="dialog" width="1000">
         <v-img
           v-if="research"
-          :src="`https://api.narr.ng/${research.thumbnail}?action=thumbnail`"
+          :src="`${imageUrl}${research.thumbnail}?action=thumbnail`"
         ></v-img>
       </v-dialog>
     </div>
@@ -157,6 +155,11 @@ export default {
   methods: {
     readResearch(id) {
       this.$router.push(id + '/read')
+    },
+  },
+  computed: {
+    imageUrl() {
+      return helpers.apiBaseUrlSrc
     },
   },
   created() {

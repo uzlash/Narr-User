@@ -47,7 +47,7 @@
                   : 'image__box custom__image-zoomin white'
               "
               width="100%"
-              :src="computedSrc"
+              :src="`${imageUrl}${this.research.readPath}${this.page}.jpg`"
             ></v-img>
           </div>
         </v-col>
@@ -111,7 +111,7 @@
               : 'image__box custom__image-zoomout white'
           "
           width="100%"
-          :src="computedSrc"
+          :src="`${imageUrl}${this.research.readPath}${this.page}.jpg`"
         ></v-img>
       </v-dialog>
     </div>
@@ -182,8 +182,8 @@ export default {
     },
   },
   computed: {
-    computedSrc() {
-      return `https://api.narr.ng/${this.research.readPath}${this.page}.jpg`
+    imageUrl() {
+      return helpers.apiBaseUrlSrc
     },
   },
   created() {

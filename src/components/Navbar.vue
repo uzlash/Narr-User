@@ -89,7 +89,7 @@
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn small icon class="mx-2" v-on="on" v-bind="attrs">
-              <v-badge content="7" color="orange darken-2" dot overlap>
+              <v-badge content="7" color="red" dot overlap>
                 <v-icon color="grey">mdi-bell</v-icon>
               </v-badge>
             </v-btn>
@@ -247,7 +247,7 @@ export default {
         route: '/repository',
       },
       {
-        icon: 'mdi-read',
+        icon: 'mdi-format-list-numbered',
         text: 'Reading List',
         route: '/history',
       },

@@ -121,6 +121,7 @@
                     <v-col cols="12">
                       <v-textarea
                         :rules="[rules.required]"
+                        hide-details="auto"
                         auto-grow
                         outlined
                         clearable
@@ -179,27 +180,32 @@
                       ></v-select>
                     </v-col>
                     <v-col cols="12" sm="12" class="d-flex">
-                      <v-select
-                        :rules="[rules.required]"
-                        v-model="meta.accessType"
-                        outlined
-                        hide-details="auto"
-                        color="#00a368"
-                        class="ma-0 pa-0"
-                        :items="['Free', 'Paid']"
-                        label="Access Type"
-                      ></v-select>
-                    </v-col>
-                    <v-col cols="12" sm="12" class="d-flex">
-                      <v-text-field
-                        v-show="meta.accessType === 'Paid'"
-                        v-model="meta.monthlyFee"
-                        outlined
-                        type="number"
-                        color="#00a368"
-                        class="ma-0 pa-0"
-                        label="Input Monthly Subscription Fee (In Naira)"
-                      ></v-text-field>
+                      <v-row>
+                        <v-col cols="6">
+                          <v-select
+                            :rules="[rules.required]"
+                            v-model="meta.accessType"
+                            outlined
+                            hide-details="auto"
+                            color="#00a368"
+                            class="ma-0 pa-0"
+                            :items="['Free', 'Paid']"
+                            label="Access Type"
+                          ></v-select>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-text-field
+                            v-if="meta.accessType === 'Paid'"
+                            v-model="meta.monthlyFee"
+                            hide-details="auto"
+                            outlined
+                            type="number"
+                            color="#00a368"
+                            class="ma-0 pa-0"
+                            label="Input Monthly Subscription Fee (In Naira)"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
                     </v-col>
                     <v-col cols="12" md="12">
                       <v-menu
@@ -318,6 +324,7 @@
                 </v-btn>
                 <v-btn
                   dark
+                  :disabled="disabledSubmit"
                   :loading="loading"
                   color="#00a368"
                   @click="uploadFile()"
@@ -370,6 +377,7 @@ export default {
       date: null,
       menu: false,
       disabled: false,
+      disabledSubmit: false,
       rules: {
         required: (v) => !!v || 'Field is required',
       },
@@ -405,6 +413,7 @@ export default {
             this.messageSuccess = response.data.message
             this.loading = false
             this.disabled = false
+            this.disabledSubmit = true
             setTimeout(() => {
               this.messageSuccess = ''
               this.dialogUpload = false

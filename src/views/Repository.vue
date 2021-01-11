@@ -72,9 +72,7 @@
             >
               <!-- :src="'https://narr.ng/' + research.thumbnail" -->
               <v-img
-                :src="
-                  `https://api.narr.ng/${research.thumbnail}?action=thumbnail`
-                "
+                :src="`${imageUrl}${research.thumbnail}?action=thumbnail`"
                 height="200px"
               ></v-img>
               <v-card-title
@@ -121,6 +119,11 @@ export default {
   methods: {
     goResearchView(id) {
       this.$router.push('/repository/' + id)
+    },
+  },
+  computed: {
+    imageUrl() {
+      return helpers.apiBaseUrlSrc
     },
   },
   created() {

@@ -16,7 +16,7 @@ import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
 // const socket = io('http://localhost:3000')
-const socket = io('wss://api.narr.ng')
+const socket = io('ws://api.narr.ng')
 
 Vue.use(VueAxios, axios)
 Vue.use(VueGoogleCharts)

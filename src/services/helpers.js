@@ -4,13 +4,14 @@ import store from '../store/index'
 export default {
   //Base URL
   apiBaseUrl: 'https://api.narr.ng/',
+  apiBaseUrlSrc: 'https://api.narr.ng',
   // apiBaseUrl: 'http://localhost:3000/',
   appBaseUrl: 'https://narr.ng/',
   //Ocr Image to Text
   uploadImageOcr(file, onUploadProgress) {
     const formData = new FormData()
     formData.append('image', file)
-    return axios.post('/ocr', formData, {
+    return axios.post(this.apiBaseUrl + 'ocr', formData, {
       headers: {
         Accept: 'text/plain',
         'x-token': store.state.token,
@@ -22,7 +23,7 @@ export default {
   uploadFileConvert(file, onUploadProgress) {
     const formData = new FormData()
     formData.append('file', file)
-    return axios.post('/doc', formData, {
+    return axios.post(this.apiBaseUrl + 'doc', formData, {
       headers: {
         Accept: 'multipart/form-data',
         'x-token': store.state.token,

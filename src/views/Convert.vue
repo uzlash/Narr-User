@@ -34,7 +34,7 @@
                           hide-details
                           show-size
                           filled
-                          accept=".doc,.docx,.txt,.pptx,.odt,.rtf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          accept=".doc,.docx,.txt,.pptx,.odt,.rtf,.xls,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                           color="#00a368"
                           label="Select File"
                           prepend-icon="mdi-file-document"
@@ -107,84 +107,84 @@
 </template>
 
 <script>
-import helpers from "../services/helpers";
+import helpers from '../services/helpers'
 export default {
   data() {
     return {
       currentFile: undefined,
       loading: false,
       progress: 0,
-      messageSuccess: "",
-      messageError: "",
+      messageSuccess: '',
+      messageError: '',
       showProgress: false,
-      File: "",
+      File: '',
       loadedData: 0,
       totalData: 0,
-    };
+    }
   },
   methods: {
     selectFile(file) {
-      this.progress = 0;
-      this.currentFile = file;
+      this.progress = 0
+      this.currentFile = file
     },
 
     uploadFile() {
       if (!this.currentFile) {
-        this.messageError = "Please select a File!";
+        this.messageError = 'Please select a File!'
         setTimeout(() => {
-          this.messageError = "";
-        }, 5000);
-        return;
+          this.messageError = ''
+        }, 5000)
+        return
       }
-      this.loading = true;
+      this.loading = true
       helpers
         .uploadFileConvert(this.currentFile, (event) => {
-          this.showProgress = true;
-          this.progress = Math.round((100 * event.loaded) / event.total);
-          this.loadedData = event.loaded;
-          this.totalData = event.total;
+          this.showProgress = true
+          this.progress = Math.round((100 * event.loaded) / event.total)
+          this.loadedData = event.loaded
+          this.totalData = event.total
         })
         .then(async (response) => {
-          const blob = await response.data;
+          const blob = await response.data
           const obj = new Blob([blob], {
-            type: "application/pdf",
-          });
+            type: 'application/pdf',
+          })
 
           //Polyfill
           if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(obj);
+            window.navigator.msSaveOrOpenBlob(obj)
           } else {
-            const objUrl = window.URL.createObjectURL(obj);
+            const objUrl = window.URL.createObjectURL(obj)
 
-            const link = document.createElement("a");
-            link.href = objUrl;
-            link.download = "download.pdf";
-            link.click();
-            this.loading = false;
-            this.currentFile = undefined;
-            this.messageSuccess = "Document to PDF Conversion Successful";
-
-            setTimeout(() => {
-              window.URL.revokeObjectURL(objUrl);
-            }, 250);
+            const link = document.createElement('a')
+            link.href = objUrl
+            link.download = 'download.pdf'
+            link.click()
+            this.loading = false
+            this.currentFile = undefined
+            this.messageSuccess = 'Document to PDF Conversion Successful'
 
             setTimeout(() => {
-              this.messageSuccess = "";
-            }, 5000);
+              window.URL.revokeObjectURL(objUrl)
+            }, 250)
+
+            setTimeout(() => {
+              this.messageSuccess = ''
+            }, 5000)
           }
         })
         .catch((err) => {
-          console.log("Error>>", err.message);
-          this.progress = 0;
-          this.loading = false;
-          this.messageError = err.message;
-          this.currentFile = undefined;
+          console.log('Error>>', err.message)
+          this.progress = 0
+          this.loading = false
+          this.messageError = err.message
+          this.currentFile = undefined
 
           setTimeout(() => {
-            this.messageError = "";
-          }, 5000);
-        });
+            this.messageError = ''
+          }, 5000)
+        })
     },
   },
-};
+}
 </script>
