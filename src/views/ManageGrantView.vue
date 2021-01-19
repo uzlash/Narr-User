@@ -23,7 +23,9 @@
                 >
                 <span class="body-1 font-weight-medium"
                   >Estimated Project Duration -
-                  <span class="amber--text text--darken-4">7 months</span></span
+                  <span class="yellow--text text--darken-2"
+                    >7 months</span
+                  ></span
                 >
               </div>
               <div class="mt-2">
@@ -140,19 +142,19 @@ export default {
   data() {
     return {
       names: [
-        { researcher: "Dr. Abdulsalam Gital", title: "B.Tech, M.sc, Ph.D" },
+        { researcher: 'Dr. Abdulsalam Gital', title: 'B.Tech, M.sc, Ph.D' },
         {
-          researcher: "Prof. Bakari Souley",
-          title: "B.Tech, PGDE, M.sc, Ph.D",
+          researcher: 'Prof. Bakari Souley',
+          title: 'B.Tech, PGDE, M.sc, Ph.D',
         },
-        { researcher: "Mrs. Fatima Zambuk", title: "ND, HND, M.sc, Ph.D" },
-        { researcher: "Mr. Sunusi Kabir Alaramma", title: "B.Sc, M.sc, Ph.D" },
-        { researcher: "Sir. Abubakar Umar", title: "B.Tech, M.sc" },
-        { researcher: "Mr. Ismail Ahmad", title: "B.Sc, M.sc, Ph.D" },
-        { researcher: "Dr. Abdulsalam Gital", title: "B.Sc, M.sc" },
-        { researcher: "Dr. Abdulsalam Gital", title: "B.Tech, M.sc, Ph.D" },
+        { researcher: 'Mrs. Fatima Zambuk', title: 'ND, HND, M.sc, Ph.D' },
+        { researcher: 'Mr. Sunusi Kabir Alaramma', title: 'B.Sc, M.sc, Ph.D' },
+        { researcher: 'Sir. Abubakar Umar', title: 'B.Tech, M.sc' },
+        { researcher: 'Mr. Ismail Ahmad', title: 'B.Sc, M.sc, Ph.D' },
+        { researcher: 'Dr. Abdulsalam Gital', title: 'B.Sc, M.sc' },
+        { researcher: 'Dr. Abdulsalam Gital', title: 'B.Tech, M.sc, Ph.D' },
       ],
-    };
+    }
   },
-};
+}
 </script>

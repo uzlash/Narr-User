@@ -3,15 +3,14 @@ import store from '../store/index'
 
 export default {
   //Base URL
-  apiBaseUrl: 'https://api.narr.ng/',
-  apiBaseUrlSrc: 'https://api.narr.ng',
-  // apiBaseUrl: 'http://localhost:3000/',
-  appBaseUrl: 'https://narr.ng/',
+  // appBaseUrl: 'http://narr.ng',
+  apiBaseUrl: 'https://api.narr.ng',
+  // apiBaseUrl: 'http://localhost:3000',
   //Ocr Image to Text
   uploadImageOcr(file, onUploadProgress) {
     const formData = new FormData()
     formData.append('image', file)
-    return axios.post(this.apiBaseUrl + 'ocr', formData, {
+    return axios.post(this.apiBaseUrl + '/ocr', formData, {
       headers: {
         Accept: 'text/plain',
         'x-token': store.state.token,
@@ -23,7 +22,7 @@ export default {
   uploadFileConvert(file, onUploadProgress) {
     const formData = new FormData()
     formData.append('file', file)
-    return axios.post(this.apiBaseUrl + 'doc', formData, {
+    return axios.post(this.apiBaseUrl + '/doc', formData, {
       headers: {
         Accept: 'multipart/form-data',
         'x-token': store.state.token,
@@ -39,7 +38,7 @@ export default {
     formData.append('meta', strMeta)
     formData.append('file', file)
     console.log(store.state.token)
-    return axios.post(this.apiBaseUrl + 'api/v1/research/upload', formData, {
+    return axios.post(this.apiBaseUrl + '/api/v1/research/upload', formData, {
       headers: {
         Accept: 'multipart/form-data',
         'x-token': store.state.token,
@@ -49,7 +48,7 @@ export default {
   },
   //Get all research document
   fetchResearches() {
-    return axios.get(this.apiBaseUrl + 'api/v1/research', {
+    return axios.get(this.apiBaseUrl + '/api/v1/research', {
       headers: {
         'x-token': store.state.token,
       },
@@ -57,7 +56,7 @@ export default {
   },
   //Get one research document
   fetchSingleResearch(id) {
-    return axios.get(this.apiBaseUrl + 'api/v1/research/' + id, {
+    return axios.get(this.apiBaseUrl + '/api/v1/research/' + id, {
       headers: {
         'x-token': store.state.token,
       },
@@ -65,7 +64,7 @@ export default {
   },
   //Get all Users
   fetchUsers() {
-    return axios.get(this.apiBaseUrl + 'api/v1/user', {
+    return axios.get(this.apiBaseUrl + '/api/v1/user', {
       headers: {
         'x-token': store.state.token,
       },
@@ -73,7 +72,7 @@ export default {
   },
   //Get one research document
   fetchSingleUser(id) {
-    return axios.get(this.apiBaseUrl + 'api/v1/user/' + id, {
+    return axios.get(this.apiBaseUrl + '/api/v1/user/' + id, {
       headers: {
         'x-token': store.state.token,
       },

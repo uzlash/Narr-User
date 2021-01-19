@@ -336,12 +336,6 @@
           </v-card>
         </v-dialog>
       </v-row>
-      <div>
-        <h3>Microservice statuses</h3>
-        <div>
-          {{ microserviceStatuses }}
-        </div>
-      </div>
     </v-container>
   </v-app>
 </template>

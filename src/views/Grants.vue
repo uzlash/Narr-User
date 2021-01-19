@@ -9,7 +9,7 @@
       <v-row>
         <v-col cols="12">
           <v-card tile outlined>
-            <v-card-title class="text-h5 font-weight-light"
+            <v-card-title class="text-h6 font-weight-light"
               >Research Grants Feed</v-card-title
             >
             <v-divider></v-divider>
@@ -19,7 +19,7 @@
               class="custom__research-card pb-0"
             >
               <div
-                class="d-flex text-h6 font-weight-medium grey--text text--darken-3"
+                class="d-flex body-1 font-weight-medium grey--text text--darken-3"
               >
                 <span
                   >Undertake research on the superposition of quantum
@@ -58,60 +58,64 @@
               </div>
               <div @click="clickedGrant(index)" class="grant__body-info">
                 <div>
-                  <span class="mr-4 body-1 font-weight-medium"
+                  <span class="mr-4 body-2 font-weight-medium"
                     >Research Budget -
                     <span class="green--text text--darken-4"
                       >N17,000,000</span
                     ></span
                   >
-                  <span class="body-1 font-weight-medium"
+                  <span class="body-2 font-weight-medium"
                     >Estimated Project Duration -
-                    <span class="amber--text text--darken-4"
+                    <span class="yellow--text text--darken-2"
                       >7 months</span
                     ></span
                   >
                 </div>
                 <div class="mt-2">
-                  <p class="body-1 font-weight-light black--text">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Reiciendis, dolores? Mollitia animi numquam, repellendus
-                    deserunt ab quasi cum dicta! Nesciunt laudantium beatae
-                    saepe, reprehenderit fugit similique, veritatis quisquam
-                    illum aut officia nihil dolores voluptate porro ipsum neque.
-                    At dolorum molestias iusto debitis cum officiis numquam
-                    magnam aliquam nostrum dolores obcaecati eaque ut, iste
-                    molestiae dolore hic laudantium, corrupti atque veritatis
-                    deserunt. Excepturi, culpa deleniti. Nobis aspernatur a
-                    voluptates omnis beatae odio qui maxime iusto at,
-                    repudiandae magni, quibusdam eos eveniet eligendi,
-                    dignissimos dolores voluptatum sit voluptas possimus
-                    deleniti rem adipisci illo labore! Facere dolorum aliquam,
-                    harum quod quas officiis animi.
+                  <p class="body-2 grey--text text--darken-3">
+                    The concept of this project is to illustrate the application
+                    of machine learning in email spam filtering. First of all,
+                    one might ask, what is learning? Learning can be defined
+                    roughly as the process of converting experience into
+                    expertise or knowledge. One might also ask what then is
+                    Machine Learning? Machine learning can be defined as a field
+                    of computer science that uses statistical techniques to give
+                    computer systems the ability to “learn” (i.e. progressively
+                    improve performance on a specific task) with data, without
+                    being explicitly programmed. Now to really talk about
+                    learning, let’s take an example from naturally occurring
+                    animal learning. Some of the most fundamental issues in ML
+                    arise already in that context.
                   </p>
                 </div>
                 <div>
                   <v-chip-group>
                     <v-chip
+                      small
                       class="ma-2 grey--text text--darken-4"
                       color="grey lighten-3"
                       >Qunatum Computing</v-chip
                     >
                     <v-chip
+                      small
                       class="ma-2 grey--text text--darken-4"
                       color="grey lighten-3"
                       >Bits/Qubits</v-chip
                     >
                     <v-chip
+                      small
                       class="ma-2 grey--text text--darken-4"
                       color="grey lighten-3"
                       >Superposition</v-chip
                     >
                     <v-chip
+                      small
                       class="ma-2 grey--text text--darken-4"
                       color="grey lighten-3"
                       >Entanglement</v-chip
                     >
                     <v-chip
+                      small
                       class="ma-2 grey--text text--darken-4"
                       color="grey lighten-3"
                       >Computation</v-chip
@@ -168,30 +172,30 @@
 export default {
   data() {
     return {
-      search: "",
+      search: '',
       grantFavorite: false,
       grantFlag: false,
       fab: false,
-    };
+    }
   },
   methods: {
     clickedFavorite(id) {
-      console.log("Liked research", id);
-      this.grantFavorite = !this.grantFavorite;
+      console.log('Liked research', id)
+      this.grantFavorite = !this.grantFavorite
     },
     clickedFlag(id) {
-      console.log("Flagged research", id);
-      this.grantFlag = !this.grantFlag;
+      console.log('Flagged research', id)
+      this.grantFlag = !this.grantFlag
     },
     clickedGrant(id) {
-      console.log("clicked " + id);
-      this.$router.push(`/viewgrant/${id}`);
+      console.log('clicked ' + id)
+      this.$router.push(`/viewgrant/${id}`)
     },
     goManageGrants() {
-      this.$router.push("/managegrant");
+      this.$router.push('/managegrant')
     },
   },
-};
+}
 </script>
 
 <style>

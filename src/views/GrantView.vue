@@ -22,7 +22,9 @@
                 >
                 <span class="body-1 font-weight-medium"
                   >Estimated Project Duration -
-                  <span class="amber--text text--darken-4">7 months</span></span
+                  <span class="yellow--text text--darken-2"
+                    >7 months</span
+                  ></span
                 >
               </div>
               <div class="mt-2">
@@ -142,19 +144,19 @@
 export default {
   data() {
     return {
-      search: "",
-      proposal: "",
-    };
+      search: '',
+      proposal: '',
+    }
   },
   methods: {
     submitProposal() {
       const data = {
         proposal: this.proposal,
-      };
-      console.log("Got proposal data", data);
+      }
+      console.log('Got proposal data', data)
     },
   },
-};
+}
 </script>
 
 <style></style>

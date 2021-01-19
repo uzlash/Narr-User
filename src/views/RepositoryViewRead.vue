@@ -17,7 +17,7 @@
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="6">
-                <div class="font-weight-bold amber--text text--darken-4">
+                <div class="font-weight-bold yellow--text text--darken-2">
                   <span>
                     Authors:
                   </span>
@@ -47,7 +47,18 @@
                   : 'image__box custom__image-zoomin white'
               "
               width="100%"
-              :src="`${imageUrl}${this.research.readPath}${this.page}.jpg`"
+              :src="
+                `${imageUrl}${this.research.readPath}${
+                  this.page
+                }.jpg?token=${savedToken}&nPages=${
+                  this.research.nPages
+                }&${Date.now()}${
+                  this.page === this.research.nPages ||
+                  this.selectedPage === this.research.nPages
+                    ? '&end=true'
+                    : ''
+                }`
+              "
             ></v-img>
           </div>
         </v-col>
@@ -111,7 +122,9 @@
               : 'image__box custom__image-zoomout white'
           "
           width="100%"
-          :src="`${imageUrl}${this.research.readPath}${this.page}.jpg`"
+          :src="
+            `${imageUrl}${this.research.readPath}${this.page}.jpg?token=${savedToken}`
+          "
         ></v-img>
       </v-dialog>
     </div>
@@ -127,6 +140,7 @@ export default {
     a: 0,
     b: 1,
     research: {},
+    hits: '',
     page: 1,
     first: 1,
     selectedPage: 1,
@@ -142,48 +156,56 @@ export default {
       helpers
         .fetchSingleResearch(this.id)
         .then((response) => {
-          console.log(response)
-          this.research = response.data.payload
+          console.log('Reader Response', response)
+          this.research = response.data.payload.research
+          this.hits = response.data.payload.hits
+          this.$store.dispatch('ADD_TO_READING_LIST', response.data.payload)
         })
         .catch((error) => {
-          console.log(error)
+          console.log('Error>>>', error)
         })
     },
     firstPage() {
+      // this.fetchResearch()
       this.page = this.first
-      this.fetchResearch()
     },
     nextPage() {
       if (this.page >= this.research.nPages) {
-        console.log('Finished')
+        console.log('Last Page Reached')
+        //        this.$store.dispatch('REMOVE_FROM_READING_LIST', this.research)
+      } else if (this.page + 1 === this.research.nPages) {
+        this.page++
+        console.log('Last Page, Removing from Reading List')
       } else {
         console.log('Next Page')
+        // this.fetchResearch()
         this.page++
-        this.fetchResearch()
       }
     },
     prevPage() {
       if (this.page <= 1) {
         console.log('First Page')
       } else {
+        // this.fetchResearch()
         this.page--
-        this.fetchResearch()
       }
     },
     lastPage() {
+      // this.fetchResearch()
       this.page = this.research.nPages
-      this.fetchResearch()
     },
     changePage(event) {
-      console.log(event.target.value)
+      // this.fetchResearch()
       this.page = event.target.value
       this.selectedPage = event.target.value
-      this.fetchResearch()
     },
   },
   computed: {
     imageUrl() {
-      return helpers.apiBaseUrlSrc
+      return helpers.apiBaseUrl
+    },
+    savedToken() {
+      return this.$store.state.token
     },
   },
   created() {

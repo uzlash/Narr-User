@@ -5,6 +5,7 @@
         <v-row align="center" justify="center">
           <v-col cols="12" md="8" sm="8" class="py-0">
             <v-text-field
+              color="accent"
               solo
               hide-details
               class="mb-2"
@@ -113,71 +114,6 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12" lg="4" md="6" sm="12" class="pa-0 px-2">
-            <v-card outlined tile>
-              <v-card-title class="body-1 grey--text text--darken-2 pa-2"
-                >Reading History</v-card-title
-              >
-            </v-card>
-            <v-card outlined tile height="320" class="cutom__card--overflow">
-              <v-list v-for="item in History" :key="item.id" class="py-0">
-                <v-list-item to="/read" class="px-2">
-                  <v-list-item-avatar color="blue" aria-dropeffect>
-                    <v-icon dark>{{ item.icon }}</v-icon>
-                  </v-list-item-avatar>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      class="font-weight-light body-1 text-wrap"
-                      >{{ item.title1 }}</v-list-item-title
-                    >
-                    <v-list-item-subtitle class="font-weight-light">{{
-                      item.authors
-                    }}</v-list-item-subtitle>
-                  </v-list-item-content>
-                  <div>
-                    <v-list-item-title class="green--text font-weight-light">{{
-                      item.title2
-                    }}</v-list-item-title>
-                    <v-list-item-subtitle class="font-weight-light">{{
-                      item.subtitle2
-                    }}</v-list-item-subtitle>
-                  </div>
-                </v-list-item>
-                <v-divider inset></v-divider>
-              </v-list>
-            </v-card>
-          </v-col>
-          <v-col cols="12" lg="5" md="6" sm="12" class="pa-0 px-2">
-            <v-card outlined tile>
-              <v-card-title class="body-1 grey--text text--darken-1 pa-2"
-                >Suggestions</v-card-title
-              >
-            </v-card>
-            <v-card outlined tile height="320" class="cutom__card--overflow">
-              <v-list v-for="item in History" :key="item.id" class="py-0">
-                <v-list-item to="/read" class="px-2">
-                  <v-list-item-avatar color="accent">
-                    <v-icon dark>{{ item.icon }}</v-icon>
-                  </v-list-item-avatar>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      class="font-weight-light body-1 text-wrap"
-                      >{{ item.title1 }}</v-list-item-title
-                    >
-                    <v-list-item-subtitle class="font-weight-light">{{
-                      item.authors
-                    }}</v-list-item-subtitle>
-                  </v-list-item-content>
-                  <div>
-                    <v-list-item-subtitle class="font-weight-light">{{
-                      item.date
-                    }}</v-list-item-subtitle>
-                  </div>
-                </v-list-item>
-                <v-divider inset></v-divider>
-              </v-list>
-            </v-card>
-          </v-col>
           <v-col
             cols="12"
             lg="3"
@@ -244,6 +180,233 @@
               </div>
             </v-card>
           </v-col>
+          <v-col
+            cols="12"
+            lg="6"
+            md="6"
+            sm="12"
+            class="hidden-sm-and-down pa-0 px-2"
+          >
+            <v-card
+              outlined
+              tile
+              height="60"
+              class="mb-2 body-1 d-flex align-center"
+            >
+              <v-btn outlined class="mx-2" small fab dark color="indigo">
+                <v-icon>mdi-office-building</v-icon>
+              </v-btn>
+              <span>Institution Information</span>
+            </v-card>
+            <v-card outlined tile height="292" class="cutom__card--overflow">
+              <div class="d-flex">
+                <v-icon color="accent">mdi-office-building</v-icon>
+                <span class="accent--text mx-2">Institution Name: </span>
+                <span class="grey--text text--darken-2"
+                  >Ahmadu Bello University</span
+                >
+              </div>
+              <!-- <div class="d-flex">
+                <v-icon color="accent">mdi-office-building</v-icon>
+                <span class="accent--text mx-2">Institution Type: </span>
+                <span class="grey--text text--darken-2">University</span>
+              </div>
+              <div class="d-flex">
+                <v-icon color="accent">mdi-office-building</v-icon>
+                <span class="accent--text mx-2">Institution Acronym: </span>
+                <span class="grey--text text--darken-2">ABU</span>
+              </div>
+              <div class="d-flex">
+                <v-icon color="accent">mdi-office-building</v-icon>
+                <span class="accent--text mx-2">Institution Ownership: </span>
+                <span class="grey--text text--darken-2">Federal Level</span>
+              </div>
+              <div class="d-flex">
+                <v-icon color="accent">mdi-office-building</v-icon>
+                <span class="accent--text mx-2">Institution Year: </span>
+                <span class="grey--text text--darken-2">1962</span>
+              </div>
+              <div class="d-flex">
+                <v-icon color="accent">mdi-office-building</v-icon>
+                <span class="accent--text mx-2">Institution Url: </span>
+                <span class="grey--text text--darken-2"
+                  ><a href="https://abu.edu.ng">ABU Official Website</a></span
+                >
+              </div>
+              <div class="d-flex">
+                <v-icon color="accent">mdi-office-building</v-icon>
+                <span class="accent--text mx-2">Affilated Schools:</span>
+              </div>
+              <ul class="grey--text text--darken-2 body-1">
+                <li>Federal College Of Education Zaria</li>
+                <li>Amir Shehu College Of Advanced Studies</li>
+                <li>Isa Kaita College of Education</li>
+              </ul> -->
+            </v-card>
+          </v-col>
+          <v-col
+            cols="12"
+            lg="3"
+            md="3"
+            sm="12"
+            class="hidden-sm-and-down pa-0 px-2"
+          >
+            <v-card
+              outlined
+              tile
+              height="60"
+              class="mb-2 body-1 d-flex align-center"
+            >
+              <v-btn outlined class="mx-2" small fab dark color="indigo">
+                <v-icon>mdi-account-group</v-icon>
+              </v-btn>
+              <span>Institution Logo</span>
+            </v-card>
+            <v-card tile outlined height="292" class="pa-4"
+              ><v-img src="../assets/abu.png" contain></v-img>
+              <v-divider></v-divider>
+              <div class="text-center grey--text text--darken-2 mt-2">
+                Ahmadu Bello University
+              </div>
+            </v-card>
+          </v-col>
+          <!-- <v-col cols="9" class="pa-0">
+            <v-card outlined tile height="100%" width="100%">
+              <v-card-title class="pa-4 body-1 grey--text text--darken-2"
+                >Institution Information</v-card-title
+              >
+              <v-divider class="mb-2"></v-divider>
+              <v-row>
+                <v-col cols="4"
+                  ><v-card tile outlined height="260" class="mx-2 pa-2"
+                    ><v-img src="../assets/abu.png" contain></v-img></v-card
+                ></v-col>
+                <v-divider vertical class="my-3"></v-divider>
+                <v-col cols="6">
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col> -->
+        </v-row>
+        <v-row class="py-2">
+          <v-col cols="12" lg="4" md="4" sm="12" class="pa-0 px-2">
+            <v-card outlined tile>
+              <v-card-title class="body-1 grey--text text--darken-2 pa-2"
+                >Reading History</v-card-title
+              >
+            </v-card>
+            <v-card
+              v-if="readingHistory.length"
+              outlined
+              tile
+              max-height="320"
+              class="cutom__card--overflow"
+            >
+              <v-list
+                v-for="(item, index) in readingHistory"
+                :key="index"
+                class="py-0"
+              >
+                <v-list-item to="/read" class="px-2">
+                  <v-list-item-avatar color="blue" aria-dropeffect>
+                    <v-icon dark>mdi-file-document</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="font-weight-light body-2 text-wrap"
+                      >{{ item.researchTitle }}</v-list-item-title
+                    >
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.authors.toString().replace(/,/g, ' and ')
+                    }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                  <div>
+                    <v-list-item-title class="green--text font-weight-light">{{
+                      item.accessType
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.nPages + ' Pages'
+                    }}</v-list-item-subtitle>
+                  </div>
+                </v-list-item>
+                <v-divider inset></v-divider>
+              </v-list>
+            </v-card>
+            <v-card
+              tile
+              outlined
+              v-else
+              class="d-flex justify-center align-center"
+            >
+              <v-card-title class="grey--text text--darken-2 body-1">
+                No Reading History Yet!
+              </v-card-title>
+            </v-card>
+          </v-col>
+          <v-col cols="12" lg="4" md="4" sm="12" class="pa-0 px-2">
+            <v-card outlined tile>
+              <v-card-title class="body-1 grey--text text--darken-1 pa-2"
+                >Suggestions</v-card-title
+              >
+            </v-card>
+            <v-card outlined tile height="320" class="cutom__card--overflow">
+              <v-list v-for="item in History" :key="item.id" class="py-0">
+                <v-list-item to="/read" class="px-2">
+                  <v-list-item-avatar color="accent">
+                    <v-icon dark>{{ item.icon }}</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="font-weight-light body-2 text-wrap"
+                      >{{ item.title1 }}</v-list-item-title
+                    >
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.authors
+                    }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                  <div>
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.date
+                    }}</v-list-item-subtitle>
+                  </div>
+                </v-list-item>
+                <v-divider inset></v-divider>
+              </v-list>
+            </v-card>
+          </v-col>
+          <v-col cols="12" lg="4" md="4" sm="12" class="pa-0 px-2">
+            <v-card outlined tile>
+              <v-card-title class="body-1 grey--text text--darken-1 pa-2"
+                >Trending</v-card-title
+              >
+            </v-card>
+            <v-card outlined tile height="320" class="cutom__card--overflow">
+              <v-list v-for="item in History" :key="item.id" class="py-0">
+                <v-list-item to="/read" class="px-2">
+                  <v-list-item-avatar color="accent">
+                    <v-icon dark>{{ item.icon }}</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="font-weight-light body-2 text-wrap"
+                      >{{ item.title1 }}</v-list-item-title
+                    >
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.authors
+                    }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                  <div>
+                    <v-list-item-subtitle class="font-weight-light">{{
+                      item.date
+                    }}</v-list-item-subtitle>
+                  </div>
+                </v-list-item>
+                <v-divider inset></v-divider>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="12" lg="12" md="12" sm="12" class="pa-2">
             <v-card outlined tile>
               <template>
@@ -262,6 +425,8 @@
               >
             </v-card>
           </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="12" lg="12" md="12" sm="12" class="pa-0 px-2">
             <v-card outlined tile>
               <GChart
@@ -277,9 +442,6 @@
             </v-card>
           </v-col>
         </v-row>
-        <!-- <v-row
-          ><div>{{ UsersCurrentlyOnline.length() }}</div></v-row
-        > -->
       </v-container>
     </v-app>
   </div>
@@ -404,30 +566,6 @@ export default {
         date: '20-03-2018',
       },
     ],
-    Grants: [
-      {
-        id: 1,
-        title1: 'Academic research writing - design thinking',
-        subtitle1:
-          'Academic Research Writing on the topic of Design Thinking and Food Innovation or Food Industry.',
-        title2: 'N350,000',
-      },
-      {
-        id: 1,
-        title1: 'Virtual Research assistant / Lead Search & Work',
-        subtitle1:
-          'I am looking for a team virtual team member with experience in data scraping, finding relevant prospects (contact details) and do cold outreach',
-        title2: 'N100/hr - 40hrs/week',
-      },
-      {
-        id: 1,
-        title1:
-          'Manually Research Facebook Pages, Ads and puts them into a Spreadsheet',
-        subtitle1:
-          'Expected to get filled in two spreadsheet columns: Library URL and Countries Algorithm (see the link attached)',
-        title2: 'N5,000',
-      },
-    ],
     chartData: [
       ['Time', 'Mins'],
       ['12am', 0],
@@ -519,9 +657,9 @@ export default {
     UsersCurrentlyOnline() {
       return this.$store.getters.getSocketUsersOnline
     },
-  },
-  mounted() {
-    console.log(this.UsersCurrentlyOnline)
+    readingHistory() {
+      return this.$store.getters.getReadingHistory
+    },
   },
 }
 </script>

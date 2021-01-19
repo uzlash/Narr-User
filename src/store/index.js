@@ -34,6 +34,8 @@ const store = new Vuex.Store({
       },
       microserviceStatus: '',
       usersOnline: [],
+      readingHistory: [],
+      trending: [],
     },
   },
   getters: {
@@ -47,13 +49,22 @@ const store = new Vuex.Store({
       return state.socket.mStatus
     },
     getSocketUsersOnline: (state) => {
-      console.log('Before Result', state.socket.usersOnline)
+      // const uniqe = new Set(
+      //   state.socket.usersOnline.map((e) => JSON.stringify(e))
+      // )
+      // const result = Array.from(uniqe).map((e) => JSON.parse(e))
+      return state.socket.usersOnline
+    },
+    getReadingHistory: (state) => {
       const uniqe = new Set(
-        state.socket.usersOnline.map((e) => JSON.stringify(e))
+        state.socket.readingHistory.map((e) => JSON.stringify(e))
       )
       const result = Array.from(uniqe).map((e) => JSON.parse(e))
-      console.log('After Result', result)
       return result
+      // return state.socket.readingHistory
+    },
+    getTrending: (state) => {
+      return state.socket.trending
     },
   },
   mutations: {
@@ -113,15 +124,15 @@ const store = new Vuex.Store({
       state.socket.microserviceStatus = payload
     },
     'SOCKET_EVENT:USERS:CURRENTLY:ONLINE'(state, payload) {
-      state.socket.usersOnline = JSON.parse(payload)
-      console.log('Mutation socket', state.socket.usersOnline)
+      const obj = JSON.parse(payload)
+      console.log('EVENT:USERS:CURRENTLY:ONLINE', payload)
+      state.socket.usersOnline = obj.usersOnline
+      state.socket.readingHistory = obj.readingHistory
+      state.socket.trending = obj.trending
     },
     AddUserToSocketUsersArray(state, payload) {
       const user = JSON.parse(payload)
-      console.log('User', user)
-      console.log('Payload', payload)
-      console.log('State socket', state.socket.usersOnline)
-      state.socket.usersOnline.push(user)
+      state.socket.usersOnline.unshift(user)
     },
     RemoveUserFromSocketUsersArray(state, payload) {
       const user = JSON.parse(payload)
@@ -132,11 +143,15 @@ const store = new Vuex.Store({
         1
       )
     },
+    // Add data to reading list
+    addToReadingList(state, payload) {
+      state.socket.readingHistory.push(payload)
+    },
   },
   actions: {
     SIGN_IN({ commit }, authData) {
       commit('startLoader')
-      fetch(helpers.apiBaseUrl + 'api/v1/auth/login', {
+      fetch(helpers.apiBaseUrl + '/api/v1/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -192,7 +207,7 @@ const store = new Vuex.Store({
         password: authData.password,
       }
       commit('startLoader')
-      fetch(helpers.apiBaseUrl + 'api/v1/auth/register', {
+      fetch(helpers.apiBaseUrl + '/api/v1/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -216,7 +231,10 @@ const store = new Vuex.Store({
           commit('stopLoader')
         })
     },
-    SIGN_OUT: ({ commit }) => {
+    SIGN_OUT({ commit }) {
+      //Needs Review
+      this._vm.$socket.client.emit('LOGOUT')
+      router.push('/signin')
       commit('signOut')
     },
     CREATE_ACCOUNT_STEP: ({ commit }) => {
@@ -225,14 +243,15 @@ const store = new Vuex.Store({
     SIGN_IN_STEP: ({ commit }) => {
       commit('changeToSignIn')
     },
+    ADD_TO_READING_LIST: ({ commit }, data) => {
+      console.log('Added to Reading List', data)
+      commit('addToReadingList', data)
+    },
     //Socekts - Note Dont use arrow functions
     socket_connect(data) {
       const user = store.state.user
       const token = store.state.token
       if (token && user) {
-        console.log('User Local Storage', user)
-        console.log('Token Local Storage', token)
-        console.log('User Online Resending login...')
         this._vm.$socket.client.emit('LOGIN', {
           token,
           user,
@@ -244,15 +263,12 @@ const store = new Vuex.Store({
     },
     'socket_event:user:login'({ commit }, user) {
       let obj = JSON.parse(user)
-      console.log('Logged in using socket!', obj.email)
-      console.log('Object.email', obj.email)
-      console.log('User storage. email', store.state.user.email)
       if (obj.email === store.state.user.email) {
         this._vm.$toast.success(`Welcome, ${obj.fullName}`)
       } else {
         this._vm.$toast.success(`User Logged In, ${obj.fullName}`)
       }
-      commit('AddUserToSocketUsersArray', user)
+      //      commit('AddUserToSocketUsersArray', user)
       commit('socketUserLogin', user)
     },
     'socket_event:microservice:statuses'({ commit }, data) {
@@ -261,17 +277,11 @@ const store = new Vuex.Store({
     },
     'socket_event:user:logout'({ commit }, user) {
       let obj = JSON.parse(user)
-      console.log('User Logged Out using socket!', obj)
       commit('RemoveUserFromSocketUsersArray', user)
 
       this._vm.$toast.warning(`User Logged Out:  ${obj.fullName}`)
       commit('socketUserLogout', user)
     },
-    // 'socket_event:users:currently:online'({ commit }, usersOnline) {
-    //   const parsedUsersOnline = JSON.parse(usersOnline)
-    //   console.log('User Currently Online', parsedUsersOnline)
-    //   commit('SocketUsersOnline', parsedUsersOnline)
-    // },
     socket_disconnect(data) {
       console.log('Socket disconnected!', data)
     },

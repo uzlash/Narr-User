@@ -11,16 +11,18 @@
           <v-card outlined tile @click="dialog = true">
             <v-img
               v-if="research"
-              :src="`${imageUrl}${research.thumbnail}?action=thumbnail`"
+              :src="
+                `${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`
+              "
               width="100%"
-              height="446"
+              height="422"
             ></v-img>
           </v-card>
           <!-- <span class="text-h4" v-else>Loading...</span> -->
         </v-col>
         <v-divider vertical class="my-3 hidden-sm-and-down"></v-divider>
         <v-col cols="12" sm="6" md="5" lg="5">
-          <v-card outlined tile min-height="400px">
+          <v-card outlined tile min-height="400">
             <v-card-title
               class="body-1 green--text text--darken-4 font-weight-bold"
             >
@@ -29,7 +31,7 @@
             <v-divider></v-divider>
             <v-card-text>
               <div class=" body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Authors(s):</span
                 >
                 <span
@@ -40,7 +42,7 @@
                 >
               </div>
               <div class="body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Category:</span
                 >
                 <span class="grey--text text--darken-3">{{
@@ -48,7 +50,7 @@
                 }}</span>
               </div>
               <div class="body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Genre:</span
                 >
                 <span class="grey--text text--darken-3">{{
@@ -56,7 +58,7 @@
                 }}</span>
               </div>
               <div class="body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Access Type:</span
                 >
                 <span class="grey--text text--darken-3">{{
@@ -64,7 +66,7 @@
                 }}</span>
               </div>
               <div class="body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Monthly Fee (N):</span
                 >
                 <span class="grey--text text--darken-3">{{
@@ -72,7 +74,7 @@
                 }}</span>
               </div>
               <div class="body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Pages:</span
                 >
                 <span class="grey--text text--darken-3">{{
@@ -80,7 +82,7 @@
                 }}</span>
               </div>
               <div class="body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Status:</span
                 >
                 <span class="grey--text text--darken-3">{{
@@ -88,7 +90,7 @@
                 }}</span>
               </div>
               <div class="body-1 my-2">
-                <span class="font-weight-bold mr-2 amber--text text--darken-4"
+                <span class="font-weight-bold mr-2 yellow--text text--darken-2"
                   >Year:</span
                 >
                 <span class="grey--text text--darken-3">{{
@@ -119,7 +121,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="11" lg="11">
+        <v-col cols="6">
           <v-tabs class="elevation-1" color="#00a368" align-with-title>
             <!-- <v-tabs-slider color="green"></v-tabs-slider> -->
             <v-tab>
@@ -130,13 +132,32 @@
             </v-tab-item>
           </v-tabs>
         </v-col>
+        <v-col cols="6">
+          <v-tabs class="elevation-1" color="#00a368" align-with-title>
+            <!-- <v-tabs-slider color="green"></v-tabs-slider> -->
+            <v-tab>
+              Currently Reading
+            </v-tab>
+            <v-tab-item class="pa-4">
+              20
+            </v-tab-item>
+            <v-tab>
+              Read
+            </v-tab>
+            <v-tab-item class="pa-4">
+              12
+            </v-tab-item>
+          </v-tabs>
+        </v-col>
       </v-row>
     </v-container>
     <div class="text-center">
       <v-dialog v-model="dialog" width="1000">
         <v-img
           v-if="research"
-          :src="`${imageUrl}${research.thumbnail}?action=thumbnail`"
+          :src="
+            `${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`
+          "
         ></v-img>
       </v-dialog>
     </div>
@@ -150,6 +171,7 @@ export default {
   props: ['id'],
   data: () => ({
     research: [],
+    hits: '',
     dialog: false,
   }),
   methods: {
@@ -159,29 +181,22 @@ export default {
   },
   computed: {
     imageUrl() {
-      return helpers.apiBaseUrlSrc
+      return helpers.apiBaseUrl
+    },
+    savedToken() {
+      return this.$store.state.token
     },
   },
   created() {
-    // fetch("/research/" + this.id, {
-    //   headers: {
-    //     "x-token": store.state.token,
-    //   },
-    // })
-    //   .then((r) => r.json())
-    //   .then((data) => {
-    //     this.research = data.payload;
-    //   })
-    //   .catch((e) => console.log(e));
-
     helpers
       .fetchSingleResearch(this.id)
       .then((response) => {
-        console.log(response)
-        this.research = response.data.payload
+        console.log('Response>>>', response)
+        this.research = response.data.payload.research
+        this.hits = response.data.payload.hits
       })
       .catch((error) => {
-        console.log(error)
+        console.log('Error>>>', error)
       })
   },
 }

@@ -36,6 +36,17 @@ const routes = [
   },
 
   {
+    path: '/search',
+    name: 'Search',
+    component: () =>
+      import(/* webpackChunkName: "Search" */ '../views/Search.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true,
+    },
+  },
+
+  {
     path: '/repository',
     name: 'Repository',
     component: RepositoryViewRouter,

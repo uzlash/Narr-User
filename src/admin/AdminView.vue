@@ -182,7 +182,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row>
+      <!-- <v-row>
         <v-col cols="3">
           <v-card outlined tile height="86px">
             <v-row>
@@ -251,7 +251,7 @@
             </v-row>
           </v-card>
         </v-col>
-      </v-row>
+      </v-row> -->
       <v-row>
         <v-col cols="6">
           <div>
@@ -297,6 +297,27 @@
                 :options="chartOptions"
                 :series="seriesColumn"
               ></apexchart>
+            </v-card>
+          </div>
+        </v-col>
+        <v-col cols="6">
+          <div>
+            <v-card height="300px" tile outlined>
+              <v-card-title class="py-0">Affiliated Schools</v-card-title>
+              <v-divider></v-divider>
+              <v-row class="pa-2">
+                <v-col cols="3" v-for="(number, index) in 4" :key="index">
+                  <v-card class="pa-1" tile outlined>
+                    <v-card tile outlined>
+                      <v-img src="../assets/abu.png"></v-img>
+                      <v-divider></v-divider>
+                      <span class="grey--text text--darken-2 body-2 text-center"
+                        >ABU</span
+                      >
+                    </v-card>
+                  </v-card>
+                </v-col>
+              </v-row>
             </v-card>
           </div>
         </v-col>

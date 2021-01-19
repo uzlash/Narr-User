@@ -360,10 +360,7 @@ export default {
   }),
   methods: {
     logOut() {
-      this.$store.dispatch('SIGN_OUT').then(() => {
-        this.$router.push('/signin')
-        this.$socket.client.emit('LOGOUT')
-      })
+      this.$store.dispatch('SIGN_OUT')
     },
   },
   computed: {
