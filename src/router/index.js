@@ -363,7 +363,7 @@ const routes = [
     },
   },
 
-  { path: '*', redirect: '/' },
+  { path: '*', redirect: '/signin' },
 ]
 
 const router = new VueRouter({

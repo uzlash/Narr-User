@@ -25,7 +25,13 @@
                   <td>{{ item.email }}</td>
                   <td>{{ item.phone }}</td>
                   <td>{{ item.institution.name }}</td>
-                  <td>{{ item.status }}</td>
+                  <td
+                    :class="
+                      item.status === 'active' ? 'green--text' : 'warning--text'
+                    "
+                  >
+                    {{ item.status }}
+                  </td>
                   <td>
                     {{
                       new Date(item.createdAt).toLocaleString('en-GB', {

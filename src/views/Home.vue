@@ -2,6 +2,7 @@
   <div class="home">
     <v-app class="grey lighten-4">
       <v-container>
+        <!--Search-->
         <v-row align="center" justify="center">
           <v-col cols="12" md="8" sm="8" class="py-0">
             <v-text-field
@@ -14,8 +15,9 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        <!--Explore-->
         <v-row align="center" justify="center">
-          <v-col cols="12" class="px-2">
+          <v-col cols="12" class="px-2 pt-1 pb-0">
             <v-card outlined tile class="pa-2" width="100%">
               <v-card-title class="pa-2 body-1 grey--text text--darken-2"
                 >EXPLORE
@@ -83,7 +85,7 @@
             </v-card>
           </v-col>
         </v-row>
-
+        <!--Uploads, Suggestions, Mentions and Grants-->
         <v-row align="center" justify="center">
           <v-col
             cols="12"
@@ -113,6 +115,7 @@
             </v-card>
           </v-col>
         </v-row>
+        <!--Institution Information and Users Online-->
         <v-row>
           <v-col
             cols="12"
@@ -130,7 +133,9 @@
               <v-btn outlined class="mx-2" small fab dark color="indigo">
                 <v-icon>mdi-account-group</v-icon>
               </v-btn>
-              <span class="mr-1">Users Online: </span>
+              <span class="mr-1 body-1 grey--text text--darken-3"
+                >Users Online:
+              </span>
               <span>{{ UsersCurrentlyOnline.length }}</span>
             </v-card>
             <v-card
@@ -196,52 +201,159 @@
               <v-btn outlined class="mx-2" small fab dark color="indigo">
                 <v-icon>mdi-office-building</v-icon>
               </v-btn>
-              <span>Institution Information</span>
+              <span class="body-1 grey--text text--darken-3"
+                >Institution Information</span
+              >
             </v-card>
-            <v-card outlined tile height="292" class="cutom__card--overflow">
-              <div class="d-flex">
-                <v-icon color="accent">mdi-office-building</v-icon>
-                <span class="accent--text mx-2">Institution Name: </span>
-                <span class="grey--text text--darken-2"
-                  >Ahmadu Bello University</span
-                >
-              </div>
-              <!-- <div class="d-flex">
-                <v-icon color="accent">mdi-office-building</v-icon>
-                <span class="accent--text mx-2">Institution Type: </span>
-                <span class="grey--text text--darken-2">University</span>
-              </div>
-              <div class="d-flex">
-                <v-icon color="accent">mdi-office-building</v-icon>
-                <span class="accent--text mx-2">Institution Acronym: </span>
-                <span class="grey--text text--darken-2">ABU</span>
-              </div>
-              <div class="d-flex">
-                <v-icon color="accent">mdi-office-building</v-icon>
-                <span class="accent--text mx-2">Institution Ownership: </span>
-                <span class="grey--text text--darken-2">Federal Level</span>
-              </div>
-              <div class="d-flex">
-                <v-icon color="accent">mdi-office-building</v-icon>
-                <span class="accent--text mx-2">Institution Year: </span>
-                <span class="grey--text text--darken-2">1962</span>
-              </div>
-              <div class="d-flex">
-                <v-icon color="accent">mdi-office-building</v-icon>
-                <span class="accent--text mx-2">Institution Url: </span>
-                <span class="grey--text text--darken-2"
-                  ><a href="https://abu.edu.ng">ABU Official Website</a></span
-                >
-              </div>
-              <div class="d-flex">
-                <v-icon color="accent">mdi-office-building</v-icon>
-                <span class="accent--text mx-2">Affilated Schools:</span>
-              </div>
-              <ul class="grey--text text--darken-2 body-1">
-                <li>Federal College Of Education Zaria</li>
-                <li>Amir Shehu College Of Advanced Studies</li>
-                <li>Isa Kaita College of Education</li>
-              </ul> -->
+            <v-card outlined tile height="292" class="custom__card--overflow">
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2">mdi-school</v-icon>
+                    <span class="accent--text body-2">Name: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      Ahmadu Bello University
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2"
+                      >mdi-school-outline</v-icon
+                    >
+                    <span class="accent--text body-2">Type: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      University
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2"
+                      >mdi-office-building</v-icon
+                    >
+                    <span class="accent--text body-2">Ownership: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      Federal Level
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2">mdi-calendar</v-icon>
+                    <span class="accent--text body-2">Established: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      1964
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2">mdi-link</v-icon>
+                    <span class="accent--text body-2">Website: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1" height="27">
+                    <v-btn
+                      x-small
+                      link
+                      text
+                      color="warning"
+                      href="https://abu.edu.ng"
+                      >Click Here</v-btn
+                    >
+                  </v-card>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2">mdi-school</v-icon>
+                    <span class="accent--text body-2">Name: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      Ahmadu Bello University
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2"
+                      >mdi-school-outline</v-icon
+                    >
+                    <span class="accent--text body-2">Type: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      University
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2"
+                      >mdi-office-building</v-icon
+                    >
+                    <span class="accent--text body-2">Ownership: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      Federal Level
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="py-1 pb-0 ml-2">
+                  <v-card tile outlined>
+                    <v-icon color="accent" class="mx-2">mdi-calendar</v-icon>
+                    <span class="accent--text body-2">Established: </span>
+                  </v-card>
+                </v-col>
+                <v-col cols="7" class="px-0 pt-1 pb-0">
+                  <v-card tile outlined class="px-1">
+                    <span class="grey--text text--darken-2 body-2">
+                      1964
+                    </span></v-card
+                  >
+                </v-col>
+              </v-row>
             </v-card>
           </v-col>
           <v-col
@@ -258,36 +370,26 @@
               class="mb-2 body-1 d-flex align-center"
             >
               <v-btn outlined class="mx-2" small fab dark color="indigo">
-                <v-icon>mdi-account-group</v-icon>
+                <v-icon>mdi-office-building</v-icon>
               </v-btn>
-              <span>Institution Logo</span>
+              <span class="body-1 grey--text text--darken-3"
+                >Institution Logo</span
+              >
             </v-card>
-            <v-card tile outlined height="292" class="pa-4"
-              ><v-img src="../assets/abu.png" contain></v-img>
-              <v-divider></v-divider>
-              <div class="text-center grey--text text--darken-2 mt-2">
+            <v-card tile outlined height="292" class="pa-4">
+              <div class="d-flex flex-column align-center justify-center">
+                <v-avatar size="200" tile>
+                  <img src="../assets/abu.png" alt="alt" />
+                </v-avatar>
+              </div>
+              <v-divider class="my-2"></v-divider>
+              <div class="text-center grey--text text--darken-2">
                 Ahmadu Bello University
               </div>
             </v-card>
           </v-col>
-          <!-- <v-col cols="9" class="pa-0">
-            <v-card outlined tile height="100%" width="100%">
-              <v-card-title class="pa-4 body-1 grey--text text--darken-2"
-                >Institution Information</v-card-title
-              >
-              <v-divider class="mb-2"></v-divider>
-              <v-row>
-                <v-col cols="4"
-                  ><v-card tile outlined height="260" class="mx-2 pa-2"
-                    ><v-img src="../assets/abu.png" contain></v-img></v-card
-                ></v-col>
-                <v-divider vertical class="my-3"></v-divider>
-                <v-col cols="6">
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col> -->
         </v-row>
+        <!--Reading History, Suggestions and Trending-->
         <v-row class="py-2">
           <v-col cols="12" lg="4" md="4" sm="12" class="pa-0 px-2">
             <v-card outlined tile>
@@ -406,8 +508,9 @@
             </v-card>
           </v-col>
         </v-row>
+        <!--Google Chart 1-->
         <v-row>
-          <v-col cols="12" lg="12" md="12" sm="12" class="pa-2">
+          <v-col cols="12" lg="12" md="12" sm="12" class="pa-2 pt-0">
             <v-card outlined tile>
               <template>
                 <div class="chart">
@@ -426,6 +529,7 @@
             </v-card>
           </v-col>
         </v-row>
+        <!--Google Chart 1-->
         <v-row>
           <v-col cols="12" lg="12" md="12" sm="12" class="pa-0 px-2">
             <v-card outlined tile>
@@ -668,8 +772,11 @@ export default {
 .rounded {
   border-radius: 30px;
 }
+.border-full {
+  border: 1px solid #95a5a6;
+}
 .line {
-  border-right: solid 1px #95a5a6;
+  border-right: solid 0.5px #95a5a6;
 }
 .cutom__card--overflow {
   overflow-x: hidden;

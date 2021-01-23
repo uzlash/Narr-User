@@ -182,77 +182,41 @@
           </v-card>
         </v-col>
       </v-row>
-      <!-- <v-row>
-        <v-col cols="3">
-          <v-card outlined tile height="86px">
-            <v-row>
-              <v-col cols="12">
-                <div class="d-flex justify-center align-center">
-                  <span> OCR Usage:</span>
-                </div>
-                <div
-                  class="d-flex justify-center align-center font-weight-bold"
-                >
-                  <span class="mr-2">Total Processed:</span>
-                  <span class="font-weight-bold">11,234</span>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-        <v-col cols="3">
-          <v-card outlined tile height="86px">
-            <v-row>
-              <v-col cols="12">
-                <div class="d-flex justify-center align-center">
-                  <span> OCR Usage:</span>
-                </div>
-                <div
-                  class="d-flex justify-center align-center font-weight-bold"
-                >
-                  <span class="mr-2">Total Processed:</span>
-                  <span class="font-weight-bold">11,234</span>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-        <v-col cols="3">
-          <v-card outlined tile height="86px">
-            <v-row>
-              <v-col cols="12">
-                <div class="d-flex justify-center align-center">
-                  <span> OCR Usage:</span>
-                </div>
-                <div
-                  class="d-flex justify-center align-center font-weight-bold"
-                >
-                  <span class="mr-2">Total Processed:</span>
-                  <span class="font-weight-bold">11,234</span>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-        <v-col cols="3">
-          <v-card outlined tile height="86px">
-            <v-row>
-              <v-col cols="12">
-                <div class="d-flex justify-center align-center">
-                  <span> OCR Usage:</span>
-                </div>
-                <div
-                  class="d-flex justify-center align-center font-weight-bold"
-                >
-                  <span class="mr-2">Total Processed:</span>
-                  <span class="font-weight-bold">11,234</span>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row> -->
       <v-row>
+        <v-col cols="6">
+          <v-card outlined tile>
+            <template>
+              <div class="chart">
+                <GChart
+                  type="LineChart"
+                  :data="chartData"
+                  :options="chartOptions"
+                />
+              </div>
+            </template>
+            <v-card-text>
+              <span class="text-center">
+                Usage in the last 24hrs
+              </span></v-card-text
+            >
+          </v-card>
+        </v-col>
+        <v-col cols="6">
+          <v-card outlined tile>
+            <GChart
+              type="ColumnChart"
+              :data="columnChartData"
+              :options="chartOptions"
+            />
+            <v-card-text>
+              <span class="text-center">
+                Time spent reading
+              </span></v-card-text
+            >
+          </v-card>
+        </v-col>
+      </v-row>
+      <!-- <v-row no-gutters>
         <v-col cols="6">
           <div>
             <v-card height="300px" tile outlined>
@@ -321,7 +285,7 @@
             </v-card>
           </div>
         </v-col>
-      </v-row>
+      </v-row> -->
     </v-container>
   </v-app>
 </template>
@@ -331,39 +295,91 @@ export default {
   data: function() {
     return {
       search: '',
+      // chartOptions: {
+      //   chart: {
+      //     id: 'vuechart',
+      //   },
+      //   xaxis: {
+      //     categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+      //   },
+      // },
+      // chartOptionsPie: {
+      //   chart: {
+      //     type: 'donut',
+      //   },
+      //   responsive: [
+      //     {
+      //       breakpoint: 480,
+      //       options: {
+      //         chart: {
+      //           width: 200,
+      //         },
+      //         legend: {
+      //           position: 'bottom',
+      //         },
+      //       },
+      //     },
+      //   ],
+      //   labels: ['Projects', 'Thesis-Dissertations', 'Journals', 'eBooks'],
+      // },
+      // seriesColumn: [
+      //   {
+      //     data: [30, 40, 35, 50, 49, 60, 70, 91],
+      //   },
+      // ],
+      // seriesDonut: [44, 55, 41, 17],
+      chartData: [
+        ['Time', 'Mins'],
+        ['12am', 0],
+        ['1am', 0],
+        ['2am', 0],
+        ['3am', 0],
+        ['4am', 0],
+        ['5am', 0],
+        ['6am', 0],
+        ['7am', 0],
+        ['8am', 40],
+        ['9am', 30],
+        ['10am', 10],
+        ['11am', 0],
+        ['12pm', 0],
+        ['1pm', 50],
+        ['2pm', 30],
+        ['3pm', 5],
+        ['4pm', 10],
+        ['5pm', 15],
+        ['6pm', 20],
+        ['7pm', 40],
+        ['8pm', 45],
+        ['9pm', 50],
+        ['10pm', 55],
+        ['11pm', 0],
+      ],
+      columnChartData: [
+        ['Days', 'Times'],
+        ['Monday', 45],
+        ['Tuesday', 60],
+        ['Wednesday', 30],
+        ['Thursday', 30],
+        ['Friday', 55],
+        ['Saturday', 0],
+        ['Sunday', 0],
+      ],
+      pieChartData: [
+        ['Year', 'Usage'],
+        ['2017', 20],
+        ['2018', 20],
+        ['2019', 35],
+        ['2020', 25],
+      ],
       chartOptions: {
         chart: {
-          id: 'vuechart',
+          title: 'Company Performance',
+          subtitle: 'Sales, Expenses, and Profit: 2017-2020',
         },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-        },
+        labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
+        value: [200, 675, 410, 390, 310, 460, 250, 240],
       },
-      chartOptionsPie: {
-        chart: {
-          type: 'donut',
-        },
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-              },
-              legend: {
-                position: 'bottom',
-              },
-            },
-          },
-        ],
-        labels: ['Projects', 'Thesis-Dissertations', 'Journals', 'eBooks'],
-      },
-      seriesColumn: [
-        {
-          data: [30, 40, 35, 50, 49, 60, 70, 91],
-        },
-      ],
-      seriesDonut: [44, 55, 41, 17],
     }
   },
 }

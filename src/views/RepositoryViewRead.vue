@@ -1,6 +1,6 @@
 <template>
   <v-app class="grey lighten-4">
-    <v-container>
+    <v-container v-if="Object.keys(research).length !== 0">
       <v-row no-gutters>
         <v-col cols="12">
           <v-card tile outlined>
@@ -31,86 +31,122 @@
           <div class="body-1 font-weight-regular"></div>
         </v-col>
         <v-col cols="12">
-          <div
-            :class="
-              darkMode === true
-                ? 'cropper__container d-flex justify-center black'
-                : 'cropper__container d-flex justify-center white'
-            "
-          >
-            <v-img
-              @click="dialog = true"
-              class="custom__image"
+          <div class="white pa-2">
+            <div
               :class="
                 darkMode === true
-                  ? 'invert__image image__box custom__image-zoomin'
-                  : 'image__box custom__image-zoomin white'
+                  ? 'cropper__container d-flex justify-center black'
+                  : 'cropper__container d-flex justify-center white'
               "
-              width="100%"
-              :src="
-                `${imageUrl}${this.research.readPath}${
-                  this.page
-                }.jpg?token=${savedToken}&nPages=${
-                  this.research.nPages
-                }&${Date.now()}${
-                  this.page === this.research.nPages ||
-                  this.selectedPage === this.research.nPages
-                    ? '&end=true'
-                    : ''
-                }`
-              "
-            ></v-img>
+            >
+              <!--What the code below does is it gives dark mode if the checkbox is selected,
+          it computes the src based on the request data, it appends the token, pages, 
+          date(to make the request unique) & then it appends end if the last page is reached.-->
+              <v-img
+                @click="dialog = true"
+                class="custom__image"
+                :class="
+                  darkMode === true
+                    ? 'invert__image image__box custom__image-zoomin'
+                    : 'image__box custom__image-zoomin white'
+                "
+                width="100%"
+                :src="
+                  `${imageUrl}${this.research.readPath}${
+                    this.page
+                  }.jpg?token=${savedToken}&nPages=${
+                    this.research.nPages
+                  }&${Date.now()}${
+                    parseInt(this.page) === this.research.nPages ||
+                    parseInt(this.selectedPage) === this.research.nPages
+                      ? '&end=true'
+                      : ''
+                  }`
+                "
+              ></v-img>
+              <!-- <v-card
+              v-show="imgLoaded === false"
+              tile
+              outlined
+              class="d-flex align-center justify-center"
+              color="transparent"
+              height="80vh"
+              width="100vw"
+            >
+              <v-progress-circular
+                :size="200"
+                color="accent"
+                indeterminate
+              ></v-progress-circular>
+            </v-card> -->
+            </div>
           </div>
         </v-col>
       </v-row>
-    </v-container>
-    <div class="d-flex justify-center">
-      <div class="custom__static d-flex flex-column">
-        <div class="d-flex align-center">
-          <v-btn large icon color="white" @click="firstPage()">
-            <v-icon>mdi-skip-previous</v-icon>
-          </v-btn>
-          <v-btn large icon color="white" @click="prevPage()">
-            <v-icon>mdi-rewind</v-icon>
-          </v-btn>
-          <span class="text-center grey lighten-3 my-3 px-4">{{ page }}</span>
-          <v-btn large icon color="white" @click="nextPage()">
-            <v-icon>mdi-fast-forward</v-icon>
-          </v-btn>
-          <v-btn large icon color="white" @click="lastPage()">
-            <v-icon>mdi-skip-next</v-icon>
-          </v-btn>
-          <div class="d-flex align-center justify-center">
-            <label for="page" class="white--text hidden-sm-and-down mx-2"
-              >Jump to page:
-            </label>
-            <select
-              @change="changePage($event)"
-              v-model="selectedPage"
-              name="page"
-              id="page"
-              class="grey lighten-4 mx-4 px-4"
-            >
-              <option
-                v-for="page in research.nPages"
-                :key="page"
-                :value="page"
-                >{{ page }}</option
+      <div class="d-flex justify-center">
+        <div class="custom__static d-flex flex-column">
+          <div class="d-flex align-center">
+            <v-btn large icon color="white" @click="firstPage()">
+              <v-icon>mdi-skip-previous</v-icon>
+            </v-btn>
+            <v-btn large icon color="white" @click="prevPage()">
+              <v-icon>mdi-rewind</v-icon>
+            </v-btn>
+            <span class="text-center grey lighten-3 my-3 px-4">{{ page }}</span>
+            <v-btn large icon color="white" @click="nextPage()">
+              <v-icon>mdi-fast-forward</v-icon>
+            </v-btn>
+            <v-btn large icon color="white" @click="lastPage()">
+              <v-icon>mdi-skip-next</v-icon>
+            </v-btn>
+            <div class="d-flex align-center justify-center">
+              <label for="page" class="white--text hidden-sm-and-down mx-2"
+                >Jump to page:
+              </label>
+              <select
+                @change="changePage($event)"
+                v-model="selectedPage"
+                name="page"
+                id="page"
+                class="grey lighten-4 mx-4 px-4"
               >
-            </select>
+                <option
+                  v-for="page in research.nPages"
+                  :key="page"
+                  :value="page"
+                  >{{ page }}</option
+                >
+              </select>
+            </div>
+            <div class="mr-2 white--text">
+              Dark <span class="hidden-sm-and-down">Mode:</span>
+            </div>
+            <v-checkbox
+              v-model="darkMode"
+              dark
+              hide-details
+              class="mt-n1"
+            ></v-checkbox>
           </div>
-          <div class="mr-2 white--text">
-            Dark <span class="hidden-sm-and-down">Mode:</span>
-          </div>
-          <v-checkbox
-            v-model="darkMode"
-            dark
-            hide-details
-            class="mt-n1"
-          ></v-checkbox>
         </div>
       </div>
-    </div>
+    </v-container>
+    <v-container v-else>
+      <v-card
+        tile
+        outlined
+        class="d-flex align-center justify-center"
+        color="transparent"
+        height="80vh"
+        width="100vw"
+      >
+        <v-progress-circular
+          :size="200"
+          color="accent"
+          indeterminate
+        ></v-progress-circular>
+      </v-card>
+    </v-container>
     <div class="text-center">
       <v-dialog v-model="dialog" width="90%">
         <v-img
@@ -147,6 +183,7 @@ export default {
     darkMode: false,
     next: false,
     dialog: false,
+    imgLoaded: false,
   }),
   methods: {
     goBack() {
@@ -159,7 +196,20 @@ export default {
           console.log('Reader Response', response)
           this.research = response.data.payload.research
           this.hits = response.data.payload.hits
-          this.$store.dispatch('ADD_TO_READING_LIST', response.data.payload)
+          const {
+            _id,
+            accessType,
+            authors,
+            researchTitle,
+            nPages,
+          } = response.data.payload.research
+          this.$store.dispatch('ADD_TO_READING_LIST', {
+            _id,
+            accessType,
+            authors,
+            researchTitle,
+            nPages,
+          })
         })
         .catch((error) => {
           console.log('Error>>>', error)
@@ -186,18 +236,19 @@ export default {
       if (this.page <= 1) {
         console.log('First Page')
       } else {
-        // this.fetchResearch()
         this.page--
       }
     },
     lastPage() {
-      // this.fetchResearch()
       this.page = this.research.nPages
     },
     changePage(event) {
-      // this.fetchResearch()
       this.page = event.target.value
       this.selectedPage = event.target.value
+    },
+    imgLoad() {
+      console.log('Image Loaded')
+      this.imgLoaded = true
     },
   },
   computed: {

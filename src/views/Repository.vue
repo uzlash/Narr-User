@@ -1,6 +1,6 @@
 <template>
   <v-app class="grey lighten-4">
-    <v-container>
+    <v-container v-if="Repository.length">
       <v-row align="center" justify="center">
         <v-col cols="12" md="8" sm="8" class="py-0">
           <v-text-field
@@ -14,52 +14,6 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <!-- <v-row>
-        <v-col cols="12" sm="6" md="3">
-          <v-text-field
-            dense
-            solo
-            hide-details
-            color="#00a368"
-            class="mb-2"
-            label="Search Repository"
-            append-icon="search"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="1" md="1" class="px-0 pt-4 pl-2">
-          <span class="body-1">Filter By: </span>
-        </v-col>
-        <v-col cols="6" sm="6" md="2">
-          <v-select
-            hide-details
-            class="d-inline"
-            dense
-            :items="[
-              'Art',
-              'Engineering',
-              'Law',
-              'Sciences',
-              'Social Sciences',
-            ]"
-            label="By Category"
-            solo
-          ></v-select>
-        </v-col>
-        <v-col cols="6" sm="6" md="2">
-          <v-select
-            hide-details
-            class="d-inline"
-            dense
-            :items="[
-              'Ahmadu Bello University',
-              'Abubakar Tafawa Balewa University',
-              'Bayero University Kano',
-            ]"
-            label="By Institution"
-            solo
-          ></v-select>
-        </v-col>
-      </v-row> -->
       <v-row>
         <v-col
           cols="12"
@@ -77,7 +31,7 @@
               tile
               class="mx-auto custom__card"
               max-width="344"
-              height="320"
+              max-height="320"
             >
               <v-img
                 :src="
@@ -85,18 +39,19 @@
                 "
                 height="200px"
               ></v-img>
-              <v-card-title
-                class="font-weight-bold px-2 body-2 green--text text--darken-4"
-              >
-                <span>{{ research.researchTitle }}</span>
+              <v-card-title class="px-2 py-1 green--text text--darken-4">
+                <span class="body-2 font-weight-bold">{{
+                  research.researchTitle
+                }}</span>
               </v-card-title>
               <v-divider></v-divider>
               <v-divider class="grey lighten-1"></v-divider>
               <v-card-subtitle class="pa-0 px-2">
-                <span class="font-weight-bold green--text text--darken-4 mr-1"
+                <span
+                  class="font-weight-bold caption green--text text--darken-4 mr-1"
                   >Authors:</span
                 >
-                <span>{{
+                <span class="caption">{{
                   research.authors.toString().replace(/,/g, ' and ')
                 }}</span>
               </v-card-subtitle>
@@ -126,6 +81,22 @@
           Upload New Document
         </span>
       </v-btn>
+    </v-container>
+    <v-container v-else>
+      <v-card
+        tile
+        outlined
+        class="d-flex align-center justify-center"
+        color="transparent"
+        height="80vh"
+        width="100vw"
+      >
+        <v-progress-circular
+          :size="200"
+          color="accent"
+          indeterminate
+        ></v-progress-circular>
+      </v-card>
     </v-container>
   </v-app>
 </template>
