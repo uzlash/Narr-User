@@ -25,7 +25,6 @@ Vue.use(VueCardFormat)
 Vue.use(VueSocketIOExt, socket, { store })
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
-Vue.use(VueSocketIOExt, socket)
 Vue.use(Toast)
 
 const token = localStorage.getItem('token')

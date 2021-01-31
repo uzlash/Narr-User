@@ -132,20 +132,7 @@
       </div>
     </v-container>
     <v-container v-else>
-      <v-card
-        tile
-        outlined
-        class="d-flex align-center justify-center"
-        color="transparent"
-        height="80vh"
-        width="100vw"
-      >
-        <v-progress-circular
-          :size="200"
-          color="accent"
-          indeterminate
-        ></v-progress-circular>
-      </v-card>
+      <div class="loader">Loading</div>
     </v-container>
     <div class="text-center">
       <v-dialog v-model="dialog" width="90%">
