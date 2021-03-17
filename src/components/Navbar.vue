@@ -237,138 +237,143 @@
 <script>
 export default {
   data: () => ({
-    user: JSON.parse(localStorage.getItem('user')),
+    user: JSON.parse(localStorage.getItem("user")),
     drawer: true,
     links: [
-      { icon: 'mdi-home', text: 'Home', route: '/' },
+      { icon: "mdi-home", text: "Home", route: "/" },
       {
-        icon: 'mdi-database',
-        text: 'Repository',
-        route: '/repository',
+        icon: "mdi-database",
+        text: "Repository",
+        route: "/repository",
       },
       {
-        icon: 'mdi-format-list-numbered',
-        text: 'Reading List',
-        route: '/history',
+        icon: "mdi-format-list-numbered",
+        text: "Reading List",
+        route: "/history",
       },
     ],
 
     researchFunding: [
       {
-        icon: 'mdi-book-open-variant',
-        text: 'Grants',
-        route: '/viewgrant',
+        icon: "mdi-book-open-variant",
+        text: "Grants",
+        route: "/viewgrant",
       },
       {
-        icon: 'mdi-account-cash',
-        text: 'Crowdfund',
-        route: '/viewcrowd',
+        icon: "mdi-account-cash",
+        text: "Crowdfund",
+        route: "/viewcrowd",
+      },
+      {
+        icon: "mdi-desktop-mac-dashboard",
+        text: "ICT Works",
+        route: "/viewwork",
       },
     ],
 
     services: [
       {
-        icon: 'mdi-chat',
-        text: 'Chat',
-        route: '/chat',
+        icon: "mdi-chat",
+        text: "Chat",
+        route: "/chat",
       },
       {
-        icon: 'mdi-ocr',
-        text: 'Image to Text',
-        route: '/ocr',
+        icon: "mdi-ocr",
+        text: "Image to Text",
+        route: "/ocr",
       },
       {
-        icon: 'mdi-file',
-        text: 'Document Conversion',
-        route: '/convert',
+        icon: "mdi-file",
+        text: "Document Conversion",
+        route: "/convert",
       },
       {
-        icon: 'mdi-message-video',
-        text: 'Video Conferencing',
-        route: '/video',
+        icon: "mdi-message-video",
+        text: "Video Conferencing",
+        route: "/video",
       },
     ],
     admin: [
       {
-        icon: 'mdi-chart-box-outline',
-        text: 'Dashboard',
-        route: '/admin',
+        icon: "mdi-chart-box-outline",
+        text: "Dashboard",
+        route: "/admin",
       },
       {
-        icon: 'mdi-account-multiple',
-        text: 'Researchers',
-        route: '/user',
+        icon: "mdi-account-multiple",
+        text: "Researchers",
+        route: "/user",
       },
       {
-        icon: 'mdi-account',
-        text: 'Admins',
-        route: '/adminuser',
+        icon: "mdi-account",
+        text: "Admins",
+        route: "/adminuser",
       },
       {
-        icon: 'mdi-database',
-        text: 'Repository',
-        route: '/repository',
+        icon: "mdi-database",
+        text: "Repository",
+        route: "/repository",
       },
       {
-        icon: 'mdi-book-open-variant',
-        text: 'Grants',
-        route: '/viewgrant',
+        icon: "mdi-book-open-variant",
+        text: "Grants",
+        route: "/viewgrant",
       },
       {
-        icon: 'mdi-account-cash',
-        text: 'Crowdfund',
-        route: '/viewcrowd',
+        icon: "mdi-account-cash",
+        text: "Crowdfund",
+        route: "/viewcrowd",
       },
       {
-        icon: 'mdi-chat',
-        text: 'Chat',
-        route: '/chat',
+        icon: "mdi-chat",
+        text: "Chat Center",
+        route: "/chat",
       },
       {
-        icon: 'mdi-ocr',
-        text: 'Image to Text',
-        route: '/ocr',
+        icon: "mdi-ocr",
+        text: "Image to Text",
+        route: "/ocr",
       },
       {
-        icon: 'mdi-file',
-        text: 'Document Conversion',
-        route: '/convert',
+        icon: "mdi-file",
+        text: "Document Conversion",
+        route: "/convert",
       },
       {
-        icon: 'mdi-message-video',
-        text: 'Video Conferencing',
-        route: '/video',
+        icon: "mdi-message-video",
+        text: "Video Conferencing",
+        route: "/video",
       },
     ],
 
     messages: [
       {
-        title: 'umar abubakar',
-        subtitle: 'hi',
-        tile: 'mention you',
-        avatar: 'mdi-user',
+        title: "umar abubakar",
+        subtitle: "hi",
+        tile: "mention you",
+        avatar: "mdi-user",
       },
 
-      { title: 'musa abubakar', subtitle: 'hi', tile: 'mention you' },
-      { title: 'usman murtala', subtitle: 'hi', tile: 'mention you' },
-      { title: 'abba kabir', subtitle: 'hello', tile: 'mention you' },
-      { title: 'aliyu ibrahim', subtitle: 'hello', tile: 'mention you' },
-      { title: 'mubarak ', subtitle: 'hi', tile: 'mention you' },
-      { title: 'abubakar', subtitle: 'hi', tile: 'mention you' },
+      { title: "musa abubakar", subtitle: "hi", tile: "mention you" },
+      { title: "usman murtala", subtitle: "hi", tile: "mention you" },
+      { title: "abba kabir", subtitle: "hello", tile: "mention you" },
+      { title: "aliyu ibrahim", subtitle: "hello", tile: "mention you" },
+      { title: "mubarak ", subtitle: "hi", tile: "mention you" },
+      { title: "abubakar", subtitle: "hi", tile: "mention you" },
     ],
     offset: true,
   }),
   methods: {
     logOut() {
-      this.$store.dispatch('SIGN_OUT')
+      this.$store.dispatch("SIGN_OUT");
     },
   },
   computed: {
     UsersCurrentlyOnline() {
-      return this.$store.getters.getSocketUsersOnline
+      return this.$store.getters.getSocketUsersOnline;
     },
   },
-}
+};
 </script>
 
 <style scoped>

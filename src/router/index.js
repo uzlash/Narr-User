@@ -217,6 +217,17 @@ const routes = [
   },
 
   {
+    path: '/viewwork',
+    name: 'ViewWork',
+    component: () =>
+      import(/* webpackChunkName: "viewcrowd" */ '../views/ICTworks.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true,
+    },
+  },
+
+  {
     path: '/chat',
     name: 'Chat',
     component: () => import(/* webpackChunkName: "chat" */ '../views/Chat.vue'),

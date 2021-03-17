@@ -78,4 +78,8 @@ export default {
       },
     })
   },
+  //Get all Works
+  fetchWorks() {
+    return axios.get('http://192.168.88.22:4000/feed.json')
+  },
 }

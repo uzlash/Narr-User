@@ -9,12 +9,10 @@
       <v-row>
         <v-col cols="12">
           <v-card tile outlined>
-            <v-card-title class="text-h6 font-weight-light"
-              >Research Grants Feed</v-card-title
-            >
+            <v-card-title class="text-h6 font-weight-light">Feed</v-card-title>
             <v-divider></v-divider>
             <v-card-text
-              v-for="(grant, index) in 10"
+              v-for="(grant, index) in 5"
               :key="index"
               class="custom__research-card pb-0"
             >
@@ -60,15 +58,11 @@
                 <div>
                   <span class="mr-4 body-2 font-weight-medium"
                     >Research Budget -
-                    <span class="green--text text--darken-4"
-                      >N17,000,000</span
-                    ></span
+                    <span class="accent--text">N17,000,000</span></span
                   >
                   <span class="body-2 font-weight-medium"
                     >Estimated Project Duration -
-                    <span class="yellow--text text--darken-2"
-                      >7 months</span
-                    ></span
+                    <span class="accent--text">7 months</span></span
                   >
                 </div>
                 <div class="mt-2">
@@ -146,12 +140,8 @@
       >
         <template v-slot:activator>
           <v-btn v-model="fab" x-large color="#00a368" dark fab>
-            <v-icon v-if="fab">
-              mdi-close
-            </v-icon>
-            <span v-else class="body-2 font-weight-bold">
-              Manage
-            </span>
+            <v-icon v-if="fab"> mdi-close </v-icon>
+            <span v-else class="body-2 font-weight-bold"> Manage </span>
           </v-btn>
         </template>
         <v-btn fab dark small color="#00a368" @click="goManageGrants()">
@@ -172,30 +162,30 @@
 export default {
   data() {
     return {
-      search: '',
+      search: "",
       grantFavorite: false,
       grantFlag: false,
       fab: false,
-    }
+    };
   },
   methods: {
     clickedFavorite(id) {
-      console.log('Liked research', id)
-      this.grantFavorite = !this.grantFavorite
+      console.log("Liked research", id);
+      this.grantFavorite = !this.grantFavorite;
     },
     clickedFlag(id) {
-      console.log('Flagged research', id)
-      this.grantFlag = !this.grantFlag
+      console.log("Flagged research", id);
+      this.grantFlag = !this.grantFlag;
     },
     clickedGrant(id) {
-      console.log('clicked ' + id)
-      this.$router.push(`/viewgrant/${id}`)
+      console.log("clicked " + id);
+      this.$router.push(`/viewgrant/${id}`);
     },
     goManageGrants() {
-      this.$router.push('/managegrant')
+      this.$router.push("/managegrant");
     },
   },
-}
+};
 </script>
 
 <style>

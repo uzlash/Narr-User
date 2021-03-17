@@ -11,13 +11,13 @@
                 </v-btn>
               </v-col>
               <v-col cols="5">
-                <div class="font-weight-bold pl-2 green--text text--darken-4">
+                <div class="font-weight-bold pl-2 accent--text">
                   Title: {{ research.researchTitle }}
                 </div>
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="6">
-                <div class="font-weight-bold yellow--text text--darken-2">
+                <div class="font-weight-bold accent--text">
                   <span>
                     Authors:
                   </span>
