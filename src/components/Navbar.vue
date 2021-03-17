@@ -274,7 +274,7 @@ export default {
     services: [
       {
         icon: "mdi-chat",
-        text: "Chat",
+        text: "Chat Center",
         route: "/chat",
       },
       {
