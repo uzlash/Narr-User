@@ -14,9 +14,7 @@
                           <v-card flat color="transparent">
                             <v-img
                               width="300"
-                              :src="
-                                `data:image/png;base64,${narrImg.encodedImg}`
-                              "
+                              :src="`data:image/png;base64,${narrImg.encodedImg}`"
                               alt="Narr Logo"
                             ></v-img>
                           </v-card>
@@ -149,9 +147,7 @@
                             <v-card flat color="transparent">
                               <v-img
                                 width="300"
-                                :src="
-                                  `data:image/png;base64,${narrImg.encodedImg}`
-                                "
+                                :src="`data:image/png;base64,${narrImg.encodedImg}`"
                                 alt="Narr Logo"
                               ></v-img>
                             </v-card>
@@ -256,8 +252,24 @@
                               </v-col>
                               <v-col cols="12" md="6">
                                 <v-select
-                                  hide-details="auto"
                                   v-if="selectedInstitutionType"
+                                  hide-details="auto"
+                                  v-model="selectedInstitutionCategory"
+                                  solo
+                                  label="Institution Category"
+                                  prepend-icon="mdi-school"
+                                  :items="['Federal', 'State', 'Private']"
+                                  :rules="[rules.required]"
+                                  color="#00A368"
+                                />
+                              </v-col>
+                              <v-col cols="12" md="12">
+                                <v-select
+                                  hide-details="auto"
+                                  v-if="
+                                    selectedInstitutionType &&
+                                    selectedInstitutionCategory
+                                  "
                                   v-model="selectedInstitution"
                                   solo
                                   label="Institution"
@@ -413,26 +425,27 @@
 
 <script>
 // import axios from "axios";
-import ForgotPasswordPopup from '../components/ForgotPasswordPopup'
+import ForgotPasswordPopup from "../components/ForgotPasswordPopup";
 export default {
   components: {
     ForgotPasswordPopup,
   },
   data: () => ({
-    fname: '',
-    lname: '',
-    email: '',
-    phone: '',
-    address: '',
-    organization: '',
-    selectedInstitutionType: '',
-    selectedInstitution: '',
-    password: '',
-    confirmPassword: '',
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    address: "",
+    organization: "",
+    selectedInstitutionType: "",
+    selectedInstitution: "",
+    selectedInstitutionCategory: "",
+    password: "",
+    confirmPassword: "",
     date: null,
     menu: false,
     modal: false,
-    showPassword: '',
+    showPassword: "",
     narrImg: {
       encodedImg: `iVBORw0KGgoAAAANSUhEUgAAAosAAACyCAYAAAAqAIVbAAAACXBIWXMAAC4jAAAuIwF4pT92AAAMMWlUWHRYTUw6Y29tLmFkb2JlLnht
                   cAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4P
@@ -744,40 +757,39 @@ export default {
                   mIRUEQBEEQBMETEYuCIAiCIAiCJ/8fpAAwfRdUd1sAAAAASUVORK5CYII=`,
     },
     rules: {
-      required: (v) => !!v || 'Field is required',
-      counter: (v) => (v && v.length >= 3) || 'Minimum length is 3 characters',
+      required: (v) => !!v || "Field is required",
+      counter: (v) => (v && v.length >= 3) || "Minimum length is 3 characters",
       email: (value) => {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return pattern.test(value) || 'Invalid e-mail.'
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "Invalid e-mail.";
       },
       password: (value) =>
-        (value && value.length >= 6) || 'Minimum length is 6 characters',
+        (value && value.length >= 6) || "Minimum length is 6 characters",
     },
-    userTypes: ['Student', 'Staff', 'Independent Researcher'],
+    userTypes: ["Student", "Staff", "Independent Researcher"],
     institutionTypes: [
-      'University',
-      'Polytechnic',
-      'College of Education',
-      'Monotechnic',
-      'Independent Researcher',
+      // "University",
+      // "Polytechnic",
+      // "College of Education",
+      // "Independent Researcher",
     ],
     institutions: [
-      { text: 'Abubakar Tafawa Balewa University', type: 'university' },
-      { text: 'Ahmadu Bello University', type: 'university' },
-      { text: 'Bayero University Kano', type: 'university' },
-      { text: 'Kaduna Polytechnique', type: 'polytechnic' },
-      { text: 'Nuhu Bamalli', type: 'polytechnic' },
+      { text: "Abubakar Tafawa Balewa University", type: "university" },
+      { text: "Ahmadu Bello University", type: "university" },
+      { text: "Bayero University Kano", type: "university" },
+      { text: "Kaduna Polytechnique", type: "polytechnic" },
+      { text: "Nuhu Bamalli", type: "polytechnic" },
       {
-        text: 'Federal College of Education Zaria',
-        type: 'college of education',
+        text: "Federal College of Education Zaria",
+        type: "college of education",
       },
       {
-        text: 'Federal College of Education Katsina',
-        type: 'college of education',
+        text: "Federal College of Education Katsina",
+        type: "college of education",
       },
-      { text: 'Dialogue Institute of Technology', type: 'monotechnic' },
-      { text: 'Khemsafe Computers', type: 'monotechnic' },
-      { text: 'Independent', type: 'independent researcher' },
+      { text: "Dialogue Institute of Technology", type: "monotechnic" },
+      { text: "Khemsafe Computers", type: "monotechnic" },
+      { text: "Independent", type: "independent researcher" },
     ],
   }),
   methods: {
@@ -785,9 +797,9 @@ export default {
       const signInData = {
         email: this.email,
         password: this.password,
-      }
+      };
       if (this.$refs.form.validate()) {
-        this.$store.dispatch('SIGN_IN', signInData)
+        this.$store.dispatch("SIGN_IN", signInData);
       }
     },
     signUp() {
@@ -803,16 +815,53 @@ export default {
           name: this.selectedInstitution,
         },
         password: this.confirmPassword,
-      }
+      };
       if (this.$refs.form.validate()) {
-        this.$store.dispatch('SIGN_UP', signUpData)
+        this.$store.dispatch("SIGN_UP", signUpData);
       }
     },
     createAccountStep() {
-      return this.$store.dispatch('CREATE_ACCOUNT_STEP')
+      return this.$store.dispatch("CREATE_ACCOUNT_STEP");
     },
     signInStep() {
-      return this.$store.dispatch('SIGN_IN_STEP')
+      return this.$store.dispatch("SIGN_IN_STEP");
+    },
+    fetchInstitutionTypes() {
+      fetch("https://api.narr.ng/api/v1/institution/types", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((r) => r.json())
+        .then((response) => {
+          console.log("Response", response);
+          const newArr = response.payload;
+          newArr.push("Independent Researcher");
+          this.institutionTypes = newArr;
+        })
+        .catch((error) => {
+          console.log("Error>>>", error);
+        });
+    },
+    fetchSelectedInstitution() {
+      fetch(
+        `https://api.narr.ng/api/v1/institution/${this.selectedInstitutionType}/${this.selectedInstitutionCategory}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((r) => r.json())
+        .then((response) => {
+          console.log("Response", response);
+          this.filteredInstitutions = response.payload;
+        })
+        .catch((error) => {
+          console.log("Error>>>", error);
+        });
     },
   },
   computed: {
@@ -820,29 +869,29 @@ export default {
       return this.institutions.filter((institution) => {
         return institution.type.match(
           this.selectedInstitutionType.toLowerCase()
-        )
-      })
+        );
+      });
     },
     passwordConfirmationRule() {
       return () =>
-        this.password === this.confirmPassword || 'Password must match'
+        this.password === this.confirmPassword || "Password must match";
     },
     changeStep() {
-      return this.$store.state.step
+      return this.$store.state.step;
     },
     signInMetaData() {
-      return this.$store.state.signIn
+      return this.$store.state.signIn;
     },
     signUpMetaData() {
-      return this.$store.state.signUp
+      return this.$store.state.signUp;
     },
   },
-}
+};
 </script>
 
 <style>
 .custom__bg {
-  background-image: url('../assets/background1.svg');
+  background-image: url("../assets/background1.svg");
   background-size: cover;
   background-attachment: fixed;
 }

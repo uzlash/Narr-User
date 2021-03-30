@@ -10,17 +10,12 @@
         <v-col cols="12">
           <v-card class="mb-2 px-4" tile>
             <v-row class="py-2">
-              <v-col cols="3" class="pb-0">
-                <v-card tile outlined class="px-1">
-                  <span class="accent--text body-2">Title: </span>
-                </v-card>
-              </v-col>
               <v-col cols="9" class="px-0 pb-0">
-                <v-card tile outlined class="px-1">
-                  <span class="grey--text text--darken-2 body-2">
+                <v-card tile outlined class="px-1" color="transparent">
+                  <span class="accent--text body-1 font-weight-bold">
                     {{ work.title }}
-                  </span></v-card
-                >
+                  </span>
+                </v-card>
               </v-col>
             </v-row>
             <v-row>
@@ -30,19 +25,38 @@
                 </v-card>
               </v-col>
               <v-col cols="6">
+                <v-card tile outlined class="px-1 mt-1">
+                  <span class="accent--text body-2">Creator: </span>
+                  <span class="grey--text text--darken-2 body-2">
+                    {{ work.creator }}
+                  </span>
+                  <!-- <v-row>
+                    <v-col cols="4" class="py-0 pb-0">
+                      <span class="accent--text body-2">Creator: </span>
+                      <span class="grey--text text--darken-2 body-2">
+                        {{ work.creator }}
+                      </span>
+                    </v-col>
+                  </v-row> -->
+                </v-card>
                 <v-row>
-                  <v-col cols="12" class="py-0 pb-0">
-                    <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Description: </span>
+                  <v-col cols="12" class="py-0">
+                    <v-card tile outlined class="px-1 mt-1" height="180">
+                      <v-card-title class="pa-1">
+                        <span class="accent--text body-2">Description: </span>
+                      </v-card-title>
+                      <v-divider></v-divider>
+                      <v-card-text class="pa-1">
+                        <span
+                          class="grey--text text--darken-2 body-2 font-weight-regular"
+                          >{{
+                            work["content:encodedSnippet"].slice(0, 500) + "..."
+                          }}</span
+                        >
+                      </v-card-text>
                     </v-card>
                   </v-col>
                 </v-row>
-                <v-card tile outlined class="px-1 mt-1" height="180">
-                  <span
-                    class="grey--text text--darken-2 body-2"
-                    v-html="work.content"
-                  ></span>
-                </v-card>
                 <div class="mt-2 d-flex justify-end">
                   <v-btn
                     depressed
@@ -68,20 +82,6 @@
                 </div>
               </v-col>
               <v-col cols="3">
-                <v-row>
-                  <v-col cols="4" class="py-0 pb-0">
-                    <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Creator: </span>
-                    </v-card>
-                  </v-col>
-                  <v-col cols="8" class="pa-0">
-                    <v-card tile outlined class="px-1">
-                      <span class="grey--text text--darken-2 body-2">
-                        {{ work.creator }}
-                      </span></v-card
-                    >
-                  </v-col>
-                </v-row>
                 <v-row>
                   <v-col cols="4" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
@@ -129,7 +129,9 @@
         <v-dialog v-model="dialogview" max-height="80vh" max-width="80vw">
           <v-card class="pa-2 custom__card-image">
             <v-card-title>
-              <span class="text-body-1 accent--text">{{ viewItem.title }}</span>
+              <span class="accent--text body-1 font-weight-bold">{{
+                viewItem.title
+              }}</span>
               <v-spacer></v-spacer>
               <v-btn @click="dialogview = false" icon>
                 <v-icon color="red">mdi-close</v-icon>

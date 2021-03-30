@@ -32,4 +32,8 @@ export default {
 .custom__iframe--container {
   height: calc(100vh);
 }
+.custom__map {
+  height: calc(100vh - 48px);
+  width: 100%;
+}
 </style>

@@ -12,7 +12,7 @@
           <v-card outlined tile class="py-1 px-2">
             <span class="accent--text mr-2">Authors:</span>
             <span class="body-2">{{
-              research.authors.toString().replace(/,/g, ' and ')
+              research.authors.toString().replace(/,/g, " and ")
             }}</span>
           </v-card>
         </v-col>
@@ -23,25 +23,23 @@
             <v-card outlined tile @click="dialog = true" class="pa-2">
               <v-img
                 v-if="research"
-                :src="
-                  `${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`
-                "
+                :src="`${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`"
                 width="100%"
                 height="250"
               ></v-img>
             </v-card>
           </v-card>
         </v-col>
-        <v-col cols="12" sm="6" md="6" lg="6">
+        <v-col cols="12" sm="6" md="6">
           <v-card tile height="300">
             <v-card-text>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Category: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{ research.category }}
@@ -50,12 +48,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Genre: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{ research.genre }}
@@ -64,12 +62,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Access Type: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{ research.accessType }}
@@ -78,12 +76,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Monthly Fee: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{ research.monthlyFee }}
@@ -92,12 +90,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Pages: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{ research.nPages }}
@@ -106,12 +104,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Views/Hits: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{ hits }}
@@ -120,12 +118,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Status: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{ research.status }}
@@ -134,16 +132,16 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4" class="pt-1 pb-0">
+                <v-col cols="5" class="pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="accent--text">Year: </span>
                   </v-card>
                 </v-col>
-                <v-col cols="8" class="px-0 pt-1 pb-0">
+                <v-col cols="7" class="px-0 pt-1 pb-0">
                   <v-card tile outlined class="px-1">
                     <span class="grey--text text--darken-2 body-2">
                       {{
-                        new Date(research.year).toLocaleString('en-GB', {
+                        new Date(research.year).toLocaleString("en-GB", {
                           hour12: true,
                         })
                       }}
@@ -174,11 +172,9 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="6" md="6" lg="6">
+        <v-col cols="12" sm="6" md="6">
           <v-tabs class="elevation-1" color="#00a368" align-with-title>
-            <v-tab>
-              Description
-            </v-tab>
+            <v-tab> Description </v-tab>
             <v-tab-item>
               <v-card>
                 <v-card-text class="pa-4 body-2 grey--text text--darken-2">
@@ -190,9 +186,7 @@
         </v-col>
         <v-col cols="12" sm="6" md="6" lg="6">
           <v-tabs class="elevation-1" color="#00a368" align-with-title>
-            <v-tab>
-              Analytics
-            </v-tab>
+            <v-tab> Analytics </v-tab>
             <v-tab-item class="pa-4">
               <v-row>
                 <v-col cols="6" class="py-1 pb-0">
@@ -291,9 +285,7 @@
       <v-dialog v-model="dialog" width="1000">
         <v-img
           v-if="research"
-          :src="
-            `${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`
-          "
+          :src="`${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`"
         ></v-img>
       </v-dialog>
     </div>
@@ -301,41 +293,41 @@
 </template>
 
 <script>
-import helpers from '../services/helpers'
+import helpers from "../services/helpers";
 export default {
-  props: ['id'],
+  props: ["id"],
   data: () => ({
     research: {},
-    hits: '',
+    hits: "",
     rating: 5,
     dialog: false,
   }),
   methods: {
     readResearch(id) {
-      this.$router.push(id + '/read')
+      this.$router.push(id + "/read");
     },
   },
   computed: {
     imageUrl() {
-      return helpers.apiBaseUrl
+      return helpers.apiBaseUrl;
     },
     savedToken() {
-      return this.$store.state.token
+      return this.$store.state.token;
     },
   },
   created() {
     helpers
       .fetchSingleResearch(this.id)
       .then((response) => {
-        console.log('Response>>>', response)
-        this.research = response.data.payload.research
-        this.hits = response.data.payload.hits
+        console.log("Response>>>", response);
+        this.research = response.data.payload.research;
+        this.hits = response.data.payload.hits;
       })
       .catch((error) => {
-        console.log('Error>>>', error)
-      })
+        console.log("Error>>>", error);
+      });
   },
-}
+};
 </script>
 
 <style></style>

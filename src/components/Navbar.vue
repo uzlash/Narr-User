@@ -150,9 +150,25 @@
         <v-list-item
           active-class="border"
           v-for="link in links"
-          :key="link.icon"
+          :key="link.id"
           :to="link.route"
           v-show="user.userRole === 'researcher'"
+        >
+          <v-list-item-action>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ link.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          color="white"
+          active-class="border"
+          v-for="link in admin"
+          :key="link.id"
+          :to="link.route"
+          v-show="user.userRole === 'admin'"
         >
           <v-list-item-action>
             <v-icon>{{ link.icon }}</v-icon>
@@ -166,7 +182,33 @@
           sub-group
           color="white"
           class="ml-n4"
-          v-show="user.userRole === 'researcher'"
+          v-show="user.userRole === 'admin'"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title class="ml-4">Manage</v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="element in manageAdmin"
+            :key="element.id"
+            :to="element.route"
+            active-class="border"
+            class="custom__research--item"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ element.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{ element.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <v-list-group
+          sub-group
+          color="white"
+          class="ml-n4"
+          v-show="user.userRole === 'researcher' || user.userRole === 'admin'"
         >
           <template v-slot:activator>
             <v-list-item-content>
@@ -178,7 +220,7 @@
 
           <v-list-item
             v-for="element in researchFunding"
-            :key="element.icon"
+            :key="element.id"
             :to="element.route"
             active-class="border"
             class="custom__research--item"
@@ -193,9 +235,9 @@
         <v-list-item
           active-class="border"
           v-for="link in services"
-          :key="link.icon"
+          :key="link.id"
           :to="link.route"
-          v-show="user.userRole === 'researcher'"
+          v-show="user.userRole === 'researcher' || user.userRole === 'admin'"
         >
           <v-list-item-action>
             <v-icon>{{ link.icon }}</v-icon>
@@ -205,21 +247,6 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <v-list-item
-        color="white"
-        active-class="border"
-        v-for="link in admin"
-        :key="link.icon"
-        :to="link.route"
-        v-show="user.userRole === 'admin'"
-      >
-        <v-list-item-action>
-          <v-icon>{{ link.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>{{ link.text }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
       <v-divider></v-divider>
 
       <template v-slot:append>
@@ -240,13 +267,15 @@ export default {
     user: JSON.parse(localStorage.getItem("user")),
     drawer: true,
     links: [
-      { icon: "mdi-home", text: "Home", route: "/" },
+      { id: 1, icon: "mdi-home", text: "Home", route: "/" },
       {
+        id: 2,
         icon: "mdi-database",
         text: "Repository",
         route: "/repository",
       },
       {
+        id: 3,
         icon: "mdi-format-list-numbered",
         text: "Reading List",
         route: "/history",
@@ -255,16 +284,19 @@ export default {
 
     researchFunding: [
       {
+        id: 4,
         icon: "mdi-book-open-variant",
         text: "Grants",
         route: "/viewgrant",
       },
       {
+        id: 5,
         icon: "mdi-account-cash",
         text: "Crowdfund",
         route: "/viewcrowd",
       },
       {
+        id: 6,
         icon: "mdi-desktop-mac-dashboard",
         text: "ICT Works",
         route: "/viewwork",
@@ -273,21 +305,25 @@ export default {
 
     services: [
       {
+        id: 7,
         icon: "mdi-chat",
         text: "Chat Center",
         route: "/chat",
       },
       {
+        id: 8,
         icon: "mdi-ocr",
         text: "Image to Text",
         route: "/ocr",
       },
       {
+        id: 9,
         icon: "mdi-file",
         text: "Document Conversion",
         route: "/convert",
       },
       {
+        id: 10,
         icon: "mdi-message-video",
         text: "Video Conferencing",
         route: "/video",
@@ -295,54 +331,42 @@ export default {
     ],
     admin: [
       {
+        id: 11,
         icon: "mdi-chart-box-outline",
         text: "Dashboard",
         route: "/admin",
       },
       {
+        id: 12,
+        icon: "mdi-database",
+        text: "Repository",
+        route: "/repository",
+      },
+    ],
+    manageAdmin: [
+      {
+        id: 13,
         icon: "mdi-account-multiple",
         text: "Researchers",
         route: "/user",
       },
       {
+        id: 14,
         icon: "mdi-account",
-        text: "Admins",
+        text: "Administrators",
         route: "/adminuser",
       },
       {
-        icon: "mdi-database",
-        text: "Repository",
-        route: "/repository",
+        id: 15,
+        icon: "mdi-office-building",
+        text: "Institutions",
+        route: "/institution",
       },
       {
-        icon: "mdi-book-open-variant",
-        text: "Grants",
-        route: "/viewgrant",
-      },
-      {
-        icon: "mdi-account-cash",
-        text: "Crowdfund",
-        route: "/viewcrowd",
-      },
-      {
-        icon: "mdi-chat",
-        text: "Chat Center",
-        route: "/chat",
-      },
-      {
-        icon: "mdi-ocr",
-        text: "Image to Text",
-        route: "/ocr",
-      },
-      {
-        icon: "mdi-file",
-        text: "Document Conversion",
-        route: "/convert",
-      },
-      {
-        icon: "mdi-message-video",
-        text: "Video Conferencing",
-        route: "/video",
+        id: 16,
+        icon: "mdi-clipboard-edit",
+        text: "Categories",
+        route: "/category",
       },
     ],
 

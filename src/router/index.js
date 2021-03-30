@@ -215,7 +215,6 @@ const routes = [
       requiresAuth: true,
     },
   },
-
   {
     path: '/viewwork',
     name: 'ViewWork',
@@ -229,12 +228,29 @@ const routes = [
 
   {
     path: '/chat',
-    name: 'Chat',
-    component: () => import(/* webpackChunkName: "chat" */ '../views/Chat.vue'),
+    name: 'chatView',
     meta: {
       showHeader: true,
-      requiresAuth: true,
+      requiresAuth: true
     },
+    component: () => import('../views/ChatView.vue'),
+    children: [
+      {
+        path: '', name: 'Chat', component: () => import('../components/Chat.vue'), meta: {
+          showHeader: true,
+          requiresAuth: true
+        },
+      },
+      {
+        path: '/chat/:id',
+        name: 'ChatCentre',
+        component: () => import('../components/ChatCentre.vue'),
+        meta: {
+          showHeader: true,
+          requiresAuth: true
+        },
+      },
+    ]
   },
 
   {
@@ -360,6 +376,44 @@ const routes = [
       import(
         /* webpackChunkName: "Individual User" */ '../admin/UserIndividual.vue'
       ),
+    meta: {
+      showHeader: true,
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      const user = store.state.user
+      if (user.userRole === 'admin') {
+        next()
+      } else {
+        next('/signin')
+      }
+    },
+  },
+
+  {
+    path: '/institution',
+    name: 'Institutions',
+    component: () =>
+      import(/* webpackChunkName: "Institutions" */ '../admin/Institutions.vue'),
+    meta: {
+      showHeader: true,
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      const user = store.state.user
+      if (user.userRole === 'admin') {
+        next()
+      } else {
+        next('/signin')
+      }
+    },
+  },
+
+  {
+    path: '/category',
+    name: 'Categories',
+    component: () =>
+      import(/* webpackChunkName: "Categories" */ '../admin/Category.vue'),
     meta: {
       showHeader: true,
       requiresAuth: true,

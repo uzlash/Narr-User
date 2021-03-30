@@ -24,58 +24,64 @@
         <v-col cols="12">
           <v-card class="mb-2 px-4" tile>
             <v-row>
-              <v-col cols="3">
+              <v-col cols="12" sm="12" md="3">
                 <v-card tile outlined class="pa-2">
                   <v-img
-                    :src="
-                      `${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`
-                    "
+                    :src="`${imageUrl}${research.thumbnail}?action=thumbnail&token=${savedToken}`"
                     height="150px"
                   ></v-img>
                 </v-card>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" sm="12" md="6">
                 <v-row>
-                  <v-col cols="3" class="py-1 pb-0">
+                  <v-col cols="4" sm="3" md="3" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Title: </span>
+                      <span class="accent--text text-caption text-sm-body-1"
+                        >Title:
+                      </span>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" class="px-0 pt-1 pb-0">
+                  <v-col cols="8" sm="9" md="9" class="px-0 pt-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="grey--text text--darken-2 body-2">
+                      <span
+                        class="grey--text text--darken-2 text-caption text-sm-body-1"
+                      >
                         {{ research.researchTitle }}
                       </span></v-card
                     >
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="3" class="py-1 pb-0">
+                  <v-col cols="4" sm="3" md="3" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Authors: </span>
+                      <span class="accent--text text-caption text-sm-body-1"
+                        >Authors:
+                      </span>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" class="px-0 pt-1 pb-0">
+                  <v-col cols="8" sm="9" md="9" class="px-0 pt-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="grey--text text--darken-2 body-2">
-                        {{ research.authors.toString().replace(/,/g, ' and ') }}
+                      <span
+                        class="grey--text text--darken-2 text-caption text-sm-body-1"
+                      >
+                        {{ research.authors.toString().replace(/,/g, " and ") }}
                       </span></v-card
                     >
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="3" class="py-1 pb-0">
+                  <v-col cols="4" sm="3" md="3" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Year: </span>
+                      <span class="accent--text text-caption text-sm-body-1"
+                        >Year:
+                      </span>
                     </v-card>
                   </v-col>
-                  <v-col
-                    cols="9
-                  "
-                    class="px-0 pt-1 pb-0"
-                  >
+                  <v-col cols="8" sm="9" md="9" class="px-0 pt-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="grey--text text--darken-2 body-2">
+                      <span
+                        class="grey--text text--darken-2 text-caption text-sm-body-1"
+                      >
                         {{ research.year }}
                       </span></v-card
                     >
@@ -83,40 +89,50 @@
                 </v-row>
 
                 <v-row>
-                  <v-col cols="3" class="py-1 pb-0">
+                  <v-col cols="4" sm="3" md="3" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Pages: </span>
+                      <span class="accent--text text-caption text-sm-body-1"
+                        >Pages:
+                      </span>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" class="px-0 pt-1 pb-0">
+                  <v-col cols="8" sm="9" md="9" class="px-0 pt-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="grey--text text--darken-2 body-2">
+                      <span
+                        class="grey--text text--darken-2 text-caption text-sm-body-1"
+                      >
                         {{ research.nPages }}
                       </span></v-card
                     >
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="3" class="py-1 pb-0">
+                  <v-col cols="4" sm="3" md="3" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Category: </span>
+                      <span class="accent--text text-caption text-sm-body-1"
+                        >Category:
+                      </span>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" class="px-0 pt-1 pb-0">
+                  <v-col cols="8" sm="9" md="9" class="px-0 pt-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="grey--text text--darken-2 body-2">
+                      <span
+                        class="grey--text text--darken-2 text-caption text-sm-body-1"
+                      >
                         {{ research.category }}
                       </span></v-card
                     >
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="3" class="py-1 pb-0">
+                  <v-col cols="4" sm="3" md="3" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Ratings: </span>
+                      <span class="accent--text text-caption text-sm-body-1"
+                        >Ratings:
+                      </span>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" class="px-0 pt-1 pb-0">
+                  <v-col cols="8" sm="9" md="9" class="px-0 pt-1 pb-0">
                     <v-card tile outlined class="px-1">
                       <!-- <v-rating
                         class="d-inline"
@@ -126,26 +142,31 @@
                         readonly
                         dense
                       ></v-rating> -->
-                      <span class="grey--text text--darken-2 body-2">
-                        <span class="accent--text body-2"> 80% </span> |
-                        (413,974,005) ratings
+                      <span
+                        class="grey--text text--darken-2 text-caption text-sm-body-1"
+                      >
+                        <span class="accent--text"> 80% </span>
+                        | (413,974,005) ratings
                       </span>
                     </v-card>
                   </v-col>
                 </v-row>
               </v-col>
-              <v-col cols="3">
+              <v-col cols="12" sm="12" md="3">
                 <v-row>
                   <v-col cols="12" class="py-1 pb-0">
                     <v-card tile outlined class="px-1">
-                      <span class="accent--text body-2">Description: </span>
+                      <span class="accent--text text-caption text-sm-body-1"
+                        >Description:
+                      </span>
                     </v-card>
                   </v-col>
                 </v-row>
                 <v-card tile outlined class="px-1 mt-1" height="146px">
-                  <span class="grey--text text--darken-2 body-2">{{
-                    research.description | trimLength
-                  }}</span>
+                  <span
+                    class="grey--text text--darken-2 text-caption text-sm-body-1"
+                    >{{ research.description | trimLength }}</span
+                  >
                 </v-card>
               </v-col>
             </v-row>
@@ -158,9 +179,7 @@
         class="custom__btn text-capitalize px-2 mt-3"
         @click="goUpload()"
       >
-        <span class="caption">
-          Upload New Document
-        </span>
+        <span class="caption"> Upload New Document </span>
       </v-btn>
     </v-container>
     <v-container v-else>
@@ -170,46 +189,46 @@
 </template>
 
 <script>
-import helpers from '../services/helpers'
+import helpers from "../services/helpers";
 export default {
   data: () => ({
     Repository: [],
   }),
   methods: {
     goResearchView(id) {
-      this.$router.push('/repository/' + id)
+      this.$router.push("/repository/" + id);
     },
     goUpload() {
-      this.$router.push('/upload')
+      this.$router.push("/upload");
     },
   },
   computed: {
     imageUrl() {
-      return helpers.apiBaseUrl
+      return helpers.apiBaseUrl;
     },
     savedToken() {
-      return this.$store.state.token
+      return this.$store.state.token;
     },
   },
   filters: {
     trimLength(val) {
       if (val.length < 200) {
-        return val
+        return val;
       }
-      return `${val.substring(0, 200)}...`
+      return `${val.substring(0, 200)}...`;
     },
   },
   created() {
     helpers
       .fetchResearches()
       .then((response) => {
-        this.Repository = response.data.payload
+        this.Repository = response.data.payload;
       })
       .catch((error) => {
-        console.log('Error>>>', error)
-      })
+        console.log("Error>>>", error);
+      });
   },
-}
+};
 </script>
 
 <style>
@@ -250,7 +269,7 @@ export default {
 .loader:after {
   position: absolute;
   top: 0;
-  content: '';
+  content: "";
 }
 .loader:before {
   left: -1.5em;
